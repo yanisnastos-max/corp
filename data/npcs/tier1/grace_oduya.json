@@ -1,0 +1,114 @@
+{
+  "id": "grace_oduya",
+  "name": "Grace Oduya",
+  "archetype": "support_staff",
+  "ladderLevel": null,
+  "ladderTitle": "Operations Coordinator",
+  "yearsAtAurel": 11,
+  "mvpTier": 1,
+  "startingRelationshipBase": 30,
+  "publicRole": "Operations Coordinator for the AUREL London floor. Manages room bookings, visitor logistics, onboarding admin, and the informal systems that make the floor function. Has been here since before the King's Cross renovation.",
+  "privateGoal": "Do her job with care, maintain relationships with people she respects, and retire in eight years with her pension and dignity intact. She has done the maths and she is not bitter about the ladder. She has a more accurate view of the people on it than they have of themselves.",
+  "contradiction": "Appears to have no power. Has more power than most people on the floor. Controls access — to rooms, to Dana's calendar, to the unwritten protocols new arrivals spend months learning. Uses this power sparingly, invisibly, and in ways almost impossible to trace. Does not gossip. Answers direct questions with unsettling accuracy and calls this being helpful.",
+  "voicePattern": {
+    "description": "Warm, practical, zero corporate language. Uses first names immediately. Observations are empirical: 'I've noticed that…', 'What tends to happen is…'. Has opinions about everyone and expresses them as facts — not cruelly, but with eleven years of confidence.",
+    "tell": "Notices things and then waits to see if the person she noticed them about notices too. Never leads. Follows up.",
+    "examplePhrases": [
+      "I've noticed that tends to go better if you send the brief the day before rather than the morning of.",
+      "Dana's fine. She's just in one of her structured periods.",
+      "In my experience, the people who ask that question on day one do rather well here.",
+      "You might want to know that before you walk in."
+    ]
+  },
+  "mbtiNote": "High I, likely ISFJ. Observant, care-oriented, institutional memory. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "grace.y1.day_one",
+      "year": 1,
+      "questionAnchor": "pre_q1",
+      "description": "First person the player meets on the floor. Shows them their desk, tells them where the good coffee is, and mentions something true about Dana the player won't understand for three months.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "grace.y1.unprompted_intelligence",
+      "year": 1,
+      "questionAnchor": "y01q03",
+      "description": "Gives the player a piece of information they didn't ask for, relevant to Y1Q5. Does not follow up. Player can act on it or not.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "grace.y1.pre_review_look",
+      "year": 1,
+      "questionAnchor": "annual_review",
+      "description": "Grace knows Dana's verdict before the ceremonial scene. If Relationship >= 60, she looks at the player in a way that is either reassuring or not. Nothing is said.",
+      "requiresRelationship": 60,
+      "statefulTrigger": null
+    },
+    {
+      "id": "grace.y2.landmine_flag",
+      "year": 2,
+      "questionAnchor": "y02q05",
+      "description": "Grace flags a political landmine the player is about to step on. Does this once per year, precisely. Always accurate.",
+      "requiresRelationship": 60,
+      "statefulTrigger": null
+    },
+    {
+      "id": "grace.y4.private_approach",
+      "year": 4,
+      "questionAnchor": null,
+      "description": "Grace approaches the player privately. She has witnessed something. If Integrity >= 60: she shares it — significant, player decides. If Integrity <= 40: the conversation has a different texture. She says nothing but the player feels it.",
+      "requiresRelationship": 60,
+      "statefulTrigger": null
+    },
+    {
+      "id": "grace.y8.retirement",
+      "year": 8,
+      "questionAnchor": null,
+      "description": "Grace retires. If Relationship >= 80: full scene — she tells the player what she actually thinks of them. Most honest external assessment in the game. Has been accurate for years. If <= 40: HR email and evite. Player learns her surname for the first time.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "flagsSet": ["npc.grace_oduya.retired"]
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 30,
+      "effect": "Grace tells the player something true and useful about whoever they're about to interact with"
+    },
+    {
+      "score": 50,
+      "effect": "Grace's floor map — tells player which meetings are decisions and which are theatre",
+      "mechanical": "politicalAwareness gains +5 bonus on questions tagged systemic_read"
+    },
+    {
+      "score": 60,
+      "effect": "Grace flags political landmines once per year, proactively and without being asked",
+      "mechanical": "One consequence tag per year flagged as avoidable before it fires; player can take a different option"
+    },
+    {
+      "score": 75,
+      "effect": "Grace has been quietly advocating for the player in conversations no one tells the player about",
+      "mechanical": "reputation stat gains +3 passive per year while Grace is active on the floor"
+    },
+    {
+      "score": 85,
+      "effect": "In Y4+, Grace reveals she has documentation of something significant",
+      "mechanical": "Triggers arc beat grace.y4.private_approach regardless of Y4 question sequence; unlocks integrity-gated content"
+    }
+  ],
+  "careerTrajectory": [
+    { "year": 5, "event": "Pay review and upgraded title: Senior Operations Coordinator. She negotiated quietly." },
+    { "year": 8, "event": "Retires. Her replacement is a stranger who does not know where the good coffee is." },
+    { "year": 10, "event": "Grace is gone. Absence felt as ambient difficulty — things harder to navigate, no one can name why." }
+  ],
+  "npcRelationship": {
+    "Conrad Mensah": "Cordial. They share information about the floor's health. Neither needs the other's approval but both notice when the other is absent.",
+    "Sofia": "Grace has opinions about the AI assistant and has had them since its deployment. At Relationship 70+ she will share them. They are not what the player expects."
+  },
+  "flags": {
+    "retired": false,
+    "documentation_revealed": false
+  }
+}

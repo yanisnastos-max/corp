@@ -1,0 +1,883 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ascend.game/schemas/game-state.schema.json",
+  "title": "ASCEND Game State",
+  "description": "The complete serializable game state. One JSON object per save file. Every variable, typed. See docs/04_state_schema.md for design rationale and integration notes.",
+  "type": "object",
+  "required": ["meta", "player", "progress", "attributes", "attributeHistory", "npcRelationships", "consequenceQueue", "questionHistory", "annualReviews", "flags"],
+  "additionalProperties": false,
+
+  "$defs": {
+
+    "isoTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 datetime string (e.g. '2034-09-01T09:00:00Z'). In-fiction timestamps use 2034+ dates; real-world save timestamps use actual time."
+    },
+
+    "uuid": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "description": "RFC 4122 UUID v4."
+    },
+
+    "backgroundId": {
+      "type": "string",
+      "enum": [
+        "ppe_lse",
+        "cs_dropout",
+        "engineering_state",
+        "philosophy_mba",
+        "art_history",
+        "international_student",
+        "apprenticeship_portfolio"
+      ],
+      "description": "One of the 7 player backgrounds. See docs/05_character_creation.md for full spec."
+    },
+
+    "traitId": {
+      "type": "string",
+      "pattern": "^trait_[a-z_]+$",
+      "description": "A behavioral trait ID from the 12-trait pool. See data/traits.json for definitions."
+    },
+
+    "npcId": {
+      "type": "string",
+      "enum": [
+        "dana_sutcliffe",
+        "zara_okafor",
+        "leo_chen",
+        "grace_oduya",
+        "sofia",
+        "priya_menon",
+        "mara_velez",
+        "dr_ruth_abara",
+        "anya_petrov",
+        "naomi_cade",
+        "npc_rival_02",
+        "npc_rival_03",
+        "npc_manager_02",
+        "npc_manager_03",
+        "npc_manager_04",
+        "npc_peer_02",
+        "npc_peer_03",
+        "npc_peer_04",
+        "npc_mentor_02",
+        "npc_direct_report_01",
+        "npc_direct_report_02",
+        "npc_direct_report_03",
+        "npc_client_01",
+        "npc_client_02",
+        "npc_client_03"
+      ],
+      "description": "Stable NPC identifier. First 5 are MVP Tier 1. Full 25 NPC IDs expand as Tier 2 NPCs are specced in docs/06_npc_bible_*.md."
+    },
+
+    "relationshipBand": {
+      "type": "string",
+      "enum": ["cold", "functional", "warm", "trusted", "invested"],
+      "description": "Derived from relationship score: cold(0-24), functional(25-49), warm(50-69), trusted(70-84), invested(85-100). Computed, not stored — included here for engine documentation."
+    },
+
+    "ladderLevel": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 12,
+      "description": "L1 Associate → L2 Analyst → L3 Senior Analyst → L4 Lead → L5 Manager → L6 Senior Manager → L7 Director → L8 Senior Director → L9 VP → L10 SVP → L11 EVP → L12 C-Suite."
+    },
+
+    "gameYear": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 12,
+      "description": "In-game year. Year 1 = first year at AUREL London."
+    },
+
+    "questionNumber": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10,
+      "description": "Question number within a year (Q1–Q10)."
+    },
+
+    "questionId": {
+      "type": "string",
+      "pattern": "^y[0-9]{2}q[0-9]{2}$",
+      "description": "Stable question identifier. Format: y01q03 = Year 1, Question 3. See data/questions/year*/q*.json."
+    },
+
+    "choiceId": {
+      "type": "string",
+      "pattern": "^[a-z]$",
+      "description": "Single lowercase letter identifying the choice made within a question: 'a', 'b', 'c', or 'd'."
+    },
+
+    "consequenceTag": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "description": "A consequence tag pushed to the queue by a question choice. Examples: seen_by_sponsor, burned_peer, integrity_debt_minor, integrity_debt_major, latent_offer, coalition_builder, high_cost_high_fidelity, systemic_read, open_inquiry, reliability_concern, track_product, track_commercial, track_cto.",
+      "examples": [
+        "seen_by_sponsor",
+        "burned_peer",
+        "integrity_debt_minor",
+        "integrity_debt_major",
+        "latent_offer",
+        "coalition_builder",
+        "high_cost_high_fidelity",
+        "systemic_read",
+        "open_inquiry",
+        "reliability_concern",
+        "risk_catch",
+        "track_product",
+        "track_commercial",
+        "track_cto",
+        "reputation_hit_minor",
+        "reputation_hit_major",
+        "minor_setback",
+        "major_setback"
+      ]
+    },
+
+    "statKey": {
+      "type": "string",
+      "enum": [
+        "politicalAwareness",
+        "strategicInfluence",
+        "collaborativePull",
+        "resilience",
+        "executionDiscipline",
+        "adaptiveNerve",
+        "technicalCredibility",
+        "reputation",
+        "marketSense",
+        "integrity",
+        "curiosity",
+        "insight",
+        "engagement",
+        "determination",
+        "socialEnergy",
+        "signalReading",
+        "decisionLens",
+        "operatingStyle"
+      ]
+    },
+
+    "statDelta": {
+      "type": "object",
+      "required": ["stat", "delta"],
+      "additionalProperties": false,
+      "properties": {
+        "stat": { "$ref": "#/$defs/statKey" },
+        "delta": {
+          "type": "integer",
+          "minimum": -20,
+          "maximum": 20,
+          "description": "Applied after Resilience mitigation and floor/ceiling clamping."
+        },
+        "reason": {
+          "type": "string",
+          "maxLength": 120,
+          "description": "Shown in Consequences Drawer for visible stats. Omit for hidden stats."
+        },
+        "hidden": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, delta is not shown to player. Always true for pillars and cognitive axes."
+        }
+      }
+    },
+
+    "npcDelta": {
+      "type": "object",
+      "required": ["npcId", "delta"],
+      "additionalProperties": false,
+      "properties": {
+        "npcId": { "$ref": "#/$defs/npcId" },
+        "delta": {
+          "type": "integer",
+          "minimum": -30,
+          "maximum": 30,
+          "description": "Applied after Collaborative Pull modifier and floor/ceiling clamping at 0–100."
+        },
+        "hidden": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, the NPC relationship change is not shown in Consequences Drawer."
+        }
+      }
+    },
+
+    "flagOperation": {
+      "type": "object",
+      "required": ["key", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.]*$",
+          "description": "Namespaced flag key. Convention: npc.{npcId}.{flag}, track.{track}.{flag}, story.{arc}.{flag}, ending.{path}.eligible."
+        },
+        "value": {
+          "oneOf": [
+            { "type": "boolean" },
+            { "type": "string" },
+            { "type": "integer" }
+          ]
+        }
+      }
+    },
+
+    "promotionOutcome": {
+      "type": "string",
+      "enum": ["promoted", "not_promoted", "promoted_conditionally"],
+      "description": "Three possible Annual Review promotion outcomes. promoted_conditionally = title without authority, prove-it year. This is the most interesting outcome and should fire often."
+    },
+
+    "careerTrack": {
+      "type": "string",
+      "enum": ["generalist", "product", "commercial", "cto", "strategy", "operations"],
+      "description": "Career track the player is currently engaging. Determined by question choice patterns and stat thresholds. 'generalist' is default until a track-specific gate is crossed."
+    },
+
+    "scorecardBand": {
+      "type": "string",
+      "enum": ["below_line", "in_discussion", "likely", "sponsor_dependent"],
+      "description": "One of four promotion scorecard bands. Surfaced from Q8 onward. Used in Annual Review Promotion Scorecard across Delivery, Visibility, Trust, Readiness dimensions."
+    },
+
+    "consequenceTrigger": {
+      "type": "object",
+      "description": "Condition that causes a queued consequence to fire. One of: immediate, year-offset, stat-threshold, or npc-threshold.",
+      "oneOf": [
+        {
+          "required": ["type"],
+          "properties": {
+            "type": { "const": "immediate" },
+            "description": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        {
+          "required": ["type", "yearsFromNow"],
+          "properties": {
+            "type": { "const": "year_offset" },
+            "yearsFromNow": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 11,
+              "description": "Fires at end of Annual Review N years from the year the tag was pushed."
+            },
+            "description": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        {
+          "required": ["type", "stat", "operator", "value"],
+          "properties": {
+            "type": { "const": "stat_threshold" },
+            "stat": { "$ref": "#/$defs/statKey" },
+            "operator": {
+              "type": "string",
+              "enum": ["gte", "lte", "eq", "gt", "lt"]
+            },
+            "value": { "type": "integer" },
+            "description": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        {
+          "required": ["type", "npcId", "operator", "value"],
+          "properties": {
+            "type": { "const": "npc_threshold" },
+            "npcId": { "$ref": "#/$defs/npcId" },
+            "operator": {
+              "type": "string",
+              "enum": ["gte", "lte", "eq", "gt", "lt"]
+            },
+            "value": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "description": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+
+  "properties": {
+
+    "meta": {
+      "description": "Save file metadata. Used for versioning, migration, and telemetry.",
+      "type": "object",
+      "required": ["schemaVersion", "gameVersion", "saveId", "createdAt", "lastSavedAt", "totalPlaytimeSeconds"],
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "description": "Semantic version of this schema. Increment minor for backwards-compatible additions; major for breaking changes.",
+          "examples": ["1.0.0"]
+        },
+        "gameVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "description": "Version of the game build that wrote this save.",
+          "examples": ["0.1.0"]
+        },
+        "saveId": {
+          "$ref": "#/$defs/uuid",
+          "description": "Unique identifier for this save file. Generated once at creation; never changes."
+        },
+        "createdAt": {
+          "$ref": "#/$defs/isoTimestamp",
+          "description": "Real-world timestamp when this save was first created."
+        },
+        "lastSavedAt": {
+          "$ref": "#/$defs/isoTimestamp",
+          "description": "Real-world timestamp of the most recent save. Updated after every choice (the save fires after every choice — no undo)."
+        },
+        "totalPlaytimeSeconds": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Cumulative seconds of active play. Used for anonymous telemetry (opt-in)."
+        },
+        "telemetryConsent": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the player has opted into anonymous, opt-in telemetry. Default false."
+        }
+      }
+    },
+
+    "player": {
+      "description": "Immutable player profile set during onboarding. Never changes after character creation.",
+      "type": "object",
+      "required": ["name", "pronouns", "backgroundId", "traitIds"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "description": "Player-entered name. Free text. Rendered in narrative, Annual Review, and Journal."
+        },
+        "pronouns": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40,
+          "description": "Player-entered pronouns. Free text. Used throughout narrative text substitutions.",
+          "examples": ["she/her", "he/him", "they/them", "she/they"]
+        },
+        "backgroundId": {
+          "$ref": "#/$defs/backgroundId",
+          "description": "Chosen background. Grants starting attribute bonuses and flavors early dialogue."
+        },
+        "traitIds": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/traitId" },
+          "description": "Exactly 3 traits chosen from the pool of 12 during onboarding. Each trait sets cognitive axis values and may gate early dialogue options."
+        }
+      }
+    },
+
+    "progress": {
+      "description": "Current game position. The source of truth for what screen and state the player is in.",
+      "type": "object",
+      "required": ["phase", "year", "ladderLevel", "careerTrack"],
+      "additionalProperties": false,
+      "properties": {
+        "phase": {
+          "type": "string",
+          "enum": ["onboarding", "question", "annual_review", "year_end_opportunity", "ended"],
+          "description": "Current game phase. 'question' is the main play state. 'annual_review' is the ceremonial year-end scene. 'year_end_opportunity' is the Three-Lane Opportunity selection. 'ended' = game complete."
+        },
+        "year": {
+          "$ref": "#/$defs/gameYear",
+          "description": "Current in-game year. Increments after the Annual Review is resolved."
+        },
+        "questionNumber": {
+          "$ref": "#/$defs/questionNumber",
+          "description": "Which question within the current year (1–10). Only meaningful when phase='question'."
+        },
+        "ladderLevel": {
+          "$ref": "#/$defs/ladderLevel",
+          "description": "Current ladder level. Updated by Annual Review promotion outcomes."
+        },
+        "conditionalPromotion": {
+          "type": "boolean",
+          "default": false,
+          "description": "True if the player is currently in a 'Promoted Conditionally' prove-it year. Cleared when next Annual Review fires a full Promoted or Not Promoted outcome."
+        },
+        "careerTrack": {
+          "$ref": "#/$defs/careerTrack",
+          "description": "Currently engaged career track. Updated when track-gated questions are answered."
+        },
+        "endingPath": {
+          "type": ["string", "null"],
+          "enum": ["visionary", "survivor", "defector", "founder", "burnout", "ethical_compass", "operator", "exile", null],
+          "default": null,
+          "description": "The ending path the player is currently eligible for. Computed annually. Null until Y6. Multiple can be eligible; only one resolves at Y12."
+        }
+      }
+    },
+
+    "attributes": {
+      "description": "Current attribute state. Updated after every question choice. See data/attributes.schema.json for full spec.",
+      "type": "object",
+      "required": ["visibleStats", "pillars", "cognitiveAxes"],
+      "additionalProperties": false,
+      "properties": {
+        "visibleStats": {
+          "type": "object",
+          "required": [
+            "politicalAwareness", "strategicInfluence", "collaborativePull",
+            "resilience", "executionDiscipline", "adaptiveNerve",
+            "technicalCredibility", "reputation", "marketSense", "integrity"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "politicalAwareness": { "type": "integer", "minimum": 0, "maximum": 100 },
+            "strategicInfluence":  { "type": "integer", "minimum": 0, "maximum": 100 },
+            "collaborativePull":   { "type": "integer", "minimum": 0, "maximum": 100 },
+            "resilience":          { "type": "integer", "minimum": 0, "maximum": 100 },
+            "executionDiscipline": { "type": "integer", "minimum": 0, "maximum": 100 },
+            "adaptiveNerve":       { "type": "integer", "minimum": 0, "maximum": 100 },
+            "technicalCredibility":{ "type": "integer", "minimum": 0, "maximum": 100 },
+            "reputation":          { "type": "integer", "minimum": 0, "maximum": 100 },
+            "marketSense":         { "type": "integer", "minimum": 0, "maximum": 100 },
+            "integrity":           { "type": "integer", "minimum": 0, "maximum": 100 }
+          }
+        },
+        "pillars": {
+          "type": "object",
+          "required": ["curiosity", "insight", "engagement", "determination"],
+          "additionalProperties": false,
+          "properties": {
+            "curiosity":     { "type": "integer", "minimum": 1, "maximum": 40 },
+            "insight":       { "type": "integer", "minimum": 1, "maximum": 40 },
+            "engagement":    { "type": "integer", "minimum": 1, "maximum": 40 },
+            "determination": { "type": "integer", "minimum": 1, "maximum": 40 }
+          }
+        },
+        "cognitiveAxes": {
+          "type": "object",
+          "required": ["socialEnergy", "signalReading", "decisionLens", "operatingStyle"],
+          "additionalProperties": false,
+          "properties": {
+            "socialEnergy":   { "type": "integer", "minimum": -5, "maximum": 5 },
+            "signalReading":  { "type": "integer", "minimum": -5, "maximum": 5 },
+            "decisionLens":   { "type": "integer", "minimum": -5, "maximum": 5 },
+            "operatingStyle": { "type": "integer", "minimum": -5, "maximum": 5 }
+          }
+        }
+      }
+    },
+
+    "attributeHistory": {
+      "description": "Point-in-time attribute snapshots taken at the end of each Annual Review. Used by Career Timeline and save-state diff view.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["year", "snapshot"],
+        "additionalProperties": false,
+        "properties": {
+          "year": { "$ref": "#/$defs/gameYear" },
+          "snapshot": {
+            "description": "Full copy of attributes object at the moment the Annual Review resolved.",
+            "$ref": "#/properties/attributes"
+          }
+        }
+      }
+    },
+
+    "npcRelationships": {
+      "description": "Relationship state for every NPC the player has encountered. Keyed by npcId. NPCs not yet encountered are absent from this map.",
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z][a-z0-9_]*$": {
+          "description": "Relationship state for a single NPC.",
+          "type": "object",
+          "required": ["npcId", "score", "firstEncounteredYear", "lastInteractionYear", "arcBeatsCompleted"],
+          "additionalProperties": false,
+          "properties": {
+            "npcId": { "$ref": "#/$defs/npcId" },
+            "score": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Current relationship score. Bands: cold(0-24), functional(25-49), warm(50-69), trusted(70-84), invested(85-100). Starting score for unmet NPCs is set by Reputation modifier at introduction."
+            },
+            "firstEncounteredYear": { "$ref": "#/$defs/gameYear" },
+            "lastInteractionYear": { "$ref": "#/$defs/gameYear" },
+            "arcBeatsCompleted": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]*$"
+              },
+              "description": "List of completed arc beat IDs for this NPC. Arc beat IDs are defined in docs/06_npc_bible_*.md."
+            },
+            "flags": {
+              "type": "object",
+              "additionalProperties": {
+                "oneOf": [
+                  { "type": "boolean" },
+                  { "type": "string" },
+                  { "type": "integer" }
+                ]
+              },
+              "description": "NPC-specific flags. Examples: {burned: true}, {trusted_advisor: true}, {sofia_sentience_acknowledged: true}. Namespaced within the NPC; global flags use the top-level flags map."
+            },
+            "activeConsequenceTags": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/consequenceTag" },
+              "description": "Consequence tags currently active against this NPC relationship (e.g. burned_peer, seen_by_sponsor). Used by the consequence engine to determine pending relationship adjustments."
+            }
+          }
+        }
+      }
+    },
+
+    "consequenceQueue": {
+      "description": "Pending consequences that will fire in the future. Populated by question choices (0–3 tags per choice). Resolved by the consequence engine at question boundaries, year-end, and Annual Review. The queue is the game's memory.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "sourceQuestionId", "sourceYear", "tag", "trigger", "payload", "fired"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/uuid",
+            "description": "Unique identifier for this queued consequence. Never reused."
+          },
+          "sourceQuestionId": {
+            "$ref": "#/$defs/questionId",
+            "description": "The question that pushed this consequence."
+          },
+          "sourceYear": { "$ref": "#/$defs/gameYear" },
+          "sourceChoiceId": { "$ref": "#/$defs/choiceId" },
+          "tag": { "$ref": "#/$defs/consequenceTag" },
+          "trigger": {
+            "$ref": "#/$defs/consequenceTrigger",
+            "description": "When this consequence fires."
+          },
+          "payload": {
+            "type": "object",
+            "description": "What happens when the consequence fires.",
+            "additionalProperties": false,
+            "properties": {
+              "statDeltas": {
+                "type": "array",
+                "items": { "$ref": "#/$defs/statDelta" },
+                "description": "Stat changes applied when consequence fires."
+              },
+              "npcDeltas": {
+                "type": "array",
+                "items": { "$ref": "#/$defs/npcDelta" },
+                "description": "NPC relationship changes applied when consequence fires."
+              },
+              "flagOperations": {
+                "type": "array",
+                "items": { "$ref": "#/$defs/flagOperation" },
+                "description": "Flags set or cleared when consequence fires."
+              },
+              "unlockQuestionIds": {
+                "type": "array",
+                "items": { "$ref": "#/$defs/questionId" },
+                "description": "Questions that become available as a result of this consequence firing."
+              },
+              "narrativeNote": {
+                "type": "string",
+                "maxLength": 200,
+                "description": "Optional internal note for writers — never shown to player. Explains what this consequence represents in story terms."
+              }
+            }
+          },
+          "fired": {
+            "type": "boolean",
+            "default": false,
+            "description": "True once the consequence has resolved. Fired consequences remain in the array for save-state diff view and Journal reconstruction."
+          },
+          "firedYear": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 12,
+            "default": null,
+            "description": "The year in which this consequence fired. Null until fired=true."
+          }
+        }
+      }
+    },
+
+    "questionHistory": {
+      "description": "Record of every question the player has answered, in order. Append-only — never mutated after a choice is written.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["questionId", "year", "questionNumber", "choiceId", "statDeltasApplied", "npcDeltasApplied", "tagsQueued", "answeredAt"],
+        "additionalProperties": false,
+        "properties": {
+          "questionId": { "$ref": "#/$defs/questionId" },
+          "year": { "$ref": "#/$defs/gameYear" },
+          "questionNumber": { "$ref": "#/$defs/questionNumber" },
+          "choiceId": { "$ref": "#/$defs/choiceId" },
+          "statDeltasApplied": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/statDelta" },
+            "description": "The stat deltas that were applied immediately when this choice was made (before Resilience mitigation). Historical record."
+          },
+          "npcDeltasApplied": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/npcDelta" },
+            "description": "The NPC relationship changes applied immediately at choice time."
+          },
+          "tagsQueued": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["tag", "consequenceId"],
+              "properties": {
+                "tag": { "$ref": "#/$defs/consequenceTag" },
+                "consequenceId": {
+                  "$ref": "#/$defs/uuid",
+                  "description": "Links to the specific entry in consequenceQueue."
+                }
+              }
+            },
+            "description": "Consequence tags pushed to the queue by this choice, with their queue entry IDs."
+          },
+          "innerMonologue": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "The one-line internal monologue shown in the Consequences Drawer after this choice. Pulled from the question content file; stored here for Journal reconstruction."
+          },
+          "answeredAt": {
+            "$ref": "#/$defs/isoTimestamp",
+            "description": "Real-world timestamp when this choice was committed. The save fires at this moment."
+          }
+        }
+      }
+    },
+
+    "annualReviews": {
+      "description": "Record of every completed Annual Review. One entry per year (after Year 1 ends). Append-only.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["year", "compensation", "promotionOutcome", "scorecardBands", "threeLaneChoice"],
+        "additionalProperties": false,
+        "properties": {
+          "year": { "$ref": "#/$defs/gameYear" },
+
+          "compensation": {
+            "type": "object",
+            "required": ["totalAmount", "formula"],
+            "additionalProperties": false,
+            "properties": {
+              "totalAmount": {
+                "type": "number",
+                "minimum": 0,
+                "description": "Annual compensation in GBP. The number Dana says aloud."
+              },
+              "currency": {
+                "type": "string",
+                "const": "GBP",
+                "default": "GBP"
+              },
+              "formula": {
+                "type": "object",
+                "required": ["attributeAggregate", "performanceScore", "sponsorStrength", "politicalCapital"],
+                "additionalProperties": false,
+                "description": "Breakdown of the comp formula: 40% attribute aggregate + 30% performance + 20% sponsor strength + 10% hidden political capital.",
+                "properties": {
+                  "attributeAggregate": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100,
+                    "description": "Weighted stat aggregate: ExecutionDiscipline(30%) + StrategicInfluence(20%) + Reputation(20%) + remaining 7 stats averaged(30%)."
+                  },
+                  "attributeAggregateWeight": {
+                    "type": "number",
+                    "const": 0.40
+                  },
+                  "performanceScore": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100,
+                    "description": "Derived from the year's question choices: ratio of high-fidelity options chosen, consequences resolved positively, and NPC relationships maintained."
+                  },
+                  "performanceWeight": {
+                    "type": "number",
+                    "const": 0.30
+                  },
+                  "sponsorStrength": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100,
+                    "description": "Averaged relationship score of active Sponsor NPCs weighted by their current arc beat."
+                  },
+                  "sponsorWeight": {
+                    "type": "number",
+                    "const": 0.20
+                  },
+                  "politicalCapital": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100,
+                    "description": "Hidden. Derived from PoliticalAwareness, consequence tag history (seen_by_sponsor, coalition_builder), and senior NPC relationship scores."
+                  },
+                  "politicalCapitalWeight": {
+                    "type": "number",
+                    "const": 0.10
+                  }
+                }
+              }
+            }
+          },
+
+          "promotionOutcome": {
+            "$ref": "#/$defs/promotionOutcome"
+          },
+          "promotionReason": {
+            "type": "string",
+            "maxLength": 300,
+            "description": "Dana's stated reason for the promotion outcome. Used for Journal and Career Timeline. Drawn from review scene content, not procedurally generated."
+          },
+          "ladderLevelBefore": { "$ref": "#/$defs/ladderLevel" },
+          "ladderLevelAfter": { "$ref": "#/$defs/ladderLevel" },
+
+          "scorecardBands": {
+            "type": "object",
+            "required": ["delivery", "visibility", "trust", "readiness"],
+            "additionalProperties": false,
+            "description": "The four-dimension Promotion Scorecard surfaced from Q8 onward.",
+            "properties": {
+              "delivery":   { "$ref": "#/$defs/scorecardBand" },
+              "visibility": { "$ref": "#/$defs/scorecardBand" },
+              "trust":      { "$ref": "#/$defs/scorecardBand" },
+              "readiness":  { "$ref": "#/$defs/scorecardBand" }
+            }
+          },
+
+          "threeLaneChoice": {
+            "type": "object",
+            "required": ["lanePresented", "laneChosen"],
+            "additionalProperties": false,
+            "description": "The Three-Lane Opportunity presented and chosen at year-end.",
+            "properties": {
+              "lanePresented": {
+                "type": "object",
+                "required": ["internalMobility", "externalOffer", "strategicRelationship"],
+                "additionalProperties": false,
+                "properties": {
+                  "internalMobility": {
+                    "type": "object",
+                    "required": ["available", "description"],
+                    "properties": {
+                      "available": { "type": "boolean" },
+                      "description": { "type": "string", "maxLength": 300 },
+                      "hiddenConsequenceIds": {
+                        "type": "array",
+                        "items": { "$ref": "#/$defs/uuid" },
+                        "description": "IDs of consequences that will fire 1–2 years later if this lane is chosen. The player does not see these."
+                      }
+                    }
+                  },
+                  "externalOffer": {
+                    "type": "object",
+                    "required": ["available", "description"],
+                    "properties": {
+                      "available": { "type": "boolean" },
+                      "description": { "type": "string", "maxLength": 300 },
+                      "requiresAdaptiveNerve": {
+                        "type": "integer",
+                        "minimum": 65,
+                        "description": "AdaptiveNerve threshold required for this lane to be selectable (not just visible)."
+                      },
+                      "hiddenConsequenceIds": {
+                        "type": "array",
+                        "items": { "$ref": "#/$defs/uuid" }
+                      }
+                    }
+                  },
+                  "strategicRelationship": {
+                    "type": "object",
+                    "required": ["available", "description"],
+                    "properties": {
+                      "available": { "type": "boolean" },
+                      "description": { "type": "string", "maxLength": 300 },
+                      "npcId": {
+                        "$ref": "#/$defs/npcId",
+                        "description": "The NPC whose relationship changes as a result of this lane."
+                      },
+                      "hiddenConsequenceIds": {
+                        "type": "array",
+                        "items": { "$ref": "#/$defs/uuid" }
+                      }
+                    }
+                  }
+                }
+              },
+              "laneChosen": {
+                "type": "string",
+                "enum": ["internal_mobility", "external_offer", "strategic_relationship", "declined_all"],
+                "description": "'declined_all' is valid only if Adaptive Pole operatingStyle is <= -3 (Adaptive-pole wait-and-see choice)."
+              }
+            }
+          },
+
+          "reviewManagerNpcId": {
+            "$ref": "#/$defs/npcId",
+            "description": "The NPC who conducted this review (Y1 = dana_sutcliffe). Changes if the player moves teams or manager NPCs' careers advance."
+          },
+          "reviewedAt": {
+            "$ref": "#/$defs/isoTimestamp"
+          }
+        }
+      }
+    },
+
+    "flags": {
+      "description": "Global game state flags. Arbitrary key-value store. Convention: use namespaced dot-notation keys. Boolean flags are most common. String and integer values are valid for flags that carry data (e.g. story.sofia.last_question_asked = 'y03q07').",
+      "type": "object",
+      "additionalProperties": {
+        "oneOf": [
+          { "type": "boolean" },
+          { "type": "string", "maxLength": 200 },
+          { "type": "integer" }
+        ]
+      },
+      "examples": [
+        {
+          "story.sofia.sentience_acknowledged": true,
+          "story.sofia.trusted_confidant": false,
+          "ending.ethical_compass.eligible": false,
+          "ending.visionary.eligible": false,
+          "track.product.engaged": false,
+          "track.commercial.engaged": false,
+          "track.cto.engaged": false,
+          "world.horizon_labs.visible": false,
+          "world.horizon_labs.offer_active": false,
+          "review.y01.reliability_concern_raised": false,
+          "review.y01.facade_flag": false,
+          "onboarding.completed": true,
+          "feature.bold_plays.unlocked": false,
+          "feature.external_offers.visible": false,
+          "feature.external_offers.selectable": false,
+          "feature.senior_table_questions.unlocked": false,
+          "feature.client_npcs.unlocked": false,
+          "feature.sofia_sentience_thread.unlocked": false,
+          "feature.sofia_final_arc.unlocked": false,
+          "feature.trusted_advisor_tier.unlocked": false
+        }
+      ]
+    }
+  }
+}

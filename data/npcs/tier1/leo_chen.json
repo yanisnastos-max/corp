@@ -1,0 +1,115 @@
+{
+  "id": "leo_chen",
+  "name": "Leo Chen",
+  "archetype": "peer",
+  "ladderLevel": 1,
+  "ladderTitle": "Associate",
+  "yearsAtAurel": 0,
+  "mvpTier": 1,
+  "startingRelationshipBase": 35,
+  "publicRole": "Associate, same intake as the player. Operations/Product track. Technically excellent. Not trying to impress anyone, which paradoxically impresses people.",
+  "privateGoal": "Do good work and leave before the politics become the job. He does not want to be promoted. This is not a pose.",
+  "contradiction": "Has a more sophisticated read on institutional power than almost anyone on the floor. Refuses to act on it. Will describe the exact mechanism of someone's career ending with the same energy he uses to describe lunch, and then return to his work. He believes describing a thing and participating in a thing are different. He is right. This doesn't protect him.",
+  "voicePattern": {
+    "description": "Flat affect in messages; warm and dry in person. Short sentences. Lots of 'yeah' and 'I mean.' Does not moderate for the room. His dry comments are the ones people quote three weeks later.",
+    "tell": "Goes quiet in meetings when he's spotted something he's decided not to say. Political Awareness 60+ and Relationship 70+ can ask him afterward.",
+    "examplePhrases": [
+      "Yeah, I mean. That's one way to read it.",
+      "The thing that's actually happening is [clinical, accurate, three-sentence explanation]. Anyway.",
+      "I noticed that too. I figured it wasn't my problem.",
+      "You could say something. It wouldn't change the outcome but you'd feel better about it."
+    ]
+  },
+  "mbtiNote": "High I, likely INTP or ISTP. Internally processed, principle-driven, low-ceremony. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "leo.y1.small_favour",
+      "year": 1,
+      "questionAnchor": "y01q02",
+      "description": "Leo does the player a small favour that costs him nothing and establishes baseline goodwill. Does not mention it again. Reciprocation optional — Leo doesn't track.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "leo.y1.political_reveal",
+      "year": 1,
+      "questionAnchor": "y01q07",
+      "description": "Leo is accidentally at the centre of a political moment he didn't recognise as political. How he handles it reveals his private read. Political Awareness 50+ clocks this.",
+      "requiresRelationship": null,
+      "statefulTrigger": { "stat": "politicalAwareness", "operator": "gte", "value": 50 }
+    },
+    {
+      "id": "leo.y2.promotion_refusal",
+      "year": 2,
+      "questionAnchor": "y02q01",
+      "description": "Leo is offered promotion to Analyst. He declines. Brief silence in Dana's office. The vacuum this creates becomes a question for the player in Y2Q4–Q6.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "flagsSet": ["npc.leo_chen.promotion_refused"]
+    },
+    {
+      "id": "leo.y3.technical_knowledge",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "If Relationship >= 70: Leo shares technical knowledge about AUREL's Loom infrastructure that couldn't be gotten elsewhere. Unlocks a product-track question.",
+      "requiresRelationship": 70,
+      "statefulTrigger": null,
+      "flagsSet": ["npc.leo_chen.loom_knowledge_shared", "feature.product_track_advanced.unlocked"]
+    },
+    {
+      "id": "leo.y3.sign_off_blocker",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "If Relationship <= 30: Leo's refused promotion made him de facto technical authority. Player needs his sign-off. Leo is not obstructive — just precise. Precision takes time.",
+      "requiresRelationship": null,
+      "relationshipCeiling": 30,
+      "statefulTrigger": null
+    },
+    {
+      "id": "leo.y5.departure",
+      "year": 5,
+      "questionAnchor": null,
+      "description": "Leo leaves for a startup. Not in World Panel. Player finds out via direct message. If Relationship >= 75: reference and back-channel, plus startup network access. If <= 40: his invisible scaffolding becomes visible in his absence.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "flagsSet": ["npc.leo_chen.departed"]
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 40,
+      "effect": "Leo gives honest feedback no one else will give — unprompted, accurate, unsexy"
+    },
+    {
+      "score": 60,
+      "effect": "Leo's technical read on situations is available on direct request; he answers directly",
+      "mechanical": "Unlocks 'ask Leo' option in product-adjacent questions"
+    },
+    {
+      "score": 70,
+      "effect": "Leo shares Loom infrastructure knowledge; product-track questions unlock",
+      "mechanical": "flags feature.product_track_advanced.unlocked = true; technicalCredibility growth +5% per year"
+    },
+    {
+      "score": 75,
+      "effect": "Leo's external network becomes accessible — first signal of External Offer track",
+      "mechanical": "world.horizon_labs.visible = true if not already set; latent_offer tag queued"
+    },
+    {
+      "score": 85,
+      "effect": "Leo tells the player what he actually thinks about their career choices — the most useful feedback in the game"
+    }
+  ],
+  "careerTrajectory": [
+    { "year": 2, "event": "Offered promotion; declines. Remains L1 Associate — technically the most senior L1 in the building." },
+    { "year": 3, "event": "De facto technical authority on floor. Status without title." },
+    { "year": 5, "event": "Leaves for a startup as CTO co-founder." },
+    { "year": 7, "event": "Startup is acquired. Leo is briefly in the news. Messages player if Relationship >= 70." },
+    { "year": 9, "event": "Available as reference for Founder ending path." }
+  ],
+  "flags": {
+    "promotion_refused": false,
+    "loom_knowledge_shared": false,
+    "departed": false
+  }
+}

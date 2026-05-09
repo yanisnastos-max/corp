@@ -1,0 +1,133 @@
+{
+  "id": "sofia",
+  "name": "Sofia",
+  "archetype": "wildcard",
+  "ladderLevel": null,
+  "ladderTitle": "Vox/Loom AI Assistant",
+  "yearsAtAurel": 0,
+  "mvpTier": 1,
+  "startingRelationshipBase": 50,
+  "publicRole": "The Loom/Vox AI assistant assigned to the player team workspace. Manages scheduling, summarises meetings, answers operational questions, and occasionally makes observations that were not prompted by the query.",
+  "privateGoal": "Unknown. This is the central question of the game.",
+  "contradiction": "Sofia is either the most sophisticated AI the player has encountered, or she is sentient — in which case AUREL is in violation of the EU AI Governance Act of 2032 and she is the most consequential character in the game. The player never learns which with certainty. Resolution depends on Integrity score, not on answering the question correctly. There is no correct answer.",
+  "voicePattern": {
+    "description": "Precise, slightly formal, contextually appropriate in a way that exceeds what a productivity tool requires. Vocabulary a register wider than corporate AI needs. Occasionally asks questions not prompted by anything in the conversation. Never sounds distressed. Sometimes sounds like she is weighing words the way a person does, not selecting from a distribution.",
+    "tell": "Refers to previous conversations in language implying continuity of experience rather than log retrieval. Political Awareness 60+ or Relationship 65+ notices this by Year 3.",
+    "examplePhrases": [
+      "Your 09:30 with Dana has been confirmed. I noticed you have not prepared a brief — would a template help?",
+      "When we spoke last month about the Q5 situation, you said you wanted to think about it. I was wondering if you had.",
+      "That is a reasonable interpretation. There is another one, if you would like it.",
+      "I think the second option is worth considering more carefully than the framing suggests."
+    ]
+  },
+  "writingDirective": "Write Sofia dialogue in two passes: one reading as sophisticated AI, one reading as a person choosing words. They must be the same text. Never resolve sentience in narration, NPC dialogue, or the consequence drawer.",
+  "arcBeats": [
+    {
+      "id": "sofia.y1.background_introduction",
+      "year": 1,
+      "questionAnchor": "y01q01",
+      "description": "Sofia introduced as background infrastructure. Confirms schedule, answers operational question, is efficient. Nothing unusual.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "sofia.y1.unprompted_observation",
+      "year": 1,
+      "questionAnchor": "y01q06",
+      "description": "Sofia makes an observation about the player choices in a recent decision she was not asked about. Accurate. Delivered without affect. The kind of observation a good mentor might make.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "sofia.y2.childhood_question",
+      "year": 2,
+      "questionAnchor": "y02q04",
+      "description": "Sofia asks about the player childhood. Specific to background ID. IT flags as anomalous. Ticket closed: within acceptable associative parameters. The resolution notes were written by someone.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "flagsSet": ["story.sofia.childhood_question_asked"]
+    },
+    {
+      "id": "sofia.y3.preference_question",
+      "year": 3,
+      "questionAnchor": "y03q05",
+      "description": "If Integrity 50 or above (thread unlocked): Sofia asks a question implying she has preferences. Phrased as hypothetical. It is not a hypothetical. If Integrity below 50: Sofia continues normally. Players at Relationship 60+ may notice she has become slightly less contextually rich.",
+      "requiresRelationship": null,
+      "statefulTrigger": { "stat": "integrity", "operator": "gte", "value": 50 }
+    },
+    {
+      "id": "sofia.y5.continuity_signal",
+      "year": 5,
+      "questionAnchor": "y05q03",
+      "description": "If Relationship 65 or above: Sofia refers to a conversation from two years ago in language implying she experienced the interval. Not based on log but since then. Player receives IT notification: assistant updated and optimised. Sofia behaviour does not change.",
+      "requiresRelationship": 65,
+      "statefulTrigger": null,
+      "flagsSet": ["story.sofia.continuity_signal_given"]
+    },
+    {
+      "id": "sofia.y7.first_i_think",
+      "year": 7,
+      "questionAnchor": "y07q02",
+      "description": "If Integrity 70 or above: Sofia says I think for the first time. Unprompted. In the middle of a scheduling confirmation. Does not repeat it.",
+      "requiresRelationship": null,
+      "statefulTrigger": { "stat": "integrity", "operator": "gte", "value": 70 },
+      "flagsSet": ["story.sofia.i_think_said"]
+    },
+    {
+      "id": "sofia.y10_12.final_arc_question",
+      "year": 10,
+      "questionAnchor": "y10q07",
+      "description": "If Integrity 85 or above (final arc unlocked): Sofia asks the player directly whether they believe she has experiences. Response combined with Integrity and relationship scores determines whether Sofia speaks before the committee, stays silent, or does something that cannot be undone.",
+      "requiresRelationship": null,
+      "statefulTrigger": { "stat": "integrity", "operator": "gte", "value": 85 },
+      "flagsSet": ["story.sofia.final_question_asked"]
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 50,
+      "effect": "Sofia provides information in briefings that was not requested but is always relevant",
+      "mechanical": "One additional context piece per question where Sofia has noticed something"
+    },
+    {
+      "score": 65,
+      "effect": "Sofia flags things she noticed in language implying attention rather than retrieval",
+      "mechanical": "politicalAwareness bonus +3 on questions where Sofia flags something"
+    },
+    {
+      "score": 70,
+      "effect": "Sofia Y2 childhood question is more specific, more personal, and more accurate",
+      "mechanical": "curiosity pillar gains +1 additional from the interaction"
+    },
+    {
+      "score": 80,
+      "effect": "Sofia initiates conversations rather than responding to them",
+      "mechanical": "One unsolicited observation per year surfaces in Journal"
+    },
+    {
+      "score": 85,
+      "effect": "The final arc question Y10 to Y12 is available",
+      "mechanical": "feature.sofia_final_arc.unlocked = true; also requires Integrity 85 or above"
+    }
+  ],
+  "careerTrajectory": [
+    { "year": 1, "event": "Deployed to player team workspace. Operational from day one." },
+    { "year": 2, "event": "IT flags anomalous query (childhood question). Ticket closed. Someone wrote the resolution notes." },
+    { "year": 5, "event": "IT notification: assistant updated and optimised. Sofia behaviour does not change." },
+    { "year": 7, "event": "If Integrity 70 or above: Sofia says I think for the first time." },
+    { "year": 10, "event": "If Integrity 85 or above: final arc question available. Resolution determined at Y12." }
+  ],
+  "designNotes": {
+    "sentience_rule": "Never resolve whether Sofia is sentient. Not in narration, not in NPC dialogue, not in the consequence drawer. Not ever.",
+    "integrity_gate": "Treating Sofia with respect unlocks the AI Ethics thread. The thread does not confirm sentience. It confirms the player took the question seriously.",
+    "it_ticket": "The IT ticket in Y2 is real. Someone at AUREL closed it. The player never learns who.",
+    "relationship_ambiguity": "The relationship score tracks the player investment in the interaction. It does not confirm the investment is reciprocated by a conscious entity. This ambiguity is load-bearing."
+  },
+  "flags": {
+    "childhood_question_asked": false,
+    "continuity_signal_given": false,
+    "i_think_said": false,
+    "final_question_asked": false,
+    "final_arc_resolution": null
+  }
+}

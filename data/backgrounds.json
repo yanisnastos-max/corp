@@ -1,0 +1,160 @@
+{
+  "$schema": "https://ascend.game/schemas/backgrounds.schema.json",
+  "version": "1.0.0",
+  "backgrounds": [
+    {
+      "id": "ppe_lse",
+      "name": "PPE at LSE",
+      "tagline": "Politics, Philosophy, Economics at the London School of Economics.",
+      "narrativeDescription": "You studied the architecture of power before you entered any building that had it. You can explain a central bank's decision in three sentences and read a policy document for what it doesn't say. The real education was learning which rooms you were and weren't meant to be in, and how to get into them anyway.",
+      "startingRole": "Associate, Strategy & Policy",
+      "primaryBonuses": [
+        { "stat": "politicalAwareness", "delta": 10, "reason": "Three years dissecting systems of influence." },
+        { "stat": "strategicInfluence", "delta": 8, "reason": "Trained to argue, not just to speak." }
+      ],
+      "secondaryBonuses": [
+        { "stat": "marketSense", "delta": 8, "reason": "Economics track — markets are legible." },
+        { "stat": "adaptiveNerve", "delta": 5, "reason": "Comfortable with abstraction and uncertainty." },
+        { "stat": "resilience", "delta": -5, "reason": "Insulated early. First real failure will sting." }
+      ],
+      "dialogueFlavorTags": ["policyframe", "systemic_lens", "institutional_fluency"],
+      "workStyleFragments": {
+        "opening": "You've read about this company, this sector, this moment.",
+        "middle": "You'll reach for frameworks when instinct would serve better, and be right just often enough that no one tells you to stop.",
+        "closing": "The gap between your theory and the room's reality is where you'll do your best work — or your worst."
+      },
+      "firstDayLetterVariant": "formal_welcome"
+    },
+    {
+      "id": "cs_dropout",
+      "name": "CS Dropout",
+      "tagline": "Two years of computer science. One decision to leave.",
+      "narrativeDescription": "You understood systems before you understood organisations. You left because the degree stopped being faster than teaching yourself, which was the most telling signal of all. You can ship. You can read code in a meeting where everyone pretends they understand it. You are visibly unimpressed by people who use technical language as a moat.",
+      "startingRole": "Associate, Product & Technology",
+      "primaryBonuses": [
+        { "stat": "technicalCredibility", "delta": 15, "reason": "You built things. People who haven't can tell." },
+        { "stat": "adaptiveNerve", "delta": 10, "reason": "Dropping out is a commitment to a different bet." }
+      ],
+      "secondaryBonuses": [
+        { "stat": "executionDiscipline", "delta": 8, "reason": "Shipping culture. Done beats perfect." },
+        { "stat": "politicalAwareness", "delta": -5, "reason": "Institutional politics are a foreign language." },
+        { "stat": "marketSense", "delta": -5, "reason": "Product intuition yes; commercial instinct, not yet." }
+      ],
+      "dialogueFlavorTags": ["builder_lens", "technical_directness", "low_ceremony"],
+      "workStyleFragments": {
+        "opening": "You will figure things out faster than people expect and explain them slower than you'd like.",
+        "middle": "The politics will surprise you — not because you can't see them, but because they keep mattering when they shouldn't.",
+        "closing": "Your best moves will look like technical opinions. They won't always be."
+      },
+      "firstDayLetterVariant": "informal_welcome"
+    },
+    {
+      "id": "engineering_state",
+      "name": "Engineering, State University",
+      "tagline": "An engineering degree from a university that expected you to work for it.",
+      "narrativeDescription": "You learned that problems have right answers and that finding them requires showing your work. You also learned that the world doesn't always reward right answers, which was its own kind of education. You are precise, reliable, and faintly suspicious of anyone who isn't.",
+      "startingRole": "Associate, Operations & Product",
+      "primaryBonuses": [
+        { "stat": "executionDiscipline", "delta": 10, "reason": "Delivery culture. You finish what you start." },
+        { "stat": "technicalCredibility", "delta": 12, "reason": "Engineers know you can read a system diagram." }
+      ],
+      "secondaryBonuses": [
+        { "stat": "collaborativePull", "delta": 5, "reason": "Group projects under pressure build mutual-aid instincts." }
+      ],
+      "dialogueFlavorTags": ["precision_frame", "proof_first", "delivery_culture"],
+      "workStyleFragments": {
+        "opening": "You'll do the work before the meeting and be surprised when the meeting matters more.",
+        "middle": "Your output will be reliable before it is visible, and you'll have to learn that visible matters.",
+        "closing": "The day someone takes credit for your work in front of you is the day this game really starts."
+      },
+      "firstDayLetterVariant": "operational_welcome"
+    },
+    {
+      "id": "philosophy_mba",
+      "name": "Philosophy + MBA",
+      "tagline": "Undergraduate philosophy. Business school. The combination is rarer than it sounds.",
+      "narrativeDescription": "You learned to argue from first principles and then spent two years in a room with people who learned to argue from precedent. The tension was productive. You can construct a strategic case and then immediately identify its three weakest assumptions. People find this useful until they don't.",
+      "startingRole": "Associate, Strategy & Corporate Development",
+      "primaryBonuses": [
+        { "stat": "strategicInfluence", "delta": 10, "reason": "You frame problems. People adopt your frames." },
+        { "stat": "marketSense", "delta": 10, "reason": "MBA track — commercial logic is a native language." }
+      ],
+      "secondaryBonuses": [
+        { "stat": "politicalAwareness", "delta": 8, "reason": "Philosophy trains pattern recognition in argument." },
+        { "stat": "technicalCredibility", "delta": -5, "reason": "Engineers will test you. Be prepared." },
+        { "stat": "executionDiscipline", "delta": -5, "reason": "Strong on the why; weaker on the how by when." }
+      ],
+      "dialogueFlavorTags": ["first_principles", "strategic_reframe", "contrarian_instinct"],
+      "workStyleFragments": {
+        "opening": "You'll be the one who questions the question, which is right more often than the room is comfortable admitting.",
+        "middle": "The gap between your analysis and your execution is where you'll lose time and earn lessons.",
+        "closing": "The MBA teaches you to want the win. The philosophy degree should have taught you to ask why."
+      },
+      "firstDayLetterVariant": "strategic_welcome"
+    },
+    {
+      "id": "art_history",
+      "name": "Art History, Somehow",
+      "tagline": "The degree that requires the most explanation at a tech company. You've got a good one.",
+      "narrativeDescription": "You studied how humans make meaning out of objects and you applied that lens to everything since. You read rooms, brands, and power structures with unusual clarity. You are underestimated at a rate that has become a competitive advantage. You have never once pretended to be a spreadsheet person and this has worked out better than it should have.",
+      "startingRole": "Associate, Brand & Communications",
+      "primaryBonuses": [
+        { "stat": "adaptiveNerve", "delta": 12, "reason": "Chronic ambiguity tolerance. You've been winging it since the start." },
+        { "stat": "collaborativePull", "delta": 8, "reason": "People find you interesting. Useful in this business." }
+      ],
+      "secondaryBonuses": [
+        { "stat": "strategicInfluence", "delta": 5, "reason": "Accidental reframing instinct — your metaphors land." },
+        { "stat": "executionDiscipline", "delta": -8, "reason": "Structure is a language you're still learning to speak." },
+        { "stat": "technicalCredibility", "delta": -10, "reason": "Engineers will assume the worst. You'll have to change that manually." }
+      ],
+      "dialogueFlavorTags": ["meaning_frame", "aesthetic_read", "underdog_credibility"],
+      "workStyleFragments": {
+        "opening": "You will be underestimated in this building, and you will find that useful until you find it insulting.",
+        "middle": "Your pattern recognition is real. Your processes are improvised. These two facts will spend years at war.",
+        "closing": "The moment you stop explaining your degree and start explaining your thinking is the moment things shift."
+      },
+      "firstDayLetterVariant": "creative_welcome"
+    },
+    {
+      "id": "international_student",
+      "name": "International Student (Visa Clock)",
+      "tagline": "A degree in the UK. A visa that started counting down the day you graduated.",
+      "narrativeDescription": "You navigated a foreign institution in a foreign language — or a foreign institution in your language, which is its own kind of translation. You've been reading rooms since before you knew the word for what you were doing. The visa clock taught you to be efficient with time in a way that people who haven't faced it rarely are. The pressure is structural. You've been managing it since you arrived.",
+      "startingRole": "Associate, International Markets or Operations",
+      "primaryBonuses": [
+        { "stat": "resilience", "delta": 12, "reason": "Structural adversity compounded annually. You don't break the same way." },
+        { "stat": "politicalAwareness", "delta": 5, "reason": "Heightened vigilance — reading environments is survival, not curiosity." }
+      ],
+      "secondaryBonuses": [
+        { "stat": "marketSense", "delta": 7, "reason": "Cross-market exposure. You've seen another version of this." },
+        { "stat": "adaptiveNerve", "delta": -5, "reason": "Risk aversion from structural exposure — wrong move has higher cost than peers." }
+      ],
+      "dialogueFlavorTags": ["cross_cultural_read", "efficiency_instinct", "structural_awareness"],
+      "workStyleFragments": {
+        "opening": "You have been efficient with time in a way this company will eventually appreciate and initially overlook.",
+        "middle": "You'll read the room faster than most. You'll hedge longer than you need to. That's rational, and this game will make it cost.",
+        "closing": "The visa clock is the least interesting thing about you and the first thing some people will see. Plan accordingly."
+      },
+      "firstDayLetterVariant": "international_welcome"
+    },
+    {
+      "id": "apprenticeship_portfolio",
+      "name": "Apprenticeship / Portfolio Kid",
+      "tagline": "No degree. A body of work instead.",
+      "narrativeDescription": "You got here without the credential the room assumed you'd have. You've been demonstrating competence to people who started from scepticism since before you had the vocabulary to name what you were doing. You know how to build trust from scratch. You also know the feeling of being in a room where everyone assumed you were the catering staff. Both of these things are data.",
+      "startingRole": "Associate, Product Design or Operations",
+      "primaryBonuses": [
+        { "stat": "collaborativePull", "delta": 10, "reason": "Built on mutual-aid culture. You learned early that you needed others." },
+        { "stat": "resilience", "delta": 8, "reason": "Structural disadvantage compounds resilience. You've had practice." }
+      ],
+      "secondaryBonuses": [],
+      "dialogueFlavorTags": ["earned_credibility", "mutual_aid_instinct", "pattern_of_scepticism"],
+      "workStyleFragments": {
+        "opening": "You've been proving yourself to rooms that assumed the answer was no since before you had a business card.",
+        "middle": "The credential gap will surface in years two and three, when the promotions get political and the politics have paperwork.",
+        "closing": "Your portfolio is real. The question is whether this building knows how to read it."
+      },
+      "firstDayLetterVariant": "portfolio_welcome"
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "$schema": "https://ascend.game/schemas/traits.schema.json",
+  "version": "1.0.0",
+  "selectionRules": {
+    "count": 3,
+    "from": 12,
+    "uniqueRequired": true,
+    "note": "Player picks exactly 3 traits. The combination initialises cognitive axes and contributes to the work-style preview paragraph. MBTI axis mappings are NEVER shown to the player."
+  },
+  "axisInitialisationNote": "Each trait pushes 1–2 cognitive axes by ±1 or ±2. When 3 traits are combined, overlapping axis pushes are summed, then clamped to [−5, +5]. The result is the player's starting cognitiveAxes state.",
+  "traits": [
+    {
+      "id": "trait_room_reader",
+      "displayText": "You read the room before you enter it.",
+      "selectionContext": "You do your homework on the people, not just the agenda. You arrive knowing the temperature.",
+      "cognitiveAxisDeltas": {
+        "socialEnergy": -2,
+        "signalReading": 1
+      },
+      "mbtiNote": "I+N leaning — internal processing, pattern-seeking. [NEVER SHOWN TO PLAYER]",
+      "workStyleFragment": "You'll prepare more than the room expected and resent the room for not noticing.",
+      "dialogueUnlocks": ["pre_meeting_read", "subtext_awareness_early"],
+      "synergiesWith": ["trait_shape_before_pieces", "trait_gut_first"],
+      "tensionWith": ["trait_room_presence", "trait_trust_fast"]
+    },
+    {
+      "id": "trait_room_presence",
+      "displayText": "You make the room feel like it started when you arrived.",
+      "selectionContext": "Energy shifts when you walk in. You know it. The room knows it. You've made peace with this being half gift, half burden.",
+      "cognitiveAxisDeltas": {
+        "socialEnergy": 2,
+        "decisionLens": 1
+      },
+      "mbtiNote": "E+F leaning — outward energy, relationally attentive. [NEVER SHOWN TO PLAYER]",
+      "workStyleFragment": "You'll be remembered before you've done anything worth remembering, which is a debt you'll spend years repaying with substance.",
+      "dialogueUnlocks": ["room_entry_presence", "collective_framing"],
+      "synergiesWith": ["trait_trust_fast", "trait_gut_first"],
+      "tensionWith": ["trait_room_reader", "trait_trust_the_plan"]
+    },
+    {
+      "id": "trait_head_first",
+      "displayText": "You decide with your head and explain with your heart.",
+      "selectionContext": "The analysis comes first. The story is how you make it land. You've learned that the logic alone rarely does.",
+      "cognitiveAxisDeltas": {
+        "decisionLens": -2,
+        "operatingStyle": 1
+      },
+      "mbtiNote": "T+J leaning — logic-primary, organised delivery. [NEVER SHOWN TO PLAYER]",
+      "workStyleFragment": "You'll build the right answer and then spend as long again making the room believe it, which you will find deeply unfair and entirely necessary.",
+      "dialogueUnlocks": ["analytical_framing", "structured_argument"],
+      "synergiesWith": ["trait_trust_the_plan", "trait_exact_account"],
+      "tensionWith": ["trait_gut_first", "trait_trust_fast"]
+    },
+    {
+      "id": "trait_gut_first",
+      "displayText": "You decide with your gut and trust the logic will follow.",
+      "selectionContext": "The conclusion arrives before the argument. You've been right often enough that you've stopped apologising for the order of operations.",
+      "cognitiveAxisDeltas": {
+        "decisionLens": 2,
+        "signalReading": 1
+      },
+      "mbtiNote": "F+N leaning — values-led, intuitive. [NEVER SHOWN TO PLAYER]",
+      "workStyleFragment": "You'll be right before you can explain why, which is either a superpower or a liability depending on whether anyone in the room trusts you yet.",
+      "dialogueUnlocks": ["intuitive_read", "values_framing"],
+      "synergiesWith": ["trait_room_reader", "trait_shape_before_pieces", "trait_trust_fast"],
+      "tensionWith": ["trait_head_first", "trait_trust_the_plan"]
+    },
+    {
+      "id": "trait_trust_the_plan",
+      "displayText": "You make the plan and trust the plan.",
+      "selectionContext": "You build structures that survive contact with reality. Not because you're rigid — because you've tested the structure before it matters.",
+      "cognitiveAxisDeltas": {
+        "operatingStyle": 2,
+        "decisionLens": -1
+      },
+      "mbtiNote": "J+T leaning — structured, logic-consistent. [NEVER SHOWN TO PLAYER]",
+      "workStyleFragment": "You'll be the one with the agenda when everyone else has forgotten there was one, which will feel like leadership and occasionally feel like parenting.",
+      "dialogueUnlocks": ["structured_approach", "planning_frame"],
+      "synergiesWith": ["trait_head_first", "trait_exact_account"],
+      "tensionWith": ["trait_throw_the_plan", "trait_gut_first", "trait_no_precedent"]
+    },
+    {
+      "id": "trait_throw_the_plan",
+      "displayText": "You make the plan knowing you'll throw it out.",
+      "selectionContext": "The plan is a starting point, not a contract. You've found that people who need certainty mistake your flexibility for chaos. You've found that people who don't mistake it for instinct. Both are useful.",
+      "cognitiveAxisDeltas": {
+        "operatingStyle": -2,
+        "signalReading": 1
+      },
+      "mbtiNote": "P+N leaning — open, pattern-sensitive, adaptive. [NEVER SHOWN TO PLAYER]",
+      "workStyleFragment": "You'll update faster than the room is comfortable with, which will sometimes look like wisdom and sometimes look like indecision depending on the outcome.",
+      "dialogueUnlocks": ["adaptive_pivot", "open_contingency"],
+      "synergiesWith": ["trait_no_precedent", "trait_shape_before_pieces"],
+      "tensionWith": ["trait_trust_the_plan", "trait_head_first"]
+    },
+    {
+      "id": "trait_shape_before_pieces",
+      "displayText": "You see the shape of a problem before you see its pieces.",
+      "selectionContext": "Pattern first, detail second. You've sat in meetings watching people argue about the wrong thing and waited for the right moment to name the thing they're actually arguing about.",
+      "cognitiveAxisDeltas": {
+        "signalReading": 2,
+        "operatingStyle": -1
+      },
+      "mbtiNote": "N+P leaning — intuitive, open-structured. [NEVER SHOWN TO PLAYER]",
+      "workStyleFragment": "You'll identify the real problem two meetings before the room is ready to have that conversation, which will be useful and will also make you difficult.",
+      "dialogueUnlocks": ["systemic_reframe", "pattern_first_option"],
+      "synergiesWith": ["trait_room_reader", "trait_gut_first", "trait_throw_the_plan"],
+      "tensionWith": ["trait_exact_account", "trait_trust_the_plan"]
+    },
+    {
+      "id": "trait_exact_account",
+      "displayText": "You want to know exactly what happened before you form a view.",
+      "selectionContext": "You don't theorise on incomplete data. You've sat in rooms where everyone formed a view in the first ten minutes and you were the last one to speak. You've been right more often than the room gave you credit for.",
+      "cognitiveAxisDeltas": {
+        "signalReading": -2,
+        "operatingStyle": 1
+      },
+      "mbtiNote": "S+J leaning — concrete, structured. [NEVER SHOWN TO PLAYER]",
+      "workStyleFragment": "You'll ask the question that derails the meeting because the answer actually matters, which will be correct and occasionally unwelcome.",
+      "dialogueUnlocks": ["evidence_demand", "fact_first_option"],
+      "synergiesWith": ["trait_head_first", "trait_trust_the_plan"],
+      "tensionWith": ["trait_shape_before_pieces", "trait_gut_first"]
+    },
+    {
+      "id": "trait_prepared_unnoticed",
+      "displayText": "You prepare more than the room expected and resent the room for not noticing.",
+      "selectionContext": "You don't half-read a brief. You annotate it, cross-reference it, and arrive with three things no one else caught. The resentment is real. You're working on it.",
+      "cognitiveAxisDeltas": {
+        "operatingStyle": 1,
+        "socialEnergy": -1
+      },
+      "attributeBonuses": [
+        { "stat": "executionDiscipline", "delta": 3, "reason": "Preparation is discipline." }
+      ],
+      "mbtiNote": "J+I leaning — structured, inwardly focused. [NEVER SHOWN TO PLAYER]",
+      "workStyleFragment": "You'll be over-prepared in rooms that reward presence over precision, and you'll have to decide how much you're willing to change for that.",
+      "dialogueUnlocks": ["deep_brief_option", "preparation_signal"],
+      "synergiesWith": ["trait_head_first", "trait_exact_account", "trait_trust_the_plan"],
+      "tensionWith": ["trait_room_presence", "trait_trust_fast"]
+    },
+    {
+      "id": "trait_no_precedent",
+      "displayText": "You are most useful when the situation has no precedent.",
+      "selectionContext": "Playbooks are for situations that have happened before. Your best work happens when there isn't one. You've noticed that this means you're underutilised in stable environments and indispensable in unstable ones.",
+      "cognitiveAxisDeltas": {
+        "operatingStyle": -2,
+        "signalReading": 1
+      },
+      "attributeBonuses": [
+        { "stat": "adaptiveNerve", "delta": 3, "reason": "Comfort with novelty is structural." }
+      ],
+      "mbtiNote": "P+N leaning — highly adaptive, pattern-seeking. [NEVER SHOWN TO PLAYER]",
+      "workStyleFragment": "You'll thrive in crises and underperform in quarters that are described as 'steady state,' which is the most honest thing anyone can know about themselves going in.",
+      "dialogueUnlocks": ["novel_situation_option", "first_principles_play"],
+      "synergiesWith": ["trait_throw_the_plan", "trait_shape_before_pieces", "trait_gut_first"],
+      "tensionWith": ["trait_trust_the_plan", "trait_exact_account"]
+    },
+    {
+      "id": "trait_process_anchor",
+      "displayText": "You trust the process when everyone else is improvising.",
+      "selectionContext": "When the room stops functioning, you have a framework for what to do next. You've seen improvisation mistake itself for instinct enough times to know the difference.",
+      "cognitiveAxisDeltas": {
+        "operatingStyle": 2,
+        "decisionLens": -1
+      },
+      "attributeBonuses": [
+        { "stat": "executionDiscipline", "delta": 3, "reason": "Process discipline is execution discipline." }
+      ],
+      "mbtiNote": "J+T leaning — structured, logic-consistent under pressure. [NEVER SHOWN TO PLAYER]",
+      "workStyleFragment": "You'll be the one holding the framework when the room has abandoned it, which will save the project and not appear in the retrospective.",
+      "dialogueUnlocks": ["framework_anchor", "structured_crisis_option"],
+      "synergiesWith": ["trait_trust_the_plan", "trait_head_first", "trait_prepared_unnoticed"],
+      "tensionWith": ["trait_no_precedent", "trait_throw_the_plan"]
+    },
+    {
+      "id": "trait_trust_fast",
+      "displayText": "You trust people faster than you should and are right more often than you expect.",
+      "selectionContext": "You extend belief before it's earned and collect on it later. You've been burned. Less often than people who don't trust at all, which is the only data point that matters.",
+      "cognitiveAxisDeltas": {
+        "decisionLens": 2,
+        "socialEnergy": 1
+      },
+      "attributeBonuses": [
+        { "stat": "collaborativePull", "delta": 3, "reason": "People can tell when they're trusted. They lean in." }
+      ],
+      "mbtiNote": "F+E leaning — relationally generous, socially oriented. [NEVER SHOWN TO PLAYER]",
+      "workStyleFragment": "You'll build the fastest relationships in the building and occasionally the least durable ones, and learning to tell the difference is most of the game.",
+      "dialogueUnlocks": ["trust_extension_option", "relational_bet"],
+      "synergiesWith": ["trait_room_presence", "trait_gut_first"],
+      "tensionWith": ["trait_room_reader", "trait_head_first", "trait_prepared_unnoticed"]
+    }
+  ]
+}

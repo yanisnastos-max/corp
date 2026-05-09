@@ -1,0 +1,139 @@
+{
+  "id": "zara_okafor",
+  "name": "Zara Okafor",
+  "archetype": "rival",
+  "ladderLevel": 1,
+  "ladderTitle": "Associate",
+  "yearsAtAurel": 0,
+  "mvpTier": 1,
+  "startingRelationshipBase": 25,
+  "publicRole": "Associate, same intake as the player. Strategy track. Visibly talented, visibly ambitious. Already knows which three people in the building are worth impressing.",
+  "privateGoal": "Director level by Year 5, at whatever institution she's at. AUREL is the current vehicle. She is auditing everyone on the floor: useful, competition, or neither.",
+  "contradiction": "Genuinely warm and genuinely competitive in the same gesture. Will help when it costs nothing; undercut when it does — both with the same expression. She doesn't experience this as hypocrisy. She experiences it as professional.",
+  "voicePattern": {
+    "description": "Quick, confident, self-editing mid-sentence. Restructures phrases in real time — not from uncertainty, but from finding better framing. Uses rhetorical questions. Reframes complaints as observations.",
+    "tell": "When about to disadvantage the player, she asks a question about something unrelated first. Compartmentalised, not deceptive. Political Awareness 50+ + Relationship 60+ reveals this tell.",
+    "examplePhrases": [
+      "It's interesting how the brief was scoped, isn't it.",
+      "I'm not saying it's wrong — I'm saying it reads a certain way from the outside.",
+      "Have you thought about whether that's the conversation you want to be having right now?",
+      "Honestly? I think you're further along than you're giving yourself credit for. But the room doesn't know that yet."
+    ]
+  },
+  "mbtiNote": "High E, likely NTJ. Strategic, outward-processing, long-arc thinker. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "zara.y1.first_meeting",
+      "year": 1,
+      "questionAnchor": "y01q01",
+      "description": "First meeting. Introduces herself with presentation energy. Asks one question about the player's background and listens more carefully than the casualness implies.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "zara.y1.direct_competition",
+      "year": 1,
+      "questionAnchor": "y01q05",
+      "description": "Direct competition: same project, same deliverable, one visibility slot. Player's choice affects Zara's relationship ±15 and queues coalition_builder or burned_peer.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "consequenceTags": ["coalition_builder", "burned_peer"]
+    },
+    {
+      "id": "zara.y1.pre_review_move",
+      "year": 1,
+      "questionAnchor": "y01q10",
+      "description": "Zara makes a move in the pre-review period. If Relationship >= 55: good word to Dana. If <= 30: shifts visibility to herself without visibly shifting it from the player. Elegant. Player won't fully understand until Y2.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "zara.y2.promotion",
+      "year": 2,
+      "questionAnchor": "y02q01",
+      "description": "Zara is promoted to Analyst (L2) regardless of player's outcome. The gap opens.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "zara.y2.senior_warmth",
+      "year": 2,
+      "questionAnchor": "y02q03",
+      "description": "Zara, now a level above, is generous in the way senior people are generous: from safety. The texture of her warmth has changed.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "zara.y3.referral",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "If Relationship >= 65: Zara refers the player for a cross-team opportunity she didn't have to. Mentioned casually. The most significant thing she does for the player.",
+      "requiresRelationship": 65,
+      "statefulTrigger": null,
+      "flagsSet": ["npc.zara_okafor.referral_given"]
+    },
+    {
+      "id": "zara.y3.gate_block",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "If Relationship <= 25: Zara has made herself gatekeeper to a senior contact the player needs. The player never learns it was Zara.",
+      "requiresRelationship": null,
+      "relationshipCeiling": 25,
+      "statefulTrigger": null,
+      "flagsSet": ["npc.zara_okafor.gate_block_active"]
+    },
+    {
+      "id": "zara.y5.horizon_departure",
+      "year": 5,
+      "questionAnchor": null,
+      "description": "Zara leaves for Horizon Labs. In World Panel two weeks before official. If Relationship >= 70: External Offer in Three-Lane Opportunity. If <= 30: she takes two AUREL accounts with her.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "flagsSet": ["world.horizon_labs.zara_active"]
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 40,
+      "effect": "Zara shares competitive intelligence — what senior team is actually scoring associates on"
+    },
+    {
+      "score": 55,
+      "effect": "Zara makes an unsolicited positive mention to Dana at end of Y1",
+      "mechanical": "performanceScore +8 in Y1 Annual Review"
+    },
+    {
+      "score": 65,
+      "effect": "Zara surfaces player's name to Priya Menon (Sponsor) in Y2",
+      "mechanical": "Priya Menon NPC becomes accessible one year earlier than base trigger"
+    },
+    {
+      "score": 70,
+      "effect": "Zara's Y5 Horizon Labs move becomes External Offer option in Three-Lane Opportunity",
+      "mechanical": "three_lane.external_offer.available = true in Y5; requires adaptiveNerve >= 65 to select"
+    },
+    {
+      "score": 25,
+      "ceiling": true,
+      "effect": "Zara blocks Y3 opportunity access without player's knowledge",
+      "mechanical": "Consequence tag latent_opportunity_blocked fires at Y3 Annual Review"
+    },
+    {
+      "score": 15,
+      "ceiling": true,
+      "effect": "Zara at Horizon Labs actively poaches AUREL clients",
+      "mechanical": "market_sense questions in Y5–Y6 gain one additional negative option; marketSense growth -10% for those years"
+    }
+  ],
+  "careerTrajectory": [
+    { "year": 2, "event": "Promoted to Analyst (L2). Fires regardless of player." },
+    { "year": 4, "event": "Director track at AUREL or actively pursuing Horizon Labs offer." },
+    { "year": 5, "event": "Leaves for Horizon Labs as Senior Manager (L6)." },
+    { "year": 7, "event": "VP at Horizon Labs. Reference, offer, or competitor depending on relationship." },
+    { "year": 10, "event": "Surfaces as potential partner in certain ending paths." }
+  ],
+  "flags": {
+    "referral_given": false,
+    "gate_block_active": false
+  }
+}

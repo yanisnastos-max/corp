@@ -1,0 +1,139 @@
+{
+  "id": "dana_sutcliffe",
+  "name": "Dana Sutcliffe",
+  "archetype": "manager",
+  "ladderLevel": 6,
+  "ladderTitle": "Senior Manager",
+  "yearsAtAurel": 7,
+  "mvpTier": 1,
+  "startingRelationshipBase": 30,
+  "publicRole": "The player's direct line manager. Runs a small strategy team within AUREL London's commercial division.",
+  "privateGoal": "Eighteen months from a Director promotion she has worked toward for three years. Needs at least one high-performer she can visibly sponsor without political risk. The player is a candidate. So is Zara.",
+  "contradiction": "Presents as deeply invested in people's growth. Her investment is real up to the exact point it costs her something. She has made peace with this distinction and considers it maturity.",
+  "voicePattern": {
+    "description": "Measured, precise, slightly formal. Never raises her voice. Criticism is architectural, not personal. Pleasure is expressed as a more probing quality of question.",
+    "tell": "Uses 'what I'd want you to think about' when she has already decided the answer. Political Awareness 60+ reveals this.",
+    "examplePhrases": [
+      "The issue isn't X — it's that X creates the impression of Y, which is a harder problem.",
+      "What I'd want you to think about is whether this signals what you intend it to signal.",
+      "That's one framing. There are others worth stress-testing.",
+      "The committee will have read the brief. What they haven't read is the room."
+    ]
+  },
+  "mbtiNote": "High J, high T. Processes internally, decides structurally. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "dana.y1.first_meeting",
+      "year": 1,
+      "questionAnchor": "y01q01",
+      "description": "First meeting. Dana knows the player's CV. Asks one question implying she's already formed a view.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "dana.y1.visibility_moment",
+      "year": 1,
+      "questionAnchor": "y01q04",
+      "description": "Dana puts the player in a high-visibility moment. Her framing is helpful and incomplete. This is institutional support, not full investment.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "dana.y1.promotion_pressure",
+      "year": 1,
+      "questionAnchor": "y01q08",
+      "description": "Dana's own promotion review creates ambient pressure. She is slightly less available. Political Awareness 50+ notices.",
+      "requiresRelationship": null,
+      "statefulTrigger": { "stat": "politicalAwareness", "operator": "gte", "value": 50 }
+    },
+    {
+      "id": "dana.y1.annual_review",
+      "year": 1,
+      "questionAnchor": "annual_review",
+      "description": "Conducts the full ceremonial Annual Review scene. Calibrated language. Tells the player what the committee said. Not everything she said.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "dana.y2.promotion",
+      "year": 2,
+      "questionAnchor": "y02q02",
+      "description": "Dana is promoted to Director. Announces warmly. Player has a new line manager. Dana becomes a corridor presence.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "dana.y2.candid_lunch",
+      "year": 2,
+      "questionAnchor": "y02q07",
+      "description": "Dana has lunch with the player. She is more candid now — not their manager anymore, theoretically. Says something about the firm she would not have said twelve months ago.",
+      "requiresRelationship": 50,
+      "statefulTrigger": null
+    },
+    {
+      "id": "dana.y3.sponsor_conversion",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "If Relationship >= 70 at end of Y2: Dana moves into Sponsor territory. Fights for the player in rooms they don't know about. Never announced — player infers it from doors opening.",
+      "requiresRelationship": 70,
+      "statefulTrigger": null,
+      "flagsSet": ["npc.dana_sutcliffe.sponsor_active"]
+    },
+    {
+      "id": "dana.y6.vp_committee",
+      "year": 6,
+      "questionAnchor": null,
+      "description": "If Relationship <= 25 at end of Y1: Dana sits on the VP evaluation committee. The player's application is not discussed — it is noted.",
+      "requiresRelationship": null,
+      "relationshipCeiling": 25,
+      "statefulTrigger": null,
+      "flagsSet": ["npc.dana_sutcliffe.committee_block"]
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 40,
+      "effect": "Dana shares context about the senior team's actual priorities — not the stated ones",
+      "mechanical": "Unlocks 'actual priorities' dialogue option in Q4 and Q8"
+    },
+    {
+      "score": 50,
+      "effect": "Pre-review framing: what the promotion committee is specifically looking for this cycle",
+      "mechanical": "Consequence tag seen_by_sponsor gains +10 weight in comp formula for this year"
+    },
+    {
+      "score": 70,
+      "effect": "Dana advocates in rooms the player doesn't know about; Sponsor arc begins",
+      "mechanical": "Sponsor strength +15 in Annual Review formula; arc beat dana.y3.sponsor_conversion fires"
+    },
+    {
+      "score": 85,
+      "effect": "Dana commits to fighting for Y4 promotion; converts formally to Sponsor archetype",
+      "mechanical": "Dana added to Sponsors list in game state; sponsor weight in comp formula doubles for Y4"
+    },
+    {
+      "score": 30,
+      "ceiling": true,
+      "effect": "Dana's review language is accurate and fatal: 'meets expectations in most areas'",
+      "mechanical": "performanceScore penalty -15 in Y1 Annual Review comp formula; promotion outcome skews not_promoted"
+    },
+    {
+      "score": 20,
+      "ceiling": true,
+      "effect": "Dana is the unnamed reason a Y3 opportunity does not materialise",
+      "mechanical": "Flags npc.dana_sutcliffe.committee_block = true; queues consequence with tag latent_opportunity_blocked"
+    }
+  ],
+  "careerTrajectory": [
+    { "year": 2, "event": "Promoted to Director (L7). New line manager assigned to player." },
+    { "year": 4, "event": "Promoted to Senior Director (L8). Faster if player's Y1–Y3 performance reflected well on her." },
+    { "year": 6, "event": "Sits on VP evaluation committee. Outcome depends on relationship history." },
+    { "year": 8, "event": "If Relationship >= 70: Dana is a named reference for an external board role consideration." },
+    { "year": 9, "event": "Dana leaves AUREL for a Non-Executive Director position. Her Slack farewell is warm and says exactly nothing." }
+  ],
+  "flags": {
+    "sponsor_active": false,
+    "committee_block": false,
+    "review_language_fatal": false
+  }
+}

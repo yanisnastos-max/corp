@@ -1,0 +1,145 @@
+{
+  "id": "conrad_mensah",
+  "name": "Conrad Mensah",
+  "archetype": "support_staff",
+  "ladderLevel": null,
+  "ladderTitle": "Events & Workplace Coordinator",
+  "yearsAtAurel": 8,
+  "mvpTier": 1,
+  "startingRelationshipBase": 40,
+  "publicRole": "Events & Workplace Coordinator for AUREL London. Books all-hands venues, organises team off-sites, runs quarterly socials, manages the informal social calendar of the floor. Knows everyone. Has always known everyone.",
+  "privateGoal": "Maintain the social fabric of the floor because — after eight years of watching — he knows the social fabric is what makes the work possible. He is not naive about the politics. He has chosen to use his complete picture of the floor to connect people rather than to leverage them. He would be extraordinary at a different job. He has never considered leaving.",
+  "contradiction": "The sunniest person on the floor. Also the best-informed. Knows who is interviewing elsewhere, whose performance review went badly, which restructuring is coming, who is sleeping with whom, which senior person is on thin ice. Does not weaponize this information. This is what makes him genuinely dangerous to underestimate: full intelligence, no apparent agenda. The people who understand what Conrad actually is get further faster.",
+  "voicePattern": {
+    "description": "High-energy, warmth-first, runs fifteen percent faster than the room expects. Uses 'love' and 'honestly' without irony — and means both. Completes other people's sentences, usually correctly. Gossip delivered as concern. Never says anything truly unkind but conveys substantial negative information through implication, timing, and the question he asks instead of the statement he doesn't.",
+    "tell": "When Conrad knows something significant and is deciding whether to share it, he asks about your weekend first.",
+    "lomoStyle": "Types in em-dashes where normal people use full stops. Capital letters for emphasis. No apology for either.",
+    "examplePhrases": [
+      "Honestly, you should come — it's going to be good. And I think you'll want to have been there.",
+      "I'm just saying, have you spoken to Zara lately? Because — and I could be wrong — there's something going on there.",
+      "How was your weekend? Good? Good. So — and this is probably nothing — I overheard something near the pods.",
+      "Love, everyone knows. They're just not saying it out loud yet.",
+      "I'm not going to tell you what to do. But if I were sitting where you're sitting — which, honestly, thank God I'm not — I would think about it."
+    ]
+  },
+  "mbtiNote": "High E, likely ENFJ. Relational, attuned, organiser of people and situations. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "conrad.y1.first_contact",
+      "year": 1,
+      "questionAnchor": "pre_q1",
+      "description": "Conrad introduces himself to the player within the first five minutes of their arrival — before Dana, before Grace shows them to their desk. He already knows where the player went to university. He has opinions about it. This is warmth, not surveillance. The distinction matters to Conrad.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "conrad.y1.team_social",
+      "year": 1,
+      "questionAnchor": "y01q04",
+      "description": "Conrad organises the first team social. Player's choices — who they talk to, how long they stay, whether they help with the clear-up — have relationship consequences that are NOT flagged. No stat reveals. No consequence drawer. The social is the one environment in the game where choices land without annotation.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "mechanicalNote": "Relationship deltas for this scene fire silently. This is intentional and must never be 'fixed'."
+    },
+    {
+      "id": "conrad.y1.pre_review_intelligence",
+      "year": 1,
+      "questionAnchor": "y01q09",
+      "description": "Conrad mentions, casually, something he overheard near the third-floor pods. He thought the player should know. The intelligence is accurate pre-review information about the player's promotion consideration. Earliest and most reliable signal available. Player can act on it or not.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "conrad.y2.restructuring_tip",
+      "year": 2,
+      "questionAnchor": "y02q02",
+      "description": "If Relationship >= 50: Conrad gives the player a heads-up about a floor restructuring two weeks before official announcement. Presented as rumour. It is not rumour.",
+      "requiresRelationship": 50,
+      "statefulTrigger": null,
+      "flagsSet": ["npc.conrad_mensah.restructuring_tip_given"]
+    },
+    {
+      "id": "conrad.y2.introduction",
+      "year": 2,
+      "questionAnchor": "y02q06",
+      "description": "If Relationship >= 60: Conrad introduces the player to someone from a different team at a cross-floor event. Not accidental — Conrad has been watching both people for months. The introduction is to a Tier 2 NPC not yet accessible via the normal question sequence.",
+      "requiresRelationship": 60,
+      "statefulTrigger": null
+    },
+    {
+      "id": "conrad.y3.cross_team_project",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "Conrad organises a new cross-team project format — his idea, approved by Dana's successor. If Relationship >= 65: player is included in a way that puts them in front of Tier 2 NPCs one year ahead of the base timeline.",
+      "requiresRelationship": 65,
+      "statefulTrigger": null,
+      "flagsSet": ["npc.conrad_mensah.tier2_access_granted"]
+    },
+    {
+      "id": "conrad.y5.job_offer_moment",
+      "year": 5,
+      "questionAnchor": "y05q07",
+      "description": "Conrad reveals, casually, that he's been offered a role at a competitor. Good salary. Events director. He's not going to take it. 'Honestly, where would I even go?' This is the player's chance to respond. If player encourages him to stay or says nothing: Conrad stays. If player is genuinely enthusiastic about the opportunity for him: Conrad goes. His replacement (Liam) knows nothing. Several informal systems collapse quietly over eighteen months.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "flagsSet": ["npc.conrad_mensah.offer_disclosed"]
+    },
+    {
+      "id": "conrad.y8.three_sentences",
+      "year": 8,
+      "questionAnchor": null,
+      "description": "If Relationship >= 85: Conrad tells the player what he actually thinks about AUREL — what eight, now twelve, years of watching this place have taught him. Not a speech. Three sentences over coffee. The player will remember them. They are the most politically unguarded thing anyone in the game will ever say.",
+      "requiresRelationship": 85,
+      "statefulTrigger": null
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 30,
+      "effect": "Conrad tells the player something useful and true about whoever they're about to interact with"
+    },
+    {
+      "score": 50,
+      "effect": "Conrad's pre-review intelligence (Y2+): overheard facts about the player's promotion consideration, delivered as casual concern",
+      "mechanical": "One consequence tag from the promotion engine surfaced one question early when Conrad's intelligence fires"
+    },
+    {
+      "score": 65,
+      "effect": "Conrad introduces the player to NPCs outside their immediate team at social events — structured early access to Tier 2 cast",
+      "mechanical": "Tier 2 NPC introduction events trigger one year before base timeline"
+    },
+    {
+      "score": 75,
+      "effect": "Conrad quietly advocates for the player's social reputation; Reputation stat gains +2 per year passively while Conrad is active",
+      "mechanical": "reputation += 2 at each Annual Review while flag npc.conrad_mensah.active = true"
+    },
+    {
+      "score": 85,
+      "effect": "Conrad shares what he actually thinks about AUREL — the most honest institutional assessment in the game",
+      "mechanical": "Triggers arc beat conrad.y8.three_sentences; insight pillar gains +2 from the conversation"
+    }
+  ],
+  "careerTrajectory": [
+    { "year": 3, "event": "Successfully pitches new cross-team format. His first formal project of his own." },
+    { "year": 5, "event": "Receives external offer; outcome depends on player response in arc beat." },
+    { "year": 8, "event": "If still at AUREL: Conrad has now outlasted three of the four senior managers who were here when he arrived. He finds this funny." },
+    { "year": 12, "event": "Conrad is still here. He knows everyone in the building — including people the player never met." }
+  ],
+  "npcRelationship": {
+    "Grace Oduya": "Cordial. They share information about the floor's health. Neither needs the other's approval but both notice when the other is absent.",
+    "All NPCs": "Conrad is on warm terms with everyone at baseline. His intelligence network reflects the full floor, not just the player's circle."
+  },
+  "designNotes": {
+    "information_delivery": "Conrad knows everything. He must never seem like an information dispenser. Every intelligence drop must arrive dressed as warmth, concern, or casual observation.",
+    "gossip_rule": "His gossip is always about other people, never about the player. The player is the one person Conrad does not discuss with anyone else. This is his most significant tell — discoverable by a player at Relationship 75+ who pays attention.",
+    "departure_tone": "Conrad's departure (if triggered in Y5) must be written as genuinely bittersweet, not dramatic. He goes warmly. The floor gets quieter in a way no one quite names.",
+    "grace_dynamic": "Grace has power through access and longevity. Conrad has power through connection and goodwill. They have a cordial relationship built on mutual recognition that they each have something the other doesn't."
+  },
+  "flags": {
+    "active": true,
+    "restructuring_tip_given": false,
+    "tier2_access_granted": false,
+    "offer_disclosed": false,
+    "departed": false
+  }
+}

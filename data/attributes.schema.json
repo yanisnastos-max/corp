@@ -1,0 +1,341 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ascend.game/schemas/attributes.schema.json",
+  "title": "ASCEND Attribute System",
+  "description": "Schema for all player attributes: 10 visible stats, 4 long-arc pillars, 4 cognitive axes. See docs/03_attributes.md for full narrative spec.",
+  "type": "object",
+  "required": ["visibleStats", "pillars", "cognitiveAxes"],
+  "additionalProperties": false,
+
+  "definitions": {
+
+    "visibleStatValue": {
+      "$comment": "A single visible stat value — integer 0–100.",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+
+    "visibleStatBand": {
+      "$comment": "Derived narrative band (1–5). Computed from value; never stored. Documented here for engine reference.",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "1=Underdeveloped(0-24), 2=Functional(25-49), 3=Capable(50-69), 4=Distinguished(70-84), 5=Exceptional(85-100)"
+    },
+
+    "pillarValue": {
+      "$comment": "A single long-arc pillar value. Starts at 1, grows 1–3 per year, max ~37 at Y12.",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 40
+    },
+
+    "cognitiveAxisValue": {
+      "$comment": "A cognitive axis score. Spectrum from -5 to +5. 0 is neutral. Set at creation, nudged ±1/year max.",
+      "type": "integer",
+      "minimum": -5,
+      "maximum": 5
+    },
+
+    "statDelta": {
+      "$comment": "A change applied to any stat. Used in question outcomes and consequence resolution.",
+      "type": "object",
+      "required": ["stat", "delta"],
+      "additionalProperties": false,
+      "properties": {
+        "stat": {
+          "description": "Which stat is being changed.",
+          "$ref": "#/definitions/anyStatKey"
+        },
+        "delta": {
+          "description": "Amount to add (positive) or subtract (negative). Applied after floor/ceiling clamps.",
+          "type": "integer",
+          "minimum": -20,
+          "maximum": 20
+        },
+        "reason": {
+          "description": "Human-readable explanation shown in the Consequences Drawer. Required for visible stats; omit for hidden.",
+          "type": "string",
+          "maxLength": 120
+        },
+        "hidden": {
+          "description": "If true, this delta is not shown in the Consequences Drawer. Used for pillar and axis changes.",
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+
+    "anyStatKey": {
+      "description": "Any valid attribute key across all three layers.",
+      "type": "string",
+      "enum": [
+        "politicalAwareness",
+        "strategicInfluence",
+        "collaborativePull",
+        "resilience",
+        "executionDiscipline",
+        "adaptiveNerve",
+        "technicalCredibility",
+        "reputation",
+        "marketSense",
+        "integrity",
+        "curiosity",
+        "insight",
+        "engagement",
+        "determination",
+        "socialEnergy",
+        "signalReading",
+        "decisionLens",
+        "operatingStyle"
+      ]
+    },
+
+    "visibleStatKey": {
+      "description": "Keys for the 10 visible stats only.",
+      "type": "string",
+      "enum": [
+        "politicalAwareness",
+        "strategicInfluence",
+        "collaborativePull",
+        "resilience",
+        "executionDiscipline",
+        "adaptiveNerve",
+        "technicalCredibility",
+        "reputation",
+        "marketSense",
+        "integrity"
+      ]
+    },
+
+    "pillarKey": {
+      "description": "Keys for the 4 long-arc Egon Zehnder pillars.",
+      "type": "string",
+      "enum": ["curiosity", "insight", "engagement", "determination"]
+    },
+
+    "cognitiveAxisKey": {
+      "description": "Keys for the 4 hidden cognitive axes.",
+      "type": "string",
+      "enum": ["socialEnergy", "signalReading", "decisionLens", "operatingStyle"]
+    },
+
+    "gatingThreshold": {
+      "$comment": "A stat gate — a condition that must be met to unlock a feature, question, or ending.",
+      "type": "object",
+      "required": ["stat", "operator", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "stat": { "$ref": "#/definitions/anyStatKey" },
+        "operator": {
+          "type": "string",
+          "enum": ["gte", "lte", "eq", "gt", "lt"],
+          "description": "gte=≥, lte=≤, eq===, gt=>, lt=<"
+        },
+        "value": {
+          "type": "integer"
+        },
+        "sustained": {
+          "description": "If true, this threshold must have been met continuously for N years.",
+          "type": "boolean",
+          "default": false
+        },
+        "sustainedYears": {
+          "description": "Number of consecutive years the threshold must have been met. Only meaningful if sustained=true.",
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  },
+
+  "properties": {
+
+    "visibleStats": {
+      "description": "The 10 player-facing stats. Range 0–100 each.",
+      "type": "object",
+      "required": [
+        "politicalAwareness",
+        "strategicInfluence",
+        "collaborativePull",
+        "resilience",
+        "executionDiscipline",
+        "adaptiveNerve",
+        "technicalCredibility",
+        "reputation",
+        "marketSense",
+        "integrity"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "politicalAwareness": {
+          "description": "Knowing what's actually being said. Gates read-between-the-lines options and NPC subtext reveals.",
+          "$ref": "#/definitions/visibleStatValue"
+        },
+        "strategicInfluence": {
+          "description": "Whether your opinion changes the outcome. Gates senior-table questions and sponsor escalation.",
+          "$ref": "#/definitions/visibleStatValue"
+        },
+        "collaborativePull": {
+          "description": "Whether people want to work with you specifically. Drives peer NPC relationship growth rate.",
+          "$ref": "#/definitions/visibleStatValue"
+        },
+        "resilience": {
+          "description": "How far you bounce back and how fast. Mitigates negative consequence severity; shortens recovery clock.",
+          "$ref": "#/definitions/visibleStatValue"
+        },
+        "executionDiscipline": {
+          "description": "You said you would, and you did. Primary gate for Annual Review performance score and promotion eligibility.",
+          "$ref": "#/definitions/visibleStatValue"
+        },
+        "adaptiveNerve": {
+          "description": "Comfort with not knowing how this ends. Unlocks bold-play options and external offer paths.",
+          "$ref": "#/definitions/visibleStatValue"
+        },
+        "technicalCredibility": {
+          "description": "Whether builders trust your judgment. Gates product/CTO track and engineering NPC trust.",
+          "$ref": "#/definitions/visibleStatValue"
+        },
+        "reputation": {
+          "description": "What people say about you when you're not in the room. Affects NPC baseline reactions and Annual Review comp.",
+          "$ref": "#/definitions/visibleStatValue"
+        },
+        "marketSense": {
+          "description": "Understanding what the market will pay for before it's obvious. Gates commercial track and client NPCs.",
+          "$ref": "#/definitions/visibleStatValue"
+        },
+        "integrity": {
+          "description": "Whether you are the same person in the dark. Gates Sofia's sentience thread, ethical arcs, and certain endings.",
+          "$ref": "#/definitions/visibleStatValue"
+        }
+      }
+    },
+
+    "pillars": {
+      "description": "The 4 hidden long-arc Egon Zehnder pillars. Range 1–40 each. Gate L9+ promotions. Never displayed.",
+      "type": "object",
+      "required": ["curiosity", "insight", "engagement", "determination"],
+      "additionalProperties": false,
+      "properties": {
+        "curiosity": {
+          "description": "Drive to seek new experience, knowledge, and candid feedback. Accumulated through inquiry choices and World Panel engagement.",
+          "$ref": "#/definitions/pillarValue"
+        },
+        "insight": {
+          "description": "Ability to gather and make sense of information that suggests new possibilities. Accumulated through systemic-read choices and cross-stat thresholds.",
+          "$ref": "#/definitions/pillarValue"
+        },
+        "engagement": {
+          "description": "Ability to connect with people in a way that generates trust. Accumulated through deep NPC investment and relationship repair.",
+          "$ref": "#/definitions/pillarValue"
+        },
+        "determination": {
+          "description": "Courage and tenacity to pursue hard goals over time. Accumulated through track consistency, hard-path choices, and conditional-promotion resolution.",
+          "$ref": "#/definitions/pillarValue"
+        }
+      }
+    },
+
+    "cognitiveAxes": {
+      "description": "The 4 hidden behavioral axes. Range -5 to +5. Set at creation via Traits; nudged ±1/year max. Never labeled to player.",
+      "type": "object",
+      "required": ["socialEnergy", "signalReading", "decisionLens", "operatingStyle"],
+      "additionalProperties": false,
+      "properties": {
+        "socialEnergy": {
+          "description": "Solitary (-5) to Collective (+5). Affects dialogue framing and NPC relationship growth rates by NPC type.",
+          "$ref": "#/definitions/cognitiveAxisValue"
+        },
+        "signalReading": {
+          "description": "Concrete (-5) to Abstract (+5). Affects opportunity detection timing and Political Awareness amplification.",
+          "$ref": "#/definitions/cognitiveAxisValue"
+        },
+        "decisionLens": {
+          "description": "Analytical (-5) to Relational (+5). Affects NPC trust patterns by archetype and Integrity accumulation triggers.",
+          "$ref": "#/definitions/cognitiveAxisValue"
+        },
+        "operatingStyle": {
+          "description": "Adaptive (-5) to Structured (+5). Affects Execution Discipline vs Adaptive Nerve growth rates and Three-Lane Opportunity information depth.",
+          "$ref": "#/definitions/cognitiveAxisValue"
+        }
+      }
+    }
+  },
+
+  "$defs": {
+
+    "annualReviewAttributeAggregate": {
+      "$comment": "Computed value for comp formula. Not stored — derived each Annual Review.",
+      "description": "The 'attribute aggregate' component of the Annual Review comp formula. Weighted: Execution Discipline 30% + Strategic Influence 20% + Reputation 20% + remaining 7 stats averaged 30%.",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+
+    "promotionGateCheck": {
+      "$comment": "Struct used by the promotion engine to evaluate all gating thresholds before surfacing a promotion outcome.",
+      "description": "Result of evaluating all promotion gates for a given ladder level.",
+      "type": "object",
+      "required": ["level", "eligible", "failedGates"],
+      "additionalProperties": false,
+      "properties": {
+        "level": {
+          "description": "Ladder level being evaluated (1–12).",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "eligible": {
+          "description": "Whether the player currently meets all gates for this level.",
+          "type": "boolean"
+        },
+        "failedGates": {
+          "description": "List of gating thresholds not currently met. Empty if eligible=true.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/gatingThreshold" }
+        }
+      }
+    },
+
+    "startingAttributeSet": {
+      "$comment": "Used by Character Creation (doc 0.6) to define background bonuses and trait-derived axis values.",
+      "description": "The full attribute state at game start, after background bonuses and trait axis values are applied.",
+      "type": "object",
+      "required": ["visibleStats", "pillars", "cognitiveAxes"],
+      "properties": {
+        "visibleStats": {
+          "description": "Starting visible stat values (base 30 + background bonus, clamped 0–100). Integrity base 50. Reputation base 30.",
+          "$ref": "#/properties/visibleStats"
+        },
+        "pillars": {
+          "description": "All pillars start at 1.",
+          "$ref": "#/properties/pillars"
+        },
+        "cognitiveAxes": {
+          "description": "Set by Trait selection during Character Creation. Each trait pushes 1–2 axes by ±1 or ±2.",
+          "$ref": "#/properties/cognitiveAxes"
+        }
+      }
+    },
+
+    "attributeSnapshot": {
+      "$comment": "A point-in-time record of all attributes. Stored in game state after each Annual Review for Career Timeline and save-state diff view.",
+      "description": "Complete attribute state snapshot for a specific year-end.",
+      "type": "object",
+      "required": ["year", "attributes"],
+      "additionalProperties": false,
+      "properties": {
+        "year": {
+          "description": "In-game year (1–12).",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "attributes": {
+          "$ref": "#"
+        }
+      }
+    }
+  }
+}
