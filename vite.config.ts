@@ -17,13 +17,14 @@ function validateDataPlugin(): Plugin {
 
     // ── Questions ──
     const questionsDir = join(dataDir, 'questions');
-    const yearDirs = readdirSync(questionsDir).filter(
-      d => readdirSync(join(questionsDir, d)).length > 0
-    );
+    const yearDirs = readdirSync(questionsDir, { withFileTypes: true })
+      .filter(d => d.isDirectory())
+      .map(d => d.name);
 
     for (const yearDir of yearDirs) {
-      const files = readdirSync(join(questionsDir, yearDir))
-        .filter(f => f.endsWith('.json'));
+      const files = readdirSync(join(questionsDir, yearDir), { withFileTypes: true })
+        .filter(f => f.isFile() && f.name.endsWith('.json'))
+        .map(f => f.name);
 
       for (const file of files) {
         const src = relative(process.cwd(), join(questionsDir, yearDir, file));
@@ -43,10 +44,13 @@ function validateDataPlugin(): Plugin {
 
     // ── NPCs ──
     const npcsDir = join(dataDir, 'npcs');
-    const tierDirs = readdirSync(npcsDir);
+    const tierDirs = readdirSync(npcsDir, { withFileTypes: true })
+      .filter(d => d.isDirectory())
+      .map(d => d.name);
     for (const tierDir of tierDirs) {
-      const files = readdirSync(join(npcsDir, tierDir))
-        .filter(f => f.endsWith('.json'));
+      const files = readdirSync(join(npcsDir, tierDir), { withFileTypes: true })
+        .filter(f => f.isFile() && f.name.endsWith('.json'))
+        .map(f => f.name);
       for (const file of files) {
         const src = relative(process.cwd(), join(npcsDir, tierDir, file));
         try {

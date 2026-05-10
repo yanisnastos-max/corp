@@ -1,11 +1,10 @@
-// ASCEND — Entry point (task 1.3)
-// Router is now src/core/router.ts.
-// Engine wiring: task 1.4.
+// ASCEND — Entry point (task 1.5)
+// Onboarding scene now live. Engine wiring: task 1.6.
 
 import { router } from './core/router';
-import { createInitialState } from './core/state';
 import { loadState, saveState, exportState, importState } from './utils/storage';
 import { mountDesignSystem } from './scenes/design_system';
+import { mountOnboarding, unmountOnboarding } from './scenes/onboarding';
 
 const root = document.getElementById('scene-root')!;
 
@@ -32,7 +31,34 @@ function render(scene: string): void {
     return;
   }
 
-  // All other scenes: show landing until Engine is wired (task 1.4)
+  if (scene === 'onboarding') {
+    document.title = 'ASCEND — New Game';
+    unmountOnboarding();
+    mountOnboarding(root);
+    return;
+  }
+
+  // decision / panels / review: placeholder until Engine is wired (task 1.6)
+  if (scene === 'decision' || scene === 'annual_review' || scene === 'career_timeline') {
+    const state = loadState();
+    document.title = 'ASCEND';
+    root.innerHTML = `
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;
+                  font-family:var(--font-ui);color:var(--color-text-muted);gap:var(--space-4);">
+        <p style="font-family:var(--font-mono);font-size:var(--text-xs);letter-spacing:.1em;text-transform:uppercase;
+                  color:var(--color-text-accent)">Scene: ${scene}</p>
+        ${state ? `<p style="font-size:var(--text-sm)">Logged in as ${state.player.name} · Year ${state.year}</p>` : ''}
+        <p style="font-size:var(--text-xs);color:var(--color-text-disabled)">Engine coming in task 1.6</p>
+        <button onclick="window.location.hash=''" style="margin-top:var(--space-4);font-family:var(--font-mono);
+          font-size:var(--text-xs);background:none;border:1px solid var(--color-border-default);
+          color:var(--color-text-muted);padding:var(--space-2) var(--space-4);border-radius:var(--radius-base);cursor:pointer;">
+          ← Back to landing
+        </button>
+      </div>`;
+    return;
+  }
+
+  // Default: landing
   document.title = 'ASCEND';
   mountLanding();
 }
@@ -180,10 +206,7 @@ function mountLanding(): void {
   // ── Wire buttons ──
 
   root.querySelector('#btn-new')?.addEventListener('click', () => {
-    state = createInitialState();
-    saveState(state);
-    toast('New game created. Engine coming in task 1.4.');
-    mountLanding(); // re-render with save present
+    router.push('onboarding');
   });
 
   root.querySelector('#btn-continue')?.addEventListener('click', () => {
