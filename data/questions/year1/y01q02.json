@@ -1,0 +1,125 @@
+{
+  "id": "y01q02",
+  "year": 1,
+  "questionNumber": 2,
+  "title": "The Annotated Brief",
+  "category": "orientation",
+  "setup": "Day three. Leo materialises next to your desk with a printed document — dense, highlighted, three colours of annotation in margins you can barely read. He sets it down like he's returning a library book.\n\n'Previous associate left it on the shared drive. I cleaned it up a bit. Thought it might be useful for the Q4 presentation — there's context in there that isn't in the Loom brief.'\n\nHe's already half-turned to leave. You have approximately six seconds to say something before he goes back to his screen.",
+  "anchoredNPCs": [
+    "leo_chen",
+    "zara_okafor"
+  ],
+  "arcBeatAnchors": [
+    "leo.y1.small_favour"
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Accept it",
+      "text": "You thank him and take it. That's a document that would take you a week to compile on your own. You don't say that. Leo nods and returns to his desk without making anything of it.",
+      "statDeltas": [
+        {
+          "stat": "executionDiscipline",
+          "delta": 3
+        },
+        {
+          "stat": "integrity",
+          "delta": -1
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "leo_chen",
+          "delta": 8
+        }
+      ],
+      "consequenceTags": [
+        "coalition_builder"
+      ],
+      "innerMonologue": "He didn't expect anything back. That makes it harder to know what you owe."
+    },
+    {
+      "id": "B",
+      "label": "Accept and share with Zara",
+      "text": "You take it and mention you'll pass it to Zara — that she'd probably find it useful too. Leo's expression does something small. He says nothing. 'Sure,' he says eventually.",
+      "statDeltas": [
+        {
+          "stat": "integrity",
+          "delta": -2
+        },
+        {
+          "stat": "collaborativePull",
+          "delta": 2
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "zara_okafor",
+          "delta": 5
+        },
+        {
+          "npcId": "leo_chen",
+          "delta": 3
+        }
+      ],
+      "consequenceTags": [],
+      "innerMonologue": "Leo gave it to you specifically. You redistributed it. You're not sure that was the same thing."
+    },
+    {
+      "id": "C",
+      "label": "Decline",
+      "text": "You thank him and say you'd rather find your own way in. He nods — not disapproving, genuinely unsurprised. 'Fair enough,' he says, and takes it back.",
+      "statDeltas": [
+        {
+          "stat": "integrity",
+          "delta": 4
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": 2
+        },
+        {
+          "stat": "executionDiscipline",
+          "delta": -4
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "leo_chen",
+          "delta": -2
+        }
+      ],
+      "consequenceTags": [
+        "high_cost_high_fidelity"
+      ],
+      "innerMonologue": "You chose the harder version. You're not sure you chose it for the right reason."
+    },
+    {
+      "id": "D",
+      "label": "Accept and ask what Leo took from it",
+      "text": "You take the document, then ask him what the most useful thing in it was — not what's on the page, but what he got from reading it. He stops walking. He turns back.",
+      "statDeltas": [
+        {
+          "stat": "executionDiscipline",
+          "delta": -2
+        },
+        {
+          "stat": "politicalAwareness",
+          "delta": 3
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "leo_chen",
+          "delta": 6
+        }
+      ],
+      "consequenceTags": [
+        "open_inquiry"
+      ],
+      "innerMonologue": "That question bought you ten minutes of Leo actually talking. You suspect that's rare.",
+      "curiosityPillarBonus": 1
+    }
+  ],
+  "designNotes": "Leo's small favour fires here. The mechanical point is Leo relationship delta: options A and D produce the strongest Leo gains. Option B is the trap — it looks generous but Leo reads it as redistributing something personal. Option C is the integrity choice with real cost. The hidden Leo-political-reveal arc (y01q07) becomes richer if the player took D here and has Rel >=50 going in."
+}

@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASCEND — Onboarding (Wireframe)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../tokens.css">
+
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ─────────────────────────────────────── */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-5) var(--space-8);
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    .wordmark {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-primary);
+    }
+
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .step-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--radius-full);
+      background: var(--color-border-default);
+      transition: background var(--transition-standard), width var(--transition-standard);
+      cursor: pointer;
+    }
+    .step-dot.completed { background: var(--color-text-muted); }
+    .step-dot.active { background: var(--color-accent-default); width: 20px; border-radius: var(--radius-base); }
+
+    .icon-btn {
+      background: none;
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-base);
+      color: var(--color-text-muted);
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      transition: border-color var(--transition-fast), color var(--transition-fast);
+    }
+    .icon-btn:hover { border-color: var(--color-border-strong); color: var(--color-text-secondary); }
+
+    /* ── Main ────────────────────────────────────────── */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: var(--space-10) var(--space-6) var(--space-16);
+    }
+
+    /* ── Step container ──────────────────────────────── */
+    .step {
+      display: none;
+      width: 100%;
+      max-width: 640px;
+      animation: step-in var(--duration-slow) var(--easing-enter) forwards;
+    }
+    .step.active { display: block; }
+
+    @keyframes step-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-accent);
+      margin-bottom: var(--space-3);
+    }
+
+    .step-heading {
+      font-family: var(--font-ui);
+      font-size: var(--text-2xl);
+      font-weight: var(--weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-2);
+      line-height: var(--leading-tight);
+    }
+
+    .step-subhead {
+      font-family: var(--font-narrative);
+      font-size: var(--text-base);
+      color: var(--color-text-secondary);
+      line-height: var(--leading-relaxed);
+      margin-bottom: var(--space-8);
+    }
+
+    /* ── Form controls ───────────────────────────────── */
+    .field {
+      margin-bottom: var(--space-5);
+    }
+
+    .field-label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-medium);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .text-input {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      background: var(--color-surface-input);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-md);
+      font-family: var(--font-ui);
+      font-size: var(--text-base);
+      color: var(--color-text-primary);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      outline: none;
+    }
+    .text-input::placeholder { color: var(--color-text-muted); }
+    .text-input:focus {
+      border-color: var(--color-accent-default);
+      box-shadow: 0 0 0 3px var(--color-accent-subtle);
+    }
+
+    .pronoun-grid {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .pronoun-chip {
+      padding: var(--space-2) var(--space-3);
+      background: var(--color-surface-overlay);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-full);
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+    }
+    .pronoun-chip:hover { border-color: var(--color-border-strong); color: var(--color-text-primary); }
+    .pronoun-chip.selected {
+      border-color: var(--color-accent-default);
+      color: var(--color-text-accent);
+      background: var(--color-accent-subtle);
+    }
+
+    /* ── Background cards ────────────────────────────── */
+    .bg-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+    }
+    @media (max-width: 560px) { .bg-grid { grid-template-columns: 1fr; } }
+
+    .bg-card {
+      padding: var(--space-4) var(--space-5);
+      background: var(--color-surface-card);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: border-color var(--transition-standard), background var(--transition-standard), transform var(--transition-standard);
+      text-align: left;
+      width: 100%;
+    }
+    .bg-card:hover {
+      border-color: var(--color-border-strong);
+      background: var(--color-surface-overlay);
+      transform: translateY(-1px);
+    }
+    .bg-card.selected {
+      border-color: var(--color-accent-default);
+      background: var(--color-surface-overlay);
+    }
+
+    .bg-name {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-1);
+    }
+
+    .bg-tagline {
+      font-family: var(--font-narrative);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      font-style: italic;
+      margin-bottom: var(--space-3);
+      line-height: var(--leading-snug);
+    }
+
+    .bg-bonuses {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .bg-bonus-chip {
+      font-family: var(--font-mono);
+      font-size: var(--text-2xs);
+      color: #6EE7B7;
+      background: rgba(110, 231, 183, 0.08);
+      border: 1px solid rgba(110, 231, 183, 0.2);
+      border-radius: var(--radius-sm);
+      padding: 1px 5px;
+      letter-spacing: var(--tracking-wide);
+    }
+
+    /* ── Trait cards ─────────────────────────────────── */
+    .trait-counter {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-4);
+    }
+    .trait-counter span { color: var(--color-text-accent); font-weight: var(--weight-medium); }
+
+    .trait-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2);
+    }
+    @media (max-width: 480px) { .trait-grid { grid-template-columns: 1fr; } }
+
+    .trait-card {
+      padding: var(--space-3) var(--space-4);
+      background: var(--color-surface-card);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: border-color var(--transition-standard), background var(--transition-standard);
+      text-align: left;
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+    .trait-card:hover {
+      border-color: var(--color-border-strong);
+      background: var(--color-surface-overlay);
+    }
+    .trait-card.selected {
+      border-color: var(--color-accent-default);
+      background: var(--color-surface-overlay);
+    }
+    .trait-card.maxed:not(.selected) {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .trait-check {
+      width: 16px;
+      height: 16px;
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      transition: border-color var(--transition-fast), background var(--transition-fast);
+    }
+    .trait-card.selected .trait-check {
+      background: var(--color-accent-default);
+      border-color: var(--color-accent-default);
+      color: white;
+    }
+
+    .trait-name {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-medium);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-1);
+    }
+
+    .trait-fragment {
+      font-family: var(--font-narrative);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      line-height: var(--leading-snug);
+      font-style: italic;
+    }
+
+    /* ── Work-style preview ──────────────────────────── */
+    .preview-box {
+      background: var(--color-surface-card);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6) var(--space-8);
+      margin-bottom: var(--space-6);
+    }
+
+    .preview-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-4);
+    }
+
+    .preview-text {
+      font-family: var(--font-narrative);
+      font-size: var(--text-md);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text-primary);
+    }
+
+    .preview-pills {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+      margin-top: var(--space-5);
+      padding-top: var(--space-5);
+      border-top: 1px solid var(--color-border-subtle);
+    }
+
+    .preview-pill {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-full);
+      padding: var(--space-1) var(--space-3);
+    }
+
+    /* ── First-day letter ────────────────────────────── */
+    .letter-wrapper {
+      background: var(--color-surface-card);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: var(--space-6);
+    }
+
+    .letter-header {
+      padding: var(--space-5) var(--space-8);
+      border-bottom: 1px solid var(--color-border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .letter-aurel {
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-semibold);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-accent);
+    }
+
+    .letter-date {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+    }
+
+    .letter-body {
+      padding: var(--space-8);
+      font-family: var(--font-narrative);
+      font-size: var(--text-md);
+      line-height: var(--leading-loose);
+      color: var(--color-text-primary);
+    }
+
+    .letter-body p + p { margin-top: var(--space-4); }
+
+    .letter-sig {
+      padding: var(--space-5) var(--space-8) var(--space-6);
+      border-top: 1px solid var(--color-border-subtle);
+    }
+
+    .letter-sig-name {
+      font-family: var(--font-narrative);
+      font-size: var(--text-base);
+      font-weight: var(--weight-semibold);
+      color: var(--color-text-primary);
+    }
+
+    .letter-sig-title {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      letter-spacing: var(--tracking-wide);
+    }
+
+    /* ── Navigation ──────────────────────────────────── */
+    .nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: var(--space-8);
+      width: 100%;
+      max-width: 640px;
+    }
+
+    .nav-back {
+      padding: var(--space-3) var(--space-5);
+      background: transparent;
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-md);
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-medium);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: border-color var(--transition-fast), color var(--transition-fast);
+    }
+    .nav-back:hover { border-color: var(--color-border-strong); color: var(--color-text-primary); }
+    .nav-back:disabled { opacity: 0.3; pointer-events: none; }
+
+    .nav-continue {
+      padding: var(--space-3) var(--space-6);
+      background: var(--color-accent-default);
+      border: none;
+      border-radius: var(--radius-md);
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
+      letter-spacing: var(--tracking-wide);
+      color: var(--pearl-100);
+      cursor: pointer;
+      transition: background var(--transition-fast), transform var(--transition-fast);
+    }
+    .nav-continue:hover { background: var(--color-accent-hover); transform: translateY(-1px); }
+    .nav-continue:active { transform: translateY(0); }
+
+    .wf-note {
+      position: fixed;
+      bottom: var(--space-4);
+      right: var(--space-4);
+      font-family: var(--font-mono);
+      font-size: var(--text-2xs);
+      color: var(--color-text-muted);
+      letter-spacing: var(--tracking-wide);
+      pointer-events: none;
+      z-index: var(--z-toast);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <span class="wordmark">Ascend</span>
+    <div class="step-indicator" id="step-dots">
+      <div class="step-dot active" data-step="1" onclick="goToStep(1)"></div>
+      <div class="step-dot" data-step="2" onclick="goToStep(2)"></div>
+      <div class="step-dot" data-step="3" onclick="goToStep(3)"></div>
+      <div class="step-dot" data-step="4" onclick="goToStep(4)"></div>
+      <div class="step-dot" data-step="5" onclick="goToStep(5)"></div>
+    </div>
+    <button class="icon-btn" id="theme-btn" aria-label="Toggle theme">☽</button>
+  </header>
+
+  <main class="main">
+
+    <!-- ── STEP 1: Name ─────────────────────────────── -->
+    <div class="step active" id="step-1">
+      <div class="step-eyebrow">Step 1 of 5</div>
+      <h1 class="step-heading">Who are you?</h1>
+      <p class="step-subhead">Your name is the only thing in AUREL London that is entirely yours. Everything else will be shaped by what happens next.</p>
+
+      <div class="field">
+        <label class="field-label" for="name-input">Your name</label>
+        <input class="text-input" type="text" id="name-input" placeholder="Enter your name" autocomplete="off" spellcheck="false">
+      </div>
+
+      <div class="field">
+        <label class="field-label">Pronouns</label>
+        <div class="pronoun-grid">
+          <button class="pronoun-chip" onclick="selectPronoun(this)">she / her</button>
+          <button class="pronoun-chip" onclick="selectPronoun(this)">he / him</button>
+          <button class="pronoun-chip" onclick="selectPronoun(this)">they / them</button>
+          <button class="pronoun-chip" onclick="selectPronoun(this)">she / they</button>
+          <button class="pronoun-chip" onclick="selectPronoun(this)">he / they</button>
+          <button class="pronoun-chip" onclick="selectPronoun(this)">other / specify</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: Background ───────────────────────── -->
+    <div class="step" id="step-2">
+      <div class="step-eyebrow">Step 2 of 5</div>
+      <h1 class="step-heading">Where did you come from?</h1>
+      <p class="step-subhead">Your background shapes how AUREL reads you in the first year — and how you read AUREL back.</p>
+
+      <div class="bg-grid">
+        <button class="bg-card" onclick="selectBg(this)">
+          <div class="bg-name">PPE at LSE</div>
+          <div class="bg-tagline">"The ladder was always the plan."</div>
+          <div class="bg-bonuses">
+            <span class="bg-bonus-chip">+5 Strategic Influence</span>
+            <span class="bg-bonus-chip">+4 Political Awareness</span>
+          </div>
+        </button>
+
+        <button class="bg-card" onclick="selectBg(this)">
+          <div class="bg-name">CS Dropout</div>
+          <div class="bg-tagline">"You left a PhD for this. You have thoughts about that."</div>
+          <div class="bg-bonuses">
+            <span class="bg-bonus-chip">+6 Technical Credibility</span>
+            <span class="bg-bonus-chip">+4 Adaptive Nerve</span>
+          </div>
+        </button>
+
+        <button class="bg-card" onclick="selectBg(this)">
+          <div class="bg-name">Engineering, State Uni</div>
+          <div class="bg-tagline">"You learned by building things that had to work."</div>
+          <div class="bg-bonuses">
+            <span class="bg-bonus-chip">+5 Execution Discipline</span>
+            <span class="bg-bonus-chip">+4 Technical Credibility</span>
+          </div>
+        </button>
+
+        <button class="bg-card" onclick="selectBg(this)">
+          <div class="bg-name">Philosophy + MBA</div>
+          <div class="bg-tagline">"You know why the meeting is actually happening."</div>
+          <div class="bg-bonuses">
+            <span class="bg-bonus-chip">+5 Market Sense</span>
+            <span class="bg-bonus-chip">+4 Strategic Influence</span>
+          </div>
+        </button>
+
+        <button class="bg-card" onclick="selectBg(this)">
+          <div class="bg-name">Art History, Somehow</div>
+          <div class="bg-tagline">"You read rooms the way most people read documents."</div>
+          <div class="bg-bonuses">
+            <span class="bg-bonus-chip">+6 Adaptive Nerve</span>
+            <span class="bg-bonus-chip">+4 Collaborative Pull</span>
+          </div>
+        </button>
+
+        <button class="bg-card" onclick="selectBg(this)">
+          <div class="bg-name">International Student</div>
+          <div class="bg-tagline">"You learned to read the room before you learned the room's language."</div>
+          <div class="bg-bonuses">
+            <span class="bg-bonus-chip">+6 Resilience</span>
+            <span class="bg-bonus-chip">+4 Political Awareness</span>
+          </div>
+        </button>
+
+        <button class="bg-card" onclick="selectBg(this)" style="grid-column: span 2">
+          <div class="bg-name">Apprenticeship / Portfolio Kid</div>
+          <div class="bg-tagline">"You never had the luxury of learning without the consequence."</div>
+          <div class="bg-bonuses">
+            <span class="bg-bonus-chip">+6 Execution Discipline</span>
+            <span class="bg-bonus-chip">+4 Reputation</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: Traits ───────────────────────────── -->
+    <div class="step" id="step-3">
+      <div class="step-eyebrow">Step 3 of 5</div>
+      <h1 class="step-heading">How do you work?</h1>
+      <p class="step-subhead">Pick three. These aren't values — they're tendencies. The way you move through a room before the room decides what to do with you.</p>
+
+      <div class="trait-counter">Selected: <span id="trait-count">0</span> / 3</div>
+
+      <div class="trait-grid" id="trait-grid">
+        <button class="trait-card" onclick="selectTrait(this)">
+          <div class="trait-check">✓</div>
+          <div>
+            <div class="trait-name">Room Reader</div>
+            <div class="trait-fragment">"You read the room before you enter it."</div>
+          </div>
+        </button>
+        <button class="trait-card" onclick="selectTrait(this)">
+          <div class="trait-check">✓</div>
+          <div>
+            <div class="trait-name">Room Presence</div>
+            <div class="trait-fragment">"When you speak, the room recalibrates."</div>
+          </div>
+        </button>
+        <button class="trait-card" onclick="selectTrait(this)">
+          <div class="trait-check">✓</div>
+          <div>
+            <div class="trait-name">Head First</div>
+            <div class="trait-fragment">"You think before you feel. Usually."</div>
+          </div>
+        </button>
+        <button class="trait-card" onclick="selectTrait(this)">
+          <div class="trait-check">✓</div>
+          <div>
+            <div class="trait-name">Gut First</div>
+            <div class="trait-fragment">"You decide, then find out why you were right."</div>
+          </div>
+        </button>
+        <button class="trait-card" onclick="selectTrait(this)">
+          <div class="trait-check">✓</div>
+          <div>
+            <div class="trait-name">Trust the Plan</div>
+            <div class="trait-fragment">"A good process survives a bad day."</div>
+          </div>
+        </button>
+        <button class="trait-card" onclick="selectTrait(this)">
+          <div class="trait-check">✓</div>
+          <div>
+            <div class="trait-name">Throw the Plan</div>
+            <div class="trait-fragment">"Plans are for the scenario that didn't happen."</div>
+          </div>
+        </button>
+        <button class="trait-card" onclick="selectTrait(this)">
+          <div class="trait-check">✓</div>
+          <div>
+            <div class="trait-name">Shape Before Pieces</div>
+            <div class="trait-fragment">"You see the whole before anyone's built the parts."</div>
+          </div>
+        </button>
+        <button class="trait-card" onclick="selectTrait(this)">
+          <div class="trait-check">✓</div>
+          <div>
+            <div class="trait-name">Exact Account</div>
+            <div class="trait-fragment">"The details are where the answer lives."</div>
+          </div>
+        </button>
+        <button class="trait-card" onclick="selectTrait(this)">
+          <div class="trait-check">✓</div>
+          <div>
+            <div class="trait-name">Prepared Unnoticed</div>
+            <div class="trait-fragment">"You prepare more than the room expected. The room doesn't notice."</div>
+          </div>
+        </button>
+        <button class="trait-card" onclick="selectTrait(this)">
+          <div class="trait-check">✓</div>
+          <div>
+            <div class="trait-name">No Precedent</div>
+            <div class="trait-fragment">"You're most comfortable when there's no map."</div>
+          </div>
+        </button>
+        <button class="trait-card" onclick="selectTrait(this)">
+          <div class="trait-check">✓</div>
+          <div>
+            <div class="trait-name">Process Anchor</div>
+            <div class="trait-fragment">"The system works when everyone uses the system."</div>
+          </div>
+        </button>
+        <button class="trait-card" onclick="selectTrait(this)">
+          <div class="trait-check">✓</div>
+          <div>
+            <div class="trait-name">Trust Fast</div>
+            <div class="trait-fragment">"You read people quickly and rarely revise the read."</div>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── STEP 4: Work-style preview ──────────────── -->
+    <div class="step" id="step-4">
+      <div class="step-eyebrow">Step 4 of 5</div>
+      <h1 class="step-heading">Here's how you move.</h1>
+      <p class="step-subhead">This is what your choices look like from the outside. You can't edit this. You can only notice it.</p>
+
+      <div class="preview-box">
+        <div class="preview-label">Work-style portrait</div>
+        <p class="preview-text" id="preview-para">You'll prepare more than the room expected and resent the room for not noticing. When things go sideways, you don't spiral — you find the next thing to control. You treat every new person as a system to understand before a person to trust. This is efficient. It is also, occasionally, a problem.</p>
+        <div class="preview-pills" id="preview-pills">
+          <span class="preview-pill">Background selected</span>
+          <span class="preview-pill">3 traits selected</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 5: First-day letter ─────────────────── -->
+    <div class="step" id="step-5">
+      <div class="step-eyebrow">Step 5 of 5</div>
+      <h1 class="step-heading">Your first day starts now.</h1>
+      <p class="step-subhead">AUREL London, 14 March 2034. You have a desk, a badge, and eleven years to figure out what you want.</p>
+
+      <div class="letter-wrapper">
+        <div class="letter-header">
+          <span class="letter-aurel">AUREL London</span>
+          <span class="letter-date">14 March 2034</span>
+        </div>
+
+        <div class="letter-body">
+          <p id="letter-salutation">Dear —</p>
+          <p>Welcome to the King's Cross office. Your access card is on your desk. The lift to the fourth floor requires a tap, not a swipe — most people learn this on their second attempt.</p>
+          <p>Grace Oduya will show you to your seat. She has been here longer than most of the senior managers and knows things they don't. I'd suggest paying attention to her.</p>
+          <p>The team sync is at 10. We'll make brief introductions. I'll ask you to say something about yourself. I'd recommend something true — we'll find out the rest soon enough, and this city is smaller than it looks from the outside.</p>
+          <p>There are no formal expectations for the first week. There are, of course, expectations.</p>
+          <p>I'm glad you're here.</p>
+        </div>
+
+        <div class="letter-sig">
+          <div class="letter-sig-name">Dana Sutcliffe</div>
+          <div class="letter-sig-title">Senior Manager, AUREL London · L6</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-row">
+      <button class="nav-back" id="nav-back" onclick="prevStep()" disabled>← Back</button>
+      <button class="nav-continue" id="nav-continue" onclick="nextStep()">Continue →</button>
+    </div>
+
+  </main>
+
+  <div class="wf-note">wireframe · onboarding · v0.14</div>
+
+  <script>
+    let currentStep = 1;
+    const TOTAL = 5;
+    let selectedTraits = 0;
+    let playerName = '';
+
+    function goToStep(n) {
+      if (n < 1 || n > TOTAL) return;
+
+      document.getElementById('step-' + currentStep).classList.remove('active');
+      currentStep = n;
+      document.getElementById('step-' + currentStep).classList.add('active');
+
+      // Update dots
+      document.querySelectorAll('.step-dot').forEach((dot, i) => {
+        dot.classList.remove('active', 'completed');
+        if (i + 1 < currentStep) dot.classList.add('completed');
+        if (i + 1 === currentStep) dot.classList.add('active');
+      });
+
+      // Nav buttons
+      document.getElementById('nav-back').disabled = currentStep === 1;
+      document.getElementById('nav-continue').textContent =
+        currentStep === TOTAL ? 'Begin ↗' : 'Continue →';
+
+      // Special: update step 4 preview
+      if (currentStep === 4) updatePreview();
+      // Special: update step 5 letter salutation
+      if (currentStep === 5) updateLetter();
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function nextStep() {
+      if (currentStep === TOTAL) {
+        alert('Wireframe: Game would begin here. Y1Q1 → Quick Sync.');
+        return;
+      }
+      goToStep(currentStep + 1);
+    }
+
+    function prevStep() { goToStep(currentStep - 1); }
+
+    function selectPronoun(el) {
+      document.querySelectorAll('.pronoun-chip').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    function selectBg(el) {
+      document.querySelectorAll('.bg-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    function selectTrait(el) {
+      if (el.classList.contains('selected')) {
+        el.classList.remove('selected');
+        selectedTraits--;
+      } else {
+        if (selectedTraits >= 3) return;
+        el.classList.add('selected');
+        selectedTraits++;
+      }
+      document.getElementById('trait-count').textContent = selectedTraits;
+
+      // Dim unselected if at max
+      document.querySelectorAll('.trait-card').forEach(c => {
+        c.classList.toggle('maxed', selectedTraits >= 3 && !c.classList.contains('selected'));
+      });
+    }
+
+    function updatePreview() {
+      const name = document.getElementById('name-input').value.trim() || 'You';
+      const bg = document.querySelector('.bg-card.selected');
+      const traits = [...document.querySelectorAll('.trait-card.selected')].map(t =>
+        t.querySelector('.trait-name').textContent
+      );
+
+      let para = '';
+      if (bg) {
+        const bgName = bg.querySelector('.bg-name').textContent;
+        if (bgName.includes('PPE')) para = "You'll walk into a room knowing the shape of the politics before anyone's spoken. The analysis will be polished. The instinct to translate everything into a strategic frame will serve you well — right up until the moment it doesn't.";
+        else if (bgName.includes('CS')) para = "You'll see the system under the system. The technical clarity will be an asset that occasionally reads as impatience. You're used to problems that have correct answers. This environment has different problems.";
+        else if (bgName.includes('Engineering')) para = "You'll deliver on what you said you'd deliver. The reputation for reliability will accumulate quietly, the way good reputations do. The risk is that delivery without visibility is invisible.";
+        else if (bgName.includes('Philosophy')) para = "You'll understand the meeting before anyone's called the meeting. The ability to read incentive structures is not the same as the ability to play them. There is a gap there that will take time to close.";
+        else if (bgName.includes('Art')) para = "You'll read the room before you enter it. The pattern recognition is real and occasionally unnerving to people who don't know where it came from. That is not your problem to manage.";
+        else if (bgName.includes('International')) para = "You'll have learned to navigate ambiguity before most people learn to acknowledge it. The resilience is structural, not performed. The political radar is calibrated to frequencies most people can't hear.";
+        else if (bgName.includes('Apprenticeship')) para = "You'll prepare more than the room expected and resent the room for not noticing. You learned without the cushion of theory. This makes your practice unusually robust and occasionally difficult to explain to people who learned the other way.";
+      }
+
+      if (!para) para = "Your profile is still taking shape.";
+      document.getElementById('preview-para').textContent = para;
+
+      const pills = document.getElementById('preview-pills');
+      pills.innerHTML = '';
+      if (bg) {
+        const p = document.createElement('span');
+        p.className = 'preview-pill';
+        p.textContent = bg.querySelector('.bg-name').textContent;
+        pills.appendChild(p);
+      }
+      traits.forEach(t => {
+        const p = document.createElement('span');
+        p.className = 'preview-pill';
+        p.textContent = t;
+        pills.appendChild(p);
+      });
+    }
+
+    function updateLetter() {
+      const name = document.getElementById('name-input').value.trim();
+      document.getElementById('letter-salutation').textContent = name ? 'Dear ' + name + ',' : 'Dear —';
+    }
+
+    document.getElementById('theme-btn').addEventListener('click', () => {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+      document.getElementById('theme-btn').textContent = current === 'dark' ? '☀' : '☽';
+    });
+  </script>
+</body>
+</html>

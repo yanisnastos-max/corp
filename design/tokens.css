@@ -1,0 +1,455 @@
+/*
+ * ASCEND — Design Tokens (CSS Custom Properties)
+ * Generated from: design/tokens.json v1.0.0
+ *
+ * Usage:
+ *   Import this file once at the root of your CSS entry point.
+ *   All custom properties are available globally on :root.
+ *   Light mode is toggled by adding [data-theme="light"] to <html>.
+ *   Reduced motion is respected via @media (prefers-reduced-motion: reduce).
+ *
+ * Structure:
+ *   1. Raw palette
+ *   2. Dark mode semantic tokens (default / :root)
+ *   3. Light mode overrides ([data-theme="light"])
+ *   4. Typography
+ *   5. Motion
+ *   6. Spacing
+ *   7. Radius
+ *   8. Shadow
+ *   9. Z-index
+ *   10. Layout
+ *   11. Reduced motion override
+ */
+
+/* ─────────────────────────────────────────────────
+   1. RAW PALETTE
+   Not for direct use in components — use semantic tokens.
+───────────────────────────────────────────────── */
+:root {
+  /* Slate */
+  --slate-950: #050508;
+  --slate-900: #0A0A0F;
+  --slate-800: #14141F;
+  --slate-700: #1E1E2E;
+  --slate-600: #28283C;
+  --slate-500: #35354E;
+
+  /* Pearl */
+  --pearl-50:  #FDFCFA;
+  --pearl-100: #F4F1EA;
+  --pearl-200: #E8E4DC;
+  --pearl-300: #D5D0C6;
+
+  /* Oxide (the accent) */
+  --oxide-300: #E8886B;
+  --oxide-400: #D97055;
+  --oxide-500: #C75B39;
+  --oxide-600: #A84A2E;
+  --oxide-700: #8B3A22;
+
+  /* Gold */
+  --gold-300: #E8CE6F;
+  --gold-400: #DFC04A;
+  --gold-500: #D4AF37;
+  --gold-600: #B8941E;
+  --gold-700: #9A7A14;
+
+  /* Graphite */
+  --graphite-300: #9CA3AF;
+  --graphite-400: #6B7280;
+  --graphite-500: #4B5563;
+  --graphite-600: #374151;
+}
+
+/* ─────────────────────────────────────────────────
+   2. DARK MODE SEMANTIC TOKENS (default)
+   Dark mode is the default. No class needed.
+───────────────────────────────────────────────── */
+:root,
+[data-theme="dark"] {
+  /* Surfaces */
+  --color-surface-base:    var(--slate-900);
+  --color-surface-raised:  var(--slate-800);
+  --color-surface-overlay: var(--slate-700);
+  --color-surface-card:    var(--slate-800);
+  --color-surface-input:   var(--slate-700);
+
+  /* Text */
+  --color-text-primary:   var(--pearl-100);
+  --color-text-secondary: var(--graphite-300);
+  --color-text-muted:     var(--graphite-400);
+  --color-text-disabled:  var(--slate-500);
+  --color-text-inverse:   var(--slate-900);
+  --color-text-accent:    var(--oxide-500);
+  --color-text-gold:      var(--gold-500);
+  --color-text-link:      var(--oxide-400);
+
+  /* Borders */
+  --color-border-subtle:  var(--slate-600);
+  --color-border-default: var(--slate-500);
+  --color-border-strong:  var(--graphite-400);
+  --color-border-accent:  var(--oxide-500);
+
+  /* Accent */
+  --color-accent-default: var(--oxide-500);
+  --color-accent-hover:   var(--oxide-400);
+  --color-accent-active:  var(--oxide-600);
+  --color-accent-subtle:  rgba(199, 91, 57, 0.12);
+
+  /* Status */
+  --color-status-positive: #4ADE80;
+  --color-status-warning:  var(--gold-500);
+  --color-status-negative: var(--oxide-500);
+  --color-status-neutral:  var(--graphite-400);
+
+  /* Focus ring — gold on dark for accessibility */
+  --color-focus: var(--gold-500);
+
+  /* Scrim (modal/drawer backdrop) */
+  --color-scrim: rgba(5, 5, 8, 0.72);
+}
+
+/* ─────────────────────────────────────────────────
+   3. LIGHT MODE OVERRIDES
+   Applied by adding data-theme="light" to <html>.
+───────────────────────────────────────────────── */
+[data-theme="light"] {
+  /* Surfaces */
+  --color-surface-base:    var(--pearl-100);
+  --color-surface-raised:  var(--pearl-50);
+  --color-surface-overlay: #FFFFFF;
+  --color-surface-card:    #FFFFFF;
+  --color-surface-input:   #FFFFFF;
+
+  /* Text */
+  --color-text-primary:   var(--slate-900);
+  --color-text-secondary: var(--graphite-500);
+  --color-text-muted:     var(--graphite-400);
+  --color-text-disabled:  var(--pearl-300);
+  --color-text-inverse:   var(--pearl-100);
+  --color-text-accent:    var(--oxide-600);
+  --color-text-gold:      var(--gold-700);
+  --color-text-link:      var(--oxide-600);
+
+  /* Borders */
+  --color-border-subtle:  var(--pearl-200);
+  --color-border-default: var(--pearl-300);
+  --color-border-strong:  var(--graphite-400);
+  --color-border-accent:  var(--oxide-600);
+
+  /* Accent — darker shade for light bg contrast */
+  --color-accent-default: var(--oxide-600);
+  --color-accent-hover:   var(--oxide-500);
+  --color-accent-active:  var(--oxide-700);
+  --color-accent-subtle:  rgba(168, 74, 46, 0.08);
+
+  /* Status */
+  --color-status-positive: #16A34A;
+  --color-status-warning:  var(--gold-600);
+  --color-status-negative: var(--oxide-600);
+  --color-status-neutral:  var(--graphite-500);
+
+  /* Focus ring — darker gold for light bg */
+  --color-focus: var(--gold-600);
+
+  /* Scrim */
+  --color-scrim: rgba(10, 10, 15, 0.48);
+}
+
+/* ─────────────────────────────────────────────────
+   4. TYPOGRAPHY
+───────────────────────────────────────────────── */
+:root {
+  /* Font families */
+  --font-ui:        "Inter", "IBM Plex Sans", system-ui, sans-serif;
+  --font-narrative: "Source Serif 4", "IBM Plex Serif", Georgia, serif;
+  --font-mono:      "JetBrains Mono", "IBM Plex Mono", "Courier New", monospace;
+
+  /* Size scale */
+  --text-2xs:  0.625rem;   /* 10px */
+  --text-xs:   0.6875rem;  /* 11px */
+  --text-sm:   0.8125rem;  /* 13px */
+  --text-base: 1rem;       /* 16px */
+  --text-md:   1.125rem;   /* 18px */
+  --text-lg:   1.25rem;    /* 20px */
+  --text-xl:   1.5rem;     /* 24px */
+  --text-2xl:  1.875rem;   /* 30px */
+  --text-3xl:  2.25rem;    /* 36px */
+  --text-4xl:  3rem;       /* 48px */
+  --text-5xl:  3.75rem;    /* 60px */
+
+  /* Weights */
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* Line heights */
+  --leading-tight:   1.2;
+  --leading-snug:    1.35;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.65;
+  --leading-loose:   1.8;
+
+  /* Letter spacing */
+  --tracking-tight:   -0.02em;
+  --tracking-normal:   0em;
+  --tracking-wide:     0.04em;
+  --tracking-widest:   0.10em;
+}
+
+/* Semantic typographic roles — apply as classes */
+.t-question-setup {
+  font-family: var(--font-narrative);
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+  font-weight: var(--weight-regular);
+  color: var(--color-text-primary);
+}
+
+.t-question-option {
+  font-family: var(--font-narrative);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  font-weight: var(--weight-regular);
+  color: var(--color-text-primary);
+}
+
+.t-inner-monologue {
+  font-family: var(--font-narrative);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.t-npc-dialogue {
+  font-family: var(--font-narrative);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  font-weight: var(--weight-regular);
+  color: var(--color-text-primary);
+}
+
+.t-ui-label {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  line-height: var(--leading-tight);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.t-ui-body {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  font-weight: var(--weight-regular);
+  color: var(--color-text-secondary);
+}
+
+.t-ui-heading {
+  font-family: var(--font-ui);
+  font-size: var(--text-lg);
+  line-height: var(--leading-tight);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.t-stat-value {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--leading-tight);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-primary);
+}
+
+.t-consequence-tag {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: var(--leading-tight);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-accent);
+}
+
+.t-first-day-letter {
+  font-family: var(--font-narrative);
+  font-size: var(--text-md);
+  line-height: var(--leading-loose);
+  font-weight: var(--weight-regular);
+  color: var(--color-text-primary);
+}
+
+/* ─────────────────────────────────────────────────
+   5. MOTION
+   CCO spec: 160–220ms ease-in-out.
+   No bounce. No spring. Text reveals via opacity only.
+───────────────────────────────────────────────── */
+:root {
+  /* Durations */
+  --duration-instant:    80ms;
+  --duration-fast:      120ms;
+  --duration-base:      160ms;
+  --duration-slow:      220ms;
+  --duration-deliberate: 360ms;
+  --duration-scene:     600ms;
+
+  /* Easings */
+  --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-enter:   cubic-bezier(0.0, 0, 0.2, 1);
+  --easing-exit:    cubic-bezier(0.4, 0, 1, 1);
+  --easing-linear:  linear;
+
+  /* Shorthand transitions */
+  --transition-standard:    var(--duration-base)      var(--easing-default);
+  --transition-fast:        var(--duration-fast)       var(--easing-default);
+  --transition-reveal:      var(--duration-slow)       var(--easing-enter);
+  --transition-dismiss:     var(--duration-fast)       var(--easing-exit);
+  --transition-scene-enter: var(--duration-scene)      var(--easing-enter);
+}
+
+/* ─────────────────────────────────────────────────
+   6. SPACING
+   4px base unit.
+───────────────────────────────────────────────── */
+:root {
+  --space-0:   0;
+  --space-1:   0.25rem;  /* 4px  */
+  --space-2:   0.5rem;   /* 8px  */
+  --space-3:   0.75rem;  /* 12px */
+  --space-4:   1rem;     /* 16px */
+  --space-5:   1.25rem;  /* 20px */
+  --space-6:   1.5rem;   /* 24px */
+  --space-8:   2rem;     /* 32px */
+  --space-10:  2.5rem;   /* 40px */
+  --space-12:  3rem;     /* 48px */
+  --space-16:  4rem;     /* 64px */
+  --space-20:  5rem;     /* 80px */
+  --space-24:  6rem;     /* 96px */
+  --space-32:  8rem;     /* 128px */
+  --space-40:  10rem;    /* 160px */
+}
+
+/* ─────────────────────────────────────────────────
+   7. RADIUS
+───────────────────────────────────────────────── */
+:root {
+  --radius-none: 0;
+  --radius-sm:   2px;
+  --radius-base: 4px;
+  --radius-md:   6px;
+  --radius-lg:   8px;
+  --radius-xl:   12px;
+  --radius-2xl:  16px;
+  --radius-full: 9999px;
+}
+
+/* ─────────────────────────────────────────────────
+   8. SHADOW
+   Heavy — this is a dark, serious UI.
+───────────────────────────────────────────────── */
+:root {
+  --shadow-sm:         0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-base:       0 2px 8px rgba(0, 0, 0, 0.45);
+  --shadow-lg:         0 8px 24px rgba(0, 0, 0, 0.55);
+  --shadow-xl:         0 16px 48px rgba(0, 0, 0, 0.65);
+  --shadow-glow-oxide: 0 0 20px rgba(199, 91, 57, 0.20);
+  --shadow-glow-gold:  0 0 20px rgba(212, 175, 55, 0.20);
+  --shadow-inner:      inset 0 1px 3px rgba(0, 0, 0, 0.40);
+}
+
+/* ─────────────────────────────────────────────────
+   9. Z-INDEX
+───────────────────────────────────────────────── */
+:root {
+  --z-base:    0;
+  --z-raised:  10;
+  --z-overlay: 100;
+  --z-drawer:  200;
+  --z-modal:   300;
+  --z-toast:   400;
+  --z-cursor:  999;
+}
+
+/* ─────────────────────────────────────────────────
+   10. LAYOUT
+───────────────────────────────────────────────── */
+:root {
+  /* Max widths — question text reads best at ~680px */
+  --max-w-question:  680px;
+  --max-w-narrative: 600px;
+  --max-w-ui:        960px;
+  --max-w-panel:     360px;
+
+  /* Breakpoints (reference only — use in JS/media queries by value) */
+  --bp-sm:  480px;
+  --bp-md:  768px;
+  --bp-lg:  1024px;
+  --bp-xl:  1280px;
+}
+
+/* ─────────────────────────────────────────────────
+   11. REDUCED MOTION
+   All transitions collapse to instant. Opacity fades
+   use a very short duration to avoid jarring cuts.
+───────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-instant:    0ms;
+    --duration-fast:       0ms;
+    --duration-base:       0ms;
+    --duration-slow:       0ms;
+    --duration-deliberate: 0ms;
+    --duration-scene:      0ms;
+    --transition-standard:    0ms linear;
+    --transition-fast:        0ms linear;
+    --transition-reveal:      0ms linear;
+    --transition-dismiss:     0ms linear;
+    --transition-scene-enter: 0ms linear;
+  }
+}
+
+/* ─────────────────────────────────────────────────
+   BASE RESET (minimal — not a full normalize)
+───────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  color-scheme: dark light;
+}
+
+body {
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus ring — visible, gold, not ugly */
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-accent-subtle);
+  color: var(--color-text-primary);
+}

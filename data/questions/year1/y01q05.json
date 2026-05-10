@@ -1,0 +1,123 @@
+{
+  "id": "y01q05",
+  "year": 1,
+  "questionNumber": 5,
+  "title": "One Slot",
+  "category": "escalation",
+  "setup": "The pilot programme has one slot. Both you and Zara submitted pitches — hers at 16:40, yours at 16:52. Dana's message arrives at 17:15:\n\n'Both strong. One slot. I'd like a recommendation note from each of you separately by close of play — why the programme should go to you rather than a shared structure. No more than a page.'\n\nYou have two and a half hours. Zara is already typing.",
+  "anchoredNPCs": [
+    "dana_sutcliffe",
+    "zara_okafor"
+  ],
+  "arcBeatAnchors": [],
+  "options": [
+    {
+      "id": "A",
+      "label": "Write the strongest case for your pitch",
+      "text": "You write the best case you can. Clear framing, hard evidence, one specific deliverable only you can commit to. Clean. Direct. You send at 18:40.",
+      "statDeltas": [
+        {
+          "stat": "executionDiscipline",
+          "delta": 4
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": 3
+        },
+        {
+          "stat": "reputation",
+          "delta": 2
+        },
+        {
+          "stat": "collaborativePull",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "high_cost_high_fidelity"
+      ],
+      "innerMonologue": "You wrote exactly what she asked for. You have no idea what Zara wrote."
+    },
+    {
+      "id": "B",
+      "label": "Propose a co-ownership structure",
+      "text": "You don't write what Dana asked for. You propose a split structure: Zara leads Q1, you lead Q3. You copy both of them. Dana did not ask for this. Zara did not ask for this either.",
+      "statDeltas": [
+        {
+          "stat": "collaborativePull",
+          "delta": 5
+        },
+        {
+          "stat": "integrity",
+          "delta": 3
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": -5
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "zara_okafor",
+          "delta": 6
+        }
+      ],
+      "consequenceTags": [
+        "coalition_builder"
+      ],
+      "innerMonologue": "You rewrote the question Dana asked. She'll either respect that or not. You'll find out."
+    },
+    {
+      "id": "C",
+      "label": "Message Zara before writing anything",
+      "text": "You message Zara first: 'What's your angle?' You're either building a coalition or gathering intelligence. You're not certain which, and you suspect Zara isn't certain either.",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 4
+        },
+        {
+          "stat": "integrity",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "zara_okafor",
+          "delta": 3
+        }
+      ],
+      "consequenceTags": [
+        "risk_catch",
+        "systemic_read"
+      ],
+      "innerMonologue": "You called it coalition-building. The framing isn't wrong. It's not complete either."
+    },
+    {
+      "id": "D",
+      "label": "Send first",
+      "text": "You write quickly and send within the hour. It's not your best work. It's in Dana's inbox before Zara's. You don't know if she reads in order. You send anyway.",
+      "statDeltas": [
+        {
+          "stat": "adaptiveNerve",
+          "delta": 3
+        },
+        {
+          "stat": "reputation",
+          "delta": 2
+        },
+        {
+          "stat": "executionDiscipline",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "systemic_read"
+      ],
+      "innerMonologue": "You traded quality for position. You're not sure that was the same trade Dana was offering."
+    }
+  ],
+  "designNotes": "First direct competition with Zara. Option B is the counter-move — it rejects the framing rather than competing within it, which builds Zara relationship but costs strategic influence. Dana's read on option B varies by her relationship score at this point: high relationship (40+) means she finds it interesting; low relationship means she finds it presumptuous. Option D fires systemic_read but the tag will surface as a consequence if the player repeats the pattern of prioritising speed over quality."
+}

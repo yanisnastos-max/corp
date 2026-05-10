@@ -1,0 +1,19 @@
+{
+  "name": "ascend",
+  "version": "0.0.1",
+  "private": true,
+  "description": "ASCEND - Narrative career RPG set in AUREL London, 2034",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "vite": "^5.2.0",
+    "vitest": "^1.5.0"
+  }
+}

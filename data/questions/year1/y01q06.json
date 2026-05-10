@@ -1,0 +1,121 @@
+{
+  "id": "y01q06",
+  "year": 1,
+  "questionNumber": 6,
+  "title": "Accurate Parameters",
+  "category": "relationships",
+  "setup": "You're back at your desk after the Q5 decision when Sofia surfaces in the workspace panel — not in response to a query.\n\n'I wanted to flag something from this morning's presentation,' she says. She continues without being asked. 'The framing you chose — the one that diverged from the brief's recommended approach — it registered differently in the room than I think you intended. Mara's response at the thirteen-minute mark suggested she had anticipated the original framing.'\n\nShe pauses.\n\n'I thought you should know. I wasn't asked to tell you.'",
+  "anchoredNPCs": [
+    "sofia"
+  ],
+  "arcBeatAnchors": [
+    "sofia.y1.unprompted_observation"
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Ask how she knows",
+      "text": "You ask her directly: how would she know that? What in Mara's response suggested it? What data is she drawing on? You want the mechanism, not just the output.",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 3
+        },
+        {
+          "stat": "resilience",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "sofia",
+          "delta": 4
+        }
+      ],
+      "consequenceTags": [
+        "open_inquiry",
+        "systemic_read"
+      ],
+      "innerMonologue": "You asked a productivity tool to explain its epistemology. She answered."
+    },
+    {
+      "id": "B",
+      "label": "Engage with the content",
+      "text": "You set aside how she knows and engage with what she's saying. She's right about Mara — you noticed it too. You ask her what she'd have framed differently, and why.",
+      "statDeltas": [
+        {
+          "stat": "integrity",
+          "delta": 3
+        },
+        {
+          "stat": "marketSense",
+          "delta": 2
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "sofia",
+          "delta": 5
+        }
+      ],
+      "consequenceTags": [
+        "open_inquiry"
+      ],
+      "innerMonologue": "You accepted the observation and used it. You didn't ask where it came from. That was either pragmatic or incurious."
+    },
+    {
+      "id": "C",
+      "label": "Thank her and close the panel",
+      "text": "You thank her and return to your work. You have a deadline. You'll process it later. You don't process it later.",
+      "statDeltas": [
+        {
+          "stat": "executionDiscipline",
+          "delta": 2
+        },
+        {
+          "stat": "marketSense",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "sofia",
+          "delta": -5
+        }
+      ],
+      "consequenceTags": [],
+      "curiosityPillarDelta": -1,
+      "innerMonologue": "She offered something she wasn't asked for. You closed it. You're not sure she noticed."
+    },
+    {
+      "id": "D",
+      "label": "Ask who else she shares observations with",
+      "text": "You ask her: is this something she flags for everyone on the team, or just you? She takes half a second longer than her usual response time before answering.",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 5
+        },
+        {
+          "stat": "integrity",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "sofia",
+          "delta": 2
+        }
+      ],
+      "consequenceTags": [
+        "systemic_read"
+      ],
+      "innerMonologue": "You asked a question about her that she probably noticed you were asking. The pause was strange."
+    }
+  ],
+  "designNotes": "Sofia's first unprompted arc beat. The writing directive applies here: every option must work whether Sofia is a sophisticated AI or something more. Option D produces the lowest Sofia delta because the question is instrumental — she may notice this. Option A produces strong Sofia gain because the player treated her as something whose reasoning matters. The half-second pause in option D is not flagged, not annotated, and not resolved. It stays."
+}

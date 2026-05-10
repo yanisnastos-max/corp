@@ -1,0 +1,250 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ASCEND Annual Review Rules",
+  "version": "1.0.0",
+  "formula": {
+    "attributeAggregate": {
+      "weight": 0.4,
+      "internalWeights": {
+        "executionDiscipline": 0.3,
+        "strategicInfluence": 0.2,
+        "reputation": 0.2,
+        "remainingSevenAverage": 0.3
+      },
+      "remainingStats": [
+        "politicalAwareness",
+        "collaborativePull",
+        "adaptiveNerve",
+        "marketSense",
+        "technicalCredibility",
+        "resilience",
+        "integrity"
+      ]
+    },
+    "performanceScore": {
+      "weight": 0.3,
+      "tagWeights": {
+        "seen_by_sponsor": 8,
+        "high_cost_high_fidelity": 5,
+        "open_inquiry": 3,
+        "systemic_read": 2,
+        "reliability_concern": -10,
+        "burned_peer": -5,
+        "risk_catch": "conditional"
+      },
+      "integrityPatternBonus": {
+        "condition": "integrityDominantChoices > 0.60",
+        "bonus": 5,
+        "description": "If more than 60% of questions chose the highest-integrity option"
+      },
+      "deliverablePenalty": {
+        "penaltyPerOpenItem": -2,
+        "description": "Open deliverables at year-end reduce performance score"
+      }
+    },
+    "sponsorStrength": {
+      "weight": 0.2,
+      "primarySponsor": {
+        "years": "1-5",
+        "npcId": "dana_sutcliffe",
+        "tierWeight": 1.0
+      },
+      "secondarySponsors": {
+        "availableFrom": 3,
+        "tierWeight": 0.7,
+        "description": "Tier 2 NPCs available as secondary sponsors from Year 3"
+      },
+      "calculation": "relationshipScore / 100 * tierWeight"
+    },
+    "politicalCapital": {
+      "weight": 0.1,
+      "components": [
+        {
+          "npcId": "conrad_mensah",
+          "weight": 0.5,
+          "ifDepartedWeight": 0.0
+        },
+        {
+          "npcId": "grace_oduya",
+          "weight": 0.5,
+          "ifRetiredWeight": 0.0
+        }
+      ],
+      "redistributionRule": "If one NPC is absent, the other carries the full component weight",
+      "calculation": "weightedAverage(componentScores) / 100"
+    }
+  },
+  "scorecard": {
+    "dimensions": [
+      {
+        "id": "delivery",
+        "source": "performanceScore",
+        "bands": {
+          "below_line": {
+            "max": 39
+          },
+          "in_discussion": {
+            "min": 40,
+            "max": 59
+          },
+          "likely": {
+            "min": 60,
+            "max": 79
+          },
+          "sponsor_dependent": {
+            "min": 80,
+            "condition": "sponsorStrength < 0.60"
+          }
+        }
+      },
+      {
+        "id": "visibility",
+        "source": "strategicInfluence",
+        "bands": {
+          "below_line": {
+            "max": 34
+          },
+          "in_discussion": {
+            "min": 35,
+            "max": 54
+          },
+          "likely": {
+            "min": 55,
+            "max": 74
+          },
+          "sponsor_dependent": {
+            "min": 75,
+            "condition": "seen_by_sponsor_count == 0"
+          }
+        }
+      },
+      {
+        "id": "trust",
+        "source": "integrity",
+        "bands": {
+          "below_line": {
+            "condition": "integrity < 40 OR reliability_concern_count > 0"
+          },
+          "in_discussion": {
+            "condition": "integrity 40-59 OR reliability_concern_count == 1"
+          },
+          "likely": {
+            "condition": "integrity 60-79 AND reliability_concern_count == 0"
+          },
+          "sponsor_dependent": {
+            "condition": "integrity >= 80 AND sponsorStrength >= 0.70"
+          }
+        }
+      },
+      {
+        "id": "readiness",
+        "source": "attributeAggregate",
+        "bands": {
+          "below_line": {
+            "max": 44
+          },
+          "in_discussion": {
+            "min": 45,
+            "max": 59
+          },
+          "likely": {
+            "min": 60,
+            "max": 74
+          },
+          "sponsor_dependent": {
+            "min": 75,
+            "condition": "sponsorStrength >= 0.60"
+          }
+        }
+      }
+    ],
+    "promotionThresholds": {
+      "promoted": {
+        "rule": "dimensions_at_likely_or_better >= 3 AND dimensions_at_likely >= 1"
+      },
+      "promoted_conditionally": {
+        "rule": "dimensions_at_likely_or_better == 2 AND dimensions_at_in_discussion == 2"
+      },
+      "not_promoted": {
+        "rule": "all other cases"
+      }
+    }
+  },
+  "threeLane": {
+    "options": [
+      {
+        "id": "internal_mobility",
+        "trigger": {
+          "any": [
+            "promotionOutcome IN ['promoted', 'promoted_conditionally']",
+            "executionDiscipline >= 60 AND strategicInfluence >= 40 AND strategicInfluence < 65"
+          ]
+        },
+        "description": "Cross-team project, role change, or elevated deliverable for Year N+1"
+      },
+      {
+        "id": "external_offer",
+        "trigger": {
+          "all": [
+            "strategicInfluence >= 65",
+            "reputation >= 60",
+            "any: [seen_by_sponsor_count >= 2, sponsorStrength >= 0.70]"
+          ]
+        },
+        "description": "Signal that player profile is generating interest outside AUREL. Not an offer — a signal."
+      },
+      {
+        "id": "strategic_relationship",
+        "trigger": {
+          "all": [
+            "politicalCapital_normalised >= 0.65",
+            "any: [npc.conrad_mensah.arc_beat_fired_this_year, npc.grace_oduya.arc_beat_fired_this_year]"
+          ]
+        },
+        "description": "Introduction or access to a Tier 2 NPC not yet in player network"
+      }
+    ],
+    "selectionRule": "If multiple lanes trigger, select the one most consistent with player year-end attribute profile. Tie-break: internal_mobility > strategic_relationship > external_offer"
+  },
+  "sceneConfig": {
+    "savePoint": "after_scene_close",
+    "actOrder": [
+      "compensation",
+      "promotion",
+      "three_lane"
+    ],
+    "sponsorByYear": {
+      "1": "dana_sutcliffe",
+      "2": "dana_sutcliffe",
+      "3": "dana_sutcliffe",
+      "4": "dana_sutcliffe",
+      "5": "dana_sutcliffe",
+      "6+": "determined_by_y5_vp_committee_arc"
+    },
+    "conditionalBranches": [
+      {
+        "id": "q10_d_branch",
+        "condition": "y01q10.selectedOption == 'D' AND npc.dana_sutcliffe.relationship >= 50",
+        "injectionPoint": "promotion_act_opening",
+        "description": "Dana acknowledges the player's question-back in Q10"
+      },
+      {
+        "id": "reliability_concern_branch",
+        "condition": "consequenceTag.reliability_concern.fired == true",
+        "injectionPoint": "promotion_act_body",
+        "description": "Dana flags the careful-over-honest pattern"
+      }
+    ]
+  },
+  "writeOrder": [
+    "1. Compute attributeAggregate from year-end stat values",
+    "2. Compute performanceScore from tag accumulation and deliverable state",
+    "3. Compute sponsorStrength from primary sponsor relationship",
+    "4. Compute politicalCapital from Conrad + Grace relationships",
+    "5. Compute scorecard dimensions (all four)",
+    "6. Determine promotionOutcome from scorecard thresholds",
+    "7. Determine threeLane from trigger rules",
+    "8. Run scene branches in act order",
+    "9. Save state after scene close"
+  ]
+}

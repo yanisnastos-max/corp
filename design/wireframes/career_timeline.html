@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASCEND — Career Timeline (Wireframe)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../tokens.css">
+  <style>
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ── Header ─────────────────────────────────────── */
+    .header {
+      position: relative;
+      z-index: var(--z-overlay);
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-6);
+      background: var(--color-surface-base);
+      border-bottom: 1px solid var(--color-border-subtle);
+      flex-shrink: 0;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .wordmark {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-primary);
+    }
+
+    .h-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--color-border-default);
+    }
+
+    .header-context {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      letter-spacing: var(--tracking-wide);
+    }
+
+    .icon-btn {
+      background: none;
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      padding: var(--space-1) var(--space-2);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      transition: all var(--duration-fast) var(--ease-default);
+    }
+
+    .icon-btn:hover {
+      border-color: var(--color-accent-default);
+      color: var(--color-accent-default);
+    }
+
+    /* ── Main split ──────────────────────────────────── */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ── Year selector tabs ──────────────────────────── */
+    .year-tabs {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 0 var(--space-6);
+      border-bottom: 1px solid var(--color-border-subtle);
+      flex-shrink: 0;
+      background: var(--color-surface-base);
+    }
+
+    .year-tab {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      padding: var(--space-3) var(--space-4);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      transition: all var(--duration-fast) var(--ease-default);
+      margin-bottom: -1px;
+    }
+
+    .year-tab.active {
+      color: var(--color-text-primary);
+      border-bottom-color: var(--color-accent-default);
+    }
+
+    .year-tab.locked {
+      color: var(--color-border-subtle);
+      cursor: not-allowed;
+    }
+
+    .year-tab-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: var(--radius-full);
+      background: currentColor;
+      margin-right: var(--space-2);
+      vertical-align: middle;
+    }
+
+    /* ── Content: timeline + sidebar ────────────────── */
+    .content {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* ── Timeline area ───────────────────────────────── */
+    .timeline-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Quarter labels */
+    .quarter-header {
+      display: flex;
+      flex-shrink: 0;
+      padding: var(--space-4) var(--space-8) 0;
+      gap: 0;
+    }
+
+    .quarter-cell {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .quarter-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    .quarter-line {
+      flex: 1;
+      height: 1px;
+      background: var(--color-border-subtle);
+    }
+
+    /* Timeline track */
+    .timeline-track-wrap {
+      flex: 1;
+      position: relative;
+      padding: var(--space-6) var(--space-8);
+      overflow: hidden;
+    }
+
+    /* Horizontal rail */
+    .rail {
+      position: absolute;
+      top: 50%;
+      left: var(--space-8);
+      right: var(--space-8);
+      height: 1px;
+      background: var(--color-border-subtle);
+      transform: translateY(-50%);
+    }
+
+    /* Quarter dividers */
+    .q-mark {
+      position: absolute;
+      top: calc(50% - 12px);
+      width: 1px;
+      height: 24px;
+      background: var(--color-border-subtle);
+    }
+
+    /* Decision nodes */
+    .nodes-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .node-wrap {
+      position: absolute;
+      transform: translateX(-50%);
+      top: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: all;
+      cursor: pointer;
+    }
+
+    .node-label-top {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      margin-bottom: var(--space-2);
+      text-align: center;
+      max-width: 80px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      opacity: 0;
+      transition: opacity var(--duration-fast) var(--ease-default);
+    }
+
+    .node-wrap:hover .node-label-top,
+    .node-wrap.selected .node-label-top {
+      opacity: 1;
+    }
+
+    .node-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-full);
+      border: 2px solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      transition: all var(--duration-moderate) var(--ease-default);
+      z-index: 1;
+    }
+
+    .node-wrap:hover .node-circle,
+    .node-wrap.selected .node-circle {
+      transform: scale(1.2);
+    }
+
+    .node-wrap.selected .node-circle {
+      box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 25%, transparent);
+    }
+
+    .node-label-bottom {
+      font-family: var(--font-narrative);
+      font-size: 10px;
+      font-style: italic;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      margin-top: var(--space-2);
+      max-width: 90px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
+      opacity: 0;
+      transition: opacity var(--duration-fast) var(--ease-default);
+    }
+
+    .node-wrap:hover .node-label-bottom,
+    .node-wrap.selected .node-label-bottom {
+      opacity: 1;
+    }
+
+    /* Category colour classes */
+    .cat-execution    { border-color: var(--color-accent-default); color: var(--color-accent-default); background: color-mix(in srgb, var(--color-accent-default) 12%, var(--color-surface-base)); }
+    .cat-strategic    { border-color: var(--color-gold-400); color: var(--color-gold-400); background: color-mix(in srgb, var(--color-gold-400) 12%, var(--color-surface-base)); }
+    .cat-relationship { border-color: #7C6FAF; color: #7C6FAF; background: color-mix(in srgb, #7C6FAF 12%, var(--color-surface-base)); }
+    .cat-collaboration { border-color: #3A7D6B; color: #3A7D6B; background: color-mix(in srgb, #3A7D6B 12%, var(--color-surface-base)); }
+    .cat-visibility   { border-color: #D4AF37; color: #D4AF37; background: color-mix(in srgb, #D4AF37 12%, var(--color-surface-base)); }
+
+    /* ── Stat delta bar (bottom strip) ──────────────── */
+    .stat-strip {
+      flex-shrink: 0;
+      padding: var(--space-4) var(--space-8);
+      border-top: 1px solid var(--color-border-subtle);
+      background: var(--color-surface-base);
+    }
+
+    .stat-strip-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-3);
+    }
+
+    .stat-bars {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3) var(--space-5);
+    }
+
+    .stat-bar-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      min-width: 140px;
+    }
+
+    .stat-bar-name {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      min-width: 100px;
+    }
+
+    .stat-bar-track {
+      flex: 1;
+      height: 3px;
+      background: var(--color-border-subtle);
+      border-radius: var(--radius-full);
+      min-width: 60px;
+      position: relative;
+      overflow: visible;
+    }
+
+    .stat-bar-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      width: 0;
+      transition: width 800ms var(--ease-default);
+      position: relative;
+    }
+
+    .stat-bar-fill.positive { background: #3A7D6B; }
+    .stat-bar-fill.negative { background: var(--color-accent-default); }
+
+    .stat-bar-delta {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-text-muted);
+      min-width: 28px;
+      text-align: right;
+    }
+
+    /* ── Detail sidebar ──────────────────────────────── */
+    .detail-sidebar {
+      width: 320px;
+      flex-shrink: 0;
+      border-left: 1px solid var(--color-border-subtle);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--color-surface-raised);
+    }
+
+    .detail-sidebar.empty .sidebar-body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .sidebar-empty-msg {
+      font-family: var(--font-narrative);
+      font-size: var(--text-sm);
+      font-style: italic;
+      color: var(--color-text-muted);
+      text-align: center;
+      padding: var(--space-8);
+    }
+
+    .sidebar-header {
+      padding: var(--space-4) var(--space-5);
+      border-bottom: 1px solid var(--color-border-subtle);
+      flex-shrink: 0;
+    }
+
+    .sidebar-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-1);
+    }
+
+    .sidebar-title {
+      font-family: var(--font-ui);
+      font-size: var(--text-md);
+      font-weight: var(--weight-semibold);
+      color: var(--color-text-primary);
+    }
+
+    .sidebar-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--space-5);
+    }
+
+    .sidebar-setup {
+      font-family: var(--font-narrative);
+      font-size: var(--text-sm);
+      font-style: italic;
+      line-height: var(--leading-relaxed);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-5);
+      padding-bottom: var(--space-5);
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    .chosen-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .chosen-option {
+      padding: var(--space-3) var(--space-4);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--space-4);
+    }
+
+    .chosen-option-label {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-medium);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .chosen-option-text {
+      font-family: var(--font-narrative);
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+      line-height: var(--leading-relaxed);
+      margin-bottom: var(--space-3);
+    }
+
+    .delta-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-1);
+    }
+
+    .delta-chip {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: var(--tracking-wide);
+      padding: 2px var(--space-2);
+      border-radius: var(--radius-sm);
+    }
+
+    .delta-chip.pos { background: color-mix(in srgb, #3A7D6B 15%, transparent); color: #5BAD8F; }
+    .delta-chip.neg { background: color-mix(in srgb, var(--color-accent-default) 15%, transparent); color: var(--color-accent-default); }
+
+    .inner-mono {
+      font-family: var(--font-narrative);
+      font-size: var(--text-xs);
+      font-style: italic;
+      color: var(--color-text-muted);
+      border-left: 2px solid var(--color-border-subtle);
+      padding-left: var(--space-3);
+      margin-top: var(--space-3);
+      line-height: var(--leading-relaxed);
+    }
+
+    .consequence-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-1);
+      margin-top: var(--space-3);
+    }
+
+    .ctag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: var(--tracking-wide);
+      color: var(--color-text-muted);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 2px var(--space-2);
+    }
+
+    @media (max-width: 900px) {
+      .detail-sidebar { display: none; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-left">
+    <span class="wordmark">AUREL</span>
+    <div class="h-divider"></div>
+    <span class="header-context">CAREER TIMELINE</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:var(--space-3)">
+    <button class="icon-btn" onclick="toggleTheme()">◑</button>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- Year tabs -->
+  <div class="year-tabs">
+    <button class="year-tab active"><span class="year-tab-dot"></span>Year 1 · 2034</button>
+    <button class="year-tab locked"><span class="year-tab-dot"></span>Year 2 · 2035</button>
+    <button class="year-tab locked"><span class="year-tab-dot"></span>Year 3 · 2036</button>
+    <button class="year-tab locked"><span class="year-tab-dot"></span>Year 4–7</button>
+    <button class="year-tab locked"><span class="year-tab-dot"></span>Year 8–12</button>
+  </div>
+
+  <div class="content">
+
+    <!-- Timeline area -->
+    <div class="timeline-area">
+
+      <!-- Quarter labels -->
+      <div class="quarter-header" id="quarter-header">
+        <!-- populated by JS -->
+      </div>
+
+      <!-- Track -->
+      <div class="timeline-track-wrap" id="track-wrap">
+        <div class="rail"></div>
+        <div class="nodes-layer" id="nodes-layer">
+          <!-- populated by JS -->
+        </div>
+      </div>
+
+      <!-- Stat strip -->
+      <div class="stat-strip">
+        <div class="stat-strip-label">Cumulative Y1 Attribute Movement</div>
+        <div class="stat-bars" id="stat-bars">
+          <!-- populated by JS -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Detail sidebar -->
+    <div class="detail-sidebar empty" id="sidebar">
+      <div class="sidebar-body">
+        <div class="sidebar-empty-msg">Select a decision to review what happened.</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  /* ─────────────────────────────────────────────────
+     DATA — Year 1 decisions
+  ───────────────────────────────────────────────── */
+  const decisions = [
+    {
+      id: 'q01',
+      n: 1,
+      week: 1,
+      quarter: 1,
+      title: 'First Day Read',
+      category: 'relationship',
+      setup: 'Dana introduces herself briefly and leaves you with a stack of onboarding materials. At 4pm she sends one question: what did you notice today that wasn\'t in the materials?',
+      chosen: {
+        label: 'B — Name three structural gaps',
+        text: 'You list what you genuinely noticed: the handoff gap between Strategy and Ops, the informal seniority protocol no one documents, and the way meeting ownership diffuses in cross-team sessions.',
+        deltas: [{s:'strategicInfluence',d:+4},{s:'reputation',d:+3},{s:'politicalAwareness',d:-2}],
+        tags: ['systemic_read', 'seen_by_sponsor'],
+        mono: 'You either read the room well or made a convincing argument that you did. You won\'t know which for a while.',
+      }
+    },
+    {
+      id: 'q02',
+      n: 2,
+      week: 3,
+      quarter: 1,
+      title: 'The Unofficial Briefing',
+      category: 'relationship',
+      setup: 'Conrad finds you at the coffee station and, without preamble, tells you three things about the floor that aren\'t in any onboarding doc. He\'s clearly done this before. He\'s waiting to see what you do with it.',
+      chosen: {
+        label: 'A — Listen, ask one question, don\'t reciprocate',
+        text: 'You let him talk. You ask about the inter-team dynamic he mentioned in passing. You don\'t offer anything in return. You leave him wondering whether you\'re discreet or just private.',
+        deltas: [{s:'politicalAwareness',d:+5},{s:'collaborativePull',d:+2},{s:'reputation',d:-1}],
+        tags: ['open_inquiry'],
+        mono: 'Conrad is a valve, not a source. What goes in also comes out. You chose to give him nothing to work with.',
+      }
+    },
+    {
+      id: 'q03',
+      n: 3,
+      week: 6,
+      quarter: 1,
+      title: 'Scope Creep',
+      category: 'execution',
+      setup: 'A brief you were given has quietly expanded — three new stakeholders, two additional deliverables, same timeline. No one has officially revised the scope. Zara has noticed.',
+      chosen: {
+        label: 'C — Flag it formally, propose a revised timeline',
+        text: 'You send a scope confirmation email, list the additions, and propose a new delivery schedule. You CC Dana. You don\'t frame it as a complaint — you frame it as project management.',
+        deltas: [{s:'executionDiscipline',d:+5},{s:'reputation',d:+3},{s:'collaborativePull',d:-2}],
+        tags: ['high_cost_high_fidelity', 'reliability_concern'],
+        mono: 'You drew a line in writing. Whoever expanded the scope without telling you is now on notice that you noticed.',
+      }
+    },
+    {
+      id: 'q04',
+      n: 4,
+      week: 9,
+      quarter: 2,
+      title: 'The Shared Credit',
+      category: 'collaboration',
+      setup: 'Your analysis was the backbone of a presentation Leo gave to a cross-functional group. He got the questions. Your name was not in the deck. He\'s asking how you want to handle it.',
+      chosen: {
+        label: 'B — Tell him to add a contributor note, no meeting needed',
+        text: 'You say a contributor line in the follow-up email is enough. You\'re not looking for equal billing — you\'re looking for a record. Leo sends the email within the hour.',
+        deltas: [{s:'collaborativePull',d:+4},{s:'reputation',d:+3},{s:'strategicInfluence',d:-2}],
+        tags: ['coalition_builder'],
+        mono: 'You made it easy for him to do the right thing and he did it. That\'s a better outcome than a confrontation you win.',
+      }
+    },
+    {
+      id: 'q05',
+      n: 5,
+      week: 12,
+      quarter: 2,
+      title: 'Visibility Window',
+      category: 'visibility',
+      setup: 'Dana gives you two minutes at the end of the monthly team meeting to present your market-signals summary. Most of the room doesn\'t know who you are yet.',
+      chosen: {
+        label: 'A — Lead with the anomaly, explain it in one sentence',
+        text: 'You open with the data point that doesn\'t fit the consensus read, name it plainly, and spend the remaining time on what it implies rather than what it confirms.',
+        deltas: [{s:'strategicInfluence',d:+5},{s:'reputation',d:+4},{s:'adaptiveNerve',d:-2}],
+        tags: ['seen_by_sponsor', 'systemic_read'],
+        mono: 'Two minutes is enough to establish that you think differently from the room. Whether that\'s good depends on what you said.',
+      }
+    },
+    {
+      id: 'q06',
+      n: 6,
+      week: 14,
+      quarter: 2,
+      title: 'Accurate Parameters',
+      category: 'execution',
+      setup: 'Dana asks you to present the Q3 forecast methodology at Thursday\'s all-hands. You\'ve found a structural error in the model — not rounding, but a category misclassification that inflates the headline by ~12%. The analyst who built it is three desks away.',
+      chosen: {
+        label: 'C — Tell the analyst first, give them 24 hours, then act',
+        text: 'You walk over and show them the cell. You give them a day to decide how to handle it. You do not promise silence.',
+        deltas: [{s:'integrity',d:+4},{s:'collaborativePull',d:+3},{s:'reputation',d:-2},{s:'executionDiscipline',d:-1}],
+        tags: ['coalition_builder', 'high_cost_high_fidelity'],
+        mono: 'Giving someone the chance to fix their own mistake is a form of respect. It\'s also a way of making them owe you one.',
+      }
+    },
+    {
+      id: 'q07',
+      n: 7,
+      week: 18,
+      quarter: 3,
+      title: 'The Advocate',
+      category: 'relationship',
+      setup: 'Zara is being cut from a project without explanation. She\'s not asking you to intervene — she\'s just telling you. But you have a read on why, and you could do something with it.',
+      chosen: {
+        label: 'D — Stay neutral, offer to look over her scope doc',
+        text: 'You don\'t take sides on the politics. You offer to read her project definition and tell her honestly if you see where the problem is. She takes you up on it.',
+        deltas: [{s:'collaborativePull',d:+3},{s:'politicalAwareness',d:+3},{s:'integrity',d:-1}],
+        tags: ['open_inquiry'],
+        mono: 'Neutrality is a position. You\'ve decided not to spend capital on this one. That\'s a choice, not an absence of one.',
+      }
+    },
+    {
+      id: 'q08',
+      n: 8,
+      week: 21,
+      quarter: 3,
+      title: 'Market Signals',
+      category: 'strategic',
+      setup: 'You\'ve spotted a convergence in three external signals that contradicts the team\'s current market assumption. Your read isn\'t conclusive. Writing it up formally means staking your name on an unpopular position.',
+      chosen: {
+        label: 'B — Write a structured note, mark it as preliminary',
+        text: 'You write a short analytical memo. You clearly label the confidence level as low and the evidence as directional. You send it to Dana only.',
+        deltas: [{s:'marketSense',d:+5},{s:'strategicInfluence',d:+4},{s:'technicalCredibility',d:+2},{s:'reputation',d:-2}],
+        tags: ['open_inquiry', 'systemic_read', 'seen_by_sponsor'],
+        mono: 'You put your thinking on paper. Dana will know whether the call was right before the quarter is out.',
+      }
+    },
+    {
+      id: 'q09',
+      n: 9,
+      week: 24,
+      quarter: 3,
+      title: 'The Working Style',
+      category: 'collaboration',
+      setup: 'Grace needs a project status summary from you by EOD. You\'re mid-flow on something more important. The summary will take forty minutes to do properly and ten to do badly.',
+      chosen: {
+        label: 'A — Do it properly, send it on time, say nothing about the cost',
+        text: 'You shift your work. You send her a clean summary with three action flags clearly marked. You absorb the interruption without mentioning it.',
+        deltas: [{s:'executionDiscipline',d:+4},{s:'reputation',d:+3},{s:'resilience',d:-2}],
+        tags: ['high_cost_high_fidelity'],
+        mono: 'Grace keeps a ledger. Not a formal one. It lives in how she routes requests, who she gives notice to first, what she tells people when they ask her about you.',
+      }
+    },
+    {
+      id: 'q10',
+      n: 10,
+      week: 28,
+      quarter: 4,
+      title: 'Dana\'s Question',
+      category: 'strategic',
+      setup: 'Dana messages you at 6pm on a Tuesday: "Quick question — if you had to make the case for the Meridian brief, what would your three points be?" You know the official three-point case. You also think it\'s wrong.',
+      chosen: {
+        label: 'A — Write your honest three-point case',
+        text: 'You write what you actually think. Point one contradicts the current internal position. You send it knowing she can read the gap.',
+        deltas: [{s:'strategicInfluence',d:+5},{s:'integrity',d:+5},{s:'politicalAwareness',d:+2},{s:'collaborativePull',d:-3}],
+        tags: ['seen_by_sponsor', 'high_cost_high_fidelity'],
+        mono: 'She asked for your actual view and you gave it. You won\'t know until Tuesday whether that was what she was really asking for.',
+      }
+    },
+  ];
+
+  /* Cumulative stat deltas */
+  const cumulativeDeltas = {
+    executionDiscipline:    +8,
+    strategicInfluence:    +21,
+    reputation:             +14,
+    politicalAwareness:     +10,
+    collaborativePull:       +9,
+    integrity:              +13,
+    marketSense:             +5,
+    technicalCredibility:    +2,
+    adaptiveNerve:           -2,
+    resilience:              -2,
+  };
+
+  /* Quarters */
+  const quarters = [
+    { label: 'Q1 · Jan–Mar', questions: [1,2,3] },
+    { label: 'Q2 · Apr–Jun', questions: [4,5,6] },
+    { label: 'Q3 · Jul–Sep', questions: [7,8,9] },
+    { label: 'Q4 · Oct–Dec', questions: [10] },
+  ];
+
+  /* ─────────────────────────────────────────────────
+     STATE
+  ───────────────────────────────────────────────── */
+  let selectedId = null;
+
+  /* ─────────────────────────────────────────────────
+     TIMELINE RENDER
+  ───────────────────────────────────────────────── */
+  function renderTimeline() {
+    const trackWrap = document.getElementById('track-wrap');
+    const nodesLayer = document.getElementById('nodes-layer');
+    const quarterHeader = document.getElementById('quarter-header');
+
+    const trackWidth = trackWrap.clientWidth - 64; /* minus 2×space-8 padding */
+    const step = trackWidth / (decisions.length + 1);
+
+    /* Quarter headers */
+    quarterHeader.innerHTML = '';
+    quarters.forEach(q => {
+      const cell = document.createElement('div');
+      cell.className = 'quarter-cell';
+      cell.innerHTML = `<span class="quarter-label">${q.label}</span><div class="quarter-line"></div>`;
+      quarterHeader.appendChild(cell);
+    });
+
+    /* Q-marks on rail */
+    const existingMarks = trackWrap.querySelectorAll('.q-mark');
+    existingMarks.forEach(m => m.remove());
+
+    /* Position each node */
+    nodesLayer.innerHTML = '';
+    decisions.forEach((d, i) => {
+      const pct = ((i + 1) / (decisions.length + 1)) * 100;
+
+      const wrap = document.createElement('div');
+      wrap.className = 'node-wrap';
+      wrap.style.left = `calc(var(--space-8) + ${pct}% * (100% - 2 * var(--space-8)) / 100)`;
+      wrap.dataset.id = d.id;
+
+      const catClass = `cat-${d.category}`;
+
+      wrap.innerHTML = `
+        <div class="node-label-top">${d.title}</div>
+        <div class="node-circle ${catClass}">Q${d.n}</div>
+        <div class="node-label-bottom">${d.category}</div>
+      `;
+
+      wrap.addEventListener('click', () => selectDecision(d.id));
+      nodesLayer.appendChild(wrap);
+    });
+  }
+
+  /* ─────────────────────────────────────────────────
+     STAT STRIP RENDER
+  ───────────────────────────────────────────────── */
+  function renderStatStrip() {
+    const container = document.getElementById('stat-bars');
+    container.innerHTML = '';
+
+    const displayNames = {
+      executionDiscipline:  'Exec. Discipline',
+      strategicInfluence:   'Strategic Influence',
+      reputation:           'Reputation',
+      politicalAwareness:   'Political Awareness',
+      collaborativePull:    'Collaborative Pull',
+      integrity:            'Integrity',
+      marketSense:          'Market Sense',
+      technicalCredibility: 'Tech. Credibility',
+      adaptiveNerve:        'Adaptive Nerve',
+      resilience:           'Resilience',
+    };
+
+    Object.entries(cumulativeDeltas).forEach(([key, delta]) => {
+      const isPos = delta >= 0;
+      const pct = Math.min(Math.abs(delta) * 4, 100); /* scale for visual */
+
+      const item = document.createElement('div');
+      item.className = 'stat-bar-item';
+      item.innerHTML = `
+        <span class="stat-bar-name">${displayNames[key]}</span>
+        <div class="stat-bar-track">
+          <div class="stat-bar-fill ${isPos ? 'positive' : 'negative'}" data-target="${pct}%"></div>
+        </div>
+        <span class="stat-bar-delta" style="color:${isPos ? '#5BAD8F' : 'var(--color-accent-default)'}">${isPos ? '+' : ''}${delta}</span>
+      `;
+      container.appendChild(item);
+    });
+
+    /* Animate */
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        document.querySelectorAll('.stat-bar-fill').forEach(el => {
+          el.style.width = el.dataset.target;
+        });
+      }, 200);
+    });
+  }
+
+  /* ─────────────────────────────────────────────────
+     SELECT DECISION
+  ───────────────────────────────────────────────── */
+  function selectDecision(id) {
+    if (selectedId === id) {
+      selectedId = null;
+      clearSidebar();
+      document.querySelectorAll('.node-wrap').forEach(n => n.classList.remove('selected'));
+      return;
+    }
+
+    selectedId = id;
+    document.querySelectorAll('.node-wrap').forEach(n => {
+      n.classList.toggle('selected', n.dataset.id === id);
+    });
+
+    const decision = decisions.find(d => d.id === id);
+    renderSidebar(decision);
+  }
+
+  function clearSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.add('empty');
+    sidebar.innerHTML = `
+      <div class="sidebar-body">
+        <div class="sidebar-empty-msg">Select a decision to review what happened.</div>
+      </div>
+    `;
+  }
+
+  function renderSidebar(d) {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.remove('empty');
+
+    const deltasHTML = d.chosen.deltas.map(({s, d: dv}) => {
+      const isPos = dv >= 0;
+      const label = s.replace(/([A-Z])/g, ' $1').toLowerCase();
+      return `<span class="delta-chip ${isPos ? 'pos' : 'neg'}">${label} ${isPos ? '+' : ''}${dv}</span>`;
+    }).join('');
+
+    const tagsHTML = d.chosen.tags.map(t =>
+      `<span class="ctag">${t.replace(/_/g, ' ')}</span>`
+    ).join('');
+
+    sidebar.innerHTML = `
+      <div class="sidebar-header">
+        <div class="sidebar-eyebrow">Q${d.n} · Wk ${d.week} · ${d.category} · Year 1</div>
+        <div class="sidebar-title">${d.title}</div>
+      </div>
+      <div class="sidebar-body">
+        <div class="sidebar-setup">${d.setup}</div>
+        <div class="chosen-label">Decision Made</div>
+        <div class="chosen-option">
+          <div class="chosen-option-label">${d.chosen.label}</div>
+          <div class="chosen-option-text">${d.chosen.text}</div>
+          <div class="delta-chips">${deltasHTML}</div>
+          <div class="inner-mono">${d.chosen.mono}</div>
+          <div class="consequence-tags">${tagsHTML}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  /* ─────────────────────────────────────────────────
+     THEME
+  ───────────────────────────────────────────────── */
+  function toggleTheme() {
+    const html = document.documentElement;
+    html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
+  }
+
+  /* ─────────────────────────────────────────────────
+     INIT
+  ───────────────────────────────────────────────── */
+  renderTimeline();
+  renderStatStrip();
+
+  /* Re-render timeline on resize */
+  window.addEventListener('resize', renderTimeline);
+
+</script>
+</body>
+</html>

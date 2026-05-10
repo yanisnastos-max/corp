@@ -1,0 +1,115 @@
+{
+  "id": "y01q08",
+  "year": 1,
+  "questionNumber": 8,
+  "title": "Six Weeks",
+  "category": "pre_review_pressure",
+  "setup": "Six weeks until review season. Conrad mentions it in the way Conrad mentions everything significant — while you're both waiting for the lift.\n\n'Not that you'd need to think about it yet.' He smiles. You both know you need to think about it.\n\nYou have six weeks, a list of open deliverables, one piece of work that could be visible above floor level, a conversation with Dana you haven't had yet, and Conrad himself — who clearly has something to say if you ask the right way.",
+  "anchoredNPCs": [
+    "dana_sutcliffe",
+    "conrad_mensah"
+  ],
+  "arcBeatAnchors": [],
+  "options": [
+    {
+      "id": "A",
+      "label": "Chase every sign-off and close every open item",
+      "text": "You spend the six weeks closing everything. Every deliverable complete, every dependency resolved. You walk into review with a clean record and nothing outstanding.",
+      "statDeltas": [
+        {
+          "stat": "executionDiscipline",
+          "delta": 5
+        },
+        {
+          "stat": "reputation",
+          "delta": 2
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "high_cost_high_fidelity"
+      ],
+      "innerMonologue": "You ran the numbers. Everything closed. You have no idea if that's what they're measuring."
+    },
+    {
+      "id": "B",
+      "label": "Focus on one visible deliverable above floor level",
+      "text": "You identify the one piece of work that would be seen by people above your immediate team and make it your focus for six weeks. Everything else moves to 'in progress.'",
+      "statDeltas": [
+        {
+          "stat": "strategicInfluence",
+          "delta": 5
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": 2
+        },
+        {
+          "stat": "executionDiscipline",
+          "delta": -4
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "seen_by_sponsor"
+      ],
+      "innerMonologue": "You chose visibility over completion. Those are different bets and you made one of them."
+    },
+    {
+      "id": "C",
+      "label": "Request a pre-review conversation with Dana",
+      "text": "You ask Dana for time explicitly — not buried in a catch-up agenda. You tell her you want to understand where you're sitting before the formal process starts.",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 4
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "dana_sutcliffe",
+          "delta": 3
+        }
+      ],
+      "consequenceTags": [
+        "systemic_read",
+        "open_inquiry"
+      ],
+      "innerMonologue": "You asked the question directly. She scheduled the meeting. You don't know what that means yet."
+    },
+    {
+      "id": "D",
+      "label": "Go back to Conrad directly",
+      "text": "You go back to Conrad and ask him directly what he actually overheard, and what he'd do with it. He was going to tell you anyway. Now he knows you're paying attention.",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 5
+        },
+        {
+          "stat": "integrity",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "conrad_mensah",
+          "delta": 3
+        }
+      ],
+      "consequenceTags": [
+        "systemic_read"
+      ],
+      "innerMonologue": "Conrad knew you'd come back. That's either intelligence or manipulation and you're not sure of the difference yet."
+    }
+  ],
+  "designNotes": "Pre-review pressure question. This is a strategy choice rather than a moral one — each option reflects a genuine approach to the six weeks. The review formula (40% attributes / 30% performance / 20% sponsor / 10% political capital) means different options feed different parts of the formula. Option A is execution-dominant. Option B is influence-dominant. Option C is sponsor-building. Option D is political capital. No option is wrong. The player who has been tracking the formula will make a more informed choice."
+}

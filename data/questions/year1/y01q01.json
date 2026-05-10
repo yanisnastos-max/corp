@@ -1,0 +1,111 @@
+{
+  "id": "y01q01",
+  "year": 1,
+  "questionNumber": 1,
+  "title": "Quick Sync",
+  "category": "orientation",
+  "setup": "Your first team sync at AUREL London. Dana Sutcliffe runs it from the standing desk at the head of the room — six people in, three on screen, one always slightly lagged. Zara Okafor has already pulled up a working doc. Leo Chen is taking no notes. Grace gave you the right seat before anyone arrived.\n\nIn the first fifteen minutes, Dana covers pipeline updates, the Q3 reforecast, and two resourcing gaps. Then she looks at you.\n\n'We've got a new face. Since this is your first proper sync — tell us what brought you here. What you're good at. And what you want to get better at.'\n\nZara is already writing. Leo has looked up from his screen for the first time.",
+  "anchoredNPCs": [
+    "dana_sutcliffe",
+    "zara_okafor",
+    "leo_chen"
+  ],
+  "arcBeatAnchors": [],
+  "options": [
+    {
+      "id": "A",
+      "label": "Lead with credentials",
+      "text": "You name the relevant experience first — not to impress, but to establish orientation. You give them a useful picture of where you're starting from. Clear, efficient, professional.",
+      "statDeltas": [
+        {
+          "stat": "strategicInfluence",
+          "delta": 3
+        },
+        {
+          "stat": "collaborativePull",
+          "delta": -2
+        },
+        {
+          "stat": "politicalAwareness",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [],
+      "innerMonologue": "It was a practical answer. The practical answer wasn't what she was asking for."
+    },
+    {
+      "id": "B",
+      "label": "Lead with curiosity",
+      "text": "You say something true and specific about what you don't know yet. That you came here to learn the thing this particular place can teach. You name it. It's more honest than it needs to be.",
+      "statDeltas": [
+        {
+          "stat": "collaborativePull",
+          "delta": 4
+        },
+        {
+          "stat": "politicalAwareness",
+          "delta": 2
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [],
+      "innerMonologue": "That was more honest than you meant to be in front of people you've known for eleven minutes."
+    },
+    {
+      "id": "C",
+      "label": "Brief and deflect",
+      "text": "You keep it concise. Name, background, looking forward to getting into the work. You deflect the what-do-you-want-to-get-better-at part with something technically true but professionally safe.",
+      "statDeltas": [
+        {
+          "stat": "integrity",
+          "delta": 2
+        },
+        {
+          "stat": "resilience",
+          "delta": 2
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": -3
+        },
+        {
+          "stat": "reputation",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [],
+      "innerMonologue": "You know what that looked like. You don't know yet whether it matters."
+    },
+    {
+      "id": "D",
+      "label": "Make a specific AUREL observation",
+      "text": "You say something precise about what you noticed in the interview process — something specific to how AUREL operates that you haven't seen many places do. It will either land or it won't.",
+      "statDeltas": [
+        {
+          "stat": "adaptiveNerve",
+          "delta": 4
+        },
+        {
+          "stat": "reputation",
+          "delta": 3
+        },
+        {
+          "stat": "executionDiscipline",
+          "delta": -4
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "high_cost_high_fidelity"
+      ],
+      "innerMonologue": "The room went a specific kind of quiet. You're going to be thinking about that for days."
+    }
+  ],
+  "designNotes": "The opening question establishes the player's social register. Option D is the high-risk read — if it lands, it builds reputation faster than anything else available at this stage. If it doesn't, the player starts Q2 with a small but real deficit. No option should feel obviously correct. Dana's expression during option C is the same as during option A. The player cannot read her yet."
+}

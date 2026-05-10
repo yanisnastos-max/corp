@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASCEND — Decision Screen (Wireframe)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../tokens.css">
+
+  <style>
+    /* ── Layout ─────────────────────────────────────── */
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* ── Header ─────────────────────────────────────── */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: var(--z-overlay);
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-6);
+      background: var(--color-surface-base);
+      border-bottom: 1px solid var(--color-border-subtle);
+      backdrop-filter: blur(8px);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .wordmark {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-primary);
+    }
+
+    .divider {
+      width: 1px;
+      height: 16px;
+      background: var(--color-border-default);
+    }
+
+    .progress-badge {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      letter-spacing: var(--tracking-wide);
+    }
+
+    .progress-pip-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+
+    .pip {
+      width: 6px;
+      height: 6px;
+      border-radius: var(--radius-full);
+      background: var(--color-border-default);
+      transition: background var(--transition-fast);
+    }
+    .pip.done { background: var(--color-text-muted); }
+    .pip.active { background: var(--color-accent-default); width: 16px; border-radius: var(--radius-base); }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .icon-btn {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-base);
+      background: transparent;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      font-size: 14px;
+      transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+    }
+    .icon-btn:hover {
+      border-color: var(--color-border-strong);
+      color: var(--color-text-secondary);
+      background: var(--color-surface-raised);
+    }
+    .icon-btn.active {
+      border-color: var(--color-accent-default);
+      color: var(--color-text-accent);
+    }
+
+    /* ── Main ────────────────────────────────────────── */
+    .main {
+      flex: 1;
+      padding-top: 52px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .question-container {
+      width: 100%;
+      max-width: var(--max-w-question);
+      padding: var(--space-10) var(--space-6) var(--space-32);
+    }
+
+    /* ── Question header ─────────────────────────────── */
+    .q-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-8);
+    }
+
+    .q-tag {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-wide);
+      color: var(--color-text-accent);
+      text-transform: uppercase;
+    }
+
+    .q-sep { color: var(--color-border-default); }
+
+    .q-category {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-wide);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+    }
+
+    .q-title {
+      font-family: var(--font-ui);
+      font-size: var(--text-xl);
+      font-weight: var(--weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-6);
+      line-height: var(--leading-tight);
+    }
+
+    /* ── Setup text ──────────────────────────────────── */
+    .q-setup {
+      font-family: var(--font-narrative);
+      font-size: var(--text-md);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-10);
+    }
+
+    .q-setup p + p { margin-top: var(--space-4); }
+
+    /* ── Options ─────────────────────────────────────── */
+    .options-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-widest);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      margin-bottom: var(--space-4);
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+    }
+
+    @media (max-width: 600px) {
+      .options-grid { grid-template-columns: 1fr; }
+    }
+
+    .option-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      padding: var(--space-5);
+      background: var(--color-surface-card);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition:
+        border-color var(--transition-standard),
+        background var(--transition-standard),
+        transform var(--transition-standard),
+        box-shadow var(--transition-standard);
+      text-align: left;
+      width: 100%;
+      user-select: none;
+    }
+
+    .option-card:hover {
+      border-color: var(--color-accent-default);
+      background: var(--color-surface-overlay);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-base), var(--shadow-glow-oxide);
+    }
+
+    .option-card:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 2px;
+    }
+
+    .option-card.selected {
+      border-color: var(--color-accent-default);
+      background: var(--color-surface-overlay);
+      box-shadow: var(--shadow-base), var(--shadow-glow-oxide);
+    }
+
+    .option-card.selected::after {
+      content: "✓";
+      position: absolute;
+      top: var(--space-3);
+      right: var(--space-4);
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-bold);
+      color: var(--color-accent-default);
+    }
+
+    .option-card.dimmed {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .option-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-medium);
+      color: var(--color-text-accent);
+      border: 1px solid var(--color-border-accent);
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+    }
+
+    .option-label {
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-medium);
+      letter-spacing: var(--tracking-wide);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+    }
+
+    .option-text {
+      font-family: var(--font-narrative);
+      font-size: var(--text-base);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text-secondary);
+    }
+
+    /* ── Consequence Drawer ──────────────────────────── */
+    .drawer-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--color-scrim);
+      z-index: var(--z-drawer);
+      opacity: 0;
+      transition: opacity var(--transition-reveal);
+    }
+    .drawer-backdrop.open {
+      display: block;
+      opacity: 1;
+    }
+
+    .drawer {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: calc(var(--z-drawer) + 1);
+      background: var(--color-surface-raised);
+      border-top: 1px solid var(--color-border-default);
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      padding: var(--space-6) var(--space-6) var(--space-8);
+      max-width: 680px;
+      margin: 0 auto;
+      transform: translateY(100%);
+      transition: transform var(--transition-reveal);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .drawer.open {
+      transform: translateY(0);
+    }
+
+    .drawer-handle {
+      width: 36px;
+      height: 3px;
+      background: var(--color-border-default);
+      border-radius: var(--radius-full);
+      margin: 0 auto var(--space-5);
+    }
+
+    .drawer-choice-recap {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-5);
+      padding-bottom: var(--space-5);
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    .drawer-choice-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-medium);
+      color: var(--color-text-accent);
+      border: 1px solid var(--color-accent-default);
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+    }
+
+    .drawer-choice-label {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-medium);
+      color: var(--color-text-primary);
+    }
+
+    .drawer-section-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-widest);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      margin-bottom: var(--space-3);
+    }
+
+    .delta-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      margin-bottom: var(--space-5);
+    }
+
+    .delta-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .delta-value {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-medium);
+      width: 36px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .delta-value.gain { color: #6EE7B7; }
+    .delta-value.cost { color: var(--color-text-accent); }
+
+    .delta-bar-track {
+      flex: 1;
+      height: 3px;
+      background: var(--color-border-subtle);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .delta-bar-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      transition: width var(--transition-deliberate) var(--easing-enter);
+    }
+    .delta-bar-fill.gain { background: #6EE7B7; }
+    .delta-bar-fill.cost { background: var(--color-accent-default); }
+
+    .delta-stat-name {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+      width: 160px;
+      flex-shrink: 0;
+    }
+
+    .inner-monologue {
+      font-family: var(--font-narrative);
+      font-size: var(--text-sm);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text-muted);
+      font-style: italic;
+      letter-spacing: var(--tracking-wide);
+      padding: var(--space-4);
+      border-left: 2px solid var(--color-border-default);
+      margin-bottom: var(--space-6);
+    }
+
+    .drawer-continue {
+      width: 100%;
+      padding: var(--space-4);
+      background: var(--color-accent-default);
+      border: none;
+      border-radius: var(--radius-lg);
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
+      letter-spacing: var(--tracking-wide);
+      color: var(--pearl-100);
+      cursor: pointer;
+      transition: background var(--transition-fast), transform var(--transition-fast);
+    }
+    .drawer-continue:hover {
+      background: var(--color-accent-hover);
+      transform: translateY(-1px);
+    }
+    .drawer-continue:active { transform: translateY(0); }
+
+    /* ── Side Panel (Attributes) ─────────────────────── */
+    .side-panel {
+      position: fixed;
+      top: 52px; right: 0; bottom: 0;
+      width: 320px;
+      background: var(--color-surface-raised);
+      border-left: 1px solid var(--color-border-subtle);
+      z-index: var(--z-drawer);
+      transform: translateX(100%);
+      transition: transform var(--transition-reveal);
+      overflow-y: auto;
+      padding: var(--space-6);
+    }
+    .side-panel.open { transform: translateX(0); }
+
+    .panel-title {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-5);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .panel-close {
+      background: none;
+      border: none;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      font-size: 16px;
+      padding: 2px;
+      line-height: 1;
+    }
+    .panel-close:hover { color: var(--color-text-primary); }
+
+    .stat-section-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-2xs);
+      letter-spacing: var(--tracking-widest);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      margin-bottom: var(--space-3);
+      margin-top: var(--space-5);
+    }
+    .stat-section-label:first-of-type { margin-top: 0; }
+
+    .stat-row {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      margin-bottom: var(--space-3);
+    }
+
+    .stat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stat-name {
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+      color: var(--color-text-secondary);
+    }
+
+    .stat-val {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-medium);
+      color: var(--color-text-primary);
+    }
+
+    .stat-track {
+      height: 3px;
+      background: var(--color-border-subtle);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .stat-fill {
+      height: 100%;
+      background: var(--color-border-strong);
+      border-radius: var(--radius-full);
+      transition: width var(--transition-deliberate) var(--easing-enter);
+    }
+    .stat-fill.high { background: var(--color-text-accent); }
+
+    /* ── Theme toggle ────────────────────────────────── */
+    .theme-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-2xs);
+      letter-spacing: var(--tracking-wide);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+    }
+
+    /* ── Wireframe note ──────────────────────────────── */
+    .wf-note {
+      position: fixed;
+      bottom: var(--space-4);
+      right: var(--space-4);
+      font-family: var(--font-mono);
+      font-size: var(--text-2xs);
+      color: var(--color-text-muted);
+      letter-spacing: var(--tracking-wide);
+      pointer-events: none;
+      z-index: var(--z-toast);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── HEADER ──────────────────────────────────────── -->
+  <header class="header">
+    <div class="header-left">
+      <span class="wordmark">Ascend</span>
+      <div class="divider"></div>
+      <div class="progress-pip-row" aria-label="Year 1, question 6 of 10">
+        <span class="pip done"></span>
+        <span class="pip done"></span>
+        <span class="pip done"></span>
+        <span class="pip done"></span>
+        <span class="pip done"></span>
+        <span class="pip active"></span>
+        <span class="pip"></span>
+        <span class="pip"></span>
+        <span class="pip"></span>
+        <span class="pip"></span>
+      </div>
+      <span class="progress-badge">Y1 · Q6</span>
+    </div>
+
+    <div class="header-right">
+      <button class="icon-btn" id="attr-btn" aria-label="Attributes panel" title="Attributes">
+        ◈
+      </button>
+      <button class="icon-btn" aria-label="People panel" title="People">
+        ◉
+      </button>
+      <div class="divider"></div>
+      <button class="icon-btn" id="theme-btn" aria-label="Toggle theme" title="Toggle light/dark">
+        ☽
+      </button>
+    </div>
+  </header>
+
+  <!-- ── MAIN ────────────────────────────────────────── -->
+  <main class="main">
+    <div class="question-container">
+
+      <div class="q-meta">
+        <span class="q-tag">Y1Q06</span>
+        <span class="q-sep">·</span>
+        <span class="q-category">Relationships</span>
+      </div>
+
+      <h1 class="q-title">Accurate Parameters</h1>
+
+      <div class="q-setup">
+        <p>You're back at your desk after the Q5 decision when Sofia surfaces in the workspace panel — not in response to a query.</p>
+        <p>"I wanted to flag something from this morning's presentation," she says. She continues without being asked. "The framing you chose — the one that diverged from the brief's recommended approach — it registered differently in the room than I think you intended. Mara's response at the thirteen-minute mark suggested she had anticipated the original framing."</p>
+        <p>She pauses.</p>
+        <p>"I thought you should know. I wasn't asked to tell you."</p>
+      </div>
+
+      <div class="options-label">Choose your response</div>
+
+      <div class="options-grid" id="options-grid">
+        <button class="option-card" data-option="A" onclick="selectOption(this)">
+          <div style="display:flex;align-items:center;gap:var(--space-3)">
+            <span class="option-letter">A</span>
+            <span class="option-label">Ask how she knows</span>
+          </div>
+          <p class="option-text">You ask her directly: how would she know that? What in Mara's response suggested it? What data is she drawing on? You want the mechanism, not just the output.</p>
+        </button>
+
+        <button class="option-card" data-option="B" onclick="selectOption(this)">
+          <div style="display:flex;align-items:center;gap:var(--space-3)">
+            <span class="option-letter">B</span>
+            <span class="option-label">Engage with the content</span>
+          </div>
+          <p class="option-text">You set aside how she knows and engage with what she's saying. She's right about Mara — you noticed it too. You ask her what she'd have framed differently, and why.</p>
+        </button>
+
+        <button class="option-card" data-option="C" onclick="selectOption(this)">
+          <div style="display:flex;align-items:center;gap:var(--space-3)">
+            <span class="option-letter">C</span>
+            <span class="option-label">Thank her and close the panel</span>
+          </div>
+          <p class="option-text">You thank her and return to your work. You have a deadline. You'll process it later. You don't process it later.</p>
+        </button>
+
+        <button class="option-card" data-option="D" onclick="selectOption(this)">
+          <div style="display:flex;align-items:center;gap:var(--space-3)">
+            <span class="option-letter">D</span>
+            <span class="option-label">Ask who else she tells</span>
+          </div>
+          <p class="option-text">You ask her: is this something she flags for everyone on the team, or just you? She takes half a second longer than her usual response time before answering.</p>
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ── CONSEQUENCE DRAWER ──────────────────────────── -->
+  <div class="drawer-backdrop" id="drawer-backdrop" onclick="closeDrawer()"></div>
+
+  <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Consequence">
+    <div class="drawer-handle"></div>
+
+    <div class="drawer-choice-recap">
+      <span class="drawer-choice-letter" id="drawer-letter">A</span>
+      <span class="drawer-choice-label" id="drawer-label-text">Ask how she knows</span>
+    </div>
+
+    <div class="drawer-section-label">Attribute changes</div>
+    <div class="delta-list" id="delta-list"></div>
+
+    <div class="inner-monologue" id="drawer-monologue"></div>
+
+    <button class="drawer-continue" onclick="closeDrawer()">Continue →</button>
+  </div>
+
+  <!-- ── ATTRIBUTES PANEL ─────────────────────────────── -->
+  <aside class="side-panel" id="attr-panel" aria-label="Attributes">
+    <div class="panel-title">
+      Attributes
+      <button class="panel-close" onclick="togglePanel()" aria-label="Close">✕</button>
+    </div>
+
+    <div class="stat-section-label">Visible Stats</div>
+
+    <div class="stat-row">
+      <div class="stat-header"><span class="stat-name">Political Awareness</span><span class="stat-val">61</span></div>
+      <div class="stat-track"><div class="stat-fill" style="width:61%"></div></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-header"><span class="stat-name">Strategic Influence</span><span class="stat-val">48</span></div>
+      <div class="stat-track"><div class="stat-fill" style="width:48%"></div></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-header"><span class="stat-name">Collaborative Pull</span><span class="stat-val">54</span></div>
+      <div class="stat-track"><div class="stat-fill" style="width:54%"></div></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-header"><span class="stat-name">Resilience</span><span class="stat-val">43</span></div>
+      <div class="stat-track"><div class="stat-fill" style="width:43%"></div></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-header"><span class="stat-name">Execution Discipline</span><span class="stat-val">55</span></div>
+      <div class="stat-track"><div class="stat-fill" style="width:55%"></div></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-header"><span class="stat-name">Adaptive Nerve</span><span class="stat-val">39</span></div>
+      <div class="stat-track"><div class="stat-fill" style="width:39%"></div></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-header"><span class="stat-name">Technical Credibility</span><span class="stat-val">28</span></div>
+      <div class="stat-track"><div class="stat-fill" style="width:28%"></div></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-header"><span class="stat-name">Reputation</span><span class="stat-val">47</span></div>
+      <div class="stat-track"><div class="stat-fill" style="width:47%"></div></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-header"><span class="stat-name">Market Sense</span><span class="stat-val">33</span></div>
+      <div class="stat-track"><div class="stat-fill" style="width:33%"></div></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-header"><span class="stat-name">Integrity</span><span class="stat-val stat-val" style="color:var(--color-text-accent)">72</span></div>
+      <div class="stat-track"><div class="stat-fill high" style="width:72%"></div></div>
+    </div>
+
+    <div class="stat-section-label">Long-Arc Pillars <span style="opacity:.4; font-size:var(--text-2xs)">hidden in game</span></div>
+
+    <div class="stat-row">
+      <div class="stat-header"><span class="stat-name">Curiosity</span><span class="stat-val">14</span></div>
+      <div class="stat-track"><div class="stat-fill" style="width:35%"></div></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-header"><span class="stat-name">Insight</span><span class="stat-val">9</span></div>
+      <div class="stat-track"><div class="stat-fill" style="width:22%"></div></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-header"><span class="stat-name">Engagement</span><span class="stat-val">11</span></div>
+      <div class="stat-track"><div class="stat-fill" style="width:27%"></div></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-header"><span class="stat-name">Determination</span><span class="stat-val">12</span></div>
+      <div class="stat-track"><div class="stat-fill" style="width:30%"></div></div>
+    </div>
+  </aside>
+
+  <div class="wf-note">wireframe · decision_screen · v0.14</div>
+
+  <script>
+    const consequences = {
+      A: {
+        label: "Ask how she knows",
+        deltas: [
+          { stat: "Political Awareness", value: +3, type: "gain" },
+          { stat: "Resilience",          value: -2, type: "cost" },
+        ],
+        npc: { name: "Sofia", value: +4, type: "gain" },
+        tags: ["open_inquiry", "systemic_read"],
+        monologue: "You asked a productivity tool to explain its epistemology. She answered."
+      },
+      B: {
+        label: "Engage with the content",
+        deltas: [
+          { stat: "Integrity",     value: +3, type: "gain" },
+          { stat: "Market Sense",  value: +2, type: "gain" },
+          { stat: "Adaptive Nerve", value: -2, type: "cost" },
+        ],
+        npc: { name: "Sofia", value: +5, type: "gain" },
+        tags: ["open_inquiry"],
+        monologue: "You accepted the observation and used it. You didn't ask where it came from. That was either pragmatic or incurious."
+      },
+      C: {
+        label: "Thank her and close the panel",
+        deltas: [
+          { stat: "Execution Discipline", value: +2, type: "gain" },
+          { stat: "Market Sense",         value: -2, type: "cost" },
+        ],
+        npc: { name: "Sofia", value: -5, type: "cost" },
+        tags: [],
+        monologue: "She offered something she wasn't asked for. You closed it. You're not sure she noticed."
+      },
+      D: {
+        label: "Ask who else she tells",
+        deltas: [
+          { stat: "Political Awareness", value: +5, type: "gain" },
+          { stat: "Integrity",           value: -3, type: "cost" },
+        ],
+        npc: { name: "Sofia", value: +2, type: "gain" },
+        tags: ["systemic_read"],
+        monologue: "You asked a question about her that she probably noticed you were asking. The pause was strange."
+      }
+    };
+
+    let panelOpen = false;
+
+    function selectOption(el) {
+      const key = el.dataset.option;
+      const data = consequences[key];
+
+      // Dim others
+      document.querySelectorAll('.option-card').forEach(c => {
+        c.classList.remove('selected', 'dimmed');
+        if (c !== el) c.classList.add('dimmed');
+      });
+      el.classList.add('selected');
+
+      // Populate drawer
+      document.getElementById('drawer-letter').textContent = key;
+      document.getElementById('drawer-label-text').textContent = data.label;
+      document.getElementById('drawer-monologue').textContent = '"' + data.monologue + '"';
+
+      const list = document.getElementById('delta-list');
+      list.innerHTML = '';
+
+      const allDeltas = [...data.deltas];
+      if (data.npc) {
+        allDeltas.push({ stat: data.npc.name + ' (relationship)', value: data.npc.value, type: data.npc.type });
+      }
+
+      allDeltas.forEach(d => {
+        const sign = d.value > 0 ? '+' : '';
+        const absVal = Math.abs(d.value);
+        const pct = Math.min(100, absVal * 18) + '%';
+
+        const row = document.createElement('div');
+        row.className = 'delta-row';
+        row.innerHTML = `
+          <span class="delta-value ${d.type}">${sign}${d.value}</span>
+          <div class="delta-bar-track">
+            <div class="delta-bar-fill ${d.type}" style="width:0%"></div>
+          </div>
+          <span class="delta-stat-name">${d.stat}</span>
+        `;
+        list.appendChild(row);
+
+        // Animate bar after paint
+        setTimeout(() => {
+          row.querySelector('.delta-bar-fill').style.width = pct;
+        }, 60);
+      });
+
+      // Show tags if any
+      if (data.tags.length) {
+        const tagEl = document.createElement('div');
+        tagEl.style.cssText = 'display:flex;gap:var(--space-2);flex-wrap:wrap;margin-bottom:var(--space-4)';
+        data.tags.forEach(t => {
+          const chip = document.createElement('span');
+          chip.className = 't-consequence-tag';
+          chip.style.cssText = 'padding:2px 6px;border:1px solid var(--color-border-default);border-radius:var(--radius-sm);';
+          chip.textContent = t;
+          tagEl.appendChild(chip);
+        });
+        list.appendChild(tagEl);
+      }
+
+      // Open drawer
+      document.getElementById('drawer-backdrop').classList.add('open');
+      setTimeout(() => {
+        document.getElementById('drawer').classList.add('open');
+      }, 10);
+    }
+
+    function closeDrawer() {
+      document.getElementById('drawer').classList.remove('open');
+      document.getElementById('drawer-backdrop').classList.remove('open');
+      document.querySelectorAll('.option-card').forEach(c => {
+        c.classList.remove('dimmed');
+      });
+    }
+
+    function togglePanel() {
+      panelOpen = !panelOpen;
+      document.getElementById('attr-panel').classList.toggle('open', panelOpen);
+      document.getElementById('attr-btn').classList.toggle('active', panelOpen);
+    }
+
+    document.getElementById('attr-btn').addEventListener('click', togglePanel);
+
+    document.getElementById('theme-btn').addEventListener('click', () => {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+      document.getElementById('theme-btn').textContent = current === 'dark' ? '☀' : '☽';
+    });
+
+    // Keyboard: Escape closes drawer or panel
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        if (document.getElementById('drawer').classList.contains('open')) closeDrawer();
+        else if (panelOpen) togglePanel();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+{
+  "id": "y01q10",
+  "year": 1,
+  "questionNumber": 10,
+  "title": "Dana's Message",
+  "category": "climax",
+  "setup": "21:14. You are still at your desk when a direct message arrives from Dana — her name, not the team channel.\n\n'Question for you — and I want your actual view, not a brief. There's a conversation happening at VP level about London's strategic autonomy from the European hub. I'm going into Tuesday's meeting and I want to know what someone at your level actually thinks, not what the room expects me to hear. You have until tomorrow morning.'\n\nYou read it twice.\n\nZara is not in the office. This message did not go to Zara.",
+  "anchoredNPCs": [
+    "dana_sutcliffe"
+  ],
+  "arcBeatAnchors": [],
+  "options": [
+    {
+      "id": "A",
+      "label": "Write your honest three-point case",
+      "text": "You write what you actually think. Three points, structured, no hedging. You tell her the London case is stronger than the briefing materials suggest — and here is specifically why.",
+      "statDeltas": [
+        {
+          "stat": "strategicInfluence",
+          "delta": 5
+        },
+        {
+          "stat": "integrity",
+          "delta": 5
+        },
+        {
+          "stat": "politicalAwareness",
+          "delta": 2
+        },
+        {
+          "stat": "collaborativePull",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "dana_sutcliffe",
+          "delta": 4
+        }
+      ],
+      "consequenceTags": [
+        "seen_by_sponsor",
+        "high_cost_high_fidelity"
+      ],
+      "innerMonologue": "She asked for your actual view and you gave it. You won't know until Tuesday whether that was what she was really asking for."
+    },
+    {
+      "id": "B",
+      "label": "Write something careful and supportable",
+      "text": "You write something that cannot be wrong — careful framing, nothing beyond what you can defend, no position she couldn't have found in the current briefing pack. Professional. Complete. Not what she asked for.",
+      "statDeltas": [
+        {
+          "stat": "executionDiscipline",
+          "delta": 3
+        },
+        {
+          "stat": "reputation",
+          "delta": 2
+        },
+        {
+          "stat": "integrity",
+          "delta": -5
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "reliability_concern"
+      ],
+      "innerMonologue": "She said she wanted your actual view. You sent her a brief. You both know that's not the same thing."
+    },
+    {
+      "id": "C",
+      "label": "Reply asking for the framework document first",
+      "text": "You reply asking her to share the current framework document before you respond — you want to anchor your view against the actual data, not what you think you know.",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 4
+        },
+        {
+          "stat": "integrity",
+          "delta": 3
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": -4
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "systemic_read",
+        "risk_catch"
+      ],
+      "innerMonologue": "She asked for instinct. You asked for a document. She'll either see that as rigour or avoidance."
+    },
+    {
+      "id": "D",
+      "label": "Ask Dana's view before giving yours",
+      "text": "You ask her what she thinks first — not to mirror it, but to understand where the real question is in Tuesday's meeting. What is she actually trying to settle?",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 5
+        },
+        {
+          "stat": "integrity",
+          "delta": 2
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": -3
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "dana_sutcliffe",
+          "delta": 5
+        }
+      ],
+      "consequenceTags": [
+        "open_inquiry"
+      ],
+      "innerMonologue": "You answered a question with a question. She might find that smart. She might find that evasive. There's no way to know until Tuesday."
+    }
+  ],
+  "designNotes": "Y1 climax. Dana's direct message is the most significant relationship moment of Year 1 — it only arrives if Dana relationship >= 25 (which is achievable through any path). Option B fires reliability_concern — this tag queues and surfaces in the Y1 annual review if not countered. Option A fires seen_by_sponsor at the cost of collaborativePull, which will compound if the player has already taken option A in Q5. Option D produces the highest Dana delta of any Y1 question and is the only option that treats the question as a conversation rather than a test."
+}

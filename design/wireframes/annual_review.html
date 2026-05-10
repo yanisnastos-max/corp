@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASCEND — Annual Review (Wireframe)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../tokens.css">
+  <style>
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ─────────────────────────────────────── */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: var(--z-overlay);
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-6);
+      background: var(--color-surface-base);
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .wordmark {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-primary);
+    }
+
+    .h-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--color-border-default);
+    }
+
+    .header-context {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      letter-spacing: var(--tracking-wide);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .icon-btn {
+      background: none;
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      padding: var(--space-1) var(--space-2);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      transition: all var(--duration-fast) var(--ease-default);
+    }
+
+    .icon-btn:hover {
+      border-color: var(--color-accent-default);
+      color: var(--color-accent-default);
+    }
+
+    /* ── Page layout ─────────────────────────────────── */
+    .page {
+      margin-top: 52px;
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      grid-template-rows: 1fr auto;
+      min-height: calc(100vh - 52px);
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+    }
+
+    /* ── Assessment (left) ───────────────────────────── */
+    .assessment {
+      grid-column: 1;
+      grid-row: 1;
+      padding: var(--space-10) var(--space-10) var(--space-8) var(--space-10);
+      border-right: 1px solid var(--color-border-subtle);
+      overflow-y: auto;
+    }
+
+    .review-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+
+    .eyebrow-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-accent);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+    }
+
+    .eyebrow-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--color-border-subtle);
+    }
+
+    .eyebrow-date {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+    }
+
+    .assessment-from {
+      margin-bottom: var(--space-8);
+    }
+
+    .from-row {
+      display: flex;
+      gap: var(--space-2);
+      align-items: baseline;
+      margin-bottom: var(--space-1);
+    }
+
+    .from-key {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      min-width: 40px;
+    }
+
+    .from-val {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .from-val strong {
+      color: var(--color-text-primary);
+      font-weight: var(--weight-semibold);
+    }
+
+    .assessment-body {
+      font-family: var(--font-narrative);
+      font-size: var(--text-md);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text-secondary);
+    }
+
+    .assessment-body p { margin-bottom: var(--space-5); }
+    .assessment-body p:last-child { margin-bottom: 0; }
+
+    .assessment-body em {
+      color: var(--color-text-primary);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    /* Conditional branch highlight */
+    .branch-note {
+      margin-top: var(--space-6);
+      padding: var(--space-4);
+      border-left: 2px solid var(--color-accent-default);
+      background: color-mix(in srgb, var(--color-accent-default) 6%, transparent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    .branch-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-accent-default);
+      margin-bottom: var(--space-2);
+    }
+
+    .branch-text {
+      font-family: var(--font-narrative);
+      font-size: var(--text-sm);
+      font-style: italic;
+      color: var(--color-text-secondary);
+      line-height: var(--leading-relaxed);
+    }
+
+    /* Toggle for branch variants */
+    .branch-toggle-row {
+      display: flex;
+      gap: var(--space-2);
+      margin-top: var(--space-6);
+      flex-wrap: wrap;
+    }
+
+    .branch-btn {
+      background: none;
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-full);
+      color: var(--color-text-muted);
+      cursor: pointer;
+      padding: 3px var(--space-3);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      transition: all var(--duration-fast) var(--ease-default);
+    }
+
+    .branch-btn:hover {
+      border-color: var(--color-border-default);
+      color: var(--color-text-secondary);
+    }
+
+    .branch-btn.active {
+      border-color: var(--color-accent-default);
+      color: var(--color-accent-default);
+      background: color-mix(in srgb, var(--color-accent-default) 10%, transparent);
+    }
+
+    /* ── Scorecard + Formula (right column) ──────────── */
+    .right-col {
+      grid-column: 2;
+      grid-row: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    /* Scorecard */
+    .scorecard {
+      padding: var(--space-8) var(--space-6) var(--space-6);
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      margin-bottom: var(--space-5);
+    }
+
+    /* Band column headers */
+    .scorecard-grid {
+      display: grid;
+      grid-template-columns: 100px repeat(4, 1fr);
+      gap: 1px;
+      background: var(--color-border-subtle);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .sc-cell {
+      background: var(--color-surface-raised);
+      padding: var(--space-2) var(--space-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sc-header {
+      background: var(--color-surface-overlay);
+    }
+
+    .sc-dim-label {
+      justify-content: flex-start;
+    }
+
+    .sc-header-text {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      text-align: center;
+    }
+
+    .sc-dim-text {
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-medium);
+      color: var(--color-text-secondary);
+    }
+
+    /* Band dot */
+    .band-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--radius-full);
+      border: 1.5px solid var(--color-border-subtle);
+      background: transparent;
+      transition: all var(--duration-moderate) var(--ease-default);
+    }
+
+    .band-dot.current-below   { background: #4B5563; border-color: #4B5563; box-shadow: 0 0 6px #4B556360; }
+    .band-dot.current-discussion { background: #6B7280; border-color: #6B7280; box-shadow: 0 0 6px #6B728080; }
+    .band-dot.current-likely  { background: var(--color-gold-400); border-color: var(--color-gold-400); box-shadow: 0 0 8px color-mix(in srgb, var(--color-gold-400) 60%, transparent); width: 10px; height: 10px; }
+    .band-dot.current-sponsor { background: var(--color-accent-default); border-color: var(--color-accent-default); box-shadow: 0 0 8px color-mix(in srgb, var(--color-accent-default) 60%, transparent); width: 10px; height: 10px; }
+
+    /* Highlighted row for current result */
+    .sc-row-likely .sc-cell {
+      background: color-mix(in srgb, var(--color-gold-400) 4%, var(--color-surface-raised));
+    }
+
+    /* ── Formula breakdown ───────────────────────────── */
+    .formula {
+      padding: var(--space-6);
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    .formula-rows {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      margin-bottom: var(--space-5);
+    }
+
+    .formula-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 48px;
+      gap: var(--space-3);
+      align-items: center;
+    }
+
+    .formula-name {
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+      color: var(--color-text-secondary);
+    }
+
+    .formula-weight {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-text-muted);
+    }
+
+    .formula-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      flex: 1;
+    }
+
+    .formula-track {
+      flex: 1;
+      height: 4px;
+      background: var(--color-border-subtle);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .formula-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      width: 0;
+      transition: width 600ms var(--ease-default);
+    }
+
+    .fill-attr   { background: #7C6FAF; }
+    .fill-perf   { background: var(--color-gold-400); }
+    .fill-sponsor { background: var(--color-accent-default); }
+    .fill-pol    { background: #3A7D6B; }
+
+    .formula-contribution {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      text-align: right;
+    }
+
+    .formula-total-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--color-border-subtle);
+    }
+
+    .formula-total-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+
+    .formula-total-score {
+      font-family: var(--font-ui);
+      font-size: var(--text-2xl);
+      font-weight: var(--weight-semibold);
+      color: var(--color-text-primary);
+      opacity: 0;
+      transition: opacity var(--duration-moderate) var(--ease-default);
+    }
+
+    .formula-total-score.revealed { opacity: 1; }
+
+    .formula-total-band {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-gold-400);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      margin-left: var(--space-2);
+    }
+
+    /* ── Outcome banner ───────────────────────────────── */
+    .outcome {
+      padding: var(--space-6);
+      flex: 1;
+    }
+
+    .outcome-card {
+      padding: var(--space-5);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-md);
+      background: var(--color-surface-overlay);
+      margin-bottom: var(--space-4);
+    }
+
+    .outcome-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-3);
+    }
+
+    .outcome-type {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    .outcome-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      padding: 3px var(--space-3);
+      border-radius: var(--radius-sm);
+      border: 1px solid;
+    }
+
+    .badge-hold {
+      color: var(--color-gold-400);
+      border-color: color-mix(in srgb, var(--color-gold-400) 30%, transparent);
+      background: color-mix(in srgb, var(--color-gold-400) 8%, transparent);
+    }
+
+    .badge-promote {
+      color: var(--color-accent-default);
+      border-color: color-mix(in srgb, var(--color-accent-default) 30%, transparent);
+      background: color-mix(in srgb, var(--color-accent-default) 8%, transparent);
+    }
+
+    .outcome-title {
+      font-family: var(--font-ui);
+      font-size: var(--text-md);
+      font-weight: var(--weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-1);
+    }
+
+    .outcome-desc {
+      font-family: var(--font-narrative);
+      font-size: var(--text-sm);
+      font-style: italic;
+      color: var(--color-text-secondary);
+      line-height: var(--leading-relaxed);
+    }
+
+    .promote-req {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-text-muted);
+      letter-spacing: var(--tracking-wide);
+      margin-top: var(--space-3);
+    }
+
+    .promote-req span {
+      color: var(--color-gold-400);
+    }
+
+    /* ── Bottom bar (full width) ─────────────────────── */
+    .bottom-bar {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: var(--space-3);
+      padding: var(--space-4) var(--space-8);
+      border-top: 1px solid var(--color-border-subtle);
+      background: var(--color-surface-base);
+    }
+
+    .btn-secondary {
+      background: none;
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-sm);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      padding: var(--space-2) var(--space-5);
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-medium);
+      transition: all var(--duration-fast) var(--ease-default);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--color-border-strong);
+      color: var(--color-text-primary);
+    }
+
+    .btn-primary {
+      background: var(--color-accent-default);
+      border: 1px solid var(--color-accent-default);
+      border-radius: var(--radius-sm);
+      color: var(--color-surface-base);
+      cursor: pointer;
+      padding: var(--space-2) var(--space-6);
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
+      transition: all var(--duration-fast) var(--ease-default);
+    }
+
+    .btn-primary:hover {
+      background: color-mix(in srgb, var(--color-accent-default) 85%, white);
+    }
+
+    @media (max-width: 800px) {
+      .page { grid-template-columns: 1fr; grid-template-rows: auto auto auto; }
+      .assessment { border-right: none; border-bottom: 1px solid var(--color-border-subtle); padding: var(--space-6); }
+      .right-col { grid-column: 1; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-left">
+    <span class="wordmark">AUREL</span>
+    <div class="h-divider"></div>
+    <span class="header-context">ANNUAL REVIEW · YEAR 1 · 2034</span>
+  </div>
+  <div class="header-right">
+    <button class="icon-btn" onclick="toggleTheme()">◑</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- ── LEFT: Dana's assessment ── -->
+  <div class="assessment">
+
+    <div class="review-eyebrow">
+      <span class="eyebrow-label">Performance Assessment</span>
+      <div class="eyebrow-rule"></div>
+      <span class="eyebrow-date">December 2034</span>
+    </div>
+
+    <div class="assessment-from">
+      <div class="from-row">
+        <span class="from-key">To</span>
+        <span class="from-val"><strong>[Player Name]</strong>, Analyst L1</span>
+      </div>
+      <div class="from-row">
+        <span class="from-key">From</span>
+        <span class="from-val"><strong>Dana Sutcliffe</strong>, Senior Manager, Strategy & Foresight</span>
+      </div>
+      <div class="from-row">
+        <span class="from-key">Re</span>
+        <span class="from-val">Year 1 Formal Review — Calibration Period</span>
+      </div>
+    </div>
+
+    <div class="assessment-body" id="assessment-body">
+      <!-- populated by JS -->
+    </div>
+
+    <div class="branch-toggle-row">
+      <span style="font-family:var(--font-mono);font-size:10px;color:var(--color-text-muted);letter-spacing:var(--tracking-wide);text-transform:uppercase;align-self:center;">Branch:</span>
+      <button class="branch-btn active" onclick="setBranch('baseline', this)">Baseline</button>
+      <button class="branch-btn" onclick="setBranch('honest', this)">Q10-D (Honest Read)</button>
+      <button class="branch-btn" onclick="setBranch('reliability', this)">Reliability Flag</button>
+    </div>
+
+  </div>
+
+  <!-- ── RIGHT: Scorecard + Formula + Outcome ── -->
+  <div class="right-col">
+
+    <!-- Scorecard -->
+    <div class="scorecard">
+      <div class="section-label">Performance Scorecard</div>
+
+      <div class="scorecard-grid">
+        <!-- Header row -->
+        <div class="sc-cell sc-header"></div>
+        <div class="sc-cell sc-header"><span class="sc-header-text">Below<br>Line</span></div>
+        <div class="sc-cell sc-header"><span class="sc-header-text">In<br>Discussion</span></div>
+        <div class="sc-cell sc-header"><span class="sc-header-text">Likely</span></div>
+        <div class="sc-cell sc-header"><span class="sc-header-text">Sponsor<br>Dep.</span></div>
+
+        <!-- Delivery: Likely -->
+        <div class="sc-cell sc-dim-label"><span class="sc-dim-text">Delivery</span></div>
+        <div class="sc-cell"><div class="band-dot"></div></div>
+        <div class="sc-cell"><div class="band-dot"></div></div>
+        <div class="sc-cell"><div class="band-dot current-likely" id="dot-delivery-likely"></div></div>
+        <div class="sc-cell"><div class="band-dot"></div></div>
+
+        <!-- Visibility: In Discussion -->
+        <div class="sc-cell sc-dim-label"><span class="sc-dim-text">Visibility</span></div>
+        <div class="sc-cell"><div class="band-dot"></div></div>
+        <div class="sc-cell"><div class="band-dot current-discussion" id="dot-visibility-discussion"></div></div>
+        <div class="sc-cell"><div class="band-dot"></div></div>
+        <div class="sc-cell"><div class="band-dot"></div></div>
+
+        <!-- Trust: Likely -->
+        <div class="sc-cell sc-dim-label"><span class="sc-dim-text">Trust</span></div>
+        <div class="sc-cell"><div class="band-dot"></div></div>
+        <div class="sc-cell"><div class="band-dot"></div></div>
+        <div class="sc-cell"><div class="band-dot current-likely" id="dot-trust-likely"></div></div>
+        <div class="sc-cell"><div class="band-dot"></div></div>
+
+        <!-- Readiness: In Discussion -->
+        <div class="sc-cell sc-dim-label"><span class="sc-dim-text">Readiness</span></div>
+        <div class="sc-cell"><div class="band-dot"></div></div>
+        <div class="sc-cell"><div class="band-dot current-discussion" id="dot-readiness-discussion"></div></div>
+        <div class="sc-cell"><div class="band-dot"></div></div>
+        <div class="sc-cell"><div class="band-dot"></div></div>
+      </div>
+
+      <div style="margin-top:var(--space-3);font-family:var(--font-mono);font-size:10px;color:var(--color-text-muted);">
+        Promotion threshold: 3 of 4 dimensions at <span style="color:var(--color-gold-400)">Likely+</span> &nbsp;·&nbsp; Current: <span style="color:var(--color-text-secondary)">2 of 4</span>
+      </div>
+    </div>
+
+    <!-- Formula breakdown -->
+    <div class="formula">
+      <div class="section-label">Score Calculation</div>
+
+      <div class="formula-rows">
+
+        <div class="formula-row">
+          <div>
+            <div class="formula-name">Attribute Aggregate</div>
+            <div class="formula-weight">40% weight</div>
+          </div>
+          <div class="formula-bar-wrap">
+            <div class="formula-track">
+              <div class="formula-fill fill-attr" data-target="58%" data-contribution="23.2"></div>
+            </div>
+          </div>
+          <div class="formula-contribution" id="contrib-attr">—</div>
+        </div>
+
+        <div class="formula-row">
+          <div>
+            <div class="formula-name">Performance Score</div>
+            <div class="formula-weight">30% weight</div>
+          </div>
+          <div class="formula-bar-wrap">
+            <div class="formula-track">
+              <div class="formula-fill fill-perf" data-target="72%" data-contribution="21.6"></div>
+            </div>
+          </div>
+          <div class="formula-contribution" id="contrib-perf">—</div>
+        </div>
+
+        <div class="formula-row">
+          <div>
+            <div class="formula-name">Sponsor Strength</div>
+            <div class="formula-weight">20% weight</div>
+          </div>
+          <div class="formula-bar-wrap">
+            <div class="formula-track">
+              <div class="formula-fill fill-sponsor" data-target="52%" data-contribution="10.4"></div>
+            </div>
+          </div>
+          <div class="formula-contribution" id="contrib-sponsor">—</div>
+        </div>
+
+        <div class="formula-row">
+          <div>
+            <div class="formula-name">Political Capital</div>
+            <div class="formula-weight">10% weight</div>
+          </div>
+          <div class="formula-bar-wrap">
+            <div class="formula-track">
+              <div class="formula-fill fill-pol" data-target="45%" data-contribution="4.5"></div>
+            </div>
+          </div>
+          <div class="formula-contribution" id="contrib-pol">—</div>
+        </div>
+
+      </div>
+
+      <div class="formula-total-row">
+        <span class="formula-total-label">Composite Score</span>
+        <div>
+          <span class="formula-total-score" id="total-score">60</span>
+          <span class="formula-total-band">/100</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Outcome -->
+    <div class="outcome">
+      <div class="section-label">Year 2 Determination</div>
+
+      <div class="outcome-card" id="outcome-card">
+        <div class="outcome-header">
+          <span class="outcome-type">Decision</span>
+          <span class="outcome-badge badge-hold" id="outcome-badge">HOLD</span>
+        </div>
+        <div class="outcome-title" id="outcome-title">Trajectory: Strong — Stretch Assignment</div>
+        <div class="outcome-desc" id="outcome-desc">
+          You are not up for promotion this cycle. Two of four dimensions sit in Discussion.
+          Dana is offering a cross-functional brief in Q1 to move Visibility. You are
+          expected to lead one deliverable independently.
+        </div>
+        <div class="promote-req" id="promote-req">
+          Year 2 target: <span>Visibility → Likely</span> · <span>Readiness → Likely</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="bottom-bar">
+    <button class="btn-secondary">View Full History</button>
+    <button class="btn-primary">Begin Year 2 →</button>
+  </div>
+
+</div>
+
+<script>
+  /* ─────────────────────────────────────────────────
+     BRANCH DATA
+  ───────────────────────────────────────────────── */
+  const branches = {
+    baseline: {
+      body: `<p>
+        You spent Year 1 learning how to be useful. That sounds modest — it isn't.
+        Most analysts in calibration spend the first year learning how to seem useful,
+        which is a different skill and a less durable one. What you built this year is
+        a reputation for <em>closing loops</em>. Things that landed on your desk did not
+        quietly stall. That matters more than the work's individual quality, most of the time.
+      </p>
+      <p>
+        Your delivery record is the strongest in the Year 1 cohort. Your strategic read
+        is developing well — I've seen it in your Q-format responses and in how you
+        navigate competing stakeholder priorities when you know I'm watching and when
+        you think I'm not. Those two things are starting to converge.
+      </p>
+      <p>
+        Where I need more from you in Year 2 is visibility. You are doing good work
+        at close range. The room needs to know that. I don't mean self-promotion —
+        I mean presence in the right conversations at the right moments, with something
+        specific to add. That is a learnable skill and you don't currently have it.
+      </p>`,
+      branchNote: null,
+    },
+    honest: {
+      body: `<p>
+        You spent Year 1 learning how to be useful. That sounds modest — it isn't.
+        Most analysts in calibration spend the first year learning how to seem useful,
+        which is a different skill and a less durable one. What you built this year is
+        a reputation for <em>closing loops</em>. Things that landed on your desk did not
+        quietly stall. That matters more than the work's individual quality, most of the time.
+      </p>
+      <p>
+        Your delivery record is the strongest in the Year 1 cohort. Your strategic read
+        is developing — I've seen it in your Q-format responses, and in a few cases,
+        in something more deliberate. You gave me your actual view on the Q3 forecast
+        question when a safer response was available. That was noted.
+      </p>
+      <p>
+        Where I need more from you in Year 2 is visibility. You are doing good work
+        at close range. The room needs to know that.
+      </p>`,
+      branchNote: {
+        tag: 'Q10-D Branch · Honest Read',
+        text: '"You gave me your actual view when a safer response was available. People who do that tend to be useful for longer. I\'m filing that. Don\'t make a habit of announcing it."',
+      },
+    },
+    reliability: {
+      body: `<p>
+        You spent Year 1 learning how to be useful. What you built this year is a
+        reputation for <em>closing loops</em> — mostly. There were two instances in
+        the back half of the year where I had to follow up on deliverables I had
+        expected to be proactively flagged. These were not failures of quality.
+        They were failures of communication.
+      </p>
+      <p>
+        I am noting this in writing because it is recoverable — and because I want
+        you to understand the difference between doing the work and being someone
+        whose work can be relied on without supervision. Year 2 is when that
+        distinction starts to matter for calibration.
+      </p>
+      <p>
+        Your strategic read is developing. Your delivery record is good. The trust
+        dimension is where this is registering, and it's why you're sitting in
+        Discussion on Readiness rather than Likely.
+      </p>`,
+      branchNote: {
+        tag: 'Reliability Concern Branch',
+        text: 'This branch fires when consequenceTags includes "reliability_concern" from 2+ questions. The trust dimension drops to In Discussion. Readiness remains In Discussion. Promotion requirement extends to 3 dimensions.',
+      },
+    },
+  };
+
+  let currentBranch = 'baseline';
+
+  function setBranch(key, btn) {
+    currentBranch = key;
+    document.querySelectorAll('.branch-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderAssessment();
+  }
+
+  function renderAssessment() {
+    const b = branches[currentBranch];
+    const container = document.getElementById('assessment-body');
+    let html = b.body;
+    if (b.branchNote) {
+      html += `<div class="branch-note">
+        <div class="branch-tag">${b.branchNote.tag}</div>
+        <div class="branch-text">${b.branchNote.text}</div>
+      </div>`;
+    }
+    container.innerHTML = html;
+  }
+
+  /* ─────────────────────────────────────────────────
+     FORMULA ANIMATION
+  ───────────────────────────────────────────────── */
+  const contribs = { attr: 23.2, perf: 21.6, sponsor: 10.4, pol: 4.5 };
+
+  function animateFormula() {
+    const fills = document.querySelectorAll('.formula-fill');
+    const ids = ['attr', 'perf', 'sponsor', 'pol'];
+
+    fills.forEach((el, i) => {
+      const delay = 200 + i * 150;
+      setTimeout(() => {
+        el.style.width = el.dataset.target;
+        const contrib = parseFloat(el.dataset.contribution);
+        setTimeout(() => {
+          document.getElementById(`contrib-${ids[i]}`).textContent = `+${contrib.toFixed(1)}`;
+        }, 400);
+      }, delay);
+    });
+
+    /* Total reveal */
+    setTimeout(() => {
+      document.getElementById('total-score').classList.add('revealed');
+    }, 1200);
+  }
+
+  /* ─────────────────────────────────────────────────
+     THEME
+  ───────────────────────────────────────────────── */
+  function toggleTheme() {
+    const html = document.documentElement;
+    html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
+  }
+
+  /* ─────────────────────────────────────────────────
+     INIT
+  ───────────────────────────────────────────────── */
+  renderAssessment();
+  setTimeout(animateFormula, 400);
+
+</script>
+</body>
+</html>

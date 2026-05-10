@@ -1,0 +1,123 @@
+{
+  "id": "y01q09",
+  "year": 1,
+  "questionNumber": 9,
+  "title": "Near the Pods",
+  "category": "pre_review_pressure",
+  "setup": "Conrad falls into step with you on the way back from the third-floor printers.\n\n'How was your weekend? Good? Good.'\n\nThe corridor is quiet. 'So — and this is probably nothing — I overheard something near the pods yesterday afternoon.' He tells you: Dana was speaking to Marcus Webb about the new intake. The word she used about you was 'promising.' The word Marcus used in response was 'visible yet?'\n\n'I'm not going to tell you what to do,' Conrad finishes. 'But if I were sitting where you're sitting — which, honestly, thank God I'm not — I'd think about that word.'",
+  "anchoredNPCs": [
+    "conrad_mensah",
+    "dana_sutcliffe"
+  ],
+  "arcBeatAnchors": [
+    "conrad.y1.pre_review_intelligence"
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Ask how Zara was framed",
+      "text": "You ask Conrad whether he heard how they framed Zara. What word did Marcus use for her? Conrad considers you for a moment, then answers.",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 5
+        },
+        {
+          "stat": "integrity",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "conrad_mensah",
+          "delta": 4
+        }
+      ],
+      "consequenceTags": [
+        "systemic_read"
+      ],
+      "innerMonologue": "You used Conrad's intelligence to get more intelligence. Conrad noticed. He doesn't seem to mind."
+    },
+    {
+      "id": "B",
+      "label": "Thank him and return to work on visibility",
+      "text": "You thank him — genuinely, not performatively — and go back to your desk. Visible yet. You know what that means. You start working on the thing that would answer it.",
+      "statDeltas": [
+        {
+          "stat": "integrity",
+          "delta": 5
+        },
+        {
+          "stat": "resilience",
+          "delta": 3
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "high_cost_high_fidelity"
+      ],
+      "innerMonologue": "You heard it and acted on it and didn't ask for anything more. That's either clean or inefficient and you don't know which."
+    },
+    {
+      "id": "C",
+      "label": "Ask Conrad what he thinks you should do with it",
+      "text": "You ask him what he thinks you should do. Not the information — what he'd actually recommend. Conrad seems pleased you asked. He has very specific thoughts.",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 3
+        },
+        {
+          "stat": "integrity",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "conrad_mensah",
+          "delta": 6
+        }
+      ],
+      "consequenceTags": [
+        "open_inquiry"
+      ],
+      "curiosityPillarDelta": 1,
+      "innerMonologue": "You asked Conrad for advice. He gave it. The advice was better than you expected."
+    },
+    {
+      "id": "D",
+      "label": "Ask what Conrad would do sitting where you are",
+      "text": "You ask what he'd do. Not advice — what he, Conrad, would actually do in your position. He considers it more carefully than you expected before answering.",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 3
+        },
+        {
+          "stat": "resilience",
+          "delta": 2
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "conrad_mensah",
+          "delta": 7
+        }
+      ],
+      "consequenceTags": [
+        "open_inquiry",
+        "systemic_read"
+      ],
+      "innerMonologue": "He told you what he'd actually do. That's different from advice. It was more useful."
+    }
+  ],
+  "designNotes": "Conrad's pre_review_intelligence arc beat fires here. Option D produces the highest Conrad relationship gain of any Y1 question — Conrad rewards being asked for his personal judgment, not just his information or advice. The gossip rule applies: Conrad discusses other people, not the player, with other people. He has not shared 'visible yet?' with Zara. The player cannot learn whether he has. Option A fires systemic_read and queues a consequence tag that modifies how the annual review scene opens."
+}

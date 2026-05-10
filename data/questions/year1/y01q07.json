@@ -1,0 +1,122 @@
+{
+  "id": "y01q07",
+  "year": 1,
+  "questionNumber": 7,
+  "title": "The Kitchen",
+  "category": "relationships",
+  "setup": "The all-floor update. Marcus Webb presents the Q3 reorganisation in prepared language: three slides, no questions taken. Something in the sequencing suggests this is not the announcement. It is the framing of the announcement.\n\nLeo catches your eye during slide two. He is expressionless in a specific way.\n\nYou find him in the kitchen afterward. He is making tea with great precision. The kitchen is empty.",
+  "anchoredNPCs": [
+    "leo_chen"
+  ],
+  "arcBeatAnchors": [
+    "leo.y1.political_reveal"
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Ask what he actually thought",
+      "text": "You sit down with your coffee and ask him what he thought — not of the presentation, of the thing behind it. What is the reorganisation actually for?",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 4
+        },
+        {
+          "stat": "resilience",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "leo_chen",
+          "delta": 6
+        }
+      ],
+      "consequenceTags": [
+        "open_inquiry",
+        "systemic_read"
+      ],
+      "curiosityPillarDelta": 1,
+      "innerMonologue": "He answered without hedging. You're not sure you expected that."
+    },
+    {
+      "id": "B",
+      "label": "Share your read before he gives his",
+      "text": "You tell him what you noticed — something specific about Marcus's language on slide three that didn't track with the framing. You want to see if he caught the same thing.",
+      "statDeltas": [
+        {
+          "stat": "adaptiveNerve",
+          "delta": 3
+        },
+        {
+          "stat": "politicalAwareness",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "leo_chen",
+          "delta": 3
+        }
+      ],
+      "consequenceTags": [
+        "systemic_read"
+      ],
+      "innerMonologue": "You showed your hand before he showed his. He matched it. You're not sure who learned more."
+    },
+    {
+      "id": "C",
+      "label": "Bring up the current project instead",
+      "text": "You mention the deliverable that needs his input. Something safe and proximate. Leo nods, makes his tea, contributes something useful. The kitchen moment closes quietly.",
+      "statDeltas": [
+        {
+          "stat": "executionDiscipline",
+          "delta": 2
+        },
+        {
+          "stat": "politicalAwareness",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "leo_chen",
+          "delta": -3
+        }
+      ],
+      "consequenceTags": [],
+      "innerMonologue": "He was ready to say something. You gave him an exit instead. He took it."
+    },
+    {
+      "id": "D",
+      "label": "Name it directly",
+      "text": "You say it out loud: 'That wasn't a reorganisation update. That was a preparation.' You watch his face. Leo stops making tea.",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 5
+        },
+        {
+          "stat": "integrity",
+          "delta": 3
+        },
+        {
+          "stat": "resilience",
+          "delta": -4
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "leo_chen",
+          "delta": 5
+        }
+      ],
+      "consequenceTags": [
+        "systemic_read",
+        "risk_catch"
+      ],
+      "innerMonologue": "You named the thing in the room that no one was naming. Leo looked at you like he was recalibrating something."
+    }
+  ],
+  "designNotes": "Leo political_reveal arc beat. Option D requires Leo relationship >= 35 (base) to unlock the full exchange — below that, Leo deflects to safer ground and the statDeltas still apply but the scene is shorter. Political Awareness 50+ players receive an additional observation tag in the narration of this scene (not in the consequence drawer). Option C is the relationship trap — it feels low-risk but loses the strongest single-session Leo gain available in Y1."
+}

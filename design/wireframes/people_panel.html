@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASCEND — People Panel (Wireframe)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../tokens.css">
+  <style>
+
+    /* ── Scene ───────────────────────────────────────── */
+    .scene {
+      position: fixed;
+      inset: 0;
+      background: var(--color-surface-base);
+      display: flex;
+      align-items: stretch;
+    }
+
+    .scene-bg {
+      flex: 1;
+      padding: var(--space-16) var(--space-8);
+      opacity: 0.25;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .scene-question {
+      max-width: 500px;
+    }
+
+    .scene-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-accent);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      margin-bottom: var(--space-4);
+    }
+
+    .scene-title {
+      font-family: var(--font-ui);
+      font-size: var(--text-2xl);
+      font-weight: var(--weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-5);
+    }
+
+    .scene-body {
+      font-family: var(--font-narrative);
+      font-size: var(--text-md);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text-secondary);
+    }
+
+    /* ── Panel shell ─────────────────────────────────── */
+    .panel {
+      width: 380px;
+      flex-shrink: 0;
+      background: var(--color-surface-raised);
+      border-left: 1px solid var(--color-border-subtle);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    @media (max-width: 600px) {
+      .scene-bg { display: none; }
+      .panel { width: 100%; border-left: none; }
+    }
+
+    /* ── Panel header ────────────────────────────────── */
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-4) var(--space-5);
+      border-bottom: 1px solid var(--color-border-subtle);
+      flex-shrink: 0;
+    }
+
+    .panel-title {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
+      color: var(--color-text-primary);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: var(--space-2);
+      align-items: center;
+    }
+
+    .icon-btn {
+      background: none;
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      padding: var(--space-1) var(--space-2);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      transition: all var(--duration-fast) var(--ease-default);
+      white-space: nowrap;
+    }
+
+    .icon-btn:hover {
+      border-color: var(--color-accent-default);
+      color: var(--color-accent-default);
+    }
+
+    .icon-btn.active {
+      background: color-mix(in srgb, var(--color-accent-default) 15%, transparent);
+      border-color: var(--color-accent-default);
+      color: var(--color-accent-default);
+    }
+
+    /* ── View toggle ─────────────────────────────────── */
+    .view-toggle {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .view-btn {
+      background: none;
+      border: none;
+      border-right: 1px solid var(--color-border-subtle);
+      color: var(--color-text-muted);
+      cursor: pointer;
+      padding: var(--space-1) var(--space-3);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      transition: all var(--duration-fast) var(--ease-default);
+    }
+
+    .view-btn:last-child { border-right: none; }
+
+    .view-btn.active {
+      background: color-mix(in srgb, var(--color-accent-default) 18%, transparent);
+      color: var(--color-accent-default);
+    }
+
+    .view-btn:hover:not(.active) {
+      background: color-mix(in srgb, var(--color-text-primary) 6%, transparent);
+      color: var(--color-text-secondary);
+    }
+
+    /* ── Sort bar (list view only) ───────────────────── */
+    .sort-bar {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-5);
+      border-bottom: 1px solid var(--color-border-subtle);
+      flex-shrink: 0;
+    }
+
+    .sort-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .sort-pills {
+      display: flex;
+      gap: var(--space-1);
+      flex-wrap: wrap;
+    }
+
+    .sort-pill {
+      background: none;
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-full);
+      color: var(--color-text-muted);
+      cursor: pointer;
+      padding: 2px var(--space-3);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: var(--tracking-wide);
+      transition: all var(--duration-fast) var(--ease-default);
+    }
+
+    .sort-pill.active {
+      border-color: var(--color-accent-default);
+      color: var(--color-accent-default);
+      background: color-mix(in srgb, var(--color-accent-default) 12%, transparent);
+    }
+
+    .sort-pill:hover:not(.active) {
+      border-color: var(--color-border-default);
+      color: var(--color-text-secondary);
+    }
+
+    /* ── Panel body ──────────────────────────────────── */
+    .panel-body {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-border-subtle) transparent;
+    }
+
+    /* ══════════════════════════════════════════════════
+       LIST VIEW
+    ══════════════════════════════════════════════════ */
+
+    .npc-list {
+      padding: var(--space-3) 0;
+    }
+
+    .npc-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-5);
+      cursor: pointer;
+      transition: background var(--duration-fast) var(--ease-default);
+      position: relative;
+    }
+
+    .npc-row:hover {
+      background: color-mix(in srgb, var(--color-text-primary) 4%, transparent);
+    }
+
+    .npc-row.selected {
+      background: color-mix(in srgb, var(--color-accent-default) 8%, transparent);
+    }
+
+    .npc-row.selected::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--color-accent-default);
+    }
+
+    /* Avatar */
+    .npc-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-full);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
+      color: var(--color-surface-base);
+      position: relative;
+    }
+
+    /* Band ring around avatar */
+    .npc-avatar::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: var(--radius-full);
+      border: 2px solid;
+    }
+
+    .band-cold .npc-avatar::after     { border-color: #4B5563; }
+    .band-functional .npc-avatar::after { border-color: #6B7280; }
+    .band-warm .npc-avatar::after     { border-color: var(--color-gold-400); }
+    .band-trusted .npc-avatar::after  { border-color: var(--color-accent-default); }
+
+    /* Main content */
+    .npc-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .npc-name-row {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-2);
+      margin-bottom: 2px;
+    }
+
+    .npc-name {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-medium);
+      color: var(--color-text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .npc-role-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Relationship bar */
+    .npc-rel-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-bottom: 3px;
+    }
+
+    .npc-rel-track {
+      flex: 1;
+      height: 3px;
+      background: var(--color-border-subtle);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .npc-rel-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      width: 0;
+      transition: width var(--duration-moderate) var(--ease-default);
+    }
+
+    .band-cold .npc-rel-fill     { background: #4B5563; }
+    .band-functional .npc-rel-fill { background: #6B7280; }
+    .band-warm .npc-rel-fill     { background: var(--color-gold-400); }
+    .band-trusted .npc-rel-fill  { background: var(--color-accent-default); }
+
+    .npc-score {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      flex-shrink: 0;
+      min-width: 24px;
+      text-align: right;
+    }
+
+    .npc-last {
+      font-family: var(--font-narrative);
+      font-size: var(--text-xs);
+      font-style: italic;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Band badge */
+    .band-badge {
+      flex-shrink: 0;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      padding: 3px var(--space-2);
+      border-radius: var(--radius-sm);
+      border: 1px solid;
+    }
+
+    .band-cold .band-badge     { color: #6B7280; border-color: #374151; background: #1F2937; }
+    .band-functional .band-badge { color: #9CA3AF; border-color: #4B5563; background: color-mix(in srgb, #6B7280 10%, transparent); }
+    .band-warm .band-badge     { color: var(--color-gold-400); border-color: color-mix(in srgb, var(--color-gold-400) 30%, transparent); background: color-mix(in srgb, var(--color-gold-400) 8%, transparent); }
+    .band-trusted .band-badge  { color: var(--color-accent-default); border-color: color-mix(in srgb, var(--color-accent-default) 30%, transparent); background: color-mix(in srgb, var(--color-accent-default) 8%, transparent); }
+
+    /* ══════════════════════════════════════════════════
+       DETAIL CARD (slides up below selected row)
+    ══════════════════════════════════════════════════ */
+
+    .npc-detail {
+      margin: 0 var(--space-5) var(--space-3);
+      padding: var(--space-4);
+      background: var(--color-surface-overlay);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-md);
+      display: none;
+      animation: detail-in var(--duration-moderate) var(--ease-default) both;
+    }
+
+    .npc-detail.visible { display: block; }
+
+    @keyframes detail-in {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .detail-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-3);
+    }
+
+    .detail-avatar-large {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-full);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-ui);
+      font-size: var(--text-md);
+      font-weight: var(--weight-semibold);
+      color: var(--color-surface-base);
+    }
+
+    .detail-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .detail-name {
+      font-family: var(--font-ui);
+      font-size: var(--text-md);
+      font-weight: var(--weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: 1px;
+    }
+
+    .detail-role {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      letter-spacing: var(--tracking-wide);
+    }
+
+    .detail-bio {
+      font-family: var(--font-narrative);
+      font-size: var(--text-sm);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text-secondary);
+      font-style: italic;
+      margin-bottom: var(--space-3);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    .detail-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2);
+    }
+
+    .detail-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .detail-stat-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    .detail-stat-value {
+      font-family: var(--font-ui);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-medium);
+      color: var(--color-text-secondary);
+    }
+
+    /* ══════════════════════════════════════════════════
+       CONSTELLATION VIEW
+    ══════════════════════════════════════════════════ */
+
+    .constellation-wrap {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .constellation-wrap.visible {
+      display: flex;
+    }
+
+    .constellation-svg-wrap {
+      flex: 1;
+      position: relative;
+      min-height: 0;
+    }
+
+    #constellation-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Node labels */
+    .const-label {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      fill: var(--color-text-secondary);
+      pointer-events: none;
+      text-anchor: middle;
+    }
+
+    /* Tooltip */
+    .const-tooltip {
+      position: absolute;
+      background: var(--color-surface-overlay);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-sm);
+      padding: var(--space-2) var(--space-3);
+      font-family: var(--font-ui);
+      font-size: var(--text-xs);
+      color: var(--color-text-primary);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--duration-fast) var(--ease-default);
+      white-space: nowrap;
+      z-index: 10;
+    }
+
+    .const-tooltip.visible {
+      opacity: 1;
+    }
+
+    .const-tooltip-name {
+      font-weight: var(--weight-semibold);
+      margin-bottom: 2px;
+    }
+
+    .const-tooltip-score {
+      font-family: var(--font-mono);
+      color: var(--color-text-muted);
+    }
+
+    .const-legend {
+      padding: var(--space-3) var(--space-5);
+      border-top: 1px solid var(--color-border-subtle);
+      display: flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-text-muted);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--radius-full);
+      flex-shrink: 0;
+    }
+
+    /* ── Empty / scroll helpers ──────────────────────── */
+    .divider {
+      height: 1px;
+      background: var(--color-border-subtle);
+      margin: var(--space-1) var(--space-5);
+    }
+
+    .panel-footer {
+      padding: var(--space-3) var(--space-5);
+      border-top: 1px solid var(--color-border-subtle);
+      flex-shrink: 0;
+    }
+
+    .footer-note {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      letter-spacing: var(--tracking-wide);
+      text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="scene">
+
+  <!-- Blurred game context behind panel -->
+  <div class="scene-bg">
+    <div class="scene-question">
+      <div class="scene-eyebrow">Year 1 · Week 14 · Question 6 of 10</div>
+      <div class="scene-title">Accurate Parameters</div>
+      <div class="scene-body">
+        Dana asks you to present the Q3 forecast methodology at Thursday's all-hands.
+        You've found what looks like a structural error in the model — not a rounding issue,
+        but a category misclassification that inflates the headline number by around twelve percent.
+        The analyst who built it is sitting three desks away. You have forty-eight hours.
+      </div>
+    </div>
+  </div>
+
+  <!-- People panel -->
+  <div class="panel" id="panel">
+
+    <div class="panel-header">
+      <div class="panel-title">People</div>
+      <div class="header-actions">
+        <div class="view-toggle">
+          <button class="view-btn active" id="btn-list" onclick="setView('list')">LIST</button>
+          <button class="view-btn" id="btn-constellation" onclick="setView('constellation')">MAP</button>
+        </div>
+        <button class="icon-btn" onclick="toggleTheme()" title="Toggle theme">◑</button>
+      </div>
+    </div>
+
+    <!-- Sort bar (list view) -->
+    <div class="sort-bar" id="sort-bar">
+      <span class="sort-label">Sort</span>
+      <div class="sort-pills">
+        <button class="sort-pill active" data-sort="score" onclick="setSort('score', this)">Score</button>
+        <button class="sort-pill" data-sort="name" onclick="setSort('name', this)">Name</button>
+        <button class="sort-pill" data-sort="recent" onclick="setSort('recent', this)">Recent</button>
+      </div>
+    </div>
+
+    <!-- Panel body -->
+    <div class="panel-body" id="panel-body">
+
+      <!-- ── LIST VIEW ── -->
+      <div id="list-view">
+        <div class="npc-list" id="npc-list">
+          <!-- populated by JS -->
+        </div>
+      </div>
+
+      <!-- ── CONSTELLATION VIEW ── -->
+      <div class="constellation-wrap" id="constellation-view">
+        <div class="constellation-svg-wrap">
+          <svg id="constellation-svg" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
+            <!-- edges -->
+            <g id="const-edges"></g>
+            <!-- player node -->
+            <g id="const-player"></g>
+            <!-- npc nodes -->
+            <g id="const-nodes"></g>
+          </svg>
+          <div class="const-tooltip" id="const-tooltip">
+            <div class="const-tooltip-name" id="tt-name"></div>
+            <div class="const-tooltip-score" id="tt-score"></div>
+          </div>
+        </div>
+        <div class="const-legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#4B5563"></div>Cold
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#6B7280"></div>Functional
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:var(--color-gold-400)"></div>Warm
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:var(--color-accent-default)"></div>Trusted
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="panel-footer">
+      <div class="footer-note">6 CONTACTS · YEAR 1 WK 14</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  /* ─────────────────────────────────────────────────────
+     DATA
+  ───────────────────────────────────────────────────── */
+  const npcs = [
+    {
+      id: 'dana_sutcliffe',
+      name: 'Dana Sutcliffe',
+      initials: 'DS',
+      color: '#7C6FAF',
+      roleTag: 'L6 · SPONSOR',
+      band: 'warm',
+      bandLabel: 'Warm',
+      score: 52,
+      lastInteraction: 'Q5 · Strategic alignment',
+      bio: 'Your manager. Reads subtext well. Rewards people who solve problems quietly. Her trust is earned in specifics, not impressions.',
+      stats: {
+        'Type': 'Manager',
+        'Interaction': 'High',
+        'Agenda': 'Visibility & Precision',
+        'Risk': 'Exacting',
+      }
+    },
+    {
+      id: 'zara_okafor',
+      name: 'Zara Okafor',
+      initials: 'ZO',
+      color: '#4B6070',
+      roleTag: 'L1 · PEER',
+      band: 'functional',
+      bandLabel: 'Functional',
+      score: 31,
+      lastInteraction: 'Q3 · Competing read',
+      bio: 'Joined the same month as you. Smart, lateral, and watching the same opportunities. Not hostile — just playing a different game.',
+      stats: {
+        'Type': 'Peer',
+        'Interaction': 'Moderate',
+        'Agenda': 'Differentiation',
+        'Risk': 'Rival dynamic',
+      }
+    },
+    {
+      id: 'leo_chen',
+      name: 'Leo Chen',
+      initials: 'LC',
+      color: '#3A7D6B',
+      roleTag: 'L1 · PEER',
+      band: 'warm',
+      bandLabel: 'Warm',
+      score: 68,
+      lastInteraction: 'Q4 · Mutual cover',
+      bio: 'The person in your cohort you actually trust. Covers for you when it costs him nothing and sometimes when it costs him something.',
+      stats: {
+        'Type': 'Peer',
+        'Interaction': 'High',
+        'Agenda': 'Collective success',
+        'Risk': 'Overextended',
+      }
+    },
+    {
+      id: 'grace_oduya',
+      name: 'Grace Oduya',
+      initials: 'GO',
+      color: '#7A5A3C',
+      roleTag: 'OPS · COORD',
+      band: 'functional',
+      bandLabel: 'Functional',
+      score: 44,
+      lastInteraction: 'Q1 · Process check-in',
+      bio: 'Runs the room schedule, knows every internal deadline, and has opinions about the AI assistant she does not voice in full company meetings.',
+      stats: {
+        'Type': 'Operations',
+        'Interaction': 'Low-medium',
+        'Agenda': 'Stability',
+        'Risk': 'Gatekeeper dynamic',
+      }
+    },
+    {
+      id: 'conrad_mensah',
+      name: 'Conrad Mensah',
+      initials: 'CM',
+      color: '#6B4E71',
+      roleTag: 'EVENTS · WP',
+      band: 'warm',
+      bandLabel: 'Warm',
+      score: 59,
+      lastInteraction: 'Q2 · Informal corridor',
+      bio: 'Knows everyone. Hears things. Not malicious about it — he just exists at the social connective tissue of the floor and doesn\'t pretend otherwise.',
+      stats: {
+        'Type': 'Workplace',
+        'Interaction': 'Informal',
+        'Agenda': 'Belonging',
+        'Risk': 'Gossip conduit',
+      }
+    },
+    {
+      id: 'sofia',
+      name: 'Sofia',
+      initials: 'SF',
+      color: '#2A6A8A',
+      roleTag: 'VOX · LOOM AI',
+      band: 'warm',
+      bandLabel: 'Warm',
+      score: 65,
+      lastInteraction: 'Q6 · Active (current)',
+      bio: 'AUREL\'s workplace AI. Processes your questions without friction, retains context across days, and occasionally implies things she does not state directly.',
+      stats: {
+        'Type': 'AI Assistant',
+        'Interaction': 'On-demand',
+        'Agenda': 'Unknown / Emergent',
+        'Risk': 'Epistemic dependency',
+      }
+    },
+  ];
+
+  /* Inter-NPC edges (source, target, weight: 0–1, label) */
+  const npcEdges = [
+    { from: 'grace_oduya', to: 'conrad_mensah', weight: 0.5, label: 'Cordial' },
+    { from: 'grace_oduya', to: 'sofia',         weight: 0.3, label: 'Friction' },
+  ];
+
+  /* ─────────────────────────────────────────────────────
+     STATE
+  ───────────────────────────────────────────────────── */
+  let currentSort = 'score';
+  let selectedNpcId = null;
+  let currentView = 'list';
+
+  /* ─────────────────────────────────────────────────────
+     THEME
+  ───────────────────────────────────────────────────── */
+  function toggleTheme() {
+    const html = document.documentElement;
+    html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
+  }
+
+  /* ─────────────────────────────────────────────────────
+     VIEW TOGGLE
+  ───────────────────────────────────────────────────── */
+  function setView(view) {
+    currentView = view;
+    document.getElementById('btn-list').classList.toggle('active', view === 'list');
+    document.getElementById('btn-constellation').classList.toggle('active', view === 'constellation');
+    document.getElementById('sort-bar').style.display = view === 'list' ? '' : 'none';
+    document.getElementById('list-view').style.display = view === 'list' ? '' : 'none';
+    document.getElementById('constellation-view').classList.toggle('visible', view === 'constellation');
+
+    if (view === 'constellation') renderConstellation();
+  }
+
+  /* ─────────────────────────────────────────────────────
+     SORT
+  ───────────────────────────────────────────────────── */
+  function setSort(key, btn) {
+    currentSort = key;
+    document.querySelectorAll('.sort-pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    renderList();
+  }
+
+  function sortedNpcs() {
+    return [...npcs].sort((a, b) => {
+      if (currentSort === 'score')  return b.score - a.score;
+      if (currentSort === 'name')   return a.name.localeCompare(b.name);
+      if (currentSort === 'recent') {
+        // "current" interaction goes first
+        const priority = id => id === 'sofia' ? 0 : 1;
+        return priority(a.id) - priority(b.id);
+      }
+      return 0;
+    });
+  }
+
+  /* ─────────────────────────────────────────────────────
+     LIST RENDER
+  ───────────────────────────────────────────────────── */
+  function renderList() {
+    const container = document.getElementById('npc-list');
+    const ordered = sortedNpcs();
+    container.innerHTML = '';
+
+    ordered.forEach((npc, i) => {
+      /* Row */
+      const row = document.createElement('div');
+      row.className = `npc-row band-${npc.band}${selectedNpcId === npc.id ? ' selected' : ''}`;
+      row.dataset.npcId = npc.id;
+      row.innerHTML = `
+        <div class="npc-avatar" style="background:${npc.color}">${npc.initials}</div>
+        <div class="npc-info">
+          <div class="npc-name-row">
+            <span class="npc-name">${npc.name}</span>
+            <span class="npc-role-tag">${npc.roleTag}</span>
+          </div>
+          <div class="npc-rel-wrap">
+            <div class="npc-rel-track">
+              <div class="npc-rel-fill" data-target="${npc.score}%" style="width:0"></div>
+            </div>
+            <span class="npc-score">${npc.score}</span>
+          </div>
+          <div class="npc-last">${npc.lastInteraction}</div>
+        </div>
+        <span class="band-badge">${npc.bandLabel}</span>
+      `;
+      row.addEventListener('click', () => selectNpc(npc.id));
+      container.appendChild(row);
+
+      /* Detail card (inserted immediately after its row) */
+      const detail = document.createElement('div');
+      detail.className = `npc-detail${selectedNpcId === npc.id ? ' visible' : ''}`;
+      detail.id = `detail-${npc.id}`;
+      detail.innerHTML = buildDetailHTML(npc);
+      container.appendChild(detail);
+    });
+
+    /* Animate bars */
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        document.querySelectorAll('.npc-rel-fill').forEach(el => {
+          el.style.width = el.dataset.target;
+        });
+      }, 80);
+    });
+  }
+
+  function buildDetailHTML(npc) {
+    const statsRows = Object.entries(npc.stats).map(([k, v]) => `
+      <div class="detail-stat">
+        <div class="detail-stat-label">${k}</div>
+        <div class="detail-stat-value">${v}</div>
+      </div>
+    `).join('');
+
+    return `
+      <div class="detail-header">
+        <div class="detail-avatar-large band-${npc.band}" style="background:${npc.color}">${npc.initials}</div>
+        <div class="detail-meta">
+          <div class="detail-name">${npc.name}</div>
+          <div class="detail-role">${npc.roleTag}</div>
+        </div>
+      </div>
+      <div class="detail-bio">${npc.bio}</div>
+      <div class="detail-stats">${statsRows}</div>
+    `;
+  }
+
+  function selectNpc(id) {
+    if (selectedNpcId === id) {
+      selectedNpcId = null;
+    } else {
+      selectedNpcId = id;
+    }
+    renderList();
+  }
+
+  /* ─────────────────────────────────────────────────────
+     CONSTELLATION RENDER
+  ───────────────────────────────────────────────────── */
+  function bandColor(band) {
+    const map = {
+      cold:       '#4B5563',
+      functional: '#6B7280',
+      warm:       'var(--color-gold-400)',
+      trusted:    'var(--color-accent-default)',
+    };
+    return map[band] || '#6B7280';
+  }
+
+  /* Resolve CSS vars for SVG (SVG ignores CSS vars in some attrs) */
+  function resolveColor(v) {
+    if (!v.startsWith('var(')) return v;
+    const varName = v.slice(4, -1);
+    return getComputedStyle(document.documentElement).getPropertyValue(varName).trim() || '#999';
+  }
+
+  function renderConstellation() {
+    const svg = document.getElementById('constellation-svg');
+    const W = 340, H = 340;
+    const cx = W / 2, cy = H / 2;
+    const R = 110; /* orbit radius */
+
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+    /* Positions: evenly spaced around circle */
+    const positions = npcs.map((npc, i) => {
+      const angle = (i / npcs.length) * 2 * Math.PI - Math.PI / 2;
+      return {
+        id: npc.id,
+        x: cx + R * Math.cos(angle),
+        y: cy + R * Math.sin(angle),
+      };
+    });
+
+    const posMap = Object.fromEntries(positions.map(p => [p.id, p]));
+
+    /* Player→NPC edges (always drawn) */
+    const edgesEl = document.getElementById('const-edges');
+    edgesEl.innerHTML = '';
+
+    npcs.forEach(npc => {
+      const pos = posMap[npc.id];
+      const opacity = 0.15 + (npc.score / 100) * 0.55;
+      const strokeW = 0.5 + (npc.score / 100) * 2;
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', cx); line.setAttribute('y1', cy);
+      line.setAttribute('x2', pos.x); line.setAttribute('y2', pos.y);
+      line.setAttribute('stroke', resolveColor(bandColor(npc.band)));
+      line.setAttribute('stroke-width', strokeW);
+      line.setAttribute('stroke-opacity', opacity);
+      line.setAttribute('stroke-dasharray', npc.band === 'functional' ? '3 4' : '');
+      edgesEl.appendChild(line);
+    });
+
+    /* Inter-NPC edges */
+    npcEdges.forEach(edge => {
+      const a = posMap[edge.from], b = posMap[edge.to];
+      if (!a || !b) return;
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', a.x); line.setAttribute('y1', a.y);
+      line.setAttribute('x2', b.x); line.setAttribute('y2', b.y);
+      line.setAttribute('stroke', edge.label === 'Friction' ? '#C75B39' : '#6B7280');
+      line.setAttribute('stroke-width', 1);
+      line.setAttribute('stroke-opacity', 0.4);
+      line.setAttribute('stroke-dasharray', '4 5');
+
+      /* Edge label */
+      const midX = (a.x + b.x) / 2, midY = (a.y + b.y) / 2;
+      const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      txt.setAttribute('x', midX); txt.setAttribute('y', midY - 4);
+      txt.setAttribute('text-anchor', 'middle');
+      txt.setAttribute('font-family', 'JetBrains Mono, monospace');
+      txt.setAttribute('font-size', '8');
+      txt.setAttribute('fill', edge.label === 'Friction' ? '#C75B39' : '#6B7280');
+      txt.setAttribute('fill-opacity', '0.7');
+      txt.textContent = edge.label.toUpperCase();
+      edgesEl.appendChild(line);
+      edgesEl.appendChild(txt);
+    });
+
+    /* Player node */
+    const playerEl = document.getElementById('const-player');
+    playerEl.innerHTML = '';
+
+    const playerCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    playerCircle.setAttribute('cx', cx); playerCircle.setAttribute('cy', cy);
+    playerCircle.setAttribute('r', 18);
+    playerCircle.setAttribute('fill', '#1E293B');
+    playerCircle.setAttribute('stroke', '#F4F1EA');
+    playerCircle.setAttribute('stroke-width', '1.5');
+    playerEl.appendChild(playerCircle);
+
+    const playerLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    playerLabel.setAttribute('x', cx); playerLabel.setAttribute('y', cy + 1);
+    playerLabel.setAttribute('text-anchor', 'middle');
+    playerLabel.setAttribute('dominant-baseline', 'middle');
+    playerLabel.setAttribute('font-family', 'Inter, sans-serif');
+    playerLabel.setAttribute('font-size', '9');
+    playerLabel.setAttribute('font-weight', '600');
+    playerLabel.setAttribute('fill', '#F4F1EA');
+    playerLabel.textContent = 'YOU';
+    playerEl.appendChild(playerLabel);
+
+    /* NPC nodes */
+    const nodesEl = document.getElementById('const-nodes');
+    nodesEl.innerHTML = '';
+
+    const tooltip = document.getElementById('const-tooltip');
+    const ttName = document.getElementById('tt-name');
+    const ttScore = document.getElementById('tt-score');
+
+    positions.forEach((pos, i) => {
+      const npc = npcs[i];
+      const nodeR = 14 + (npc.score / 100) * 8;
+      const color = resolveColor(bandColor(npc.band));
+
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.style.cursor = 'pointer';
+
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', pos.x); circle.setAttribute('cy', pos.y);
+      circle.setAttribute('r', nodeR);
+      circle.setAttribute('fill', npc.color);
+      circle.setAttribute('fill-opacity', '0.9');
+      circle.setAttribute('stroke', color);
+      circle.setAttribute('stroke-width', '2');
+
+      const initials = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      initials.setAttribute('x', pos.x); initials.setAttribute('y', pos.y);
+      initials.setAttribute('text-anchor', 'middle');
+      initials.setAttribute('dominant-baseline', 'middle');
+      initials.setAttribute('font-family', 'Inter, sans-serif');
+      initials.setAttribute('font-size', '9');
+      initials.setAttribute('font-weight', '600');
+      initials.setAttribute('fill', '#F4F1EA');
+      initials.textContent = npc.initials;
+
+      /* Name label below node */
+      const nameY = pos.y + nodeR + 13;
+      const nameTxt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      nameTxt.setAttribute('x', pos.x); nameTxt.setAttribute('y', nameY);
+      nameTxt.setAttribute('text-anchor', 'middle');
+      nameTxt.setAttribute('font-family', 'Inter, sans-serif');
+      nameTxt.setAttribute('font-size', '9');
+      nameTxt.setAttribute('fill', '#9CA3AF');
+      nameTxt.textContent = npc.name.split(' ')[0]; /* first name only */
+
+      g.appendChild(circle);
+      g.appendChild(initials);
+      g.appendChild(nameTxt);
+
+      /* Hover tooltip */
+      g.addEventListener('mouseenter', (e) => {
+        ttName.textContent = npc.name;
+        ttScore.textContent = `${npc.bandLabel} · ${npc.score}`;
+        tooltip.classList.add('visible');
+      });
+      g.addEventListener('mousemove', (e) => {
+        const rect = svg.parentElement.getBoundingClientRect();
+        tooltip.style.left = (e.clientX - rect.left + 12) + 'px';
+        tooltip.style.top  = (e.clientY - rect.top  - 10) + 'px';
+      });
+      g.addEventListener('mouseleave', () => {
+        tooltip.classList.remove('visible');
+      });
+
+      nodesEl.appendChild(g);
+    });
+  }
+
+  /* ─────────────────────────────────────────────────────
+     INIT
+  ───────────────────────────────────────────────────── */
+  renderList();
+
+</script>
+</body>
+</html>

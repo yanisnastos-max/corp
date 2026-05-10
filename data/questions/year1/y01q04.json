@@ -1,0 +1,128 @@
+{
+  "id": "y01q04",
+  "year": 1,
+  "questionNumber": 4,
+  "title": "The Incomplete Brief",
+  "category": "first_test",
+  "setup": "Dana sends the brief at 11:47. Presentation is at 13:30. You read it on your way back from the kitchen.\n\nOn page three, under Proposed Timeline, there is a gap — not a typo, a structural omission. The kind that changes the recommendation entirely. Dana is in back-to-back meetings until 13:25. Six people are expecting a complete picture. You have ninety minutes.\n\nNote: Conrad's first team social is running tonight. The choices you make there will not be flagged.",
+  "anchoredNPCs": [
+    "dana_sutcliffe"
+  ],
+  "arcBeatAnchors": [
+    "conrad.y1.team_social"
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Present it as received",
+      "text": "You present what you have. You don't volunteer the gap. If someone spots it, you'll flag it as an open item. You get through the room. Nobody spots it.",
+      "statDeltas": [
+        {
+          "stat": "executionDiscipline",
+          "delta": 5
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": -4
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "dana_sutcliffe",
+          "delta": 2
+        }
+      ],
+      "consequenceTags": [],
+      "innerMonologue": "No one caught it. That's not the same as it not mattering."
+    },
+    {
+      "id": "B",
+      "label": "Research and fill the gap yourself",
+      "text": "You reconstruct the missing section from what you can find in the Loom archive. Your version is defensible. It is not Dana's version. You present it as the brief.",
+      "statDeltas": [
+        {
+          "stat": "strategicInfluence",
+          "delta": 5
+        },
+        {
+          "stat": "reputation",
+          "delta": 3
+        },
+        {
+          "stat": "executionDiscipline",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "dana_sutcliffe",
+          "delta": -3
+        }
+      ],
+      "consequenceTags": [
+        "seen_by_sponsor"
+      ],
+      "innerMonologue": "You made a call above your pay grade. You were right. That might not protect you."
+    },
+    {
+      "id": "C",
+      "label": "Flag it to Dana immediately",
+      "text": "You send a message marked urgent. She replies in seventeen minutes: 'Good catch. Use your judgment on the timeline — I trust it.' You adjust the brief. You walk in with her endorsement.",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 4
+        },
+        {
+          "stat": "integrity",
+          "delta": 4
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "dana_sutcliffe",
+          "delta": 3
+        }
+      ],
+      "consequenceTags": [
+        "systemic_read",
+        "open_inquiry"
+      ],
+      "innerMonologue": "You didn't fix it. You surfaced it to the person who owned it. That was the right move and you knew it."
+    },
+    {
+      "id": "D",
+      "label": "Present with a deliberate addendum",
+      "text": "You present the brief as received, then table the timeline section explicitly — flagging it as requiring further sign-off, not as an oversight. You make the gap visible on your own terms.",
+      "statDeltas": [
+        {
+          "stat": "adaptiveNerve",
+          "delta": 4
+        },
+        {
+          "stat": "politicalAwareness",
+          "delta": 2
+        },
+        {
+          "stat": "executionDiscipline",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "dana_sutcliffe",
+          "delta": 1
+        }
+      ],
+      "consequenceTags": [
+        "high_cost_high_fidelity"
+      ],
+      "innerMonologue": "You named the thing you didn't know instead of hiding it. The room noticed. You're not sure in which direction."
+    }
+  ],
+  "designNotes": "The Conrad team social (y01q04) fires as a scene tonight — choices made there are not annotated, per the Conrad arc beat design. This question itself tests how the player handles an information gap under time pressure. Option C is the only one that builds Dana relationship through transparency rather than performance. Option B fires seen_by_sponsor but with a Dana cost that may compound if repeated."
+}

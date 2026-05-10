@@ -1,0 +1,121 @@
+{
+  "id": "y01q03",
+  "year": 1,
+  "questionNumber": 3,
+  "title": "Something You Should Know",
+  "category": "first_test",
+  "setup": "Grace intercepts you on the way back from the third-floor printers. She glances once down the corridor.\n\n'I probably shouldn't say anything. But I was in the room this morning when Marcus Webb asked about the Velas project. The one you're presenting Thursday.' She pauses. 'The question he asked wasn't a question. Just — you might want to know that before you walk in.'\n\nShe is looking at you with eleven years of calibrated neutrality. She is giving you something she has chosen to give you.",
+  "anchoredNPCs": [
+    "grace_oduya",
+    "zara_okafor"
+  ],
+  "arcBeatAnchors": [
+    "grace.y1.unprompted_intelligence"
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Act on it — adjust Thursday's presentation",
+      "text": "You ask her what Marcus said, exactly. You adjust your approach for Thursday, leading with the answer to the question he didn't ask. The presentation lands differently than it would have.",
+      "statDeltas": [
+        {
+          "stat": "strategicInfluence",
+          "delta": 4
+        },
+        {
+          "stat": "integrity",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "seen_by_sponsor"
+      ],
+      "innerMonologue": "You used information you weren't supposed to have and you knew it and you did it anyway."
+    },
+    {
+      "id": "B",
+      "label": "Do nothing — present as planned",
+      "text": "You thank her and present Thursday exactly as you'd planned. The information sits at the back of your mind throughout. You don't adjust the brief.",
+      "statDeltas": [
+        {
+          "stat": "integrity",
+          "delta": 5
+        },
+        {
+          "stat": "executionDiscipline",
+          "delta": 2
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "high_cost_high_fidelity"
+      ],
+      "innerMonologue": "You had the map and walked the original route. That was a choice."
+    },
+    {
+      "id": "C",
+      "label": "Ask Grace what she means",
+      "text": "You ask her what she means — not the surface meaning, the thing under it. What was Marcus actually asking? What does she know about the project's context that isn't in the brief? She considers you for a moment before answering.",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 5
+        },
+        {
+          "stat": "resilience",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "grace_oduya",
+          "delta": 4
+        }
+      ],
+      "consequenceTags": [
+        "systemic_read",
+        "risk_catch"
+      ],
+      "innerMonologue": "She wasn't expecting you to push. Something about her expression suggests she doesn't mind."
+    },
+    {
+      "id": "D",
+      "label": "Tell Zara",
+      "text": "You mention it to Zara collegially before Thursday. Thought she should know. When you come back from the stairwell later, Grace is at her desk. She notices. Her expression doesn't change.",
+      "statDeltas": [
+        {
+          "stat": "collaborativePull",
+          "delta": 2
+        },
+        {
+          "stat": "integrity",
+          "delta": -4
+        },
+        {
+          "stat": "politicalAwareness",
+          "delta": -1
+        }
+      ],
+      "npcDeltas": [
+        {
+          "npcId": "zara_okafor",
+          "delta": 3
+        },
+        {
+          "npcId": "grace_oduya",
+          "delta": -6
+        }
+      ],
+      "consequenceTags": [
+        "burned_peer"
+      ],
+      "innerMonologue": "Grace gave you something she didn't give Zara. You gave it to Zara anyway. Grace noticed."
+    }
+  ],
+  "designNotes": "Grace's Y1 unprompted intelligence fires here. The key mechanical point: option C produces the highest Grace relationship gain because she offered information and the player wanted to understand it, not just use it. Option D fires burned_peer and will carry a consequence with Grace that is not announced — her subsequent arc beats at Y2 and Y4 will be less forthcoming. Option A produces seen_by_sponsor but at an integrity cost the player cannot recover cheaply."
+}
