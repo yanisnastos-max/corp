@@ -190,8 +190,8 @@ function header(q: Question, playerName: string): string {
     </div>
   </div>
   <div class="dc-year-progress">
-    <div class="dc-progress-dots">${dots}</div>
-    <span class="dc-progress-label">Q${q.questionNumber} of ${totalQ}</span>
+    <div class="dc-progress-dots" role="progressbar" aria-label="Question ${q.questionNumber} of ${totalQ}" aria-valuenow="${q.questionNumber}" aria-valuemin="1" aria-valuemax="${totalQ}">${dots}</div>
+    <span class="dc-progress-label" aria-hidden="true">Q${q.questionNumber} of ${totalQ}</span>
   </div>
 </header>`;
 }
@@ -233,7 +233,7 @@ function optionCard(opt: QuestionOption, phase: Phase): string {
   ].filter(Boolean).join(' ');
 
   return `
-<button class="${classList}" data-option-id="${opt.id}" ${phase === 'resolved' ? 'disabled' : ''}>
+<button class="${classList}" data-option-id="${opt.id}" aria-label="Option ${opt.id} — ${esc(opt.label)}" ${phase === 'resolved' ? 'disabled' : ''}>
   <div class="dc-option-header">
     <span class="dc-option-id">${opt.id}</span>
     <span class="dc-option-label">${esc(opt.label)}</span>
@@ -253,7 +253,7 @@ function drawer(opt: QuestionOption): string {
     .join('');
 
   return `
-<div class="dc-drawer" id="dc-drawer">
+<div class="dc-drawer" id="dc-drawer" aria-live="polite" aria-atomic="true">
   <p class="dc-monologue">${esc(opt.innerMonologue)}</p>
   ${deltas ? `<div class="dc-deltas">${deltas}</div>` : ''}
   ${opt.consequenceTags.length > 0 ? `

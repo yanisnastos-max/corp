@@ -64,10 +64,21 @@ export function mountAttributePanel(container: HTMLElement): void {
   }
 
   render(state);
+
+  // Keyboard: Escape closes panel
+  function onKeyDown(e: KeyboardEvent): void {
+    if (e.key === 'Escape') { router.push('decision'); }
+  }
+  document.addEventListener('keydown', onKeyDown);
+  // Store on element for cleanup
+  (_container as HTMLElement & { _apKeyDown?: typeof onKeyDown })._apKeyDown = onKeyDown;
 }
 
 export function unmountAttributePanel(): void {
   document.getElementById('ap-styles')?.remove();
+  // Remove Escape key handler
+  const stored = (_container as (HTMLElement & { _apKeyDown?: (e: KeyboardEvent) => void }) | null);
+  if (stored?._apKeyDown) document.removeEventListener('keydown', stored._apKeyDown);
   _container = null;
 }
 

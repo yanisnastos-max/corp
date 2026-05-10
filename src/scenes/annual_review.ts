@@ -194,10 +194,10 @@ function render(): void {
   </div>
 </div>
 
-<div class="ar-page">
+<div class="ar-page" role="main">
 
   <!-- LEFT: Assessment letter -->
-  <div class="ar-assessment">
+  <div class="ar-assessment" role="region" aria-label="Performance assessment from Dana Sutcliffe">
     <div class="ar-eyebrow">
       <span class="ar-eyebrow-label">Performance Assessment</span>
       <div class="ar-eyebrow-rule"></div>
@@ -227,7 +227,7 @@ function render(): void {
   <!-- RIGHT: Scorecard + Formula + Outcome -->
   <div class="ar-right-col">
 
-    <div class="ar-scorecard">
+    <div class="ar-scorecard" role="region" aria-label="Performance scorecard">
       <div class="ar-section-label">Performance Scorecard</div>
       ${scorecardGrid(c.scorecard)}
       <div class="ar-sc-footnote">
@@ -248,13 +248,13 @@ function render(): void {
       <div class="ar-formula-total">
         <span class="ar-formula-total-label">Composite Score</span>
         <div>
-          <span class="ar-total-score" id="ar-total-score">${c.compositeScore}</span>
+          <span class="ar-total-score" id="ar-total-score" aria-live="polite" aria-label="Composite score">${c.compositeScore}</span>
           <span class="ar-total-band">/100</span>
         </div>
       </div>
     </div>
 
-    <div class="ar-outcome">
+    <div class="ar-outcome" role="region" aria-label="Year determination and outcome">
       <div class="ar-section-label">Year ${year + 1} Determination</div>
       ${outcomeCard(c, year)}
     </div>
@@ -263,7 +263,7 @@ function render(): void {
 
   <!-- BOTTOM BAR -->
   <div class="ar-bottom-bar">
-    <button class="ar-btn-primary" id="ar-continue">Begin Year ${year + 1} →</button>
+    <button class="ar-btn-primary" id="ar-continue" aria-label="Begin Year ${year + 1} and advance to next year">Begin Year ${year + 1} →</button>
   </div>
 
 </div>`;
@@ -308,7 +308,7 @@ function scorecardGrid(sc: Scorecard): string {
      ${BANDS.map(col => `<div class="sc-cell"><div class="band-dot${bandClass(band, col)}"></div></div>`).join('')}`
   ).join('');
 
-  return `<div class="ar-scorecard-grid">${headerRow}${dimRows}</div>`;
+  return `<div class="ar-scorecard-grid" role="table" aria-label="Scorecard dimensions">${headerRow}${dimRows}</div>`;
 }
 
 function formulaRow(

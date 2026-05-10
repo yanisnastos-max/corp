@@ -1,5 +1,5 @@
 import { defineConfig, type Plugin } from 'vite';
-import { readdirSync, readFileSync } from 'fs';
+import { readdirSync, readFileSync, cpSync, existsSync } from 'fs';
 import { join, relative } from 'path';
 
 // ─────────────────────────────────────────────
@@ -191,6 +191,49 @@ function checkJsonFile(
   }
 }
 
+
+// ─────────────────────────────────────────────
+// DATA SERVE + COPY PLUGIN
+// Dev:   serves data/ directory at /data/ (relative to base)
+// Build: copies data/ into dist/data/ so GitHub Pages can serve it
+// ─────────────────────────────────────────────
+
+function serveDataPlugin(): Plugin {
+  const dataDir = join(process.cwd(), 'data');
+
+  return {
+    name: 'ascend-serve-data',
+
+    // Dev server: mount data/ as static files under /data/
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        // Strip base prefix: /corp/data/foo.json → /data/foo.json
+        const url   = req.url ?? '';
+        const match = url.match(/^\/corp(\/data\/.+)$/);
+        if (!match) return next();
+
+        const rel  = match[1]!;          // e.g. /data/backgrounds.json
+        const disk = join(process.cwd(), rel);
+        if (!existsSync(disk)) return next();
+
+        const raw = readFileSync(disk);
+        res.writeHead(200, {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache',
+        });
+        res.end(raw);
+      });
+    },
+
+    // Production build: copy entire data/ tree into dist/data/
+    closeBundle() {
+      const dest = join(process.cwd(), 'dist', 'data');
+      cpSync(dataDir, dest, { recursive: true });
+      console.log('[ASCEND] Copied data/ → dist/data/');
+    },
+  };
+}
+
 // ─────────────────────────────────────────────
 // VITE CONFIG
 // ─────────────────────────────────────────────
@@ -201,6 +244,7 @@ export default defineConfig({
 
   plugins: [
     validateDataPlugin(),
+    serveDataPlugin(),
   ],
 
   build: {
