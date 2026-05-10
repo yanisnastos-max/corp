@@ -119,4 +119,5 @@
       "innerMonologue": "You traded quality for position. You're not sure that was the same trade Dana was offering."
     }
   ],
-  "designNotes": "First direct competition with Zara. Option B is the counter-move — it rejects the framing rather than competing within it, which builds Zara relationship but costs strategic influence. Dana's read on option B varies by her relationship score at this point: high relationship (40+) means she finds it interesting; low relationship means she finds it presumptuous. Option D fires systemi
+  "designNotes": "First direct competition with Zara. Option B is the counter-move — it rejects the framing rather than competing within it, which builds Zara relationship but costs strategic influence. Dana's read on option B varies by her relationship score at this point: high relationship (40+) means she finds it interesting; low relationship means she finds it presumptuous. Option D fires systemic_read but the tag will surface as a consequence if the player repeats the pattern of prioritising speed over quality."
+}

@@ -152,7 +152,11 @@ function render(): void {
 
   ${phase === 'resolved' ? `
   <div class="dc-footer">
-    <button class="dc-continue-btn" id="dc-continue">Continue</button>
+    <nav class="dc-panel-nav">
+      <button class="dc-panel-link" id="dc-attr-link">Attributes</button>
+      <span class="dc-panel-link dc-panel-link--disabled">People</span>
+    </nav>
+    <button class="dc-continue-btn" id="dc-continue">Continue →</button>
   </div>` : ''}
 
 </div>`;
@@ -165,15 +169,29 @@ function render(): void {
 // ─────────────────────────────────────────────
 
 function header(q: Question, playerName: string): string {
+  const totalQ   = 10;
+  const pct      = Math.round(((q.questionNumber - 1) / totalQ) * 100);
+  const dots     = Array.from({ length: totalQ }, (_, i) => {
+    const cls = i + 1 < q.questionNumber ? 'dc-dot dc-dot--done'
+              : i + 1 === q.questionNumber ? 'dc-dot dc-dot--active'
+              : 'dc-dot';
+    return `<span class="${cls}"></span>`;
+  }).join('');
+
   return `
 <header class="dc-header">
-  <div class="dc-header-left">
-    <span class="dc-pill">Year ${q.year}</span>
-    <span class="dc-pill">Q${q.questionNumber}</span>
-    <span class="dc-pill dc-pill-cat">${q.category}</span>
+  <div class="dc-header-top">
+    <div class="dc-header-left">
+      <span class="dc-pill">Year ${q.year}</span>
+      <span class="dc-pill dc-pill-cat">${q.category}</span>
+    </div>
+    <div class="dc-header-right">
+      ${playerName ? `<span class="dc-player-tag">${esc(playerName)}</span>` : ''}
+    </div>
   </div>
-  <div class="dc-header-right">
-    ${playerName ? `<span class="dc-player-tag">${esc(playerName)}</span>` : ''}
+  <div class="dc-year-progress">
+    <div class="dc-progress-dots">${dots}</div>
+    <span class="dc-progress-label">Q${q.questionNumber} of ${totalQ}</span>
   </div>
 </header>`;
 }
@@ -262,6 +280,9 @@ function wire(): void {
 
   if (_scene.phase === 'resolved') {
     document.getElementById('dc-continue')?.addEventListener('click', advance);
+    document.getElementById('dc-attr-link')?.addEventListener('click', () => {
+      router.push('attribute_panel');
+    });
   }
 }
 
@@ -299,6 +320,9 @@ function choose(opt: QuestionOption): void {
     year:       q.year,
     week:       state.week,
   });
+
+  // Advance week: 10 questions × 5 weeks ≈ 50 weeks in year 1
+  state = { ...state, week: Math.min(52, state.week + 5) };
 
   saveState(state);
 
@@ -557,9 +581,32 @@ function injectStyles(): void {
 }
 .dc-footer {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
   padding: var(--space-6) 0;
   margin-top: var(--space-4);
+}
+.dc-panel-nav {
+  display: flex;
+  gap: var(--space-4);
+}
+.dc-panel-link {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 2px 0;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+  color: var(--color-text-accent);
+  border-color: var(--color-accent-default);
+  text-decoration: none;
+}
+.dc-panel-link--disabled {
+  color: var(--color-text-disabled);
+  border-color: transparent;
+  cursor: default;
+  pointer-events: none;
 }
 .dc-continue-btn {
   font-family: var(--font-ui);
@@ -622,6 +669,47 @@ function injectStyles(): void {
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-base);
   cursor: pointer;
+}
+/* ── Year progress strip ── */
+.dc-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+.dc-year-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.dc-progress-dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.dc-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-border-default);
+  transition: background var(--transition-fast);
+}
+.dc-dot--done {
+  background: var(--color-accent-default);
+  opacity: 0.45;
+}
+.dc-dot--active {
+  background: var(--color-accent-default);
+  width: 10px;
+  height: 10px;
+}
+.dc-progress-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  white-space: nowrap;
 }
 `;
   document.head.appendChild(style);

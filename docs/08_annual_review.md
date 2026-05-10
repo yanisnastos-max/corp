@@ -157,4 +157,4 @@ Dana stands. The meeting is complete. She does not say 'good luck.' She says: "S
 
 **Y2+ reviews:** Dana is the sponsor for Y1–Y5. From Y3, secondary sponsors (Tier 2 NPCs) can augment sponsor strength but cannot replace Dana. From Y6, Dana's successor (determined by Y5 VP committee arc beat dana.y6.vp_committee) may become the primary reviewer. The review scene structure remains identical; the NPC and voice changes.
 
-**No-promotion scene note:** The no-promotion scene must be written by a human. The spec above is guidance only. The scene shou
+**No-promotion scene note:** The no-promotion scene must be written by a human. The spec above is guidance only. The scene should take approximately 90 seconds of reading time. Dana does not apologise. She does not soften. She tells the truth in a way that is more useful than comfort.

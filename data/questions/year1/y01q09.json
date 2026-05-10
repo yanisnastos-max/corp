@@ -119,4 +119,5 @@
       "innerMonologue": "He told you what he'd actually do. That's different from advice. It was more useful."
     }
   ],
-  "designNotes": "Conrad's pre_review_intelligence arc beat fires here. Option D produces the highest Conrad relationship gain of any Y1 question — Conrad rewards being asked for his personal judgment, not just his information or advice. The gossip rule applies: Conrad discusses other people, not the player, with other people. He has not shared 'visible yet?' with Zara. The player cannot learn whet
+  "designNotes": "Conrad's pre_review_intelligence arc beat fires here. Option D produces the highest Conrad relationship gain of any Y1 question — Conrad rewards being asked for his personal judgment, not just his information or advice. The gossip rule applies: Conrad discusses other people, not the player, with other people. He has not shared 'visible yet?' with Zara. The player cannot learn whether he has. Option A fires systemic_read and queues a consequence tag that modifies how the annual review scene opens."
+}

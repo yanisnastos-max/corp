@@ -115,4 +115,4 @@ Option C (ask for the framework document first) is the rigour play. The integrit
 
 Option D (ask Dana's view first) produces the highest Dana gain in Year 1 (+5). This is the only option that treats the question as a conversation rather than a test. The player is not mirroring — the inner monologue is clear that they're trying to understand what Tuesday is actually about. The adaptiveNerve cost (-3) reflects the risk: asking a question back when someone asked you a question first is either smart or evasive. Dana decides which. The player doesn't know until the annual review scene.
 
-**Annual review feed:** Q10 directly seeds the Y1 annual review. Option A + seen_by_sponsor: review opens on visibility. Option B + reliability_concern: review opens on a different note. Option D: Dana has a line she delive
+**Annual review feed:** Q10 directly seeds the Y1 annual review. Option A + seen_by_sponsor: review opens on visibility. Option B + reliability_concern: review opens on a different note. Option D: Dana has a line she delivers only if Q10 option D was chosen and Dana Relationship >= 50. It is the most specific line in the Y1 review scene.

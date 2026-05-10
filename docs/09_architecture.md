@@ -344,4 +344,6 @@ JSON data files are the source of truth for all game content. They are validated
 | No router library | Single-scene app; Engine handles all transitions | Phase 3 if non-linear navigation needed |
 | No state management library | GameState is one flat-ish object; Zustand/Redux would add abstraction with no benefit | Phase 2 if state graph becomes complex |
 | JSON over SQLite (WASM) | 4–8KB JSON vs. 500KB SQLite WASM binary for MVP | Phase 3 if save size exceeds 50KB or cross-device sync required |
-| No servic
+| No service worker | GitHub Pages caching is sufficient for MVP; adds complexity | Phase 2 if offline play is a requirement |
+| No audio | Scope control; narrative weight is carried by writing + typography | Phase 2 |
+| Inline scene styles | Avoids coordination cost of a global stylesheet across 6+ scenes | Phase 3 if CSS bundle size becomes a concern |

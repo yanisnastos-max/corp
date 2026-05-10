@@ -856,4 +856,26 @@
 
     function togglePanel() {
       panelOpen = !panelOpen;
-      document.getElementById('attr-panel').classL
+      document.getElementById('attr-panel').classList.toggle('open', panelOpen);
+      document.getElementById('attr-btn').classList.toggle('active', panelOpen);
+    }
+
+    document.getElementById('attr-btn').addEventListener('click', togglePanel);
+
+    document.getElementById('theme-btn').addEventListener('click', () => {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+      document.getElementById('theme-btn').textContent = current === 'dark' ? '☀' : '☽';
+    });
+
+    // Keyboard: Escape closes drawer or panel
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        if (document.getElementById('drawer').classList.contains('open')) closeDrawer();
+        else if (panelOpen) togglePanel();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -241,4 +241,10 @@
     "2. Compute performanceScore from tag accumulation and deliverable state",
     "3. Compute sponsorStrength from primary sponsor relationship",
     "4. Compute politicalCapital from Conrad + Grace relationships",
-    
+    "5. Compute scorecard dimensions (all four)",
+    "6. Determine promotionOutcome from scorecard thresholds",
+    "7. Determine threeLane from trigger rules",
+    "8. Run scene branches in act order",
+    "9. Save state after scene close"
+  ]
+}

@@ -133,4 +133,4 @@ Option C (message Zara first) is morally ambiguous. The inner monologue makes th
 
 Option D (send first) is the speed play. The systemic_read tag fires and queues — if the player repeats this pattern (speed over quality) in future questions, the queued consequence surfaces in the annual review.
 
-**Zara trajectory note:** Option B in Q5 produces the conditions for the Y2 coalition arc. Options A and D comp
+**Zara trajectory note:** Option B in Q5 produces the conditions for the Y2 coalition arc. Options A and D compound toward rivalry. Option C remains genuinely ambiguous and branches depending on Zara's current relationship score with the player.

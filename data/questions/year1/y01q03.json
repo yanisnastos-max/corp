@@ -117,4 +117,5 @@
       "innerMonologue": "Grace gave you something she didn't give Zara. You gave it to Zara anyway. Grace noticed."
     }
   ],
-  "designNotes": "Grace's Y1 unprompted intelligence fires here. The key mechanical point: option C produces the highest Grace relationship gain because she offered information and the player wanted to understand it, not just use it. Option D fires burned_peer and will carry a consequence with Grace that is not announced — her subsequent arc beats at Y2 and Y4 wil
+  "designNotes": "Grace's Y1 unprompted intelligence fires here. The key mechanical point: option C produces the highest Grace relationship gain because she offered information and the player wanted to understand it, not just use it. Option D fires burned_peer and will carry a consequence with Grace that is not announced — her subsequent arc beats at Y2 and Y4 will be less forthcoming. Option A produces seen_by_sponsor but at an integrity cost the player cannot recover cheaply."
+}

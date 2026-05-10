@@ -798,4 +798,26 @@
           const max = parseInt(el.dataset.max);
           const circ = 2 * Math.PI * 30; // r=30
           const fill = (val / max) * circ;
-          el.style.transition = 'strok
+          el.style.transition = 'stroke-dasharray 0.8s cubic-bezier(0.0, 0, 0.2, 1)';
+          el.setAttribute('stroke-dasharray', `${fill} ${circ - fill}`);
+        });
+      }, 150);
+    });
+
+    let axesVisible = true;
+    function toggleAxes(btn) {
+      axesVisible = !axesVisible;
+      document.getElementById('axes-section').style.display = axesVisible ? 'block' : 'none';
+      btn.classList.toggle('active', axesVisible);
+      btn.textContent = axesVisible ? 'SHOW AXES' : 'HIDE AXES';
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      document.getElementById('theme-btn').textContent = isDark ? 'DARK MODE' : 'LIGHT MODE';
+    }
+  </script>
+</body>
+</html>
