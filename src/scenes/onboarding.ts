@@ -139,7 +139,7 @@ function nav(): string {
 
   return `
 <div class="ob-nav">
-  <button class="ob-btn ob-btn-ghost" id="ob-back" ${isFirst ? 'disabled' : ''}>← Back</button>
+  <button class="ob-btn ob-btn-ghost" id="ob-back">← Back</button>
   <button class="ob-btn ob-btn-primary" id="ob-next" ${canNext ? '' : 'disabled'}>${nextLabel}</button>
 </div>`;
 }
@@ -332,6 +332,8 @@ function wireNav(): void {
     if (_wizard.step > 1) {
       _wizard = { ..._wizard, step: (_wizard.step - 1) as WizardState['step'] };
       render();
+    } else {
+      router.push('landing');
     }
   });
 

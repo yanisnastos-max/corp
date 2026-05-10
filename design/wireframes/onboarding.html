@@ -831,28 +831,4 @@
       if (bg) {
         const p = document.createElement('span');
         p.className = 'preview-pill';
-        p.textContent = bg.querySelector('.bg-name').textContent;
-        pills.appendChild(p);
-      }
-      traits.forEach(t => {
-        const p = document.createElement('span');
-        p.className = 'preview-pill';
-        p.textContent = t;
-        pills.appendChild(p);
-      });
-    }
-
-    function updateLetter() {
-      const name = document.getElementById('name-input').value.trim();
-      document.getElementById('letter-salutation').textContent = name ? 'Dear ' + name + ',' : 'Dear —';
-    }
-
-    document.getElementById('theme-btn').addEventListener('click', () => {
-      const html = document.documentElement;
-      const current = html.getAttribute('data-theme');
-      html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
-      document.getElementById('theme-btn').textContent = current === 'dark' ? '☀' : '☽';
-    });
-  </script>
-</body>
-</html>
+        p.textContent = bg.querySelector('.bg-name').textC

@@ -884,24 +884,4 @@
 
     /* Total reveal */
     setTimeout(() => {
-      document.getElementById('total-score').classList.add('revealed');
-    }, 1200);
-  }
-
-  /* ─────────────────────────────────────────────────
-     THEME
-  ───────────────────────────────────────────────── */
-  function toggleTheme() {
-    const html = document.documentElement;
-    html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
-  }
-
-  /* ─────────────────────────────────────────────────
-     INIT
-  ───────────────────────────────────────────────── */
-  renderAssessment();
-  setTimeout(animateFormula, 400);
-
-</script>
-</body>
-</html>
+      document.getElementById('total-score').classList.add('revealed');

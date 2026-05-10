@@ -14,5 +14,3 @@ Thumbs.db
 .idea/
 
 # Env
-.env
-.env.local

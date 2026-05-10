@@ -1,9 +1,8 @@
 // ASCEND — Hash router
 // Maps window.location.hash → SceneKey.
-// The Engine (task 1.4) calls navigate(); scenes call Router.push().
-// #design-system is a dev-only route that bypasses the scene system.
 
 export type SceneKey =
+  | 'landing'
   | 'onboarding'
   | 'decision'
   | 'attribute_panel'
@@ -13,6 +12,8 @@ export type SceneKey =
   | 'design_system';   // dev only
 
 const HASH_TO_SCENE: Record<string, SceneKey> = {
+  '':                 'landing',
+  '#':                'landing',
   '#onboarding':      'onboarding',
   '#decision':        'decision',
   '#attribute-panel': 'attribute_panel',
@@ -23,6 +24,7 @@ const HASH_TO_SCENE: Record<string, SceneKey> = {
 };
 
 const SCENE_TO_HASH: Record<SceneKey, string> = {
+  landing:         '',
   onboarding:      '#onboarding',
   decision:        '#decision',
   attribute_panel: '#attribute-panel',
@@ -37,9 +39,9 @@ type RouteHandler = (scene: SceneKey) => void;
 class Router {
   private handlers: RouteHandler[] = [];
 
-  /** Current scene derived from window.location.hash. Falls back to 'onboarding'. */
+  /** Current scene derived from window.location.hash. Falls back to 'landing'. */
   current(): SceneKey {
-    return HASH_TO_SCENE[window.location.hash] ?? 'onboarding';
+    return HASH_TO_SCENE[window.location.hash] ?? 'landing';
   }
 
   /** Navigate to a scene — updates the URL and fires handlers. */
@@ -47,9 +49,7 @@ class Router {
     const hash = SCENE_TO_HASH[scene];
     if (window.location.hash !== hash) {
       window.location.hash = hash;
-      // hashchange event fires → _dispatch() called via listener below
     } else {
-      // Same route — fire handlers directly (e.g. force-refresh)
       this._dispatch(scene);
     }
   }

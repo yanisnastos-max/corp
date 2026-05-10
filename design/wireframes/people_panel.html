@@ -1089,34 +1089,4 @@
       nameTxt.setAttribute('fill', '#9CA3AF');
       nameTxt.textContent = npc.name.split(' ')[0]; /* first name only */
 
-      g.appendChild(circle);
-      g.appendChild(initials);
-      g.appendChild(nameTxt);
-
-      /* Hover tooltip */
-      g.addEventListener('mouseenter', (e) => {
-        ttName.textContent = npc.name;
-        ttScore.textContent = `${npc.bandLabel} · ${npc.score}`;
-        tooltip.classList.add('visible');
-      });
-      g.addEventListener('mousemove', (e) => {
-        const rect = svg.parentElement.getBoundingClientRect();
-        tooltip.style.left = (e.clientX - rect.left + 12) + 'px';
-        tooltip.style.top  = (e.clientY - rect.top  - 10) + 'px';
-      });
-      g.addEventListener('mouseleave', () => {
-        tooltip.classList.remove('visible');
-      });
-
-      nodesEl.appendChild(g);
-    });
-  }
-
-  /* ─────────────────────────────────────────────────────
-     INIT
-  ───────────────────────────────────────────────────── */
-  renderList();
-
-</script>
-</body>
-</html>
+      g.appen

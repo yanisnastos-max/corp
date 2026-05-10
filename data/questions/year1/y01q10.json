@@ -131,5 +131,4 @@
       "innerMonologue": "You answered a question with a question. She might find that smart. She might find that evasive. There's no way to know until Tuesday."
     }
   ],
-  "designNotes": "Y1 climax. Dana's direct message is the most significant relationship moment of Year 1 — it only arrives if Dana relationship >= 25 (which is achievable through any path). Option B fires reliability_concern — this tag queues and surfaces in the Y1 annual review if not countered. Option A fires seen_by_sponsor at the cost of collaborativePull, which will compound if the player has already taken option A in Q5. Option D produces the highest Dana delta of any Y1 question and is the only option that treats the question as a conversation rather than a test."
-}
+  "designNotes": "Y1 climax. Dana's direct message is the most significant relationship moment of Year 1 — it only arrives if Dana relationship >= 25 (which is achievable through any path). Option B fires reliability_concern — this tag queues and surfaces in the Y1 annual review if not countered. Option A fires seen_by_sponsor at the cost of collaborativePull, which will compound if the player has already taken option A in Q5. Option D produc

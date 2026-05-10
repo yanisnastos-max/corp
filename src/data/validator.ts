@@ -30,7 +30,7 @@ export function validateQuestion(data: unknown, src = 'unknown'): Question {
     validateOption(opt, q['id'] as string, src);
   }
 
-  return data as Question;
+  return data as unknown as Question;
 }
 
 export function validateNpc(data: unknown, src = 'unknown'): NpcDefinition {
@@ -44,7 +44,7 @@ export function validateNpc(data: unknown, src = 'unknown'): NpcDefinition {
   requireObject(n, 'voicePattern', src);
   requireArray(n, 'arcBeats', src);
 
-  return data as NpcDefinition;
+  return data as unknown as NpcDefinition;
 }
 
 export function validateBackgrounds(data: unknown, src = 'unknown'): BackgroundsFile {
@@ -63,7 +63,7 @@ export function validateBackgrounds(data: unknown, src = 'unknown'): Backgrounds
     requireArray(b, 'primaryBonuses', src);
   }
 
-  return data as BackgroundsFile;
+  return data as unknown as BackgroundsFile;
 }
 
 export function validateTraits(data: unknown, src = 'unknown'): TraitsFile {
@@ -81,7 +81,7 @@ export function validateTraits(data: unknown, src = 'unknown'): TraitsFile {
     requireString(tr, 'displayText', src);
   }
 
-  return data as TraitsFile;
+  return data as unknown as TraitsFile;
 }
 
 export function validateReviewRules(data: unknown, src = 'unknown'): ReviewRules {
@@ -93,7 +93,7 @@ export function validateReviewRules(data: unknown, src = 'unknown'): ReviewRules
   requireObject(formula, 'attributeAggregate', src);
   requireObject(formula, 'performanceScore', src);
 
-  return data as ReviewRules;
+  return data as unknown as ReviewRules;
 }
 
 // ─────────────────────────────────────────────

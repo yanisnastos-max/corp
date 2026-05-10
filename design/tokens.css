@@ -435,21 +435,4 @@ body {
   font-family: var(--font-ui);
   font-size: var(--text-base);
   line-height: var(--leading-normal);
-  color: var(--color-text-primary);
-  background-color: var(--color-surface-base);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Focus ring — visible, gold, not ugly */
-:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 3px;
-  border-radius: var(--radius-sm);
-}
-
-/* Selection */
-::selection {
-  background-color: var(--color-accent-subtle);
-  color: var(--color-text-primary);
-}
+  colo
