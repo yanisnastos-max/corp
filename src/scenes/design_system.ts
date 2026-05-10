@@ -178,12 +178,12 @@ function typeScale(): string {
 // ─────────────────────────────────────────────
 function semanticRoles(): string {
   const roles: Array<{ cls: string; label: string; text: string }> = [
-    { cls: 't-question-setup',   label: '.t-question-setup',   text: 'Dana drops the file on your desk at 6:52pm. "You've got until morning." The option she isn't naming is letting it fail.' },
-    { cls: 't-question-option',  label: '.t-question-option',  text: 'Ask for the original brief. If she's changed scope without documentation, that's her problem, not yours.' },
-    { cls: 't-inner-monologue',  label: '.t-inner-monologue',  text: 'She's testing whether you'll absorb chaos silently.' },
-    { cls: 't-npc-dialogue',     label: '.t-npc-dialogue',     text: '"I'm not asking for a favour," Dana says. "I'm asking for your job."' },
+    { cls: 't-question-setup',   label: '.t-question-setup',   text: 'Dana drops the file on your desk at 6:52pm. “You’ve got until morning.” The option she isn’t naming is letting it fail.' },
+    { cls: 't-question-option',  label: '.t-question-option',  text: 'Ask for the original brief. If she’s changed scope without documentation, that’s her problem, not yours.' },
+    { cls: 't-inner-monologue',  label: '.t-inner-monologue',  text: 'She’s testing whether you’ll absorb chaos silently.' },
+    { cls: 't-npc-dialogue',     label: '.t-npc-dialogue',     text: '“I’m not asking for a favour,” Dana says. “I’m asking for your job.”' },
     { cls: 't-ui-heading',       label: '.t-ui-heading',       text: 'Year 1 · Q3 of 10' },
-    { cls: 't-ui-body',          label: '.t-ui-body',          text: 'Your decisions are recorded. Some will surface years from now in rooms you haven't entered yet.' },
+    { cls: 't-ui-body',          label: '.t-ui-body',          text: 'Your decisions are recorded. Some will surface years from now in rooms you haven’t entered yet.' },
     { cls: 't-ui-label',         label: '.t-ui-label',         text: 'Execution Discipline' },
     { cls: 't-stat-value',       label: '.t-stat-value',       text: 'exec_discipline: 74 / 100' },
     { cls: 't-consequence-tag',  label: '.t-consequence-tag',  text: 'seen_by_sponsor · high_cost_high_fidelity' },

@@ -1,11 +1,10 @@
 // ASCEND — Engine (scene orchestration)
 // Full implementation: task 1.4
+// SceneKey is defined in router.ts; Engine imports from there.
 
-export type SceneKey =
-  | 'onboarding' | 'decision' | 'attribute_panel'
-  | 'people_panel' | 'annual_review' | 'career_timeline';
+import type { SceneKey } from './router';
 
-// Engine wires together: GameState + EventBus + SceneManager
+// Engine wires together: GameState + EventBus + Router + SceneManager
 // Stub — implemented in task 1.4
 export class Engine {
   async transition(_to: SceneKey, _payload?: unknown): Promise<void> {

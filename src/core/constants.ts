@@ -17,4 +17,4 @@ export const AXIS_KEYS = [
 export type StatKey   = typeof STAT_KEYS[number];
 export type PillarKey = typeof PILLAR_KEYS[number];
 export type AxisKey   = typeof AXIS_KEYS[number];
-export type NpcId     = string;
+// NpcId is defined in state.ts to keep it co-located with GameState
