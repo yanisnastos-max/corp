@@ -27,6 +27,9 @@ render(router.current());
 function render(scene: string): void {
   root.innerHTML = '';
   document.querySelectorAll('#ds-styles').forEach(el => el.remove());
+  // Announce scene to screen readers
+  const announcer = document.getElementById('sr-announcer');
+  if (announcer) announcer.textContent = document.title || scene;
 
   if (scene === 'design_system') {
     document.title = 'ASCEND — Design System';
@@ -101,6 +104,8 @@ function render(scene: string): void {
 // ─────────────────────────────────────────────
 
 function mountLanding(): void {
+  root.setAttribute('role', 'main');
+  root.setAttribute('aria-label', 'AUREL — Main menu');
   let state = loadState();
 
   const style = document.createElement('style');
@@ -229,11 +234,11 @@ function mountLanding(): void {
       <button class="hello-btn hello-btn-ghost" id="btn-import">Import Save</button>
     </div>
     <nav class="hello-links">
-      <button class="hello-link" id="btn-export" ${hasSave ? '' : 'disabled style="opacity:0.3;cursor:default"'}>Export Save</button>
-      <button class="hello-link" id="link-ds">Design System</button>
+      <button class="hello-link" id="btn-export" aria-label="Export save file" ${hasSave ? '' : 'disabled style="opacity:0.3;cursor:default"'}>Export Save</button>
+      <button class="hello-link" id="link-ds" aria-label="View design system">Design System</button>
     </nav>
-    <p class="hello-status">Build <span>v0.0.1</span> · 1.8 / 1.12</p>
-    <div class="hello-toast" id="toast"></div>
+    <p class="hello-status">Build <span>v0.1.0</span> · MVP</p>
+    <div class="hello-toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
   `;
 
   root.querySelector('#btn-new')?.addEventListener('click', () => {

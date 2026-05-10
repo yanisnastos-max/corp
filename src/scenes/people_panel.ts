@@ -84,6 +84,8 @@ export async function mountPeoplePanel(container: HTMLElement): Promise<void> {
 
 export function unmountPeoplePanel(): void {
   document.getElementById('pp-styles')?.remove();
+  const stored = (_container as (HTMLElement & { _ppKeyDown?: (e: KeyboardEvent) => void }) | null);
+  if (stored?._ppKeyDown) document.removeEventListener('keydown', stored._ppKeyDown);
   _container = null;
 }
 
@@ -124,8 +126,8 @@ function render(): void {
     <div class="pp-sort-bar">
       <span class="pp-sort-label">Sort</span>
       <div class="pp-sort-pills">
-        <button class="pp-sort-pill ${_panel.sort === 'score' ? 'active' : ''}" data-sort="score">Relationship</button>
-        <button class="pp-sort-pill ${_panel.sort === 'name'  ? 'active' : ''}" data-sort="name">Name</button>
+        <button class="pp-sort-pill ${_panel.sort === 'score' ? 'active' : ''}" data-sort="score" aria-pressed="${_panel.sort === 'score'}">Relationship</button>
+        <button class="pp-sort-pill ${_panel.sort === 'name'  ? 'active' : ''}" data-sort="name" aria-pressed="${_panel.sort === 'name'}">Name</button>
       </div>
     </div>
 
@@ -206,6 +208,13 @@ function wire(): void {
   document.getElementById('pp-close')?.addEventListener('click', () => {
     router.push('decision');
   });
+
+  // Keyboard: Escape closes panel
+  function onKeyDown(e: KeyboardEvent): void {
+    if (e.key === 'Escape') router.push('decision');
+  }
+  document.addEventListener('keydown', onKeyDown);
+  (_container as HTMLElement & { _ppKeyDown?: typeof onKeyDown })._ppKeyDown = onKeyDown;
 
   document.querySelectorAll<HTMLButtonElement>('.pp-sort-pill').forEach(btn => {
     btn.addEventListener('click', () => {
