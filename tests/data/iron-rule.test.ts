@@ -6,11 +6,13 @@ import { join } from 'path';
 
 describe('Iron rule — question options', () => {
   const questionsDir = join(process.cwd(), 'data/questions/year1');
-  const files = readdirSync(questionsDir).filter(f => f.endsWith('.json'));
+  const files = readdirSync(questionsDir).filter((f: string) => f.endsWith('.json'));
 
-  files.forEach(file => {
+  files.forEach((file: string) => {
     it(`${file}: every option has ≥1 gain and ≥1 cost`, () => {
-      const q = JSON.parse(readFileSync(join(questionsDir, file), 'utf8'));
+      const q = JSON.parse(readFileSync(join(questionsDir, file), 'utf8')) as {
+        options: Array<{ id: string; statDeltas: Array<{ delta: number }> }>;
+      };
       for (const option of q.options) {
         const gains  = option.statDeltas.filter((d: {delta: number}) => d.delta > 0);
         const costs  = option.statDeltas.filter((d: {delta: number}) => d.delta < 0);
