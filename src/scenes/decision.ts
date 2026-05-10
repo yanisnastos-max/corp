@@ -154,7 +154,7 @@ function render(): void {
   <div class="dc-footer">
     <nav class="dc-panel-nav">
       <button class="dc-panel-link" id="dc-attr-link">Attributes</button>
-      <span class="dc-panel-link dc-panel-link--disabled">People</span>
+      <button class="dc-panel-link" id="dc-people-link">People</button>
     </nav>
     <button class="dc-continue-btn" id="dc-continue">Continue →</button>
   </div>` : ''}
@@ -282,6 +282,9 @@ function wire(): void {
     document.getElementById('dc-continue')?.addEventListener('click', advance);
     document.getElementById('dc-attr-link')?.addEventListener('click', () => {
       router.push('attribute_panel');
+    });
+    document.getElementById('dc-people-link')?.addEventListener('click', () => {
+      router.push('people_panel');
     });
   }
 }

@@ -7,6 +7,8 @@ import { mountDesignSystem } from './scenes/design_system';
 import { mountOnboarding, unmountOnboarding } from './scenes/onboarding';
 import { mountDecision, unmountDecision } from './scenes/decision';
 import { mountAttributePanel, unmountAttributePanel } from './scenes/attribute_panel';
+import { mountPeoplePanel, unmountPeoplePanel } from './scenes/people_panel';
+import { mountAnnualReview, unmountAnnualReview } from './scenes/annual_review';
 
 const root = document.getElementById('scene-root')!;
 
@@ -59,8 +61,22 @@ function render(scene: string): void {
     return;
   }
 
-  // people_panel, annual_review, career_timeline: placeholder until 1.9–1.10
-  if (scene === 'people_panel' || scene === 'annual_review' || scene === 'career_timeline') {
+  if (scene === 'people_panel') {
+    document.title = 'ASCEND — People';
+    unmountPeoplePanel();
+    void mountPeoplePanel(root);
+    return;
+  }
+
+  if (scene === 'annual_review') {
+    document.title = 'ASCEND — Annual Review';
+    unmountAnnualReview();
+    mountAnnualReview(root);
+    return;
+  }
+
+  // career_timeline: placeholder until 1.11+
+  if (scene === 'career_timeline') {
     const state = loadState();
     document.title = 'ASCEND';
     root.innerHTML = `
