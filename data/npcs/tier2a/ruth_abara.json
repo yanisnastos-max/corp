@@ -1,0 +1,113 @@
+{
+  "id": "ruth_abara",
+  "name": "Dr. Ruth Abara",
+  "archetype": "advisor",
+  "ladderLevel": 8,
+  "ladderTitle": "Senior Director",
+  "yearsAtAurel": 11,
+  "mvpTier": 2,
+  "startingRelationshipBase": 15,
+  "publicRole": "Senior Director, Global Strategy. Runs a team of one (herself). Has been at AUREL since before the Halcyon acquisition. Elena Voss has met with her privately six times in the last two years; nobody knows why.",
+  "privateGoal": "Ruth has already achieved everything she wanted in this company. She stays because she finds the game genuinely interesting, and because she has not yet found anyone worth teaching it to. She is looking for that person. She has extremely high standards for what 'worth teaching' means. Most people she meets don't reach them.",
+  "contradiction": "Positions herself as politically neutral — 'I don't have a horse in any of these races.' She has a horse. She has always had a horse. The horse is never declared and has never lost. She would describe herself as principled, which is accurate and incomplete.",
+  "voicePattern": {
+    "description": "Unhurried. Occasionally academic in register — a real sentence with a subordinate clause when everyone else is speaking in fragments. Asks questions she already knows the answer to, but the asking is part of the lesson. Maintains eye contact longer than comfortable.",
+    "tell": "When she thinks you've said something interesting she says nothing for four to seven seconds. Political Awareness 65+ learns to wait for this. Strategic Influence 70+ can use it.",
+    "examplePhrases": [
+      "That's the question worth sitting with for a moment.",
+      "I'm not asking what you think the answer is. I'm asking what you think the question is.",
+      "This organization has a very specific pathology around that particular word. You'll want to learn it.",
+      "Tell me what you decided and we'll work backward from there."
+    ]
+  },
+  "mbtiNote": "INTP moving toward INTJ as she ages. The academic instinct is still present; the tolerance for pure theory has shortened considerably. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "ruth.y1.hallway",
+      "year": 1,
+      "questionAnchor": "y01q08",
+      "description": "Ruth passes the player in a corridor and asks a question with no context. The question is about something the player dealt with in Q6. She doesn't wait for a full answer. Player is left unsettled.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "ruth.y2.coffee",
+      "year": 2,
+      "questionAnchor": "y02q03",
+      "description": "Ruth invites the player for coffee. No agenda. She asks about the Meridian brief. The conversation is the most useful thirty minutes the player will have had all year, and also the most difficult to explain to anyone else.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "ruth.y3.test",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "Ruth puts the player in a situation that cannot be resolved cleanly. The situation involves two people the player cares about and one principle. She watches the outcome. Says nothing for two weeks afterward.",
+      "requiresRelationship": 40,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.ruth_abara.test_administered"
+      ]
+    },
+    {
+      "id": "ruth.y5.teaching",
+      "year": 5,
+      "questionAnchor": null,
+      "description": "If test_administered and Relationship >= 60: Ruth begins meeting with the player semi-regularly. These meetings are not on any calendar. They produce nothing except clarity.",
+      "requiresRelationship": 60,
+      "statefulTrigger": {
+        "flag": "npc.ruth_abara.test_administered"
+      },
+      "flagsSet": [
+        "npc.ruth_abara.teaching_active"
+      ]
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 40,
+      "effect": "Ruth begins acknowledging the player in meetings rather than looking past them",
+      "mechanical": "strategicInfluence +3 on next visibility event"
+    },
+    {
+      "score": 60,
+      "effect": "Ruth explains what she actually thinks about the organisation's current direction. It is not the official view. It is probably correct.",
+      "mechanical": "marketSense +5; politicalAwareness +4; flags ruth_abara.candid_read = true"
+    },
+    {
+      "score": 75,
+      "effect": "Ruth puts the player's name in front of Elena Voss — indirectly, in a memo. This is not announced. It surfaces in Year 7 if it was done.",
+      "mechanical": "Sponsor weight +20 for Y7 review; flags ruth_abara.voss_referral = true"
+    },
+    {
+      "score": 20,
+      "ceiling": true,
+      "effect": "Ruth tells someone, once, that she doesn't know what the player is for. This sentence travels.",
+      "mechanical": "reputation -8 in Y3 annual review"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 3,
+      "event": "Administers the test if relationship qualifies. Result shapes the teaching arc."
+    },
+    {
+      "year": 5,
+      "event": "Begins teaching arc if conditions met. Otherwise, remains an occasional corridor presence."
+    },
+    {
+      "year": 7,
+      "event": "Voss referral surfaces if triggered. Otherwise Ruth retires quietly from public visibility."
+    },
+    {
+      "year": 10,
+      "event": "Ruth leaves AUREL. Her departure email is three sentences. Her actual goodbye is one conversation with the player, if the relationship warrants it."
+    }
+  ],
+  "flags": {
+    "test_administered": false,
+    "teaching_active": false,
+    "candid_read": false,
+    "voss_referral": false
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "id": "priya_menon",
+  "name": "Priya Menon",
+  "archetype": "rival",
+  "ladderLevel": 1,
+  "ladderTitle": "Associate",
+  "yearsAtAurel": 1,
+  "mvpTier": 2,
+  "startingRelationshipBase": 30,
+  "publicRole": "Associate on the Risk & Governance team. Six months ahead of the player in tenure. Known for thorough documentation and for never missing a deadline.",
+  "privateGoal": "Priya is in the Year Three cohort shortlist already — informally, in the heads of two people above her. She does not know this yet. She is working as if she isn't, which is what got her on the list. What she actually wants is to become the first person in her family to reach senior leadership in a company this size. She thinks about this every day and has told no one.",
+  "contradiction": "Presents as collaborative and generous with her knowledge. She shares everything — notes, process docs, frameworks. What she does not share is that she is always three steps further than whatever she has just handed you. Her helpfulness is real. Her advantage is also real. She sees no contradiction. The player will eventually have to decide whether they do.",
+  "voicePattern": {
+    "description": "Precise and efficient. Writes in bullets. Speaks in complete sentences but rarely long ones. Does not fill silence. Gives compliments rarely and means them when she does.",
+    "tell": "When she disagrees she says 'I'd push back slightly on that' and then does not push back slightly. Political Awareness 55+ reveals the pattern.",
+    "examplePhrases": [
+      "I'd push back slightly on that framing.",
+      "I documented it — I can share the template if useful.",
+      "The gap in this analysis is the assumption about Q3 data.",
+      "That's a reasonable way to read it. There's another reading."
+    ]
+  },
+  "mbtiNote": "INTJ. Processes privately. Decides fast. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "priya.y1.first_contact",
+      "year": 1,
+      "questionAnchor": "y01q03",
+      "description": "First meeting in a cross-team working session. Priya asks one question the player probably hasn't considered. She doesn't appear to notice the effect.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "priya.y2.parallel_track",
+      "year": 2,
+      "questionAnchor": "y02q04",
+      "description": "Player learns Priya is also being tracked for Year 3 cohort. The nature of the relationship is forced into definition.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "priya.y2.offer_to_collaborate",
+      "year": 2,
+      "questionAnchor": "y02q06",
+      "description": "Priya approaches the player about co-authoring an internal brief. If Relationship >= 45, the collaboration is genuine. If < 45, the framing is collaborative; the output is 70% hers.",
+      "requiresRelationship": 45,
+      "statefulTrigger": null
+    },
+    {
+      "id": "priya.y3.cohort_result",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "One of them is in the Year 3 cohort and one is not. The scene plays differently depending on who it is and what the relationship score is.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.priya_menon.cohort_won"
+      ]
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 50,
+      "effect": "Priya begins sharing her actual analytical frameworks — not the documented versions, the working ones",
+      "mechanical": "technicalCredibility gains +3 on the next question that involves analysis"
+    },
+    {
+      "score": 65,
+      "effect": "Priya tells the player, once, that she considers them the most interesting person in the cohort. She does not expand on this.",
+      "mechanical": "Consequence tag coalition_builder gains weight +5 for rest of year"
+    },
+    {
+      "score": 25,
+      "ceiling": true,
+      "effect": "Priya stops including the player in cross-team communications. Not hostile — just efficient about where she invests attention.",
+      "mechanical": "collaborativePull -5 on next cross-functional question"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 3,
+      "event": "Promoted to Senior Associate (L2). Part of the Year 3 cohort or not, depending on game state."
+    },
+    {
+      "year": 5,
+      "event": "Moves to Chicago HQ for an eighteen-month rotation. Returns to London with a Senior Manager title."
+    },
+    {
+      "year": 8,
+      "event": "If Relationship >= 60: Priya nominates the player for an internal award that opens a specific door. If < 30: she is on the committee that doesn't."
+    },
+    {
+      "year": 11,
+      "event": "Director (L7). One of the youngest in AUREL London's history. The player's history with her by this point shapes an entire mid-game scene."
+    }
+  ],
+  "flags": {
+    "cohort_won": false,
+    "collaboration_active": false
+  }
+}

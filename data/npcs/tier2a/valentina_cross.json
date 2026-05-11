@@ -1,0 +1,88 @@
+{
+  "id": "valentina_cross",
+  "name": "Valentina Cross",
+  "archetype": "client",
+  "ladderLevel": 5,
+  "ladderTitle": "Manager",
+  "yearsAtAurel": 0,
+  "mvpTier": 2,
+  "startingRelationshipBase": 20,
+  "publicRole": "External stakeholder on the Meridian brief — a Manager at the client organisation. Three years into her role, sharp on delivery, has worked with AUREL on two previous engagements. Knows the firm better than most internal staff realise.",
+  "privateGoal": "Valentina is deciding whether to leave her organisation for an internal role at a company like AUREL. She uses every engagement as a calibration exercise. She is watching how the people across the table operate under pressure. She is writing mental references she will never share.",
+  "contradiction": "Highly relational presentation — remembers names, references previous conversations, invests in the social layer of every meeting. Ends relationships cleanly and completely when they stop serving a purpose. The warmth is not performed; the ending is not cruel. She simply does not confuse investment with permanence.",
+  "voicePattern": {
+    "description": "Warm, specific, unhurried. Uses your name at least once per conversation. Asks follow-up questions that demonstrate she retained what you said last time. When she's unhappy with something she says it flatly without emotional texture — a single sentence, then continues.",
+    "tell": "When she says 'I want to make sure I understand this correctly' she has understood it correctly and is giving you the chance to fix it before she has to say what she actually thinks.",
+    "examplePhrases": [
+      "I want to make sure I understand this correctly — you're saying that the timeline assumption holds even if the Q2 data shifts?",
+      "That's useful context. I didn't have that piece.",
+      "This is the cleanest version of this brief I've seen from your side in two years.",
+      "I'll be direct: that section doesn't hold."
+    ]
+  },
+  "mbtiNote": "ESTJ. Relational but execution-anchored. Doesn't separate the two. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "valentina.y2.first_meeting",
+      "year": 2,
+      "questionAnchor": "y02q03",
+      "description": "First formal meeting as part of the Meridian brief. Valentina is prepared, asks one question the previous owner of the brief couldn't answer. The player either can or can't.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "valentina.y2.briefing_room",
+      "year": 2,
+      "questionAnchor": "y02q06",
+      "description": "Present in the briefing room. Observes the Harlow challenge. Sends a follow-up email after the meeting that is technically about the brief and is actually an assessment.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "valentina.y3.extension",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "The Meridian engagement ends. If Relationship >= 50 and the brief delivered: Valentina requests the player by name for the follow-on engagement. This is unusual and noticed internally.",
+      "requiresRelationship": 50,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.valentina_cross.extension_requested"
+      ]
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 45,
+      "effect": "Valentina shares what her organisation actually needs from the engagement vs. what the brief says. The gap is significant.",
+      "mechanical": "strategicInfluence +4; next Meridian-related question has an additional option"
+    },
+    {
+      "score": 60,
+      "effect": "Extension request triggers if brief delivered. External visibility note added to player's Y3 review.",
+      "mechanical": "reputation +5 in Y3 annual review; flags extension_requested"
+    },
+    {
+      "score": 20,
+      "ceiling": true,
+      "effect": "Valentina gives feedback to AUREL's engagement lead. It is accurate and does not mention the player by name. The omission is its own signal.",
+      "mechanical": "reputation -4 in Y2 review"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 2,
+      "event": "Active on Meridian engagement."
+    },
+    {
+      "year": 3,
+      "event": "Extension or end of engagement depending on relationship and brief outcome."
+    },
+    {
+      "year": 5,
+      "event": "If Relationship >= 55: Valentina joins AUREL in an internal role. The player now has an unexpected internal ally with external credibility."
+    }
+  ],
+  "flags": {
+    "extension_requested": false
+  }
+}

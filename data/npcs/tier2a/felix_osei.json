@@ -1,0 +1,100 @@
+{
+  "id": "felix_osei",
+  "name": "Felix Osei",
+  "archetype": "direct_report",
+  "ladderLevel": 0,
+  "ladderTitle": "Junior Associate",
+  "yearsAtAurel": 0,
+  "mvpTier": 2,
+  "startingRelationshipBase": 50,
+  "publicRole": "Junior Associate, joins in Year 3. The player's first direct report. Graduated eighteen months ago, has one short stint at a smaller firm. Eager, organised, slightly overwhelming in the first thirty days.",
+  "privateGoal": "Felix is trying to figure out what good management looks like — he hasn't had it yet. He has decided, consciously, to watch the player's every move for the first year and build a mental model of what kind of leader they are. He is not doing this cynically. He genuinely wants to learn from someone. He is also building precise information about the player's blind spots.",
+  "contradiction": "Appears entirely deferential. He is not. He has strong views about most things and suppresses them completely in front of the player until he has enough information to know whether expressing them is safe. If the relationship reaches 65, he will say something that surprises the player with its precision. He has been thinking it for months.",
+  "voicePattern": {
+    "description": "Formal in early stages — slightly stiff, over-prepares for every interaction. Loosens over time if the relationship warrants it. Asks very specific clarifying questions. Takes notes in every meeting, always on paper.",
+    "tell": "Pauses before answering anything important, even something simple. The pause is him checking what he's about to say against what he actually thinks. Collaborative Pull 55+ from the player makes the gap between the two shorter.",
+    "examplePhrases": [
+      "I just want to make sure I've understood the priority correctly.",
+      "Can I ask — what would you have done differently at that stage?",
+      "I had a thought on this. I don't know if it's useful.",
+      "I finished the draft. I flagged three things I wasn't sure about."
+    ]
+  },
+  "mbtiNote": "ISFJ transitioning to ISTJ as he gains confidence. The observer instinct runs deep and doesn't change. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "felix.y3.arrival",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "Felix joins. The player manages his onboarding. How they do it shapes the relationship for the next three years.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "felix.y3.first_mistake",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "Felix makes a material error on a deliverable. The player decides how to respond. Felix watches the response more carefully than the correction.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.felix_osei.mistake_resolved"
+      ]
+    },
+    {
+      "id": "felix.y4.candid_view",
+      "year": 4,
+      "questionAnchor": null,
+      "description": "If Relationship >= 65: Felix tells the player something honest about how they come across in cross-team settings. It is the most accurate unsolicited feedback the player has received.",
+      "requiresRelationship": 65,
+      "statefulTrigger": null
+    },
+    {
+      "id": "felix.y5.his_own_path",
+      "year": 5,
+      "questionAnchor": null,
+      "description": "Felix is promoted to Associate (L1). He has a decision about which track to pursue. If Relationship >= 60, the player's input is sought. Their answer changes the arc.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 55,
+      "effect": "Felix begins flagging things the player has missed — small, accurate, never in public. This becomes quietly invaluable.",
+      "mechanical": "risk_catch consequence tag triggers once more per year; executionDiscipline +2"
+    },
+    {
+      "score": 70,
+      "effect": "Felix tells the player what people say about them when they're not in the room. The player can choose to act on this or not.",
+      "mechanical": "politicalAwareness +5; reputation modifier +3"
+    },
+    {
+      "score": 30,
+      "ceiling": true,
+      "effect": "Felix does his work correctly and says almost nothing. He leaves at the end of Year 4 for a role at a smaller firm. His exit interview is polite.",
+      "mechanical": "Manage-upward effectiveness -10 for Y4-Y5 reviews"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 3,
+      "event": "Joins as player's first direct report."
+    },
+    {
+      "year": 4,
+      "event": "Full Associate capability. Relationship determines how much of it is directed toward the player's work."
+    },
+    {
+      "year": 5,
+      "event": "Own track decision. Stays or moves based on relationship and player guidance."
+    },
+    {
+      "year": 8,
+      "event": "If stayed: Felix is now a Manager. In a nice circularity, he has a direct report asking him the same questions he used to ask the player."
+    }
+  ],
+  "flags": {
+    "mistake_resolved": false
+  }
+}

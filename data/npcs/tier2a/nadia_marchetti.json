@@ -1,0 +1,91 @@
+{
+  "id": "nadia_marchetti",
+  "name": "Nadia Marchetti",
+  "archetype": "support",
+  "ladderLevel": 0,
+  "ladderTitle": "HR Business Partner",
+  "yearsAtAurel": 6,
+  "mvpTier": 2,
+  "startingRelationshipBase": 25,
+  "publicRole": "HR Business Partner for the London commercial division. Six years at AUREL. Manages all people-related process for approximately 120 employees, including the player.",
+  "privateGoal": "Nadia has an unusually precise map of who matters, who is rising, and who is managed out before they know it's happening. She does not use this map to advance herself — she uses it to be useful to the right people at the right time. Her private goal is stability: she wants to still be here in ten years, doing the same job for a higher calibre of problem.",
+  "contradiction": "Describes her role as employee advocacy. Her actual function, at the operational level, is early-warning system for management. Both things are true. She does not experience the tension because she has decided that what is good for the organisation is, in the long run, good for the people in it. This is sometimes correct.",
+  "voicePattern": {
+    "description": "Warm, bureaucratically precise. Knows everyone's name and uses it. Keeps things procedurally correct in a way that is either reassuring or unnerving depending on the context. Very good at sentences that seem to offer comfort while containing very specific conditions.",
+    "tell": "When she says 'I just want to make sure you're set up for success' something has already been decided. Political Awareness 55+ recognises this. Political Awareness 70+ can ask what it is.",
+    "examplePhrases": [
+      "I just want to make sure you're set up for success going into this cycle.",
+      "This is completely normal — these conversations happen more often than people realise.",
+      "The process is designed to be fair, and I'm here to help you navigate it.",
+      "Is there anything you'd want me to know before the review cycle opens?"
+    ]
+  },
+  "mbtiNote": "ISFJ. Institutional loyalty, personal warmth, sharp procedural intelligence. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "nadia.y1.check_in",
+      "year": 1,
+      "questionAnchor": "y01q09",
+      "description": "Nadia schedules a standard 90-day check-in. It is standard. The questions are the same as everyone else's. The notes she takes are not.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "nadia.y2.pre_review",
+      "year": 2,
+      "questionAnchor": "y02q09",
+      "description": "Before the Y2 annual review, Nadia asks the player one non-standard question. If Political Awareness >= 55, the player can identify what the question is actually about. The answer they give shapes Nadia's pre-review note to the committee.",
+      "requiresRelationship": null,
+      "statefulTrigger": {
+        "stat": "politicalAwareness",
+        "operator": "gte",
+        "value": 55
+      }
+    },
+    {
+      "id": "nadia.y3.early_warning",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "If Relationship >= 50: Nadia tells the player, obliquely but unmistakably, that a specific senior figure has made a comment about them. She cannot say more. She has already said too much.",
+      "requiresRelationship": 50,
+      "statefulTrigger": null
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 45,
+      "effect": "Nadia tells the player when the review cycle is actually running vs. when it's officially running. These are different dates.",
+      "mechanical": "politicalAwareness +3; player can time a visibility action to land inside the actual window"
+    },
+    {
+      "score": 60,
+      "effect": "Nadia's early warning arc activates — she lets one piece of committee-level information reach the player per review cycle.",
+      "mechanical": "strategicInfluence +3; one annual review outcome shifted by one level in the player's favour"
+    },
+    {
+      "score": 15,
+      "ceiling": true,
+      "effect": "Nadia's pre-review note is accurate and does not advocate for the player. The committee has what it has.",
+      "mechanical": "performanceScore -5 in next annual review"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 1,
+      "event": "Standard HR presence throughout."
+    },
+    {
+      "year": 3,
+      "event": "Early warning arc activates if relationship qualifies."
+    },
+    {
+      "year": 7,
+      "event": "Nadia is promoted to HR Director. Her map of the organisation is now four years more complete. Her usefulness to the player roughly doubles."
+    },
+    {
+      "year": 10,
+      "event": "If Relationship >= 60: Nadia flags something about the player's VP track file that nobody else would have caught. What the player does with it determines a specific late-game outcome."
+    }
+  ],
+  "flags": {}
+}

@@ -1,0 +1,104 @@
+{
+  "id": "tomas_reyes",
+  "name": "Tomás Reyes",
+  "archetype": "rival",
+  "ladderLevel": 1,
+  "ladderTitle": "Associate",
+  "yearsAtAurel": 0,
+  "mvpTier": 2,
+  "startingRelationshipBase": 30,
+  "publicRole": "Associate, joined in Q4 of the player's first year from a direct competitor. Analytically sharp. Assigned to two projects that were expected to go to the player. Everyone is watching the dynamic without saying so.",
+  "privateGoal": "Tomás is exhausted. He left his previous company after a near-burnout that he described to exactly one person as 'three years of being the most competent person in every room and it nearly killed me.' He came to AUREL to find peers. He has found them. He is now trying to figure out whether he actually wants the promotion track or whether the promotion track is just what he knows how to run.",
+  "contradiction": "Reads as highly ambitious. Is genuinely tired of ambition. Does everything required of the ambitious track with flawless execution because he has no other mode — competence is his default state, not his goal. If someone gave him permission to slow down he would not know what to do with it. He has no idea this is true.",
+  "voicePattern": {
+    "description": "Direct and slightly wry. Undercuts his own insights with a dry qualifier — 'for whatever that's worth' — as if protecting himself from being taken too seriously. In writing, he's clean and exact. In person, he's more interesting than his writing suggests.",
+    "tell": "Asks 'how are you finding it?' when he's actually asking 'are you struggling like I am?' Resilience 55+ or Collaborative Pull 60+ lets the player sense this.",
+    "examplePhrases": [
+      "That's a good problem to have — for whatever that's worth.",
+      "I'll be honest: I don't love the framing, but it'll probably land.",
+      "How are you finding it here? The London office specifically.",
+      "I've run this analysis three ways. Two of them agree. The third one I can't rule out."
+    ]
+  },
+  "mbtiNote": "ISTJ under pressure, INTP when relaxed. The gap between the two modes is where the interesting version of him lives. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "tomas.y1.arrival",
+      "year": 1,
+      "questionAnchor": "y01q10",
+      "description": "Tomás joins in Q4. Player meets him briefly. He's already been briefed on two projects. The introduction is professionally warm and observationally loaded.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "tomas.y2.rivalry_clarified",
+      "year": 2,
+      "questionAnchor": "y02q04",
+      "description": "The rivalry is out in the open — or at least, no longer ignorable. The player's choice of how to handle it defines the relationship for Years 2 and 3.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "tomas.y2.private_admission",
+      "year": 2,
+      "questionAnchor": "y02q08",
+      "description": "If Relationship >= 55: Tomás tells the player, in a rare moment of candour, that he's not sure he wants what he's working toward. He regrets saying it almost immediately. The conversation creates a debt.",
+      "requiresRelationship": 55,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.tomas_reyes.candid_admission"
+      ]
+    },
+    {
+      "id": "tomas.y3.departure_risk",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "Tomás is recruited externally. If Relationship >= 50 he tells the player before accepting. If < 50 the player hears via Conrad. How the player responds determines whether he stays.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.tomas_reyes.departure_resolved"
+      ]
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 45,
+      "effect": "Tomás begins routing his spare analytical capacity to the player's projects — informally, without being asked",
+      "mechanical": "technicalCredibility +3 on next analysis-heavy question"
+    },
+    {
+      "score": 60,
+      "effect": "The private admission arc unlocks. Tomás becomes a genuine confidant rather than a managed rival.",
+      "mechanical": "resilience +3; coalition_builder consequence tag gains +5 weight"
+    },
+    {
+      "score": 20,
+      "ceiling": true,
+      "effect": "Tomás becomes a quiet counter-narrative to the player in rooms the player isn't in. He doesn't lie. He just tells a slightly different story.",
+      "mechanical": "reputation -5 on next cross-functional visibility event"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 2,
+      "event": "Fully integrated. Project assignments clarify the rival dynamic."
+    },
+    {
+      "year": 3,
+      "event": "External offer. Stays or leaves based on relationship score and player action."
+    },
+    {
+      "year": 5,
+      "event": "If stayed: promoted to Senior Associate (L2). Becomes a quiet long-term ally or an increasingly accomplished parallel track."
+    },
+    {
+      "year": 8,
+      "event": "If stayed: Manager (L5). The early rivalry is now institutional history. What it means is up to the relationship score."
+    }
+  ],
+  "flags": {
+    "candid_admission": false,
+    "departure_resolved": false
+  }
+}

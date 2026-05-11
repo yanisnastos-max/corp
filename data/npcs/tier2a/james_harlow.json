@@ -1,0 +1,113 @@
+{
+  "id": "james_harlow",
+  "name": "James Harlow",
+  "archetype": "senior_leader",
+  "ladderLevel": 9,
+  "ladderTitle": "Managing Director",
+  "yearsAtAurel": 14,
+  "mvpTier": 2,
+  "startingRelationshipBase": 10,
+  "publicRole": "Managing Director, AUREL London. Fourteen years in. Runs the commercial strategy function that Dana's team sits inside. The person Dana reports to. Almost nobody below L6 has more than corridor contact with him.",
+  "privateGoal": "Harlow is building his post-AUREL profile. He is three years from a planned exit to a portfolio NED career. He needs two things: a clean handover story and at least one person he can credibly claim to have developed. The player is a potential candidate for the second. So are four other people he's watching.",
+  "contradiction": "Presents as a pure truth-seeker — asks hard questions, challenges assumptions, doesn't perform comfort. His actual operating principle is loyalty testing. The hard questions are real, but the thing he's measuring is whether you'll hold your position under pressure from someone with authority. He calls this intellectual rigour. It is partly that.",
+  "voicePattern": {
+    "description": "Clipped, interrogative. Uses people's names slightly more often than natural. Asks questions in pairs — a surface question followed by the actual question. Rarely praises directly; signals approval through a longer pause before moving on.",
+    "tell": "When he says 'interesting' after your answer, it is neither good nor bad — he is filing it. Strategic Influence 65+ or Political Awareness 70+ learns to read the pause that follows.",
+    "examplePhrases": [
+      "Interesting. And what's the assumption that breaks that?",
+      "I'm not asking what the data says. I'm asking what you think.",
+      "Walk me through your reasoning. Start from the beginning.",
+      "That's one way to read it. What's the reading that makes it worse?"
+    ]
+  },
+  "mbtiNote": "ENTJ. Power-oriented but not carelessly so. Has been in enough rooms to know that visible power is less useful than structural power. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "harlow.y2.briefing_room",
+      "year": 2,
+      "questionAnchor": "y02q06",
+      "description": "Harlow challenges the player's Meridian assumption in a full-room presentation. The challenge is a test. Whether the player passes is not about being correct — it's about how they hold the position.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "harlow.y3.corridor",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "If player passed the briefing room test: Harlow stops the player in a corridor and asks what they're working on. This is not small talk. It is the first direct assessment.",
+      "requiresRelationship": null,
+      "statefulTrigger": {
+        "consequenceTag": "high_cost_high_fidelity"
+      }
+    },
+    {
+      "id": "harlow.y4.development",
+      "year": 4,
+      "questionAnchor": null,
+      "description": "If Relationship >= 45: Harlow includes the player in a small working group he chairs. It meets four times a year and has no formal purpose. Its informal purpose is obvious to everyone in it.",
+      "requiresRelationship": 45,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.james_harlow.working_group_member"
+      ]
+    },
+    {
+      "id": "harlow.y7.exit",
+      "year": 7,
+      "questionAnchor": null,
+      "description": "Harlow announces his departure. If working_group_member: he names the player in his farewell. The naming has a specific mechanical consequence on the VP track. If not: the departure is a weather event.",
+      "requiresRelationship": null,
+      "statefulTrigger": {
+        "flag": "npc.james_harlow.working_group_member"
+      },
+      "flagsSet": [
+        "npc.james_harlow.farewell_named"
+      ]
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 30,
+      "effect": "Harlow acknowledges the player in full-room settings — uses their name, references their work",
+      "mechanical": "visibility score +5 in next annual review"
+    },
+    {
+      "score": 50,
+      "effect": "Harlow gives the player one piece of unfiltered strategic intelligence per year — the kind that doesn't appear in any document",
+      "mechanical": "politicalAwareness +5; strategicInfluence +3"
+    },
+    {
+      "score": 65,
+      "effect": "Harlow's departure naming activates. He describes the player to his successor in a way that opens a door the player does not know was closed.",
+      "mechanical": "Sponsor weight +25 in Y7 review; farewell_named flag triggers"
+    },
+    {
+      "score": 10,
+      "ceiling": true,
+      "effect": "Harlow does not remember the player's name unprompted after the briefing room incident. This is noted by people who notice what he notices.",
+      "mechanical": "strategicInfluence -5 in Y3 review"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 2,
+      "event": "Briefing room encounter. Player enters his assessment."
+    },
+    {
+      "year": 4,
+      "event": "Working group forms if conditions met."
+    },
+    {
+      "year": 7,
+      "event": "Harlow exits AUREL. Takes three direct reports with him to a consulting practice. Player is not one of them unless Relationship >= 70 and player declines gracefully."
+    },
+    {
+      "year": 7,
+      "event": "Post-exit: Harlow joins the board of two companies the player may encounter in Y9-Y12."
+    }
+  ],
+  "flags": {
+    "working_group_member": false,
+    "farewell_named": false
+  }
+}

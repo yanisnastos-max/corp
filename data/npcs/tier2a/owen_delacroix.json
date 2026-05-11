@@ -1,0 +1,110 @@
+{
+  "id": "owen_delacroix",
+  "name": "Owen Delacroix",
+  "archetype": "senior_leader",
+  "ladderLevel": 7,
+  "ladderTitle": "Director",
+  "yearsAtAurel": 8,
+  "mvpTier": 2,
+  "startingRelationshipBase": 15,
+  "publicRole": "Director, Commercial Strategy. Dana's peer and, after Dana's promotion to Director, her structural equivalent. Runs a larger team on a parallel track. Has sponsored two associates to Senior Manager in the last three years.",
+  "privateGoal": "Owen is building his case for Senior Director. He needs his team to look like the most productive unit in the commercial division. He is also managing his relationship with Dana, who is now his peer after being his junior, which has introduced a tension he manages with deliberate cordiality.",
+  "contradiction": "Promotes collaboration as the primary organisational value — genuinely believes it, has built a strong team culture on it. His collaboration structures are designed such that credit aggregates upward efficiently. He doesn't hide this; he just describes it as how organisations work. He's right, and it's convenient.",
+  "voicePattern": {
+    "description": "Expansive, collegial, good at making structural decisions sound like team decisions. Uses 'we' almost exclusively. When he means 'I', the 'we' is slightly more deliberate. Strategic Influence 60+ can hear the difference.",
+    "tell": "Says 'I want to make sure we're all aligned on this' before announcing something that's already decided. Political Awareness 60+ recognises this pattern.",
+    "examplePhrases": [
+      "I want to make sure we're all aligned on this before we move.",
+      "This is exactly the kind of work we should be doing more of.",
+      "Let's make sure the credit is distributed properly — the whole team made this happen.",
+      "My door is always open. I mean that literally."
+    ]
+  },
+  "mbtiNote": "ESTJ with a cultivated ENFJ performance. The cultivation is deliberate and not dishonest — he simply decided which version of himself is most useful to be in this building. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "owen.y2.introduction",
+      "year": 2,
+      "questionAnchor": "y02q01",
+      "description": "Owen is at the meeting where Dana announces her promotion. He congratulates Dana in a way that is warm, generous, and lands slightly wrong. Political Awareness 45+ notices.",
+      "requiresRelationship": null,
+      "statefulTrigger": {
+        "stat": "politicalAwareness",
+        "operator": "gte",
+        "value": 45
+      }
+    },
+    {
+      "id": "owen.y2.recruitment",
+      "year": 2,
+      "questionAnchor": "y02q07",
+      "description": "Owen approaches the player about joining a cross-team working group he leads. The offer is genuine. It is also a talent acquisition.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.owen_delacroix.working_group_offered"
+      ]
+    },
+    {
+      "id": "owen.y3.credit_structure",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "If working_group_offered and player joined: A piece of work the player contributed to is summarised upward with Owen's name on the summary. The player's name is in the appendix. This is accurate and complete.",
+      "requiresRelationship": null,
+      "statefulTrigger": {
+        "flag": "npc.owen_delacroix.working_group_offered"
+      }
+    },
+    {
+      "id": "owen.y5.sponsorship",
+      "year": 5,
+      "questionAnchor": null,
+      "description": "If Relationship >= 55: Owen offers formal sponsorship to the player for a senior track. The sponsorship is real and comes with the credit structures described above. The player must decide whether to accept it on those terms.",
+      "requiresRelationship": 55,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.owen_delacroix.sponsor_offered"
+      ]
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 40,
+      "effect": "Owen begins including the player's name in cross-divisional communications — small mentions that add up.",
+      "mechanical": "visibility score +4 in next annual review"
+    },
+    {
+      "score": 55,
+      "effect": "Formal sponsorship offer. Comes with a specific credit-attribution model the player can accept or renegotiate.",
+      "mechanical": "sponsor_strength +15; credit aggregation upward by default unless player negotiates otherwise"
+    },
+    {
+      "score": 20,
+      "ceiling": true,
+      "effect": "Owen develops a mild but persistent read of the player as 'not a team player.' He says this with precision to exactly two people when asked.",
+      "mechanical": "reputation -5 in Y3 review; collaborativePull -3"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 2,
+      "event": "Peer to Dana post her promotion. Relationship with player begins."
+    },
+    {
+      "year": 4,
+      "event": "Promoted to Senior Director if his team metrics hold. Player's contributions are in those metrics if they joined the working group."
+    },
+    {
+      "year": 6,
+      "event": "Senior Director. Sits on the Y6 VP committee alongside Harlow. Two votes, two different reads on the player."
+    },
+    {
+      "year": 9,
+      "event": "If Relationship >= 60: Owen becomes a named reference for a specific board-adjacent role that opens in Y9. He gives the reference without telling the player he's doing it."
+    }
+  ],
+  "flags": {
+    "working_group_offered": false,
+    "sponsor_offered": false
+  }
+}

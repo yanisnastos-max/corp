@@ -1,0 +1,107 @@
+{
+  "id": "mara_velez",
+  "name": "Mara Velez",
+  "archetype": "manager",
+  "ladderLevel": 6,
+  "ladderTitle": "Senior Manager",
+  "yearsAtAurel": 4,
+  "mvpTier": 2,
+  "startingRelationshipBase": 20,
+  "publicRole": "Senior Manager running AUREL London's Innovation Lab — a team of five that sits between Product and Strategy and is generally understood to have more prestige than budget. Dana's peer on the floor.",
+  "privateGoal": "Mara is trying to make the Innovation Lab into something that can justify a Director-level head. She is that Director-level head, if it works. The Lab is currently seen as decorative by the two MDs whose budgets would need to shift for it to matter. She needs a project that lands with one of them. She has been working on this quietly for a year.",
+  "contradiction": "Champions unconventional thinking loudly and consistently. Has quietly ended the careers of three associates who produced work that made her look derivative. She is not aware of this pattern. She would be genuinely distressed if told. The distress would last approximately four days.",
+  "voicePattern": {
+    "description": "Energetic, idea-forward, uses 'what if we—' a lot. Interrupts herself to follow a thought. Writes long emails with three key points that she buries. Gives feedback by restating what she thought you were trying to do and then describing what you actually did, without editorialising.",
+    "tell": "Uses 'I love this' before the note that negates it. Strategic Influence 55+ reveals that 'I love this' almost always precedes a structural critique.",
+    "examplePhrases": [
+      "I love this — and I want to push on the underlying assumption.",
+      "What if we reframe the entire premise?",
+      "The idea is right. The execution is one draft away from being right.",
+      "Tell me what you were trying to solve. Start from there."
+    ]
+  },
+  "mbtiNote": "ENFP. High energy, low follow-through on admin. Delegates to avoid it. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "mara.y1.lab_pitch",
+      "year": 1,
+      "questionAnchor": "y01q05",
+      "description": "Mara gives an informal pitch about the Innovation Lab at an internal event. Player observes. If Political Awareness >= 40, the player notices she's pitching to one specific person in the room.",
+      "requiresRelationship": null,
+      "statefulTrigger": {
+        "stat": "politicalAwareness",
+        "operator": "gte",
+        "value": 40
+      }
+    },
+    {
+      "id": "mara.y2.new_line_manager",
+      "year": 2,
+      "questionAnchor": "y02q01",
+      "description": "After Dana's promotion, Mara becomes the player's new line manager. She runs her first one-on-one immediately. The energy is different from Dana's.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "mara.y2.lab_project_offer",
+      "year": 2,
+      "questionAnchor": "y02q05",
+      "description": "Mara offers the player a project in the Lab. High visibility, low infrastructure. If accepted, it sets up an arc beat in Y3 where the project either lands or doesn't.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.mara_velez.lab_project_active"
+      ]
+    },
+    {
+      "id": "mara.y3.credit_problem",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "If lab_project_active and Relationship < 50: The Lab project lands. Mara presents it. The player's contribution is mentioned once. If Relationship >= 50, the player is named as co-lead in the summary doc.",
+      "requiresRelationship": null,
+      "statefulTrigger": {
+        "flag": "npc.mara_velez.lab_project_active"
+      }
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 45,
+      "effect": "Mara starts routing cross-functional requests to the player first rather than posting them to the team channel",
+      "mechanical": "visibility score +5 in next annual review"
+    },
+    {
+      "score": 60,
+      "effect": "Mara tells the player specifically what the two blocking MDs respond to. This is genuinely useful information.",
+      "mechanical": "politicalAwareness +3; seen_by_sponsor tag gains +8 weight for MD-facing moments"
+    },
+    {
+      "score": 20,
+      "ceiling": true,
+      "effect": "Mara gives the player feedback in the form of a question: 'What were you trying to achieve here?' It is not a question.",
+      "mechanical": "reputation -5 in current year review"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 2,
+      "event": "Becomes player's line manager after Dana's Director promotion."
+    },
+    {
+      "year": 4,
+      "event": "Lab project lands or doesn't. If it does: Director promotion. If it doesn't: lateral move to a Strategy role. Either way she leaves the player's direct chain."
+    },
+    {
+      "year": 6,
+      "event": "If promoted to Director: appears at Y6 VP committee. Relationship history is now a formal career variable."
+    },
+    {
+      "year": 9,
+      "event": "If relationship >= 65: Mara sends an unexpected reference for an external board opportunity. It is unsolicited and accurate."
+    }
+  ],
+  "flags": {
+    "lab_project_active": false,
+    "credit_resolved": false
+  }
+}

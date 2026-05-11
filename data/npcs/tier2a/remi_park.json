@@ -1,0 +1,91 @@
+{
+  "id": "remi_park",
+  "name": "Remi Park",
+  "archetype": "peer",
+  "ladderLevel": 2,
+  "ladderTitle": "Senior Associate",
+  "yearsAtAurel": 3,
+  "mvpTier": 2,
+  "startingRelationshipBase": 40,
+  "publicRole": "Senior Associate on the Loom product team. Three years ahead of the player in tenure. Runs the internal beta program. Known for moving fast and making cross-functional work look easy.",
+  "privateGoal": "Remi is building a personal network inside AUREL that is independent of any single team's patronage. She doesn't want a sponsor — she wants options. The internal beta program is partly a product function and mostly a way to have a legitimate reason to talk to anyone on any team without needing an introduction.",
+  "contradiction": "Presents as purely collaborative — no agenda, just helpful, happy to share resources and process. Keeps a careful mental ledger of what she has extended to whom and what has come back. She is not transactional in a cold way — she genuinely likes people — but the ledger is real and she acts on it.",
+  "voicePattern": {
+    "description": "Fast, warm, good at making you feel like you're the most interesting conversation she's had this week. Texts in lowercase. In person, high energy and slightly restless — she's thinking two steps ahead while she's talking to you.",
+    "tell": "Adds 'just let me know' to the end of every offer. When she means it, nothing follows. When she's keeping score, she follows up.",
+    "examplePhrases": [
+      "I can pull you into the beta track — just let me know.",
+      "Honestly the cleanest cross-functional work I've seen in two years.",
+      "The Loom team has data on this. I'll send you the raw cut.",
+      "What are you actually trying to figure out? Not the official version — the real one."
+    ]
+  },
+  "mbtiNote": "ENFJ. Genuine warmth, strategic execution. The two are not in conflict for her. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "remi.y1.introduction",
+      "year": 1,
+      "questionAnchor": "y01q06",
+      "description": "Remi introduces herself at an internal product event. She already knows three things about the player from someone else. She doesn't pretend otherwise.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "remi.y2.beta_offer",
+      "year": 2,
+      "questionAnchor": "y02q02",
+      "description": "Remi offers the player access to a Loom beta feature that would be useful for the Meridian brief. The access is real. The context is also relationship-building.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.remi_park.beta_extended"
+      ]
+    },
+    {
+      "id": "remi.y3.call_in",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "Remi calls in a favour. The ask is reasonable. Whether the player comes through determines the ledger balance for the rest of the game.",
+      "requiresRelationship": null,
+      "statefulTrigger": {
+        "flag": "npc.remi_park.beta_extended"
+      }
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 50,
+      "effect": "Remi introduces the player to two people they would not have access to through their formal network. Both introductions are warm.",
+      "mechanical": "politicalAwareness +3; next cross-functional question unlocks additional option"
+    },
+    {
+      "score": 65,
+      "effect": "Remi tells the player which senior figures in the Loom org are actually worth knowing vs. which are just senior. This distinction matters.",
+      "mechanical": "marketSense +3; strategicInfluence +3 on next Loom-adjacent question"
+    },
+    {
+      "score": 25,
+      "ceiling": true,
+      "effect": "Remi stops routing things to the player. The beta access expires. She doesn't say anything. Neither does anyone else.",
+      "mechanical": "technicalCredibility -3 on next analysis question; next cross-functional opportunity has one fewer option"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 2,
+      "event": "Promoted to Manager (L5) — fast track. Her internal network made the case before the formal review did."
+    },
+    {
+      "year": 4,
+      "event": "Moves to Chicago HQ. Sends the player a thoughtful message before leaving."
+    },
+    {
+      "year": 7,
+      "event": "If Relationship >= 55: Remi, now a Senior Manager in Chicago, routes a specific opportunity to the London office and attaches the player's name to it."
+    }
+  ],
+  "flags": {
+    "beta_extended": false,
+    "favour_resolved": false
+  }
+}
