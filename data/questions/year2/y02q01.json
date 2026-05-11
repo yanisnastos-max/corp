@@ -1,0 +1,115 @@
+{
+  "id": "y02q01",
+  "year": 2,
+  "questionNumber": 1,
+  "title": "The Reset",
+  "category": "orientation",
+  "setup": "First sync of the new year. Dana runs it the same way she always does — standing desk, six people in, three on screen. But the room has shifted. Your name is on two items in the agenda now.\n\nAt the end of the meeting she looks at you directly. 'You've had a full year here. I want you to own the Friday market briefing from now on. Weekly. Ten minutes. Your read, not a summary.'\n\nShe doesn't ask whether you want it. Leo catches your eye across the table. Zara is already typing.",
+  "anchoredNPCs": [
+    "dana_sutcliffe",
+    "leo_chen",
+    "zara_okafor"
+  ],
+  "arcBeatAnchors": [
+    "dana.y2.briefing_ownership"
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Accept without qualification",
+      "text": "You say yes clearly. No conditions, no caveats. You'll own it. Dana nods once and moves on. Leo looks slightly surprised.",
+      "statDeltas": [
+        {
+          "stat": "adaptiveNerve",
+          "delta": 4
+        },
+        {
+          "stat": "reputation",
+          "delta": 3
+        },
+        {
+          "stat": "resilience",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "seen_by_sponsor"
+      ],
+      "innerMonologue": "You agreed before you'd thought through what ten minutes actually requires every single week without fail."
+    },
+    {
+      "id": "B",
+      "label": "Accept and name one constraint",
+      "text": "You accept, but flag that you'll need read access to the market data stack by Thursday each week to do it properly. You frame it as a dependency, not a condition.",
+      "statDeltas": [
+        {
+          "stat": "executionDiscipline",
+          "delta": 4
+        },
+        {
+          "stat": "reputation",
+          "delta": 2
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "high_cost_high_fidelity"
+      ],
+      "innerMonologue": "You've already been thinking about the access problem, which means you've already been thinking about owning this."
+    },
+    {
+      "id": "C",
+      "label": "Accept and ask what good looks like",
+      "text": "You accept, then ask what she'd consider a strong briefing versus a weak one. She pauses, then tells you. It's more specific than you expected.",
+      "statDeltas": [
+        {
+          "stat": "strategicInfluence",
+          "delta": 3
+        },
+        {
+          "stat": "politicalAwareness",
+          "delta": 3
+        },
+        {
+          "stat": "reputation",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "open_inquiry"
+      ],
+      "innerMonologue": "She answered the question fully, which means she'd already thought about what she wanted and was waiting to see if you'd ask."
+    },
+    {
+      "id": "D",
+      "label": "Accept and propose a trial format",
+      "text": "You accept and suggest running three pilots before settling on a format — you want to test what lands with the room before committing to a structure. Dana considers this, then agrees.",
+      "statDeltas": [
+        {
+          "stat": "strategicInfluence",
+          "delta": 4
+        },
+        {
+          "stat": "executionDiscipline",
+          "delta": 2
+        },
+        {
+          "stat": "collaborativePull",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "systemic_read"
+      ],
+      "innerMonologue": "You bought yourself time while appearing to care about quality. Both things are true, which makes it slightly easier to live with."
+    }
+  ],
+  "designNotes": "Opens Year 2 by immediately establishing that the player's position has changed. Dana's direct ownership assignment signals trust or pressure depending on Y1 outcome. Option C is the most information-extracting play. Option A is highest nerve, highest cost on resilience."
+}

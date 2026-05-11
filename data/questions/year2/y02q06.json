@@ -1,0 +1,116 @@
+{
+  "id": "y02q06",
+  "year": 2,
+  "questionNumber": 6,
+  "title": "The Briefing Room",
+  "category": "visibility",
+  "setup": "You're presenting the Meridian brief to a room that includes two managing directors you've never met, Grace, Dana, and three people from the client side. Thirty minutes, your deck, your call.\n\nFive minutes in, one of the MDs — Harlow, who hasn't spoken until now — raises his hand and interrupts. He thinks your first assumption is wrong. He doesn't phrase it as a question.\n\nThe room goes very still. Dana is watching.",
+  "anchoredNPCs": [
+    "dana_sutcliffe",
+    "grace_oduya"
+  ],
+  "arcBeatAnchors": [
+    "dana.meridian.room_test"
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Defend the assumption with data",
+      "text": "You acknowledge his concern, then walk through the evidence that supports the assumption — three sources, one counter-example you've already accounted for. You don't yield.",
+      "statDeltas": [
+        {
+          "stat": "adaptiveNerve",
+          "delta": 5
+        },
+        {
+          "stat": "technicalCredibility",
+          "delta": 4
+        },
+        {
+          "stat": "collaborativePull",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "high_cost_high_fidelity",
+        "seen_by_sponsor"
+      ],
+      "innerMonologue": "You held the line in a room where holding lines is expensive. Whether you were right is a separate question from whether you should have done it."
+    },
+    {
+      "id": "B",
+      "label": "Acknowledge the challenge and offer to revisit",
+      "text": "You say he's raised something worth examining properly. You propose that you incorporate this line of questioning into a revised section and send it to the room within 48 hours.",
+      "statDeltas": [
+        {
+          "stat": "executionDiscipline",
+          "delta": 3
+        },
+        {
+          "stat": "collaborativePull",
+          "delta": 3
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "reliability_concern"
+      ],
+      "innerMonologue": "You bought the room peace and yourself 48 hours. Dana will want to know if you actually think the assumption holds."
+    },
+    {
+      "id": "C",
+      "label": "Ask him to restate his concern more specifically",
+      "text": "You say: 'Can you help me understand exactly which part of the assumption you think doesn't hold?' You wait. He narrows it. His actual objection is much smaller than his opening implied.",
+      "statDeltas": [
+        {
+          "stat": "strategicInfluence",
+          "delta": 4
+        },
+        {
+          "stat": "politicalAwareness",
+          "delta": 3
+        },
+        {
+          "stat": "resilience",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "open_inquiry",
+        "seen_by_sponsor"
+      ],
+      "innerMonologue": "Making him be specific was the right move. The room noticed you made him be specific."
+    },
+    {
+      "id": "D",
+      "label": "Concede the point and adjust the frame",
+      "text": "You say he's right that the assumption is contestable and reframe the brief: the conclusion holds even under the weaker assumption. You continue from there.",
+      "statDeltas": [
+        {
+          "stat": "strategicInfluence",
+          "delta": 5
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": 2
+        },
+        {
+          "stat": "technicalCredibility",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "systemic_read"
+      ],
+      "innerMonologue": "You gave him the point and kept the room. The conclusion now rests on weaker ground. That may matter later."
+    }
+  ],
+  "designNotes": "High-pressure room test. Option A is the full Cortés play — high nerve, potentially alienates. Option C is the sophisticated read — makes him be specific — which is realistically the strongest move. Dana's watching for how the player handles authority."
+}

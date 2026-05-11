@@ -1,5 +1,5 @@
 // ASCEND — Entry point
-// Scenes: landing, onboarding, decision, attribute_panel, people_panel, annual_review
+// Scenes: landing, onboarding, decision, attribute_panel, people_panel, annual_review, career_timeline
 
 import { router } from './core/router';
 import { loadState, saveState, exportState, importState } from './utils/storage';
@@ -9,6 +9,7 @@ import { mountDecision, unmountDecision } from './scenes/decision';
 import { mountAttributePanel, unmountAttributePanel } from './scenes/attribute_panel';
 import { mountPeoplePanel, unmountPeoplePanel } from './scenes/people_panel';
 import { mountAnnualReview, unmountAnnualReview } from './scenes/annual_review';
+import { mountCareerTimeline, unmountCareerTimeline } from './scenes/career_timeline';
 
 const root = document.getElementById('scene-root')!;
 
@@ -78,23 +79,10 @@ function render(scene: string): void {
     return;
   }
 
-  // career_timeline: placeholder until 1.11+
   if (scene === 'career_timeline') {
-    const state = loadState();
-    document.title = 'ASCEND';
-    root.innerHTML = `
-      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;
-                  font-family:var(--font-ui);color:var(--color-text-muted);gap:var(--space-4);">
-        <p style="font-family:var(--font-mono);font-size:var(--text-xs);letter-spacing:.1em;text-transform:uppercase;
-                  color:var(--color-text-accent)">${scene.replace('_', ' ')}</p>
-        ${state ? `<p style="font-size:var(--text-sm)">${state.player.name} · Year ${state.year} · Week ${state.week}</p>` : ''}
-        <p style="font-size:var(--text-xs);color:var(--color-text-disabled)">Coming in tasks 1.9–1.10</p>
-        <button onclick="history.back()" style="margin-top:var(--space-4);font-family:var(--font-mono);
-          font-size:var(--text-xs);background:none;border:1px solid var(--color-border-default);
-          color:var(--color-text-muted);padding:var(--space-2) var(--space-4);border-radius:var(--radius-base);cursor:pointer;">
-          Back
-        </button>
-      </div>`;
+    document.title = 'ASCEND — Career Timeline';
+    unmountCareerTimeline();
+    mountCareerTimeline(root);
     return;
   }
 }

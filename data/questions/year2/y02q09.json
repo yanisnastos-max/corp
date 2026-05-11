@@ -1,0 +1,114 @@
+{
+  "id": "y02q09",
+  "year": 2,
+  "questionNumber": 9,
+  "title": "The Internal Paper",
+  "category": "strategic",
+  "setup": "There's an internal working paper circulating among senior associates — not official, not endorsed, written by two people you know are being positioned for the year-three cohort. It argues for a structural change to how AUREL's London practice runs its pipeline. The argument is good. It's also politically risky to be associated with it.\n\nYou've been asked to add your name as a co-author. It would go to three managing directors, including the one who challenged your Meridian assumption.",
+  "anchoredNPCs": [
+    "dana_sutcliffe",
+    "grace_oduya"
+  ],
+  "arcBeatAnchors": [
+    "y2.internal_paper.positioning"
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Add your name — own the position",
+      "text": "You read it one more time, decide you agree with it, and tell them to add your name. You don't add caveats. You're either in or you're not.",
+      "statDeltas": [
+        {
+          "stat": "adaptiveNerve",
+          "delta": 5
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": 4
+        },
+        {
+          "stat": "reputation",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "high_cost_high_fidelity"
+      ],
+      "innerMonologue": "Your name is now attached to an argument that three MDs may not like. You've decided that being right matters more than being liked."
+    },
+    {
+      "id": "B",
+      "label": "Contribute edits without taking authorship",
+      "text": "You offer to sharpen two sections of the argument but decline the author credit. You tell them your contribution is the content, not the name.",
+      "statDeltas": [
+        {
+          "stat": "technicalCredibility",
+          "delta": 4
+        },
+        {
+          "stat": "integrity",
+          "delta": 2
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [],
+      "innerMonologue": "You made the paper better and removed yourself from its consequences. The authors will know. You'll know."
+    },
+    {
+      "id": "C",
+      "label": "Decline and tell Dana it exists",
+      "text": "You decline authorship and tell Dana about the paper — as information, not as a warning. You let her decide what to do with it.",
+      "statDeltas": [
+        {
+          "stat": "integrity",
+          "delta": 3
+        },
+        {
+          "stat": "politicalAwareness",
+          "delta": 3
+        },
+        {
+          "stat": "collaborativePull",
+          "delta": -4
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "seen_by_sponsor",
+        "burned_peer"
+      ],
+      "innerMonologue": "You've created a debt with the authors and a credit with Dana. Whether those are the right accounts to be managing depends on what happens next."
+    },
+    {
+      "id": "D",
+      "label": "Ask Dana if she thinks you should sign it",
+      "text": "You show her the paper and ask directly: would it be career-helpful or career-damaging to attach your name? She reads it for four minutes before answering.",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 5
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": 2
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "seen_by_sponsor",
+        "open_inquiry"
+      ],
+      "innerMonologue": "She told you what she actually thought, which is worth more than most things. You still had to make the call yourself."
+    }
+  ],
+  "designNotes": "Positions the player on the political map relative to the MD cohort. Option A sets up a potential reward or consequence at Y3 annual review. Option C burns peer relationships. Option D is the strongest information play but delays the actual decision."
+}

@@ -1,0 +1,120 @@
+{
+  "id": "y02q10",
+  "year": 2,
+  "questionNumber": 10,
+  "title": "Dana's Offer",
+  "category": "strategic",
+  "setup": "Dana asks you to stay after a one-on-one. After the formal part is done she sits back and tells you directly: she's putting your name forward for the Year Three cohort. It's not a guarantee — there's a process, two other MDs have input — but she's putting it in.\n\nThen she asks: 'What do you want from the next two years here? Not what you think I want to hear. What do you actually want?'\n\nShe is watching with the same expression she had on day one when you answered her question in that first sync.",
+  "anchoredNPCs": [
+    "dana_sutcliffe"
+  ],
+  "arcBeatAnchors": [
+    "dana.y2.cohort_offer"
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Name what you want specifically",
+      "text": "You tell her. Not the safe answer — the real one. You want ownership of a practice area. You name the area. You explain why you think you'd be effective there. She listens without expression.",
+      "statDeltas": [
+        {
+          "stat": "adaptiveNerve",
+          "delta": 5
+        },
+        {
+          "stat": "integrity",
+          "delta": 5
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": 3
+        },
+        {
+          "stat": "collaborativePull",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "seen_by_sponsor",
+        "high_cost_high_fidelity"
+      ],
+      "innerMonologue": "You just told your sponsor what you want, which means you've given her information she can use to help you or to measure whether you get it."
+    },
+    {
+      "id": "B",
+      "label": "Say you want to stay — and earn the cohort honestly",
+      "text": "You tell her you want to be in that room on merit. You want to be the strongest candidate in the process, not just the name she put in. She smiles for the first time in forty minutes.",
+      "statDeltas": [
+        {
+          "stat": "integrity",
+          "delta": 4
+        },
+        {
+          "stat": "resilience",
+          "delta": 4
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "seen_by_sponsor"
+      ],
+      "innerMonologue": "You answered the question she wanted to hear while also meaning it. That's either a sign of alignment or a very good edit."
+    },
+    {
+      "id": "C",
+      "label": "Reflect the question back — ask what she thinks the next two years should look like",
+      "text": "You tell her you'd rather answer after hearing how she sees your trajectory. She nods, then maps it out. The picture is different from what you assumed.",
+      "statDeltas": [
+        {
+          "stat": "strategicInfluence",
+          "delta": 5
+        },
+        {
+          "stat": "politicalAwareness",
+          "delta": 4
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "open_inquiry",
+        "seen_by_sponsor"
+      ],
+      "innerMonologue": "You answered her question with her own answer. It was the highest-information move. It also tells her you're still calibrating."
+    },
+    {
+      "id": "D",
+      "label": "Tell her about the recruiter message",
+      "text": "You tell her that an external firm has been in contact. Not as leverage — as context for your answer. You want her to understand that you've thought about the alternatives and chosen this.",
+      "statDeltas": [
+        {
+          "stat": "integrity",
+          "delta": 5
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": 4
+        },
+        {
+          "stat": "politicalAwareness",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "seen_by_sponsor",
+        "high_cost_high_fidelity"
+      ],
+      "innerMonologue": "You handed her the full picture and let her decide what to do with it. That was either very brave or very naïve. You'll know which by next quarter."
+    }
+  ],
+  "designNotes": "Year 2 closer. Mirrors Y1 Q10 structure — Dana asks a direct question, player must answer honestly or strategically. Option D connects to the recruiter thread from Q7. Option A sets the player's stated ambition on the record entering Year 3. Year 3 questions should reference this choice."
+}

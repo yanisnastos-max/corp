@@ -1,0 +1,111 @@
+{
+  "id": "y02q08",
+  "year": 2,
+  "questionNumber": 8,
+  "title": "Grace's Verdict",
+  "category": "collaboration",
+  "setup": "Grace runs the quarterly project review. Every associate gets a paragraph. You've heard through the usual channels that yours is positive — but you also know Grace separates 'delivered' from 'operated well.' They're not the same metric to her.\n\nAfter the formal debrief she asks if you have ten minutes. You do. She closes the door and tells you, with unusual directness, the specific thing that worked and the specific thing that didn't. No softening. No buffer paragraph.\n\nThe thing that didn't work is something you're privately proud of.",
+  "anchoredNPCs": [
+    "grace_oduya"
+  ],
+  "arcBeatAnchors": [
+    "grace.y2.direct_feedback"
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Take the feedback without qualifying it",
+      "text": "You listen fully. You don't explain the context, don't mention the constraints. You thank her for the specificity and ask if she'd be willing to tell you how she'd have handled it differently.",
+      "statDeltas": [
+        {
+          "stat": "resilience",
+          "delta": 4
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": 3
+        },
+        {
+          "stat": "executionDiscipline",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "open_inquiry"
+      ],
+      "innerMonologue": "You didn't defend the thing you're proud of, which means you either trust her read or you're learning to keep things to yourself."
+    },
+    {
+      "id": "B",
+      "label": "Explain the constraints that produced it",
+      "text": "You tell her what the situation actually looked like from inside it — the timeline pressure, the resource gap, the call you had to make. You're not defensive. You want her to have the full picture.",
+      "statDeltas": [
+        {
+          "stat": "integrity",
+          "delta": 4
+        },
+        {
+          "stat": "technicalCredibility",
+          "delta": 3
+        },
+        {
+          "stat": "resilience",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "high_cost_high_fidelity"
+      ],
+      "innerMonologue": "You explained yourself to someone who didn't ask for an explanation. She'll decide whether that's honesty or defensiveness."
+    },
+    {
+      "id": "C",
+      "label": "Disagree with the assessment",
+      "text": "You tell her, calmly, that you read the situation differently and you'd make the same call again given the same constraints. You lay out your reasoning briefly.",
+      "statDeltas": [
+        {
+          "stat": "adaptiveNerve",
+          "delta": 5
+        },
+        {
+          "stat": "integrity",
+          "delta": 3
+        },
+        {
+          "stat": "collaborativePull",
+          "delta": -4
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [],
+      "innerMonologue": "Grace doesn't give feedback that expects a debate. You've just introduced one. Whether she respects it depends on whether you're right."
+    },
+    {
+      "id": "D",
+      "label": "Ask what it would have needed to look like",
+      "text": "You ask her to describe what the right version of it would have looked like from her vantage point. She does. It's more specific than most feedback you've received.",
+      "statDeltas": [
+        {
+          "stat": "executionDiscipline",
+          "delta": 4
+        },
+        {
+          "stat": "collaborativePull",
+          "delta": 4
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "systemic_read"
+      ],
+      "innerMonologue": "You learned what good looks like to the person whose opinion moves resources. That's worth more than being right about the original call."
+    }
+  ],
+  "designNotes": "Grace is the calibration figure. Her feedback is always fair and precise. Option C is high-nerve but creates a real relationship risk. Option D is the highest-information play."
+}

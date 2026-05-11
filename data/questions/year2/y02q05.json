@@ -1,0 +1,112 @@
+{
+  "id": "y02q05",
+  "year": 2,
+  "questionNumber": 5,
+  "title": "Zara's Ask",
+  "category": "relationship",
+  "setup": "Zara sends you a calendar invite: thirty minutes, no title, end of day Friday. When you join, she gets straight to it.\n\nShe's been passed over for a project lead role she was clearly qualified for. She's writing a case to Dana — not a complaint, a business case for why the decision should be revisited. She wants you to read it before she sends it and tell her honestly whether it works.\n\nYou know why she was passed over. You know something she doesn't. Whether you tell her is the actual question.",
+  "anchoredNPCs": [
+    "zara_okafor",
+    "dana_sutcliffe"
+  ],
+  "arcBeatAnchors": [
+    "zara.y2.project_lead_case"
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Read it and give honest technical feedback only",
+      "text": "You read the case carefully. You tell her where the argument is strong, where it's thin, and what evidence she'd need to fill the gaps. You say nothing about what you know.",
+      "statDeltas": [
+        {
+          "stat": "collaborativePull",
+          "delta": 4
+        },
+        {
+          "stat": "integrity",
+          "delta": 2
+        },
+        {
+          "stat": "politicalAwareness",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "high_cost_high_fidelity"
+      ],
+      "innerMonologue": "You helped her write a better case for a situation you understand better than she does. That's a choice with a shape."
+    },
+    {
+      "id": "B",
+      "label": "Tell her what you know",
+      "text": "You tell her the actual reason — the one not in any document. You explain what you know and where it came from. It's not comfortable. She doesn't say thank you immediately.",
+      "statDeltas": [
+        {
+          "stat": "integrity",
+          "delta": 5
+        },
+        {
+          "stat": "collaborativePull",
+          "delta": 3
+        },
+        {
+          "stat": "reputation",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "burned_peer"
+      ],
+      "innerMonologue": "She needed to know this. Whether she'll be glad you told her depends on what she does with it."
+    },
+    {
+      "id": "C",
+      "label": "Decline — too much proximity to the decision",
+      "text": "You tell her honestly that you're too close to the decision-making to be the right reader for this. You recommend someone else. You don't explain further.",
+      "statDeltas": [
+        {
+          "stat": "integrity",
+          "delta": 3
+        },
+        {
+          "stat": "resilience",
+          "delta": 2
+        },
+        {
+          "stat": "collaborativePull",
+          "delta": -4
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [],
+      "innerMonologue": "You avoided the conflict cleanly. She knows you deflected. What she concludes about why is up to her."
+    },
+    {
+      "id": "D",
+      "label": "Read it and recommend she doesn't send it",
+      "text": "You read it and tell her it won't land — not because her case is wrong, but because the timing and framing will make her look like she's contesting authority rather than adding value. You suggest waiting.",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 5
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": 2
+        },
+        {
+          "stat": "collaborativePull",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "systemic_read"
+      ],
+      "innerMonologue": "You gave her political advice instead of the honesty she came for. Those aren't always the same thing."
+    }
+  ],
+  "designNotes": "Zara appears in Y1 Q7. This is the payoff — the player's earlier choice about neutrality now meets a direct ask. Option B has burned_peer because the knowledge comes from somewhere that touching it affects."
+}

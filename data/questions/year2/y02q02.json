@@ -1,0 +1,115 @@
+{
+  "id": "y02q02",
+  "year": 2,
+  "questionNumber": 2,
+  "title": "Conrad's Map",
+  "category": "relationship",
+  "setup": "Conrad stops you in the corridor near the second-floor kitchen — not the coffee station this time, the quieter one. He's more deliberate about it. He tells you there's a restructuring conversation happening above Dana's level, two floors up, and that two of the four people in the room have mentioned your name in connection with a new vertical.\n\nHe gives you this without asking for anything. That's the part that requires attention.\n\n'I'm not asking you to do anything,' he says. 'Just thought you should know the terrain.'",
+  "anchoredNPCs": [
+    "conrad_mensah",
+    "dana_sutcliffe"
+  ],
+  "arcBeatAnchors": [
+    "conrad.y2.political_map"
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Thank him and say nothing back",
+      "text": "You thank him genuinely and offer nothing in return. You don't ask where he heard it, who the four people are, or what the vertical is. You let the silence do the work.",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 4
+        },
+        {
+          "stat": "integrity",
+          "delta": 3
+        },
+        {
+          "stat": "collaborativePull",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "open_inquiry"
+      ],
+      "innerMonologue": "Conrad gives information to people he trusts to handle it quietly. You've just confirmed you're one of them."
+    },
+    {
+      "id": "B",
+      "label": "Ask one clarifying question",
+      "text": "You ask which vertical. He tells you. It's not the one you'd have assumed. You say thank you and leave before he can ask anything.",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 5
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": 2
+        },
+        {
+          "stat": "reputation",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "systemic_read"
+      ],
+      "innerMonologue": "Now you know something specific, which means you'll have to decide what to do with it."
+    },
+    {
+      "id": "C",
+      "label": "Tell Dana the same day",
+      "text": "You go to Dana directly. You tell her what Conrad said, word for word. You frame it as transparency, not as concern. She listens carefully and thanks you.",
+      "statDeltas": [
+        {
+          "stat": "integrity",
+          "delta": 4
+        },
+        {
+          "stat": "reputation",
+          "delta": 3
+        },
+        {
+          "stat": "politicalAwareness",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "seen_by_sponsor",
+        "burned_peer"
+      ],
+      "innerMonologue": "You chose your lane. Conrad will find out eventually. Whether that matters depends on whether he was testing you."
+    },
+    {
+      "id": "D",
+      "label": "Reciprocate — share something back",
+      "text": "You give him something true but low-risk: what you know about the Q3 workstream reassignment. It's real information. He nods slowly, as if accounting for it.",
+      "statDeltas": [
+        {
+          "stat": "collaborativePull",
+          "delta": 4
+        },
+        {
+          "stat": "politicalAwareness",
+          "delta": 3
+        },
+        {
+          "stat": "integrity",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "coalition_builder"
+      ],
+      "innerMonologue": "You're in an exchange now. That comes with obligations you haven't fully mapped yet."
+    }
+  ],
+  "designNotes": "Conrad graduates from information-giver to political actor. Option C burns Conrad but banks with Dana. Option D begins a reciprocal information relationship with real game consequences. Option A is the cleanest but gives up information."
+}

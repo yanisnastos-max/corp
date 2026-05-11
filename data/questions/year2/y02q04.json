@@ -1,0 +1,114 @@
+{
+  "id": "y02q04",
+  "year": 2,
+  "questionNumber": 4,
+  "title": "The Peer Problem",
+  "category": "collaboration",
+  "setup": "Tomás Reyes joined AUREL in Q4 of last year from a competitor. He's good — analytically sharp, politically fluent, reads rooms well. He's been handed several of the projects that were circling your orbit.\n\nZara mentions it in passing: 'He's being positioned.' She doesn't say for what.\n\nYou have no grievance with Tomás directly. He's done nothing wrong. The positioning isn't his doing. But the pattern is there if you look for it, and you've been looking.",
+  "anchoredNPCs": [
+    "zara_okafor",
+    "dana_sutcliffe"
+  ],
+  "arcBeatAnchors": [
+    "tomas.y2.rivalry_emerges"
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Build a working relationship with him directly",
+      "text": "You suggest a coffee. Not to read him, not to manage the dynamic — to actually work out if there's a collaboration that makes sense. He accepts. The conversation goes somewhere useful.",
+      "statDeltas": [
+        {
+          "stat": "collaborativePull",
+          "delta": 5
+        },
+        {
+          "stat": "politicalAwareness",
+          "delta": 2
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "coalition_builder",
+        "open_inquiry"
+      ],
+      "innerMonologue": "You've decided not to treat this as a zero-sum game, which only works if he's made the same decision."
+    },
+    {
+      "id": "B",
+      "label": "Do nothing — let your work speak",
+      "text": "You make no move. You keep executing, keep delivering, keep showing up. You don't mention Tomás to anyone. You trust the quality of the work to hold its own.",
+      "statDeltas": [
+        {
+          "stat": "executionDiscipline",
+          "delta": 3
+        },
+        {
+          "stat": "integrity",
+          "delta": 3
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [],
+      "innerMonologue": "The work-speaks-for-itself strategy is most effective when the people who need to hear it are already paying attention."
+    },
+    {
+      "id": "C",
+      "label": "Ask Dana directly what the positioning is about",
+      "text": "You wait until a one-on-one and ask her plainly: what's Tomás being set up for? She doesn't flinch. She tells you more than you expected.",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 5
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": 3
+        },
+        {
+          "stat": "collaborativePull",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "seen_by_sponsor",
+        "open_inquiry"
+      ],
+      "innerMonologue": "She answered, which means either she respects you enough to be direct, or the answer wasn't sensitive enough to protect."
+    },
+    {
+      "id": "D",
+      "label": "Deliberately take on a project Tomás was expected to get",
+      "text": "There's a brief being scoped. You know Tomás is the likely candidate. You put your name forward first, with a clear rationale. You get it.",
+      "statDeltas": [
+        {
+          "stat": "adaptiveNerve",
+          "delta": 4
+        },
+        {
+          "stat": "reputation",
+          "delta": 2
+        },
+        {
+          "stat": "collaborativePull",
+          "delta": -4
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "burned_peer"
+      ],
+      "innerMonologue": "You moved first. Whether this was the right call depends entirely on what happens next and who's watching."
+    }
+  ],
+  "designNotes": "Introduces Tomás as a structural rival without making him a villain. Option D is the aggressive play with a burned_peer consequence that can resurface. Option B is low-cost but passive."
+}

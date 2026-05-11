@@ -1,0 +1,116 @@
+{
+  "id": "y02q03",
+  "year": 2,
+  "questionNumber": 3,
+  "title": "Full Ownership",
+  "category": "execution",
+  "setup": "Dana hands you the Meridian brief. Not a component of it — all of it. Thirty-page deliverable, three external stakeholders, two internal sign-offs required, six-week timeline. The previous owner left the company quietly last month.\n\nShe sends it in a calendar invite with no agenda. Just your name and hers and a one-line note: 'Yours now. Let's talk through it Thursday.'\n\nYou open the file. The previous version is dated eight months ago and marked 'Draft 3.' It has eleven unresolved comments in the margins.",
+  "anchoredNPCs": [
+    "dana_sutcliffe",
+    "zara_okafor",
+    "grace_oduya"
+  ],
+  "arcBeatAnchors": [
+    "dana.meridian.ownership"
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Audit before Thursday, present a clean assessment",
+      "text": "You spend two evenings mapping every unresolved comment, every gap in the methodology, every stakeholder assumption that hasn't been confirmed. You walk into Thursday with a one-page triage.",
+      "statDeltas": [
+        {
+          "stat": "executionDiscipline",
+          "delta": 5
+        },
+        {
+          "stat": "technicalCredibility",
+          "delta": 3
+        },
+        {
+          "stat": "resilience",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "high_cost_high_fidelity",
+        "risk_catch"
+      ],
+      "innerMonologue": "You found three things the previous owner had missed. You don't know yet whether surfacing them will feel like thoroughness or criticism."
+    },
+    {
+      "id": "B",
+      "label": "Ask Grace to co-own the stakeholder layer",
+      "text": "You call Grace. You tell her what you've inherited and ask if she's willing to own the external stakeholder relationship while you own the analysis. She agrees, subject to scope clarity.",
+      "statDeltas": [
+        {
+          "stat": "collaborativePull",
+          "delta": 4
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": 3
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "coalition_builder"
+      ],
+      "innerMonologue": "You've distributed the risk. You've also distributed the credit. Those are the same decision."
+    },
+    {
+      "id": "C",
+      "label": "Propose a revised timeline before starting",
+      "text": "Before Thursday you send Dana a short note: six weeks isn't enough given the state of the draft. You propose eight. You attach a dependency map.",
+      "statDeltas": [
+        {
+          "stat": "integrity",
+          "delta": 4
+        },
+        {
+          "stat": "executionDiscipline",
+          "delta": 3
+        },
+        {
+          "stat": "reputation",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "reliability_concern"
+      ],
+      "innerMonologue": "She gave it to you without conditions. You're returning it with one before you've started."
+    },
+    {
+      "id": "D",
+      "label": "Start from scratch — ignore the old draft",
+      "text": "You read the brief requirements, set the old draft aside, and build from first principles. You present a clean structure on Thursday with no reference to what came before.",
+      "statDeltas": [
+        {
+          "stat": "adaptiveNerve",
+          "delta": 4
+        },
+        {
+          "stat": "strategicInfluence",
+          "delta": 3
+        },
+        {
+          "stat": "technicalCredibility",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "high_cost_high_fidelity"
+      ],
+      "innerMonologue": "The old draft's problems can't haunt you if you don't inherit them. The tradeoff is that you're starting eight months behind everyone else's shared understanding."
+    }
+  ],
+  "designNotes": "Meridian brief appears in Y1 Q10. Year 2 Q3 pays it off — the player now owns it. Each option reflects a different risk strategy. Option C has a double-edged reliability_concern consequence that follows the player into the review."
+}

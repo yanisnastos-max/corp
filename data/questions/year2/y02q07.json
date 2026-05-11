@@ -1,0 +1,112 @@
+{
+  "id": "y02q07",
+  "year": 2,
+  "questionNumber": 7,
+  "title": "The Signal",
+  "category": "strategic",
+  "setup": "A headhunter reaches out on LinkedIn. Small message, polished, specific — they know your recent work, reference Meridian by name. The firm they represent doesn't appear in the message but you can infer it from the recruiter's profile. It's a competitor. Senior position. The timeline, if it materialised, would be six to eight months.\n\nYou haven't replied. You're sitting with it.\n\nConrad happens to mention, two days later, that two people at this firm have recently left under circumstances he describes as 'consolidating their bench.'",
+  "anchoredNPCs": [
+    "dana_sutcliffe",
+    "conrad_mensah"
+  ],
+  "arcBeatAnchors": [
+    "external.y2.first_offer_signal"
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Don't reply — let it expire",
+      "text": "You close the tab. You don't reply, don't acknowledge, don't mention it to anyone. You go back to the brief.",
+      "statDeltas": [
+        {
+          "stat": "integrity",
+          "delta": 3
+        },
+        {
+          "stat": "executionDiscipline",
+          "delta": 3
+        },
+        {
+          "stat": "marketSense",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [],
+      "innerMonologue": "You didn't engage with the question the message was actually asking, which is whether you want to stay."
+    },
+    {
+      "id": "B",
+      "label": "Reply to gather information — no commitment",
+      "text": "You reply briefly: open to a conversation, no timeline, no commitment. You schedule a call. You learn enough to know whether this is a real opportunity.",
+      "statDeltas": [
+        {
+          "stat": "marketSense",
+          "delta": 5
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": 3
+        },
+        {
+          "stat": "integrity",
+          "delta": -2
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "open_inquiry"
+      ],
+      "innerMonologue": "You're gathering market data about yourself. That framing makes it easier. It doesn't make it incorrect."
+    },
+    {
+      "id": "C",
+      "label": "Tell Dana — use it as a career conversation",
+      "text": "You tell Dana. Not as leverage, you're clear about that — but you think she should know, and you want to use it as a reason to talk about where you're going here. The conversation is more direct than you expected.",
+      "statDeltas": [
+        {
+          "stat": "integrity",
+          "delta": 4
+        },
+        {
+          "stat": "adaptiveNerve",
+          "delta": 4
+        },
+        {
+          "stat": "marketSense",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "seen_by_sponsor"
+      ],
+      "innerMonologue": "You played it completely straight and she respected it. You still don't know if it was wise."
+    },
+    {
+      "id": "D",
+      "label": "Ask Conrad what he knows about the firm",
+      "text": "You tell Conrad about the message — not the full contents, but enough. He fills in what he knows. It's useful. You leave the conversation with a better sense of the terrain.",
+      "statDeltas": [
+        {
+          "stat": "politicalAwareness",
+          "delta": 4
+        },
+        {
+          "stat": "marketSense",
+          "delta": 4
+        },
+        {
+          "stat": "integrity",
+          "delta": -3
+        }
+      ],
+      "npcDeltas": [],
+      "consequenceTags": [
+        "coalition_builder"
+      ],
+      "innerMonologue": "Conrad now knows you're being looked at. He'll file that. You're not sure yet which way he'll use it."
+    }
+  ],
+  "designNotes": "First external signal. Sets up the three-lane system (internal mobility vs external offer vs strategic relationship). Option C is the full-transparency play with real upside; Option B gathers information but has an integrity cost."
+}
