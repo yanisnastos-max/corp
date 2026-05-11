@@ -1,6 +1,6 @@
 // ASCEND — GameState type, factory, and pure reducers
 // Immutable pattern: every reducer returns a new GameState object.
-import type { StatKey, PillarKey, AxisKey } from './constants';
+import type { StatKey, PillarKey, AxisKey, LaneKey } from './constants';
 import { STAT_KEYS, PILLAR_KEYS, AXIS_KEYS } from './constants';
 
 export type NpcId = string;
@@ -38,6 +38,8 @@ export interface GameState {
   consequenceTags:   string[];
   decisions:         DecisionRecord[];
   reviewHistory:     ReviewRecord[];
+  activeLane:        LaneKey | null;
+  laneEnteredYear:   number | null;
   flags:             Record<string, boolean>;
   eventLog:          string[];         // human-readable game log (task 1.3)
 }
@@ -72,6 +74,8 @@ export function createInitialState(): GameState {
     consequenceTags:  [],
     decisions:        [],
     reviewHistory:    [],
+    activeLane:       null,
+    laneEnteredYear:  null,
     flags:            {},
     eventLog:         ['Game started.'],
   };
@@ -169,6 +173,19 @@ export function recordReview(state: GameState, record: ReviewRecord): GameState 
 
 export function setFlag(state: GameState, key: string, value: boolean): GameState {
   return { ...state, flags: { ...state.flags, [key]: value } };
+}
+
+export function setLane(
+  state: GameState,
+  lane: LaneKey,
+  year: number,
+): GameState {
+  return {
+    ...state,
+    activeLane:      lane,
+    laneEnteredYear: year,
+    eventLog:        [...state.eventLog, `Y${year} lane: ${lane}`],
+  };
 }
 
 export function logEvent(state: GameState, message: string): GameState {

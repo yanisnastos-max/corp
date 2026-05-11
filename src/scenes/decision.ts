@@ -13,6 +13,8 @@ import {
 import type { StatKey } from '../core/constants';
 import { loadState, saveState } from '../utils/storage';
 import { router } from '../core/router';
+import { LANE_META }   from '../logic/lanes';
+import type { LaneKey } from '../core/constants';
 
 // ─────────────────────────────────────────────
 // STAT DISPLAY NAMES
@@ -137,7 +139,7 @@ function render(): void {
   _container.innerHTML = `
 <div class="dc-wrap">
 
-  ${header(q, state?.player.name ?? '')}
+  ${header(q, state?.player.name ?? '', state?.activeLane ?? null)}
 
   <div class="dc-body">
     <div class="dc-setup-col">
@@ -169,7 +171,7 @@ function render(): void {
 // TEMPLATE HELPERS
 // ─────────────────────────────────────────────
 
-function header(q: Question, playerName: string): string {
+function header(q: Question, playerName: string, lane: LaneKey | null): string {
   const totalQ   = 10;
   const pct      = Math.round(((q.questionNumber - 1) / totalQ) * 100);
   const dots     = Array.from({ length: totalQ }, (_, i) => {
@@ -187,6 +189,7 @@ function header(q: Question, playerName: string): string {
       <span class="dc-pill dc-pill-cat">${q.category}</span>
     </div>
     <div class="dc-header-right">
+      ${lane ? `<span class="dc-lane-badge ${LANE_META[lane].cssClass}" title="${LANE_META[lane].summary}">${LANE_META[lane].shortLabel}</span>` : ''}
       ${playerName ? `<span class="dc-player-tag">${esc(playerName)}</span>` : ''}
     </div>
   </div>
@@ -424,6 +427,21 @@ function injectStyles(): void {
   color: var(--color-text-disabled);
   letter-spacing: .04em;
 }
+.dc-lane-badge {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid currentColor;
+  opacity: 0.75;
+  cursor: default;
+}
+.dc-lane-badge.lane-internal  { color: var(--color-accent-default); }
+.dc-lane-badge.lane-external  { color: #D4AF37; }
+.dc-lane-badge.lane-strategic { color: #7C6FAF; }
 .dc-body {
   display: grid;
   grid-template-columns: 1fr 1fr;

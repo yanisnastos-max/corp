@@ -4,7 +4,8 @@
 // Branch detection: Q10-D (honest read) and reliability_concern tag.
 
 import { loadState, saveState } from '../utils/storage';
-import { recordReview } from '../core/state';
+import { recordReview, setLane } from '../core/state';
+import { computeActiveLane } from '../logic/lanes';
 import type { GameState } from '../core/state';
 import { router } from '../core/router';
 
@@ -536,6 +537,19 @@ function settle(): void {
     scorecard: scorecardRecord,
     comp,
   });
+
+  // Compute and record career lane based on review outcome
+  const laneReviewRecord = {
+    year:     _state.year,
+    score:    c.compositeScore,
+    outcome:  c.outcome === 'promoted' ? 'promoted' as const :
+              c.outcome === 'hold_stretch' ? 'hold_stretch' as const :
+              c.outcome === 'below_line' ? 'below_line' as const : 'hold_standard' as const,
+    scorecard: scorecardRecord,
+    comp,
+  };
+  const activeLane = computeActiveLane(newState, laneReviewRecord);
+  newState = setLane(newState, activeLane, _state.year);
 
   saveState(newState);
   router.push('decision');

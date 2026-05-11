@@ -13,6 +13,7 @@ export const AXIS_KEYS = [
   'cautious_bold', 'systemic_tactical',
 ] as const;
 
+export type LaneKey   = 'internal_mobility' | 'external_offer' | 'strategic_relationship';
 export type StatKey   = typeof STAT_KEYS[number];
 export type PillarKey = typeof PILLAR_KEYS[number];
 export type AxisKey   = typeof AXIS_KEYS[number];
