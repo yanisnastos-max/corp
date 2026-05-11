@@ -1,0 +1,92 @@
+{
+  "id": "patrick_lau",
+  "name": "Patrick Lau",
+  "archetype": "senior_leader",
+  "ladderLevel": 8,
+  "ladderTitle": "Senior Director",
+  "yearsAtAurel": 9,
+  "mvpTier": 2,
+  "startingRelationshipBase": 10,
+  "publicRole": "Senior Director, Finance & Operations, AUREL London. The person who controls headcount approvals, project budgets, and the financial sign-off on any initiative above a certain threshold. Nine years in. Does not attend most social events.",
+  "privateGoal": "Patrick has survived four reorganisations by being indispensable to whoever is currently in charge of the money. He is not building a career — he has one. What he wants now is to ensure that the next round of structural change does not remove the function he has spent nine years making essential. He watches incoming talent carefully, specifically for signs of whether they understand what he does.",
+  "contradiction": "Presents as a pure numbers function — apolitical, uninterested in narrative, focused on financial reality. Has an extremely sophisticated read of organisational politics that he deploys entirely through budget decisions. He does not think of this as political. He thinks of it as accurate allocation.",
+  "voicePattern": {
+    "description": "Dry and brief. Communicates in email more than in person, and his emails are short. In meetings, asks exactly one question at the end. That question is always the right one. Does not fill silence. If you ask him a question he can't answer accurately, he will say so rather than approximate.",
+    "tell": "When he says 'I'll need to look at the numbers on that' he has already looked. Strategic Influence 60+ catches the tense. Political Awareness 65+ understands what it means.",
+    "examplePhrases": [
+      "The budget doesn't support that timeline.",
+      "I'll need to look at the numbers on that.",
+      "What's the business case? One paragraph.",
+      "That's a spend question, not a strategy question. They're different approvals."
+    ]
+  },
+  "mbtiNote": "ISTJ. Has been ISTJ for so long it has become structural rather than temperamental. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "patrick.y2.first_encounter",
+      "year": 2,
+      "questionAnchor": "y02q03",
+      "description": "Patrick is listed as one of the two internal sign-offs required for the Meridian brief. The player interacts with him during the approval process. He asks one question.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "patrick.y3.budget_moment",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "The player needs budget approval for something. Patrick's response depends on their relationship score and on whether the business case was clearly articulated.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.patrick_lau.approval_history"
+      ]
+    },
+    {
+      "id": "patrick.y5.ally_signal",
+      "year": 5,
+      "questionAnchor": null,
+      "description": "If Relationship >= 40: Patrick approves a budget request faster than process allows. He does not explain why. Players at Political Awareness 60+ understand this is a signal.",
+      "requiresRelationship": 40,
+      "statefulTrigger": null
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 35,
+      "effect": "Patrick flags budget timelines to the player before they become official — three days of advance warning per cycle",
+      "mechanical": "executionDiscipline +3; one future project avoids a timeline penalty"
+    },
+    {
+      "score": 50,
+      "effect": "Patrick tells the player, once, where the actual discretionary budget lives and who controls it. This is not in any org chart.",
+      "mechanical": "politicalAwareness +5; strategicInfluence +3"
+    },
+    {
+      "score": 10,
+      "ceiling": true,
+      "effect": "Patrick's budget approvals for the player's projects are accurate, thorough, and slow.",
+      "mechanical": "reliability_concern tag triggered on next project; executionDiscipline -3"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 2,
+      "event": "Meridian sign-off encounter."
+    },
+    {
+      "year": 5,
+      "event": "Ally signal if relationship qualifies."
+    },
+    {
+      "year": 8,
+      "event": "Patrick is offered early retirement as part of a finance restructure. He declines. This decision is felt across the division."
+    },
+    {
+      "year": 10,
+      "event": "If Relationship >= 50: Patrick's institutional knowledge is the only thing standing between the player and a budget problem in Y10. He uses it."
+    }
+  ],
+  "flags": {
+    "approval_history": false
+  }
+}

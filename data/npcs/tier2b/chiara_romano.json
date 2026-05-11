@@ -1,0 +1,92 @@
+{
+  "id": "chiara_romano",
+  "name": "Chiara Romano",
+  "archetype": "wildcard",
+  "ladderLevel": null,
+  "ladderTitle": "External",
+  "yearsAtAurel": 0,
+  "mvpTier": 2,
+  "startingRelationshipBase": 30,
+  "publicRole": "Freelance journalist covering enterprise tech and workplace culture. Has bylines in three publications the AUREL communications team monitors. Has broken two AUREL stories in the last eighteen months, one positive and one complicated.",
+  "privateGoal": "Chiara is working on a long-form piece about AUREL's internal culture — specifically the gap between what the company says it values and what it actually rewards. She does not have enough on-record sources. She is building them slowly, over months, from inside and outside. She does not pursue people; she creates conditions in which people want to talk to her.",
+  "contradiction": "Presents as genuinely interested in everyone she meets — warm, curious, remembers details, follows up. She is genuinely interested in everyone she meets. She is also writing down what they say. These are not in conflict for her and she does not think they should be in conflict for anyone else. She has never lied to a source. She has sometimes created impressions she didn't correct.",
+  "voicePattern": {
+    "description": "Conversational, self-deprecating, asks questions that sound like small talk and are not. Excellent at making the person across from her feel like the most interesting subject she has ever found. Writes quickly. Pauses when something is said that she wants to use later.",
+    "tell": "Leans slightly forward when you've said something she finds useful. Most people read this as engagement. It is engagement. It is also note-taking.",
+    "examplePhrases": [
+      "That's a more interesting way to put it than anything I've read.",
+      "I'm not writing anything you haven't said — but say it like you'd want it to read.",
+      "What would a fair version of this story look like to you?",
+      "Off the record: what actually happened?"
+    ]
+  },
+  "mbtiNote": "ENFP with journalist's INTJ overlay when she has the thread. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "chiara.y2.conference",
+      "year": 2,
+      "questionAnchor": "y02q07",
+      "description": "Chiara is at an industry event the player attends. They speak briefly. She follows up the next day with a specific, thoughtful email. No ask, just continuing the conversation.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "chiara.y3.piece_published",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "Chiara publishes the AUREL culture piece. Whether the player appears in it (named or unnamed), and how, depends entirely on what they said to her and what relationship they've built.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.chiara_romano.piece_published"
+      ]
+    },
+    {
+      "id": "chiara.y5.followup",
+      "year": 5,
+      "questionAnchor": null,
+      "description": "If Relationship >= 50: Chiara reaches out again. She's working on a follow-up. She gives the player more notice than her other sources. The notice is real.",
+      "requiresRelationship": 50,
+      "statefulTrigger": {
+        "flag": "npc.chiara_romano.piece_published"
+      }
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 45,
+      "effect": "The published piece either quotes the player positively or omits them cleanly. Neither outcome is damaging.",
+      "mechanical": "reputation modifier neutral; no external visibility penalty"
+    },
+    {
+      "score": 60,
+      "effect": "Chiara writes a profile segment that positions the player as a rising figure in AUREL's commercial division. It is accurate. External visibility increases.",
+      "mechanical": "reputation +6; marketSense +3; flags chiara_romano.profile_written"
+    },
+    {
+      "score": 20,
+      "ceiling": true,
+      "effect": "Something the player said in what they believed was casual conversation appears in the piece. It is not wrong. It is not what they would have chosen. AUREL communications notices.",
+      "mechanical": "reputation -8; reliability_concern tag added; flags chiara_romano.quote_published"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 3,
+      "event": "Piece published. Outcome depends on relationship and player decisions."
+    },
+    {
+      "year": 5,
+      "event": "Follow-up approach if relationship qualifies."
+    },
+    {
+      "year": 8,
+      "event": "Chiara joins a media company as a senior editor. She commissions a AUREL feature. The player's profile — whatever shape it's in — is part of the brief she hands to her writer."
+    }
+  ],
+  "flags": {
+    "piece_published": false,
+    "profile_written": false,
+    "quote_published": false
+  }
+}

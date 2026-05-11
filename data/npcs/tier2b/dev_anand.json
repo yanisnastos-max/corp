@@ -1,0 +1,92 @@
+{
+  "id": "dev_anand",
+  "name": "Dev Anand",
+  "archetype": "wildcard",
+  "ladderLevel": null,
+  "ladderTitle": "External",
+  "yearsAtAurel": 0,
+  "mvpTier": 2,
+  "startingRelationshipBase": 35,
+  "publicRole": "Former AUREL London Associate. Left eighteen months ago for a competitor — Stratum Advisory, a smaller but fast-growing strategy firm. Widely regarded as someone who left on good terms. Turns up at industry events. Still texts Grace.",
+  "privateGoal": "Dev left because he saw the ceiling early and didn't want to wait for it. He was right about the ceiling and slightly wrong about the timing — the ceiling moved up after he left. He has not made peace with this. He watches AUREL's output carefully, tells people he doesn't, and occasionally surfaces at events to remind people he exists. He is also, genuinely, doing interesting work at Stratum.",
+  "contradiction": "Presents as having moved on entirely — enthusiastic about Stratum, no visible bitterness about AUREL. The lack of bitterness is performed well enough that it reads as authentic. He has AUREL's internal Slack channel architecture memorised from memory and still thinks about it. He would be appalled to know this was visible. To some people it is.",
+  "voicePattern": {
+    "description": "Confident, slightly too casual about AUREL — the effort of the casualness is the tell. Talks about his current work with real pride. Asks about people still inside with an interest that is partly genuine and partly reconnaissance.",
+    "tell": "Always knows exactly what AUREL's most recent public announcement was and has an immediate read on whether it makes sense. Political Awareness 45+ notices he's more current than a former employee should be.",
+    "examplePhrases": [
+      "I don't miss the ladder structure — genuinely. Stratum moves faster.",
+      "How's Dana doing? I always liked her.",
+      "I saw the Halo Q3 numbers. Interesting read on the margin pressure.",
+      "You should come see what we're building. I mean that."
+    ]
+  },
+  "mbtiNote": "ENTP. Genuinely smart, genuinely restless, slightly unfinished. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "dev.y2.event",
+      "year": 2,
+      "questionAnchor": "y02q07",
+      "description": "Dev is at the same industry event as Chiara and the player. He approaches warmly. He knows more about the player's projects than the player has shared publicly.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "dev.y3.stratum_pitch",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "Dev reaches out with a genuine offer: Stratum is hiring at L2 and he wants to put the player's name in. He frames it as 'just worth knowing about.' It is also worth knowing about.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.dev_anand.stratum_offer"
+      ]
+    },
+    {
+      "id": "dev.y5.competitor_intel",
+      "year": 5,
+      "questionAnchor": null,
+      "description": "If Relationship >= 50: Dev tells the player something specific about AUREL's competitive landscape from the outside that nobody inside would know. He says it's not confidential, which it technically isn't.",
+      "requiresRelationship": 50,
+      "statefulTrigger": null
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 45,
+      "effect": "Dev's external read on the player's visible work is positive — he tells people so. This creates a small but real external reputation signal.",
+      "mechanical": "marketSense +3; reputation +2 external modifier"
+    },
+    {
+      "score": 60,
+      "effect": "Dev shares Stratum's client list — confidently, without naming it as intel. It is valuable context for the player's market mapping.",
+      "mechanical": "marketSense +5; strategicInfluence +3 on next external-facing question"
+    },
+    {
+      "score": 20,
+      "ceiling": true,
+      "effect": "Dev's read of the player, shared at industry events, is 'exactly what you'd expect from AUREL at that level.' This is faint praise used as description.",
+      "mechanical": "external reputation -3; marketSense -2"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 2,
+      "event": "Industry event encounter."
+    },
+    {
+      "year": 3,
+      "event": "Stratum offer surfaces."
+    },
+    {
+      "year": 5,
+      "event": "Competitor intel if relationship qualifies."
+    },
+    {
+      "year": 7,
+      "event": "Dev is promoted to Director at Stratum. If Relationship >= 55 he reaches out with a board-level referral opportunity that AUREL cannot match at the player's current level."
+    }
+  ],
+  "flags": {
+    "stratum_offer": false
+  }
+}

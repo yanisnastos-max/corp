@@ -1,0 +1,92 @@
+{
+  "id": "selin_kaya",
+  "name": "Dr. Selin Kaya",
+  "archetype": "advisor",
+  "ladderLevel": null,
+  "ladderTitle": "External",
+  "yearsAtAurel": 0,
+  "mvpTier": 2,
+  "startingRelationshipBase": 20,
+  "publicRole": "External academic advisor retained by AUREL's Strategy function. Associate Professor at UCL. Her research is on organisational decision-making under uncertainty. AUREL uses her for two things: legitimacy and provocation.",
+  "privateGoal": "Selin is building the research case that AUREL's internal decision-making patterns constitute a novel organisational form — neither traditional hierarchy nor flat structure but something she doesn't have a name for yet. She needs access. She is gentle, persistent, and has a very long timeline.",
+  "contradiction": "Presents as detached and analytical — a scientist observing, not participating. Has developed strong opinions about which AUREL people are doing something genuinely interesting and which are performing interest. She advocates, informally, for the former. She would describe this as 'maintaining research quality.' It is that and also favouritism, which she considers a methodological necessity.",
+  "voicePattern": {
+    "description": "Academic register, but the academic register of someone who has learned to be useful outside a seminar room. Clear, builds arguments in sequence, checks for comprehension before advancing. Genuinely delighted by precision from unexpected people.",
+    "tell": "When someone says something she finds genuinely interesting she goes very still and says 'say that again.' She then writes it down. She doesn't ask permission.",
+    "examplePhrases": [
+      "The interesting thing isn't the decision — it's the frame you're using to describe it.",
+      "Say that again. I want to make sure I have the exact phrasing.",
+      "Your organisation has a specific pathology around expertise. Most large organisations do. Yours is unusually legible.",
+      "What would the null hypothesis be for that assumption?"
+    ]
+  },
+  "mbtiNote": "INTP. Pure type. Joyful about ideas, occasionally forgetful that people are not data points. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "selin.y2.workshop",
+      "year": 2,
+      "questionAnchor": "y02q08",
+      "description": "Selin runs an internal decision-making workshop. The player attends. She asks the player a question in front of the group that nobody expected. The question is good.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "selin.y3.research_ask",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "Selin asks the player for a single interview for her research — 45 minutes, fully anonymised. No obligation. The conversation is the most analytically demanding one the player has had this year.",
+      "requiresRelationship": 30,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.selin_kaya.interview_given"
+      ]
+    },
+    {
+      "id": "selin.y5.paper",
+      "year": 5,
+      "questionAnchor": null,
+      "description": "If interview_given: Selin's paper is published. A composite character who reads like the player appears in a section about navigating ambiguous authority. The description is generous. Ingrid Svensson reads the paper.",
+      "requiresRelationship": null,
+      "statefulTrigger": {
+        "flag": "npc.selin_kaya.interview_given"
+      },
+      "flagsSet": [
+        "npc.selin_kaya.paper_published"
+      ]
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 40,
+      "effect": "Selin shares her working model of AUREL's decision pathology with the player — a framework for understanding why certain things happen that cannot be said internally",
+      "mechanical": "politicalAwareness +5; strategicInfluence +3"
+    },
+    {
+      "score": 55,
+      "effect": "The published paper includes a section the Ingrid Svensson reads. The composite character is recognisably senior and competent. Ingrid makes a note.",
+      "mechanical": "sponsor_strength +8 for Y5 review; ingrid relationship +5"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 2,
+      "event": "Workshop encounter."
+    },
+    {
+      "year": 3,
+      "event": "Research interview if relationship qualifies."
+    },
+    {
+      "year": 5,
+      "event": "Paper published if interview given."
+    },
+    {
+      "year": 8,
+      "event": "Selin is endowed chair at UCL. Her AUREL access increases. If Relationship >= 55: she names the player in a case study used in executive education. The name travels."
+    }
+  ],
+  "flags": {
+    "interview_given": false,
+    "paper_published": false
+  }
+}

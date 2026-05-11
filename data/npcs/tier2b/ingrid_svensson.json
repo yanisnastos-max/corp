@@ -1,0 +1,94 @@
+{
+  "id": "ingrid_svensson",
+  "name": "Ingrid Svensson",
+  "archetype": "senior_leader",
+  "ladderLevel": 10,
+  "ladderTitle": "SVP",
+  "yearsAtAurel": 5,
+  "mvpTier": 2,
+  "startingRelationshipBase": 5,
+  "publicRole": "SVP, Global Commercial Strategy, based in Chicago. Visits London for two weeks each quarter. Has Voss's ear. Her remit technically covers the player's entire division.",
+  "privateGoal": "Ingrid is the person Voss trusts to tell her when the London office has become comfortable. She visits not to inspect but to calibrate — to understand the actual culture gap between Chicago and London and whether it is productive or complacent. She has ended two London Directors' careers without ever raising her voice or making a decision that looked like a personnel call.",
+  "contradiction": "Presents as purely strategic — interested in systems, not people. Has an almost preternatural memory for individuals: what they said in a room two years ago, whether their delivery matched their framing, what face they made when challenged. She uses this as data. She has never described herself as a people person. She is one of the best at it in the building.",
+  "voicePattern": {
+    "description": "Economical. Rarely speaks first in a room. When she does, the room recalibrates. Asks questions by narrowing — starts general, gets specific, the specificity is always the one you weren't prepared for. No small talk.",
+    "tell": "Goes quiet for longer than expected before responding to something she finds interesting. Most people take this as disapproval. Strategic Influence 70+ and Political Awareness 70+ understand the difference.",
+    "examplePhrases": [
+      "What would have to be true for that to be correct?",
+      "I heard a different version of this from Chicago. Walk me through yours.",
+      "The gap between what you said and what you meant is interesting.",
+      "I'll need to think about that. Come find me before Thursday."
+    ]
+  },
+  "mbtiNote": "INTJ. Chicago-formed. Has operated at pressure for long enough that the pressure is invisible to her. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "ingrid.y2.first_visit",
+      "year": 2,
+      "questionAnchor": "y02q06",
+      "description": "Ingrid is present at the Meridian briefing room session. She does not speak. She is watching. The player will not know she was there until later.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "ingrid.y3.corridor",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "Ingrid stops the player in a corridor during a London visit. She references something specific from the briefing room. The player has one exchange to make an impression.",
+      "requiresRelationship": null,
+      "statefulTrigger": {
+        "consequenceTag": "seen_by_sponsor"
+      }
+    },
+    {
+      "id": "ingrid.y5.chicago_consideration",
+      "year": 5,
+      "questionAnchor": null,
+      "description": "If Relationship >= 35: Ingrid's assessment of the player reaches Voss's office as a footnote in a London review doc. The player never sees it. It surfaces mechanically in Y7.",
+      "requiresRelationship": 35,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.ingrid_svensson.voss_footnote"
+      ]
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 30,
+      "effect": "Ingrid uses the player's name in a Chicago debrief. This is noted by two people in the room.",
+      "mechanical": "sponsor_strength +10 for Y5 review"
+    },
+    {
+      "score": 45,
+      "effect": "Ingrid routes one piece of Chicago strategic intelligence to the London team 'for context' — specifically to the player.",
+      "mechanical": "marketSense +5; strategicInfluence +4"
+    },
+    {
+      "score": 15,
+      "ceiling": true,
+      "effect": "Ingrid's London review doc describes the player's team as 'adequately resourced.' The player is not mentioned individually.",
+      "mechanical": "No VP track boost in Y5–Y6 review cycle"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 2,
+      "event": "Quarterly London visits begin."
+    },
+    {
+      "year": 5,
+      "event": "Voss footnote fires if relationship qualifies."
+    },
+    {
+      "year": 7,
+      "event": "Ingrid is promoted to EVP. Her London visits become less frequent and more consequential."
+    },
+    {
+      "year": 10,
+      "event": "If Relationship >= 45: Ingrid is one of the four votes on the player's VP committee. She casts hers before anyone else speaks."
+    }
+  ],
+  "flags": {
+    "voss_footnote": false
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "id": "marcus_webb",
+  "name": "Marcus Webb",
+  "archetype": "client",
+  "ladderLevel": null,
+  "ladderTitle": "External",
+  "yearsAtAurel": 0,
+  "mvpTier": 2,
+  "startingRelationshipBase": 15,
+  "publicRole": "Managing Director at Aldgate Capital, an institutional investor with a significant AUREL position. Attends two AUREL investor briefings per year. Occasionally requests informal calls with the strategy team to 'understand direction.'",
+  "privateGoal": "Marcus is deciding whether to increase or reduce the Aldgate position. He is doing this by building a human model of AUREL's internal health. The financials tell him what happened. The people tell him what is about to happen. He is excellent at reading people, which AUREL's communications team knows and carefully manages.",
+  "contradiction": "Presents as purely financial — interested in returns, not culture, not people. Has an almost clinical interest in organisational culture as a leading indicator of financial performance. He calls this 'people analytics.' It is that, and it is also genuine curiosity about how organisations work. He is not cynical. He is very good.",
+  "voicePattern": {
+    "description": "Comfortable, authoritative, good at making you feel the conversation is informal when it is not. Asks questions that sound like small talk and are drawing conclusions. Reveals what he thinks rarely and precisely.",
+    "tell": "When he says 'that's helpful context' the conversation has just gone somewhere he will act on. Most people don't notice. Political Awareness 60+ does.",
+    "examplePhrases": [
+      "That's helpful context, thank you.",
+      "Not asking you to break confidence — I'm just trying to understand the culture.",
+      "The numbers are fine. The numbers are always fine until they aren't. What I'm trying to understand is the human layer.",
+      "What does success look like in this building? I mean for the people, not the product."
+    ]
+  },
+  "mbtiNote": "ENTJ. Investor-trained. Has learned to be patient in a way that does not come naturally. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "marcus.y3.briefing",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "Marcus attends an investor briefing the player helps prepare. They are introduced briefly. He asks one question during the session that is not in the pre-agreed list.",
+      "requiresRelationship": null,
+      "statefulTrigger": {
+        "consequenceTag": "seen_by_sponsor"
+      }
+    },
+    {
+      "id": "marcus.y4.call",
+      "year": 4,
+      "questionAnchor": null,
+      "description": "Marcus's team requests a call with 'the person who prepared the Q3 market section.' The player takes the call. It is thirty minutes. It is not a briefing — it is an interview.",
+      "requiresRelationship": 25,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.marcus_webb.call_taken"
+      ]
+    },
+    {
+      "id": "marcus.y6.aldgate_signal",
+      "year": 6,
+      "questionAnchor": null,
+      "description": "Aldgate increases its AUREL position. The decision is partly driven by Marcus's human model of the organisation. If Relationship >= 40: the player appears positively in that model. This is never communicated directly. It surfaces as a specific opportunity in Y7.",
+      "requiresRelationship": 40,
+      "statefulTrigger": {
+        "flag": "npc.marcus_webb.call_taken"
+      },
+      "flagsSet": [
+        "npc.marcus_webb.positive_model"
+      ]
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 35,
+      "effect": "Marcus sends the player a note after the investor briefing — personal, not templated. This is noticed by three people who see it.",
+      "mechanical": "reputation +4 external; marketSense +2"
+    },
+    {
+      "score": 50,
+      "effect": "Marcus shares his honest read of AUREL's competitive position — the read he gives to Aldgate partners, not the one in the public briefing.",
+      "mechanical": "marketSense +6; strategicInfluence +4"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 3,
+      "event": "Investor briefing encounter."
+    },
+    {
+      "year": 4,
+      "event": "Call if conditions met."
+    },
+    {
+      "year": 6,
+      "event": "Aldgate position decision. Player's model position surfaces in Y7 if positive."
+    },
+    {
+      "year": 9,
+      "event": "If Relationship >= 50: Marcus joins an AUREL advisory board. The player's name is in the recommendation memo he submits."
+    }
+  ],
+  "flags": {
+    "call_taken": false,
+    "positive_model": false
+  }
+}

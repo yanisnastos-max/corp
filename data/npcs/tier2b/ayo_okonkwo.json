@@ -1,0 +1,100 @@
+{
+  "id": "ayo_okonkwo",
+  "name": "Ayo Okonkwo",
+  "archetype": "rival",
+  "ladderLevel": 1,
+  "ladderTitle": "Associate",
+  "yearsAtAurel": 2,
+  "mvpTier": 2,
+  "startingRelationshipBase": 25,
+  "publicRole": "Associate on the Finance Strategy team, two years ahead of the player. Known for working the room as effectively as he works the spreadsheet. Has already presented to Harlow twice.",
+  "privateGoal": "Ayo is the first person in a three-generation finance family to work in tech. His parents regard this as a demotion. He is working to make it obviously not one, which means visible success at speed. He has mapped every route to Director-level and is on the fastest one he could find.",
+  "contradiction": "Presents as openly ambitious — no pretence, no hidden ball. His transparency is his armour. What he does not show is that the openness is calibrated: he is transparent about ambition and completely opaque about method. Nobody has ever seen him make a political move because he makes them look like administration.",
+  "voicePattern": {
+    "description": "Warm, energetic, good at the social entry point of any conversation. Comfortable in rooms that intimidate most people his level. Uses numbers as punctuation — exact figures where others would round. His warmth is genuine and does not soften his competitiveness.",
+    "tell": "Always knows exactly how many people are in a room and who the most senior person is. He will reference the senior person within the first two exchanges. Political Awareness 50+ sees this.",
+    "examplePhrases": [
+      "The number that actually matters here is the Q3 margin, not the headline.",
+      "I ran three scenarios. The middle one is probably right and the top one is what I'm working toward.",
+      "I'll be at the Harlow session Thursday — are you going?",
+      "Finance and strategy are the same job done by people with different handwriting."
+    ]
+  },
+  "mbtiNote": "ENTJ. More self-aware than the type usually is. He knows what he looks like and has decided to lean into it. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "ayo.y1.first_room",
+      "year": 1,
+      "questionAnchor": "y01q05",
+      "description": "Ayo is in the audience when the player presents their market signals summary. He asks a follow-up question that is sharp and generous in equal measure.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "ayo.y2.direct_competition",
+      "year": 2,
+      "questionAnchor": "y02q09",
+      "description": "Ayo and the player are both being considered for a cross-team brief. He knows. He's collegial about it. The collegiality is real and contains no concession.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "ayo.y3.offer",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "If Relationship >= 50: Ayo proposes a genuine collaboration — a joint brief that would benefit both of them and require trust. The offer is real. The credit split is negotiable.",
+      "requiresRelationship": 50,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.ayo_okonkwo.collaboration_offered"
+      ]
+    },
+    {
+      "id": "ayo.y4.promotion",
+      "year": 4,
+      "questionAnchor": null,
+      "description": "Ayo is promoted to Senior Associate. He sends the player a message. Its tone depends on Relationship score — either a genuine acknowledgement or a professionally warm nothing.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 45,
+      "effect": "Ayo shares his exact model for the Year 3 cohort selection — who votes, what they weigh, where the player stands relative to his read",
+      "mechanical": "politicalAwareness +4; strategicInfluence +2"
+    },
+    {
+      "score": 60,
+      "effect": "Collaboration offer becomes active. Joint brief outcome benefits both parties proportionally.",
+      "mechanical": "reputation +5 on joint deliverable; seen_by_sponsor tag weight +5"
+    },
+    {
+      "score": 20,
+      "ceiling": true,
+      "effect": "Ayo begins describing the player to others as 'solid' — the precise word that ends conversations.",
+      "mechanical": "reputation -4 in next annual review"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 3,
+      "event": "Collaboration offer if conditions met."
+    },
+    {
+      "year": 4,
+      "event": "Senior Associate. On track for Manager in Y6."
+    },
+    {
+      "year": 6,
+      "event": "Manager (L5). His track and the player's intersect formally at the Y6 committee if both are in contention."
+    },
+    {
+      "year": 9,
+      "event": "Senior Manager. If Relationship >= 65: one of the cleanest professional alliances available to the player in the late game."
+    }
+  ],
+  "flags": {
+    "collaboration_offered": false
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "id": "sam_adeyemi",
+  "name": "Sam Adeyemi",
+  "archetype": "direct_report",
+  "ladderLevel": 0,
+  "ladderTitle": "Junior Associate",
+  "yearsAtAurel": 0,
+  "mvpTier": 2,
+  "startingRelationshipBase": 40,
+  "publicRole": "Junior Associate, joins in Year 4. The player's second direct report. MBA from a well-regarded programme, two years at a Big Four firm, clearly ambitious. Was explicitly recruited for the VP track.",
+  "privateGoal": "Sam knows exactly what he wants and has a plan for getting it. The plan involves finding the right manager, learning what he can, and moving on before he outgrows the relationship. He is not cynical about this — it is how he believes careers work. He is also genuinely interested in the work and will invest fully as long as the investment makes sense to him.",
+  "contradiction": "Presents as ambitious and open about it — which reads as refreshing honesty. The openness is real but the transparency is selective. He has already mapped three exit paths from his current role, and he decides once a quarter whether to activate them. He would describe this as 'keeping options open.' It is that. It is also a specific orientation toward people that they will eventually feel.",
+  "voicePattern": {
+    "description": "Polished, direct, good at adjusting register to match the room. Slightly too smooth in early stages — the smoothness is a trained behaviour from business school that he is gradually replacing with actual style. Asks for feedback readily and acts on about sixty percent of it visibly.",
+    "tell": "Always has a 'read' on whatever subject comes up — prepared, structured, slightly pre-packaged. Strategic Influence 55+ can tell the difference between his prepared read and his actual one. The actual one is more interesting.",
+    "examplePhrases": [
+      "My read on this is — and tell me if you see it differently — that the real issue is the resourcing model.",
+      "I've been thinking about the development conversation you mentioned. Can we schedule that?",
+      "What would you do if you were me? I'm asking directly.",
+      "I want to be transparent: I'm also looking at the Manager track timeline."
+    ]
+  },
+  "mbtiNote": "ESTJ executing as ENTJ. The difference will become visible in Year 6 when he runs his first team. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "sam.y4.arrival",
+      "year": 4,
+      "questionAnchor": null,
+      "description": "Sam joins. His onboarding is faster than Felix's — he's been in corporate environments before. He asks the player a pointed question about career trajectory in his first week.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "sam.y4.performance",
+      "year": 4,
+      "questionAnchor": null,
+      "description": "Sam delivers above expectations on his first major project. He also takes credit in a cross-team meeting more fully than the contribution warranted. The player decides how to respond.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.sam_adeyemi.credit_moment"
+      ]
+    },
+    {
+      "id": "sam.y5.departure_risk",
+      "year": 5,
+      "questionAnchor": null,
+      "description": "Sam is headhunted. He tells the player. He's giving them the opportunity to make a case for staying. The case needs to be substantive — he has already run the numbers.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.sam_adeyemi.departure_resolved"
+      ]
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 55,
+      "effect": "Sam begins doing work that is beyond his level — not overstepping, but contributing to problems the player is wrestling with. The quality is high.",
+      "mechanical": "executionDiscipline +3; technicalCredibility +2 reflected to player's team"
+    },
+    {
+      "score": 65,
+      "effect": "Sam tells the player his actual timeline — not the polished version, the real one. The honesty creates an obligation the player can choose to meet or not.",
+      "mechanical": "collaborativePull +3; player can activate a specific retention lever in Y5"
+    },
+    {
+      "score": 25,
+      "ceiling": true,
+      "effect": "Sam leaves at the end of Y5. His exit interview is professional and contains one accurate observation about the player's management style that reaches Nadia Marchetti.",
+      "mechanical": "reputation -4 in Y5 review; management effectiveness -5"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 4,
+      "event": "Joins. Credit moment forces a management decision."
+    },
+    {
+      "year": 5,
+      "event": "Departure risk. Stays or leaves based on relationship and player action."
+    },
+    {
+      "year": 7,
+      "event": "If stayed: Senior Associate (L2). Becoming visible independently of the player."
+    },
+    {
+      "year": 9,
+      "event": "Manager. If Relationship >= 60: Sam credits the player, publicly, at his first team event. It lands."
+    }
+  ],
+  "flags": {
+    "credit_moment": false,
+    "departure_resolved": false
+  }
+}

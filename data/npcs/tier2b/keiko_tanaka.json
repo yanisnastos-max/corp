@@ -1,0 +1,108 @@
+{
+  "id": "keiko_tanaka",
+  "name": "Keiko Tanaka",
+  "archetype": "peer",
+  "ladderLevel": 2,
+  "ladderTitle": "Senior Associate",
+  "yearsAtAurel": 3,
+  "mvpTier": 2,
+  "startingRelationshipBase": 35,
+  "publicRole": "Senior Associate, AUREL Tokyo. Three years in. Seconded to London for a six-month joint project in Year 3. The first Tokyo-London collaboration at this level in four years.",
+  "privateGoal": "Keiko is using the London secondment to build the cross-geography network that will make her indispensable to AUREL's Asia-Pacific expansion ambitions. She is also learning, specifically, how London operates — not to replicate it in Tokyo but to understand the gap, which she believes is larger than both sides acknowledge.",
+  "contradiction": "Presents as focused entirely on the work — precise, professional, culturally attentive to the London room. Has extensive opinions about how London operates that she shares with no one in London. The opinions are accurate. The silence is strategic but also respectful — she does not confuse the two reasons for it.",
+  "voicePattern": {
+    "description": "Measured, careful with language in a way that reads as precision rather than caution. Slightly more formal in writing than in person. In conversation, asks questions in a way that demonstrates she has already read everything available on the subject. Comfortable with longer silences than the London floor expects.",
+    "tell": "Asks a clarifying question about something that was already clear. The question is about cultural context, not information. Political Awareness 55+ catches this.",
+    "examplePhrases": [
+      "Can I ask — when you say 'aligned,' do you mean the decision has been made or that it's still open?",
+      "In Tokyo we would approach this differently. I'm not saying better — differently.",
+      "I read the brief three times. I have one question about the assumption in section four.",
+      "The Tokyo team will want to know the timeline before the rationale. That's useful to know."
+    ]
+  },
+  "mbtiNote": "ISTJ with a genuine warmth that the type descriptor undersells. Disciplined, curious, privately funny. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "keiko.y3.arrival",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "Keiko joins the London team for her six-month secondment. The player is assigned as her primary London contact. The relationship sets up immediately.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "keiko.y3.joint_brief",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "The joint project requires a decision that sits in the gap between Tokyo and London processes. The player and Keiko navigate it together. How they do it shapes the relationship.",
+      "requiresRelationship": null,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.keiko_tanaka.joint_brief_resolved"
+      ]
+    },
+    {
+      "id": "keiko.y4.return",
+      "year": 4,
+      "questionAnchor": null,
+      "description": "Keiko returns to Tokyo. If Relationship >= 55 she leaves the player a specific handover note that turns out to be useful in an unexpected way in Y5.",
+      "requiresRelationship": 55,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.keiko_tanaka.handover_note"
+      ]
+    },
+    {
+      "id": "keiko.y6.tokyo_project",
+      "year": 6,
+      "questionAnchor": null,
+      "description": "If Relationship >= 60: Keiko requests the player by name for a Tokyo-side project. The project involves a two-week visit. It is the player's first international assignment.",
+      "requiresRelationship": 60,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.keiko_tanaka.tokyo_assignment"
+      ]
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 45,
+      "effect": "Keiko shares what the Tokyo team actually thinks of the London approach — not a complaint, a calibration. The information is useful.",
+      "mechanical": "politicalAwareness +4; adaptiveNerve +2"
+    },
+    {
+      "score": 60,
+      "effect": "Tokyo assignment activates in Y6. International assignment adds sponsor_strength +10 for Y6 review.",
+      "mechanical": "reputation +5 external; visibility score +8 in Y6 review"
+    },
+    {
+      "score": 25,
+      "ceiling": true,
+      "effect": "The joint brief is completed correctly. Keiko's London report describes it as professionally managed. The player is not mentioned by name.",
+      "mechanical": "No cross-geography visibility; collaborativePull -2"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 3,
+      "event": "Six-month secondment to London."
+    },
+    {
+      "year": 4,
+      "event": "Returns to Tokyo. Handover note if relationship qualifies."
+    },
+    {
+      "year": 6,
+      "event": "Tokyo assignment offer if conditions met."
+    },
+    {
+      "year": 9,
+      "event": "Keiko is Director, Asia-Pacific. The player's cross-geography relationship is now a significant professional asset."
+    }
+  ],
+  "flags": {
+    "joint_brief_resolved": false,
+    "handover_note": false,
+    "tokyo_assignment": false
+  }
+}

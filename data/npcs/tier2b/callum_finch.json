@@ -1,0 +1,96 @@
+{
+  "id": "callum_finch",
+  "name": "Callum Finch",
+  "archetype": "support",
+  "ladderLevel": null,
+  "ladderTitle": "Executive Assistant",
+  "yearsAtAurel": 6,
+  "mvpTier": 2,
+  "startingRelationshipBase": 40,
+  "publicRole": "Executive Assistant shared across three Senior Managers, including the player's line manager. Six years at AUREL. Knows the building better than most people who've been there twice as long.",
+  "privateGoal": "Callum has been offered an internal transfer to the Operations team three times. He has declined each time. He stays as an EA because the information density of his current position is irreplaceable. He is not building power for himself — he is building knowledge, which he regards as safer and more interesting. He is also, genuinely, good at the job and proud of it.",
+  "contradiction": "Presents as logistical infrastructure — the person who books rooms, manages diaries, orders the things that need ordering. Is in fact a sophisticated observer of organisational dynamics who has a more accurate read of the floor than most people two levels above him. He never uses this directly. He routes it through apparently logistical decisions: who gets meeting space on which day, which rooms have the right acoustics for which conversations.",
+  "voicePattern": {
+    "description": "Efficient, warm, slightly wry when he knows you well enough. Communicates in lists. Uses first names for everyone from Associate to MD without apparent hierarchy awareness, which is itself a sophisticated choice. Occasionally makes a comment that lands differently than a logistical observation should.",
+    "tell": "Books the player into meeting rooms that are better than their seniority warrants. Most people don't notice. Political Awareness 50+ does.",
+    "examplePhrases": [
+      "I've got you in the corner room on four — better light, better acoustics.",
+      "Harlow runs late on Tuesdays. I've left twenty minutes.",
+      "Grace asked about you this morning. Not officially — she just asked.",
+      "You're confirmed for Thursday. I've sent the brief to the right people."
+    ]
+  },
+  "mbtiNote": "ISFP with institutional ISTJ overlay. The genuine warmth and the logistical precision are both real. [NEVER SHOWN TO PLAYER]",
+  "arcBeats": [
+    {
+      "id": "callum.y2.introduction",
+      "year": 2,
+      "questionAnchor": "y02q01",
+      "description": "Callum introduces himself when the player's seniority crosses the threshold that includes EA support. The introduction is logistical. He remembers the player's coffee order without being asked.",
+      "requiresRelationship": null,
+      "statefulTrigger": null
+    },
+    {
+      "id": "callum.y3.intel",
+      "year": 3,
+      "questionAnchor": null,
+      "description": "If Relationship >= 45: Callum says something apparently logistical that contains a specific piece of organisational intelligence. Whether the player understands it depends on Political Awareness.",
+      "requiresRelationship": 45,
+      "statefulTrigger": {
+        "stat": "politicalAwareness",
+        "operator": "gte",
+        "value": 50
+      }
+    },
+    {
+      "id": "callum.y5.critical_moment",
+      "year": 5,
+      "questionAnchor": null,
+      "description": "If Relationship >= 55: Callum does something — a room booking, a diary change, an apparently logistical decision — that materially affects an important meeting. It is not an accident. He never refers to it again.",
+      "requiresRelationship": 55,
+      "statefulTrigger": null,
+      "flagsSet": [
+        "npc.callum_finch.critical_action"
+      ]
+    }
+  ],
+  "relationshipThresholds": [
+    {
+      "score": 45,
+      "effect": "Callum's apparently logistical decisions begin consistently favouring the player — better rooms, better timing, the right pre-reads arriving first.",
+      "mechanical": "executionDiscipline +2; one visibility event per year receives +3 bonus"
+    },
+    {
+      "score": 60,
+      "effect": "Critical action arc activates. A specific meeting in Y5 goes differently than it would have.",
+      "mechanical": "one Y5 annual review dimension shifted one level upward; flags critical_action"
+    },
+    {
+      "score": 20,
+      "ceiling": true,
+      "effect": "Callum's logistical decisions are neutral and correct. The player gets exactly the resources their seniority warrants. No more.",
+      "mechanical": "No bonus on visibility events; scheduling conflicts resolve against the player at standard probability"
+    }
+  ],
+  "careerTrajectory": [
+    {
+      "year": 2,
+      "event": "EA support begins."
+    },
+    {
+      "year": 3,
+      "event": "Intel moment if conditions met."
+    },
+    {
+      "year": 5,
+      "event": "Critical action if relationship qualifies."
+    },
+    {
+      "year": 8,
+      "event": "Callum is offered, and this time accepts, the Operations transfer. His institutional knowledge goes with him. If Relationship >= 55: he names the player as his primary reference for understanding the commercial floor culture."
+    }
+  ],
+  "flags": {
+    "critical_action": false
+  }
+}
